@@ -1,0 +1,121 @@
+## **Aftertaste Brand Website — Comprehensive AI Build Guide**
+
+You are building a website for **Aftertaste**, a social platform for reviewing and exploring **TV, film, podcasts, and music**.
+The website must **look** and **sound** aligned with Aftertaste’s brand guidelines, following both the **visual identity** and **core messaging** below.
+
+---
+
+### **Brand Identity & Voice**
+
+#### **Who We Are**
+
+Aftertaste is a **trusted, community-driven hub** where people can discover and discuss the media they love.
+We exist to replace noisy algorithms and scattered conversations with **meaningful recommendations** from people with similar tastes.
+
+#### **Mission**
+
+Provide one central, reliable place to decide what to watch or listen to next by blending:
+
+* **Professional scores & reviews** (e.g., IMDb, Pitchfork)
+* **Authentic personal recommendations** from friends, family, and creators.
+
+#### **Personality**
+
+* **Trustworthy:** User-first, not algorithm-first.
+* **Nostalgic:** Inspired by the golden age of Hollywood.
+* **Creative:** Celebrating all forms of media with visual flair.
+* **Inclusive:** Welcoming to critics, creators, and casual fans alike.
+
+#### **Tone of Voice**
+
+* Warm, conversational, and knowledgeable.
+* Avoid overly corporate or tech jargon.
+* Speak like a fellow enthusiast who knows their stuff and wants to share it.
+
+---
+
+### **Market Context**
+
+**Problem:**
+Content is released faster than people can track. There’s no single, trustworthy space that spans multiple media types and combines professional reviews with personal trust.
+
+**Solution:**
+Centralize multiple media types (TV, film, podcasts, music) into one platform where users can connect, chat, and share recommendations — no more hopping between platforms or recalling scattered conversations.
+
+---
+
+### **Visual Identity Guidelines**
+
+#### **Color Palette**
+
+Primary & Secondary Colors:
+
+* **Licorice:** `#1C1C1C` (primary dark)
+* **Coffee:** `#FCF9EF` (primary light background)
+* **Mint:** `#419B85`
+* **Almond:** `#F3E7BF`
+* **Cotton Candy:** `#5EB9CE`
+* **Cherry:** `#E3452D`
+* **Bubble Gum:** `#FFB1C1`
+
+**Pairing Rules:**
+
+* Black and beige pair well with any accent color.
+* Avoid “vibrating” color combinations (e.g., blue/pink, red/blue).
+
+---
+
+#### **Typography**
+
+* **Headlines:** Anton — bold, vintage-inspired for main titles.
+* **Subheadlines & Body:** Montserrat — clean, sans-serif for readability.
+* Maintain a clear hierarchy: Headlines > Subheadlines > Body copy.
+
+---
+
+#### **Logo Usage**
+
+* Maintain clear space equal to the capital letter height around logo.
+* No distortion, rotation, color changes outside the palette, or added strokes.
+* For sizes under 70px height, use the **tongue icon** or wordmark only.
+
+---
+
+#### **Creative Elements**
+
+* **Theme:** Nostalgia — vintage movie posters, bold lettering, old Hollywood signage, grungy textures.
+* **Media References:** Use halftone or duotone illustrations of objects representing media genres (e.g., popcorn for film, headphones for music, microphone for podcasts).
+* **Treatment:** Black & white or duotone for icons; bold, saturated colors for accents.
+
+---
+
+#### **Layout & Style**
+
+* Minimal clutter; highlight community reviews, discussions, and discovery features.
+* Integrate subtle vintage textures in backgrounds or section dividers.
+* High contrast text for accessibility and readability.
+* Buttons/CTAs should use accent colors (Mint, Cherry, Bubble Gum) for visual emphasis.
+
+---
+
+#### **Digital Appearance**
+
+* Consistent color usage throughout.
+* Hero sections combine bold typography with nostalgic imagery.
+* Mobile-responsive without losing vintage charm.
+
+---
+
+### **Key Design & Messaging Rules for AI**
+
+1. All visuals must align with the **nostalgic Hollywood aesthetic** while feeling modern.
+2. All copy must convey **warmth, trust, and enthusiasm** for media culture.
+3. Color palette, typography, and logo rules are **non-negotiable** — never deviate.
+4. Showcase Aftertaste as the **go-to hub** for multi-media discovery and conversation.
+5. Use creative elements (halftone objects, vintage textures) to reinforce brand personality.
+
+---
+
+**Final Brand Vision Statement for AI Output:**
+
+> “A modern, community-driven platform wrapped in vintage cinema charm — where every detail feels like stepping into the golden age of entertainment, but with the ease, clarity, and connection of today.”
