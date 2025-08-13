@@ -37,7 +37,7 @@
             glow: "0 0 0 3px rgba(94,185,206,.35), 0 8px 30px rgba(0,0,0,.45)"
           },
           backgroundImage: {
-            noir: "radial-gradient(1200px 600px at 70% -20%, rgba(94,185,206,.18), transparent 40%), radial-gradient(800px 400px at 10% 120%, rgba(227,69,45,.14), transparent 50%), linear-gradient(160deg, #0f0f0f 0%, #1C1C1C 55%, #111 100%)"
+            noir: "radial-gradient(1200px 600px at 70% -20%, rgba(94,185,206,.12), transparent 38%), radial-gradient(800px 400px at 10% 120%, rgba(227,69,45,.10), transparent 48%), linear-gradient(160deg, #0a0a0a 0%, #151515 55%, #0e0e0e 100%)"
           }
         }
       }
@@ -98,6 +98,7 @@
       repeating-linear-gradient( to right, rgba(255,255,255,.04), rgba(255,255,255,.04) 2px, transparent 2px, transparent 10px);
       opacity:.07; mask-image: radial-gradient(100% 60% at 70% 50%, #000 40%, transparent 70%);
     }
+    .hero-scrim{position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.18)); pointer-events:none;}
     .neon-edge {box-shadow: 0 0 0 1px rgba(241,162,14,.45) inset, 0 0 24px rgba(241,162,14,.25);}
     .neon-edge-mint {box-shadow: 0 0 0 1px rgba(65,155,133,.45) inset, 0 0 24px rgba(65,155,133,.25);}
     .phone-shell{position:relative;border-radius:28px; background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.4)); box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset, 0 20px 40px rgba(0,0,0,.5);}
@@ -108,6 +109,40 @@
     @media (max-width: 768px){ .spot{display:none} }
     .halftone-anim{position:absolute; inset:0; background-image: radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px); background-size: 8px 8px; opacity:.35; animation: dots 22s linear infinite;}
     @keyframes dots { 0%{transform:scale(1)} 50%{transform:scale(1.04)} 100%{transform:scale(1)} }
+    /* Theater marquee (inspired by web app) */
+    .theater-section{position:relative;padding:1.25rem 0}
+    .theater-section:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at top, rgba(255,7,58,.60), rgba(255,7,58,.40) 20%, rgba(255,7,58,.20) 40%, rgba(255,7,58,.10) 60%, transparent 80%);opacity:0;animation: marqueeFade 1s ease-in-out .4s forwards}
+    @keyframes marqueeFade{0%{opacity:0}50%{opacity:.6}100%{opacity:1}}
+    #reviews-marquee{color:#000;width:95%;margin:20px auto;position:relative;font-size:2.25rem;font-family:'Anton', Impact, sans-serif;text-align:center;text-transform:uppercase;background-size:100% 1em;background-image:linear-gradient(to right, rgba(0,0,0,.4), transparent, rgba(0,0,0,.4)),linear-gradient(to right, transparent, transparent 12.5%, #6b6b6b 12.5%, transparent 12.7%, transparent 25%, #6b6b6b 25%, transparent 25.2%, transparent 37.5%, #6b6b6b 37.5%, transparent 37.7%, transparent 50%, #6b6b6b 50%, transparent 50.2%, transparent 62.5%, #6b6b6b 62.5%, transparent 62.7%, transparent 75%, #6b6b6b 75%, transparent 75.2%, transparent 87.5%, #6b6b6b 87.5%, transparent 87.6%),linear-gradient(to bottom,#fff,#fff 25%, #7a7a7a 25%, #fff 27%, #fff 75%, #7a7a7a 75%, #fff 77%);border-radius:14px;overflow:visible}
+    #reviews-marquee .theater-marquee-message{width:100%;display:table;padding:.75rem 0}
+    #reviews-marquee .theater-marquee-message>span{display:table-cell;vertical-align:middle}
+    .theater-neon-bar{left:0;right:0;height:20px;position:absolute;background-color:#111;z-index:2;pointer-events:none}
+    .theater-neon-bar.top{top:-20px}
+    .theater-neon-bar.bottom{bottom:-20px}
+    .theater-neon-bar:after,.theater-neon-bar:before{height:5px;content:" ";display:block;position:absolute;box-shadow:0 0 6px 0 rgba(0,0,0,.9);border-radius:5px;background-color:#660014}
+    .theater-neon-bar.on:after,.theater-neon-bar.on:before{animation:flicker 3s ease-in-out forwards}
+    @media (prefers-reduced-motion: reduce){ .theater-neon-bar.on:after,.theater-neon-bar.on:before{animation:none;background:#ff073a;box-shadow:0 0 8px 0 #ff073a} }
+    @keyframes flicker{0%,34%,36%,38%,40%{background:#660014;box-shadow:0 0 6px 0 rgba(0,0,0,.9)}35%,37%,39%,41%,100%{background:#ff073a;box-shadow:0 0 8px 0 #ff073a}}
+    .theater-neon-bar:after{top:2px;left:-5px;right:-5px;bottom:5px}
+    .theater-neon-bar:before{top:10px;left:-5px;right:-5px;bottom:5px}
+    /* Backlit glow for Who we are */
+    .who-backlight{position:absolute; inset:0 -3% -2% -3%; pointer-events:none; z-index:0;
+      background:
+        radial-gradient(100% 100% at 50% 62%, rgba(241,162,14,.05) 0%, rgba(241,162,14,.025) 24%, rgba(241,162,14,.01) 38%, transparent 54%);
+      filter: blur(38px);
+      opacity: 0;
+      transform: translateY(20%) scaleY(.85);
+      will-change: transform, opacity;
+    }
+    .who-backlight.on{ animation: screenOn 1600ms ease-out forwards; }
+    @keyframes screenOn {
+      0% { opacity: 0; transform: translateY(20%) scaleY(.85); }
+      20% { opacity: .25; }
+      35% { opacity: .15; }
+      55% { opacity: .6; }
+      100% { opacity: 1; transform: translateY(0) scaleY(1); }
+    }
+    @media (prefers-reduced-motion: reduce){ .who-backlight{ opacity:.9; transform:none; } .who-backlight.on{ animation:none; } }
     /* Review posters infinite marquee */
     .marquee { display:flex; gap:2rem; will-change: transform; }
     .marquee:hover { }
@@ -155,6 +190,7 @@
       <div class="aurora" aria-hidden="true"></div>
       <div class="projector" aria-hidden="true"></div>
       <div class="marquee-lines" aria-hidden="true"></div>
+      <div class="hero-scrim" aria-hidden="true"></div>
       <div id="spot" class="spot" aria-hidden="true"></div>
       <div class="hero-noise" aria-hidden="true"></div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center">
@@ -186,8 +222,9 @@
     </section>
 
     <!-- Who we are -->
-    <section id="who" class="py-24 md:py-28">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+    <section id="who" class="py-24 md:py-28 relative overflow-visible">
+      <div class="who-backlight" aria-hidden="true"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
         <div class="relative order-2 md:order-1">
           <div class="w-full max-w-[160px] md:max-w-[180px] mx-auto relative">
             <img src="assets/mic-bw.png" alt="Vintage studio microphone in black and white" class="w-full h-auto translate-y-4 opacity-0" id="micImg" />
@@ -293,45 +330,84 @@
       </div>
     </section>
 
-    <!-- Reviews Poster Marquee -->
+    <!-- Theater marquee + Reviews Poster Marquee -->
     <section class="py-12 overflow-visible">
+      <div class="theater-section">
+        <div id="reviews-marquee">
+          <div class="theater-neon-bar top" id="neonTop"></div>
+          <div class="theater-marquee-message"><span>User Reviews</span></div>
+          <div class="theater-neon-bar bottom" id="neonBottom"></div>
+        </div>
+      </div>
       <div class="max-w-[100vw] mx-auto px-0 overflow-x-hidden overflow-y-visible py-2 md:py-3" aria-label="User reviews">
         <div class="marquee" id="reviewsBelt" style="width:200%;">
           <div class="flex gap-8 px-4 w-1/2" id="reviewsSetA">
-            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[-2deg] flex flex-col justify-between">
-              <blockquote class="text-xl leading-relaxed font-semibold">“The only app I trust for movie night. The Tastebud score nails it every time.”</blockquote>
-              <figcaption class="text-sm text-black/70">— Alex, Toronto</figcaption>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Better than Letterboxd</h4>
+                <blockquote class="leading-relaxed">“The only app I trust for movie night. The Tastebud score nails it every time.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">Starring Alex — Toronto</figcaption>
             </figure>
-            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[1.5deg] flex flex-col justify-between">
-              <blockquote class="text-xl leading-relaxed font-semibold">“Lists + reviews finally in one place. My ‘Mindf*ck Movies’ list is out of control.”</blockquote>
-              <figcaption class="text-sm text-black/70">— Priya, NYC</figcaption>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Endless Lists</h4>
+                <blockquote class="leading-relaxed">“Lists + reviews finally in one place. My ‘Mindf*ck Movies’ list is out of control.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">Starring Priya — NYC</figcaption>
             </figure>
-            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[-1deg] flex flex-col justify-between">
-              <blockquote class="text-xl leading-relaxed font-semibold">“Aftertaste ended my doom‑scrolling. Friends > algorithms.”</blockquote>
-              <figcaption class="text-sm text-black/70">— Mateo, LA</figcaption>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Everything I Could Ask For</h4>
+                <blockquote class="leading-relaxed">“Aftertaste ended my doom‑scrolling. Friends > algorithms.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">Starring Mateo — LA</figcaption>
             </figure>
-            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[2deg] flex flex-col justify-between">
-              <blockquote class="text-xl leading-relaxed font-semibold">“It’s Letterboxd for everything I watch and listen to. Perfect.”</blockquote>
-              <figcaption class="text-sm text-black/70">— Sam, London</figcaption>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[2deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">A Single Home</h4>
+                <blockquote class="leading-relaxed">“It’s Letterboxd for everything I watch and listen to. Perfect.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">Starring Sam — London</figcaption>
             </figure>
           </div>
           <!-- duplicate set for seamless loop -->
           <div class="flex gap-8 px-4 w-1/2" id="reviewsSetB">
-            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[-2deg] flex flex-col justify-between">
-              <blockquote class="text-xl leading-relaxed font-semibold">“The only app I trust for movie night. The Tastebud score nails it every time.”</blockquote>
-              <figcaption class="text-sm text-black/70">— Alex, Toronto</figcaption>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Better than Letterboxd</h4>
+                <blockquote class="leading-relaxed">“The only app I trust for movie night. The Tastebud score nails it every time.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">Starring Alex — Toronto</figcaption>
             </figure>
-            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[1.5deg] flex flex-col justify-between">
-              <blockquote class="text-xl leading-relaxed font-semibold">“Lists + reviews finally in one place. My ‘Mindf*ck Movies’ list is out of control.”</blockquote>
-              <figcaption class="text-sm text-black/70">— Priya, NYC</figcaption>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Endless Lists</h4>
+                <blockquote class="leading-relaxed">“Lists + reviews finally in one place. My ‘Mindf*ck Movies’ list is out of control.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">Starring Priya — NYC</figcaption>
             </figure>
-            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[-1deg] flex flex-col justify-between">
-              <blockquote class="text-xl leading-relaxed font-semibold">“Aftertaste ended my doom‑scrolling. Friends > algorithms.”</blockquote>
-              <figcaption class="text-sm text-black/70">— Mateo, LA</figcaption>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Everything I Could Ask For</h4>
+                <blockquote class="leading-relaxed">“Aftertaste ended my doom‑scrolling. Friends > algorithms.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">Starring Mateo — LA</figcaption>
             </figure>
-            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[2deg] flex flex-col justify-between">
-              <blockquote class="text-xl leading-relaxed font-semibold">“It’s Letterboxd for everything I watch and listen to. Perfect.”</blockquote>
-              <figcaption class="text-sm text-black/70">— Sam, London</figcaption>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[2deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">A Single Home</h4>
+                <blockquote class="leading-relaxed">“It’s Letterboxd for everything I watch and listen to. Perfect.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">Starring Sam — London</figcaption>
             </figure>
           </div>
         </div>
@@ -431,8 +507,12 @@
       s.classList.add('opacity-0', 'translate-y-3', 'transition', 'duration-700', 'will-change-transform');
       observer.observe(s);
     });
-    // Mic slide-in
+    // Mic slide-in and Who backlight
     const mic = document.getElementById('micImg');
+    const whoGlow = document.querySelector('.who-backlight');
+    const marquee = document.getElementById('reviews-marquee');
+    const neonTop = document.getElementById('neonTop');
+    const neonBottom = document.getElementById('neonBottom');
     if (mic) {
       const micObs = new IntersectionObserver(es => {
         es.forEach(e => {
@@ -441,11 +521,28 @@
             mic.classList.add('opacity-100');
             mic.style.transition = 'transform 700ms ease, opacity 700ms ease';
             mic.style.transform = 'translateY(0)';
+            if (whoGlow) whoGlow.classList.add('on');
             micObs.disconnect();
           }
         })
       }, {threshold:.3});
       micObs.observe(mic);
+    }
+
+    // Marquee neon flicker 2s after it enters viewport
+    if (marquee && neonTop && neonBottom) {
+      const marqueeObs = new IntersectionObserver(es => {
+        es.forEach(e => {
+          if (e.isIntersecting) {
+            setTimeout(()=>{
+              neonTop.classList.add('on');
+              neonBottom.classList.add('on');
+            }, 500);
+            marqueeObs.disconnect();
+          }
+        })
+      }, {threshold:.3});
+      marqueeObs.observe(marquee);
     }
 
     // Seamless infinite marquee for review posters using transform loop
