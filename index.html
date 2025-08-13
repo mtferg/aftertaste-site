@@ -1,22 +1,433 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Aftertaste</title>
-    <meta name="description" content="A community-driven hub to discover TV, film, podcasts, and music through trusted recommendations." />
-    <meta property="og:title" content="Aftertaste" />
-    <meta property="og:description" content="A community-driven hub to discover TV, film, podcasts, and music through trusted recommendations." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton:wght@400&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="/src/assets/brand/Wordmark-Horizontal-RGB-Mint.png" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aftertaste — Your Ultimate Movie and TV Hub</title>
+  <meta name="description" content="Track what you watch, compare tastes with friends, and discover what to stream next—without the algorithm fog." />
+  <meta property="og:title" content="Aftertaste — Your Ultimate Movie and TV Hub" />
+  <meta property="og:description" content="Track what you watch, compare tastes with friends, and discover what to stream next—without the algorithm fog." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/hero-screenshot.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#1C1C1C" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            licorice: "#1C1C1C",
+            almond: "#FCF9EF",
+            mint: "#5EB9CE",
+            cherry: "#E3452D",
+            bubblegum: "#FFB1C1",
+            coffee: "#419B85",
+            cotton: "#F3E7BF"
+          },
+          fontFamily: {
+            sans: ["Montserrat", "ui-sans-serif", "system-ui"],
+            display: ["Anton", "Impact", "sans-serif"]
+          },
+          boxShadow: {
+            glow: "0 0 0 3px rgba(94,185,206,.35), 0 8px 30px rgba(0,0,0,.45)"
+          },
+          backgroundImage: {
+            noir: "radial-gradient(1200px 600px at 70% -20%, rgba(94,185,206,.18), transparent 40%), radial-gradient(800px 400px at 10% 120%, rgba(227,69,45,.14), transparent 50%), linear-gradient(160deg, #0f0f0f 0%, #1C1C1C 55%, #111 100%)"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {scroll-behavior: smooth;}
+    .grain:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url('assets/grain.svg');
+      opacity: .08;
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+    }
+    /* Subtle page vignette */
+    .grain:after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: inset 0 0 120px 40px rgba(0,0,0,.6);
+    }
+    /* Beveled poster-like frames */
+    .poster {
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.25));
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset, 0 12px 30px rgba(0,0,0,.45);
+    }
+    /* Halftone / duotone placeholder */
+    .halftone {
+      background:
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.08) 1px, transparent 1px) 0 0/6px 6px,
+        linear-gradient(135deg, rgba(94,185,206,.18), rgba(227,69,45,.12));
+    }
+    @media (prefers-reduced-motion:no-preference) {
+      .ambient {
+        background-size: 200% 200%;
+        animation: leak 12s ease-in-out infinite;
+      }
+      @keyframes leak {
+        0%,100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+      .parallax:hover img { transform: perspective(800px) rotateY(4deg) translateZ(0); }
+    }
+  </style>
+</head>
+<body class="bg-licorice text-almond font-sans grain">
+  <!-- Header/Nav -->
+  <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:ring-2 focus:ring-mint bg-black text-white px-3 py-2 rounded">Skip to content</a>
+  <header id="top" class="fixed top-0 left-0 right-0 z-50 transition-colors">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#top" class="flex items-center gap-3">
+          <img src="assets/logo.png" alt="Aftertaste logo" class="h-8 w-8 rounded-full ring-1 ring-white/10">
+          <span class="font-display tracking-widest text-xl">AFTERTASTE</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#top" class="hover:text-mint">Home</a>
+          <a href="#who" class="hover:text-mint">Who we are</a>
+          <a href="#features" class="hover:text-mint">Features</a>
+          <a href="https://aftertaste.app/" class="hover:text-mint">Web App</a>
+          <a href="#contact" class="hover:text-mint">Contact</a>
+          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" class="inline-flex items-center gap-2 rounded-xl bg-mint text-licorice font-semibold px-4 py-2 shadow-glow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-mint focus-visible:ring-offset-licorice transition">Download the App</a>
+        </div>
+      </div>
+    </nav>
+    <div class="h-px w-full bg-white/5"></div>
+  </header>
+
+  <main class="pt-20">
+    <!-- Hero -->
+    <section id="hero" class="ambient bg-noir">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <h1 class="font-display text-5xl md:text-6xl leading-none">Your Ultimate Movie and TV Hub</h1>
+          <p class="text-lg text-almond/85">Track what you watch, compare tastes with friends, and discover what to stream next—without the algorithm fog.</p>
+          <div class="flex flex-wrap gap-4">
+            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" aria-label="Download on the App Store" class="inline-flex items-center rounded-2xl shadow-glow hover:shadow-xl ring-1 ring-white/15 bg-black text-white transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="164" height="48" viewBox="0 0 168 56" role="img" aria-label="Download on the App Store" class="h-12 w-auto">
+                <title>Download on the App Store</title>
+                <rect width="168" height="56" rx="12" fill="#000"/>
+                <g fill="#fff" transform="translate(16,14)">
+                  <path d="M17.564 10.36c-.01-2.27 1.86-3.36 1.947-3.41-1.07-1.57-2.73-1.78-3.31-1.81-1.4-.14-2.73.82-3.43.82-.72 0-1.8-.8-2.97-.78-1.5.02-2.88.88-3.65 2.22-1.57 2.72-.4 6.73 1.1 8.93.75 1.07 1.64 2.27 2.8 2.23 1.12-.05 1.54-.72 2.9-.72 1.35 0 1.74.72 2.93.7 1.22-.02 1.99-1.08 2.73-2.16.86-1.26 1.21-2.5 1.22-2.56-.03-.01-2.34-.9-2.34-3.31z"/>
+                  <path d="M14.896 3.66c.62-.77 1.04-1.84.93-2.9-.9.04-2  .6-2.64 1.37-.58.67-1.08 1.77-.95 2.82 1.01.08 2.04-.51 2.66-1.29z"/>
+                  <g transform="translate(30,1)">
+                    <path d="M9.5 20.4h-3.3l-1-3H1.5l-1 3H-2l5.2-14.6h3.1L9.5 20.4zm-5-5.6L3.6 8l-1.9 6.8h2.8zM12.1 5.8h2.9v10.8h6.1v3h-9V5.8zM23.3 5.8h2.9V9c.7-2.2 2.3-3.4 4.7-3.3v3.1c-3 0-4.7 1.8-4.7 5v6.6h-2.9V5.8zM43.9 9.9c-.7-.8-1.6-1.2-2.6-1.2-2.1 0-3.6 1.7-3.6 4.2 0 2.5 1.5 4.2 3.7 4.2 1 0 1.9-.4 2.5-1.1l2 .2c-.8 1.9-2.5 3.1-4.5 3.1-3.7 0-6.3-2.9-6.3-6.4 0-3.6 2.6-6.4 6.2-6.4 2 0 3.6.9 4.6 2.7l-2 .7zM53.7 5.5c3.8 0 6.3 2.7 6.3 6.6 0 3.9-2.5 6.6-6.3 6.6s-6.3-2.7-6.3-6.6c0-3.9 2.5-6.6 6.3-6.6zm0 10.7c2.1 0 3.4-1.7 3.4-4.1 0-2.4-1.4-4.1-3.4-4.1-2 0-3.4 1.7-3.4 4.1 0 2.4 1.4 4.1 3.4 4.1zM64.5 5.8h2.9v10.8h6.1v3h-9V5.8z" fill="#fff"/>
+                  </g>
+                </g>
+              </svg>
+            </a>
+            <a href="https://aftertaste.app/" class="rounded-2xl border border-white/20 px-5 py-3 hover:bg-white/5 transition">Prefer the Medium Screen?</a>
+          </div>
+        </div>
+        <div class="relative parallax">
+          <div class="absolute -inset-4 bg-white/5 rounded-3xl blur-2xl opacity-30"></div>
+          <figure class="relative rounded-3xl overflow-hidden ring-1 ring-white/10 shadow-2xl poster">
+            <picture>
+              <source srcset="assets/hero-screenshot.webp" type="image/webp" />
+              <img src="assets/hero-screenshot.png" alt="Aftertaste app screen" class="w-full h-full object-cover transition-transform duration-300 will-change-transform" />
+            </picture>
+            <figcaption class="sr-only">Aftertaste app UI.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who we are -->
+    <section id="who" class="py-24 md:py-28">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+        <div class="relative order-2 md:order-1">
+          <div class="aspect-[4/3] rounded-3xl ring-1 ring-white/10 halftone poster flex items-center justify-center">
+            <span class="text-white/40">Image placeholder</span>
+          </div>
+          <div class="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-mint/20 blur-2xl"></div>
+        </div>
+        <div class="space-y-6 order-1 md:order-2">
+          <h2 class="font-display text-4xl">Who we are</h2>
+          <p>Aftertaste is a social platform to <strong>review and explore</strong> what you watch and listen to—film, TV, podcasts, and music.</p>
+          <p>Instead of chasing scattered algorithms and generic lists, <strong>trusted recommendations</strong> come from conversations with people who share your taste.</p>
+          <p>We bring critics, creators, and casual fans together—<strong>a single home</strong> for finding your next favorite thing.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Slider -->
+    <section id="features" class="py-24 md:py-28 bg-black/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header class="flex items-end justify-between mb-10">
+          <h2 class="font-display text-4xl">Features</h2>
+          <div class="text-sm opacity-70">Use ← → keys</div>
+        </header>
+
+        <div class="relative">
+          <div id="slider" class="overflow-hidden rounded-3xl ring-1 ring-white/10" role="region" aria-roledescription="carousel" aria-label="App Features">
+            <ul id="slides" class="flex transition-transform duration-500 will-change-transform">
+              <!-- Slide 1 -->
+              <li class="min-w-full grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717]">
+                <div class="space-y-4 flex flex-col justify-center">
+                  <h3 class="text-2xl font-semibold">Track &amp; Rate</h3>
+                  <p>Log watched and in-progress items, score from 1–10, and keep your history tidy.</p>
+                </div>
+                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster">
+                  <img src="assets/feature-1.webp" alt="Track & Rate screen" class="w-full h-full object-cover" />
+                </div>
+              </li>
+              <!-- Slide 2 -->
+              <li class="min-w-full grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717]">
+                <div class="space-y-4 flex flex-col justify-center">
+                  <h3 class="text-2xl font-semibold">Tastebuds</h3>
+                  <p>Follow friends and creators; compare tastes and see what your circle is watching.</p>
+                </div>
+                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster">
+                  <img src="assets/feature-2.webp" alt="Tastebuds feed screen" class="w-full h-full object-cover" />
+                </div>
+              </li>
+              <!-- Slide 3 -->
+              <li class="min-w-full grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717]">
+                <div class="space-y-4 flex flex-col justify-center">
+                  <h3 class="text-2xl font-semibold">Lists</h3>
+                  <p>Curate themes and share—like <em>“Mindf*ck Movies”</em>, your crowd-pleasing rabbit hole.</p>
+                </div>
+                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster">
+                  <img src="assets/feature-3.webp" alt="Lists screen" class="w-full h-full object-cover" />
+                </div>
+              </li>
+              <!-- Slide 4 -->
+              <li class="min-w-full grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717]">
+                <div class="space-y-4 flex flex-col justify-center">
+                  <h3 class="text-2xl font-semibold">Reviews &amp; Discussions</h3>
+                  <p>Post reviews, react, and dive into threads that actually help you decide what to watch.</p>
+                </div>
+                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster">
+                  <img src="assets/feature-4.webp" alt="Reviews screen" class="w-full h-full object-cover" />
+                </div>
+              </li>
+              <!-- Slide 5 -->
+              <li class="min-w-full grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717]">
+                <div class="space-y-4 flex flex-col justify-center">
+                  <h3 class="text-2xl font-semibold">Trending &amp; Discover</h3>
+                  <p>See what’s popping this week or month—globally and among your Tastebuds.</p>
+                </div>
+                <div class="rounded-xl bg-white/5 aspect-[16/10] flex items-center justify-center ring-1 ring-white/10 poster">
+                  <span class="text-white/40">Add more screenshots anytime</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Controls -->
+          <div class="mt-6 flex items-center justify-between">
+            <div class="flex gap-2" id="dots" role="tablist" aria-label="Feature slides"></div>
+            <div class="flex gap-2">
+              <button id="prev" class="px-4 py-2 rounded-lg border border-white/20 hover:bg-white/5" aria-label="Previous slide" aria-controls="slides">←</button>
+              <button id="next" class="px-4 py-2 rounded-lg border border-white/20 hover:bg-white/5" aria-label="Next slide" aria-controls="slides">→</button>
+            </div>
+          </div>
+          <div id="status" class="sr-only" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Web app callout -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <a href="https://aftertaste.app/" class="block rounded-3xl ring-1 ring-white/10 p-8 md:p-12 bg-gradient-to-br from-neutral-900 to-neutral-800 hover:shadow-glow transition">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <h3 class="font-display text-3xl">Prefer the Medium Screen?</h3>
+              <p class="text-almond/80 mt-2">Open the web app and keep your lists flowing on desktop.</p>
+            </div>
+            <div class="text-mint font-semibold">aftertaste.app →</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 md:py-28 bg-black/30">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-display text-4xl mb-6">Contact us</h2>
+        <form id="contactForm" class="space-y-4">
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="text-sm">Name</span>
+              <input type="text" name="name" autocomplete="name" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mint" />
+            </label>
+            <label class="block">
+              <span class="text-sm">Email</span>
+              <input type="email" name="email" autocomplete="email" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mint" />
+            </label>
+          </div>
+          <label class="block">
+            <span class="text-sm">Message</span>
+            <textarea name="message" rows="5" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mint"></textarea>
+          </label>
+          <div class="flex items-center gap-3">
+            <button type="submit" class="rounded-xl bg-mint text-licorice font-semibold px-6 py-3 hover:shadow-glow transition">Send</button>
+            <span id="toast" class="text-sm text-almond/70 hidden" role="status" aria-live="polite">Opening your email client…</span>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo.png" alt="" class="h-8 w-8 rounded-full ring-1 ring-white/10" />
+        <div>
+          <div class="font-display tracking-widest">AFTERTASTE</div>
+          <p class="text-sm text-white/60">Aftertaste helps you find what’s worth watching—through people you trust.</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://instagram.com/" aria-label="Instagram" class="p-2 rounded-lg hover:bg-white/10">
+          <img src="assets/instagram.svg" alt="" class="h-5 w-5"/>
+        </a>
+        <a href="https://tiktok.com/" aria-label="TikTok" class="p-2 rounded-lg hover:bg-white/10">
+          <img src="assets/tiktok.svg" alt="" class="h-5 w-5"/>
+        </a>
+      </div>
+      <div class="text-sm text-white/60">&copy; <span id="year"></span> Aftertaste. All rights reserved. <a href="#" class="underline decoration-white/20 hover:decoration-white/60">Privacy</a> · <a href="#" class="underline decoration-white/20 hover:decoration-white/60">Terms</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky header fill on scroll
+    const header = document.querySelector('header');
+    const fill = () => {
+      header.classList.toggle('bg-black/60', window.scrollY > 4);
+      header.classList.toggle('backdrop-blur', window.scrollY > 4);
+    };
+    window.addEventListener('scroll', fill); fill();
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('opacity-100', 'translate-y-0');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('section').forEach(s => {
+      s.classList.add('opacity-0', 'translate-y-3', 'transition', 'duration-700', 'will-change-transform');
+      observer.observe(s);
+    });
+
+    // Simple slider
+    const slides = document.getElementById('slides');
+    const dots = document.getElementById('dots');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const status = document.getElementById('status');
+    const sliderRegion = document.getElementById('slider');
+    let index = 0;
+    const count = slides.children.length;
+    const slideEls = Array.from(slides.children);
+
+    // Initialize slide semantics
+    slideEls.forEach((el, i) => {
+      el.id = `slide-${i}`;
+      el.setAttribute('role', 'group');
+      el.setAttribute('aria-roledescription', 'slide');
+      el.setAttribute('aria-label', `${i+1} of ${count}`);
+    });
+
+    function renderDots() {
+      dots.innerHTML = '';
+      for (let i=0;i<count;i++) {
+        const b = document.createElement('button');
+        b.className = 'h-2 w-8 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-mint focus-visible:ring-offset-licorice ' + (i===index ? 'bg-mint' : 'bg-white/20');
+        b.setAttribute('role','tab');
+        b.setAttribute('aria-controls', `slide-${i}`);
+        b.setAttribute('aria-selected', i===index ? 'true' : 'false');
+        b.setAttribute('tabindex', i===index ? '0' : '-1');
+        b.addEventListener('click', ()=>go(i));
+        dots.appendChild(b);
+      }
+    }
+    function go(i) {
+      index = (i+count)%count;
+      slides.style.transform = `translateX(-${index*100}%)`;
+      renderDots();
+      // Update slide aria-hidden and live status
+      slideEls.forEach((el, j) => {
+        el.setAttribute('aria-hidden', j === index ? 'false' : 'true');
+      });
+      const currentTitle = slideEls[index].querySelector('h3')?.textContent || `Slide ${index+1}`;
+      status.textContent = `${currentTitle} — slide ${index+1} of ${count}`;
+    }
+    prev.addEventListener('click', ()=>go(index-1));
+    next.addEventListener('click', ()=>go(index+1));
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') go(index-1);
+      if (e.key === 'ArrowRight') go(index+1);
+    });
+    renderDots();
+    go(0);
+
+    // Tablist keyboard support for dots (WAI-ARIA Tabs pattern lite)
+    dots.addEventListener('keydown', (e) => {
+      const tabs = Array.from(dots.querySelectorAll('[role="tab"]'));
+      const current = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const nextIndex = (current - 1 + tabs.length) % tabs.length;
+        tabs[nextIndex].focus();
+        go(nextIndex);
+      }
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        const nextIndex = (current + 1) % tabs.length;
+        tabs[nextIndex].focus();
+        go(nextIndex);
+      }
+      if (e.key === 'Home') {
+        e.preventDefault();
+        tabs[0].focus();
+        go(0);
+      }
+      if (e.key === 'End') {
+        e.preventDefault();
+        tabs[tabs.length - 1].focus();
+        go(tabs.length - 1);
+      }
+    });
+
+    // Contact form (mailto)
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = encodeURIComponent(data.get('name'));
+      const email = encodeURIComponent(data.get('email'));
+      const message = encodeURIComponent(data.get('message'));
+      const subject = encodeURIComponent(`Website contact from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+      const mailto = `mailto:hello@aftertaste.com?subject=${subject}&body=${body}`;
+      document.getElementById('toast').classList.remove('hidden');
+      window.location.href = mailto;
+    });
+    // Optional hosted form submissions for later:
+    // Netlify: add form attributes -> <form name="contact" data-netlify="true">
+    // Formspree: set action="https://formspree.io/f/yourFormId" method="POST"
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
