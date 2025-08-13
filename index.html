@@ -22,11 +22,12 @@
           colors: {
             licorice: "#1C1C1C",
             almond: "#FCF9EF",
-            mint: "#5EB9CE",
+            cottoncandy: "#5EB9CE",
             cherry: "#E3452D",
             bubblegum: "#FFB1C1",
-            coffee: "#419B85",
-            cotton: "#F3E7BF"
+            mint: "#419B85",
+            coffee: "#F3E7BF",
+            popcorn: "#F1A20E"
           },
           fontFamily: {
             sans: ["Montserrat", "ui-sans-serif", "system-ui"],
@@ -49,7 +50,7 @@
       position: fixed;
       inset: 0;
       background: url('assets/grain.svg');
-      opacity: .08;
+      opacity: .06;
       pointer-events: none;
       mix-blend-mode: soft-light;
     }
@@ -81,13 +82,13 @@
         0%,100% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
       }
-      .parallax:hover img { transform: perspective(800px) rotateY(4deg) translateZ(0); }
+      .parallax:hover img { transform: perspective(800px) rotateY(-4deg) translateZ(0); }
     }
   </style>
 </head>
 <body class="bg-licorice text-almond font-sans grain">
   <!-- Header/Nav -->
-  <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:ring-2 focus:ring-mint bg-black text-white px-3 py-2 rounded">Skip to content</a>
+  <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:ring-2 focus:ring-popcorn bg-black text-white px-3 py-2 rounded">Skip to content</a>
   <header id="top" class="fixed top-0 left-0 right-0 z-50 transition-colors">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
@@ -96,12 +97,12 @@
           <span class="font-display tracking-widest text-xl">AFTERTASTE</span>
         </a>
         <div class="hidden md:flex items-center gap-6 text-sm">
-          <a href="#top" class="hover:text-mint">Home</a>
-          <a href="#who" class="hover:text-mint">Who we are</a>
-          <a href="#features" class="hover:text-mint">Features</a>
-          <a href="https://aftertaste.app/" class="hover:text-mint">Web App</a>
-          <a href="#contact" class="hover:text-mint">Contact</a>
-          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" class="inline-flex items-center gap-2 rounded-xl bg-mint text-licorice font-semibold px-4 py-2 shadow-glow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-mint focus-visible:ring-offset-licorice transition">Download the App</a>
+          <a href="#top" class="hover:text-popcorn">Home</a>
+          <a href="#who" class="hover:text-popcorn">Who we are</a>
+          <a href="#features" class="hover:text-popcorn">Features</a>
+          <a href="https://aftertaste.app/" class="hover:text-popcorn">Web App</a>
+          <a href="#contact" class="hover:text-popcorn">Contact</a>
+          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" class="inline-flex items-center gap-2 rounded-xl bg-popcorn text-licorice font-semibold px-4 py-2 shadow-glow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-popcorn focus-visible:ring-offset-licorice transition">Download the App</a>
         </div>
       </div>
     </nav>
@@ -133,11 +134,11 @@
           </div>
         </div>
         <div class="relative parallax">
-          <div class="absolute -inset-4 bg-white/5 rounded-3xl blur-2xl opacity-30"></div>
-          <figure class="relative rounded-3xl overflow-hidden ring-1 ring-white/10 shadow-2xl poster">
+          <div class="absolute -inset-1 md:-inset-2 bg-white/5 rounded-3xl blur-2xl opacity-30"></div>
+          <figure class="relative rounded-3xl overflow-hidden ring-1 ring-white/10 shadow-2xl poster w-full max-w-[240px] md:max-w-[280px] lg:max-w-[320px] mx-auto aspect-[9/19]">
             <picture>
               <source srcset="assets/hero-screenshot.webp" type="image/webp" />
-              <img src="assets/hero-screenshot.png" alt="Aftertaste app screen" class="w-full h-full object-cover transition-transform duration-300 will-change-transform" />
+              <img src="assets/hero-screenshot.png" alt="Aftertaste app screen" class="w-full h-full object-cover bg-black/20 transition-transform duration-300 will-change-transform" />
             </picture>
             <figcaption class="sr-only">Aftertaste app UI.</figcaption>
           </figure>
@@ -149,10 +150,11 @@
     <section id="who" class="py-24 md:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
         <div class="relative order-2 md:order-1">
-          <div class="aspect-[4/3] rounded-3xl ring-1 ring-white/10 halftone poster flex items-center justify-center">
-            <span class="text-white/40">Image placeholder</span>
-          </div>
-          <div class="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-mint/20 blur-2xl"></div>
+          <figure class="aspect-[4/3] rounded-3xl ring-1 ring-white/10 poster overflow-hidden bg-black w-full max-w-[560px] md:max-w-[640px] mx-auto">
+            <img src="assets/mic-bw.png" alt="Vintage studio microphone in black and white" class="w-full h-full object-contain" />
+            <figcaption class="sr-only">Black and white microphone image evoking classic radio/film era.</figcaption>
+          </figure>
+          <div class="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-popcorn/20 blur-2xl"></div>
         </div>
         <div class="space-y-6 order-1 md:order-2">
           <h2 class="font-display text-4xl">Who we are</h2>
@@ -180,8 +182,8 @@
                   <h3 class="text-2xl font-semibold">Track &amp; Rate</h3>
                   <p>Log watched and in-progress items, score from 1–10, and keep your history tidy.</p>
                 </div>
-                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster">
-                  <img src="assets/feature-1.webp" alt="Track & Rate screen" class="w-full h-full object-cover" />
+                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster w-full max-w-[220px] md:max-w-[260px] lg:max-w-[280px] mx-auto aspect-[9/19]">
+                  <img src="assets/feature-1.webp" alt="Track & Rate screen" class="w-full h-full object-cover bg-black/20" />
                 </div>
               </li>
               <!-- Slide 2 -->
@@ -190,8 +192,8 @@
                   <h3 class="text-2xl font-semibold">Tastebuds</h3>
                   <p>Follow friends and creators; compare tastes and see what your circle is watching.</p>
                 </div>
-                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster">
-                  <img src="assets/feature-2.webp" alt="Tastebuds feed screen" class="w-full h-full object-cover" />
+                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster w-full max-w-[220px] md:max-w-[260px] lg:max-w-[280px] mx-auto aspect-[9/19]">
+                  <img src="assets/feature-2.webp" alt="Tastebuds feed screen" class="w-full h-full object-cover bg-black/20" />
                 </div>
               </li>
               <!-- Slide 3 -->
@@ -200,8 +202,8 @@
                   <h3 class="text-2xl font-semibold">Lists</h3>
                   <p>Curate themes and share—like <em>“Mindf*ck Movies”</em>, your crowd-pleasing rabbit hole.</p>
                 </div>
-                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster">
-                  <img src="assets/feature-3.webp" alt="Lists screen" class="w-full h-full object-cover" />
+                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster w-full max-w-[220px] md:max-w-[260px] lg:max-w-[280px] mx-auto aspect-[9/19]">
+                  <img src="assets/feature-3.webp" alt="Lists screen" class="w-full h-full object-cover bg-black/20" />
                 </div>
               </li>
               <!-- Slide 4 -->
@@ -210,8 +212,8 @@
                   <h3 class="text-2xl font-semibold">Reviews &amp; Discussions</h3>
                   <p>Post reviews, react, and dive into threads that actually help you decide what to watch.</p>
                 </div>
-                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster">
-                  <img src="assets/feature-4.webp" alt="Reviews screen" class="w-full h-full object-cover" />
+                <div class="rounded-xl overflow-hidden ring-1 ring-white/10 poster w-full max-w-[220px] md:max-w-[260px] lg:max-w-[280px] mx-auto aspect-[9/19]">
+                  <img src="assets/feature-4.webp" alt="Reviews screen" class="w-full h-full object-cover bg-black/20" />
                 </div>
               </li>
               <!-- Slide 5 -->
@@ -249,7 +251,7 @@
               <h3 class="font-display text-3xl">Prefer the Medium Screen?</h3>
               <p class="text-almond/80 mt-2">Open the web app and keep your lists flowing on desktop.</p>
             </div>
-            <div class="text-mint font-semibold">aftertaste.app →</div>
+            <div class="text-popcorn font-semibold">aftertaste.app →</div>
           </div>
         </a>
       </div>
@@ -263,19 +265,19 @@
           <div class="grid md:grid-cols-2 gap-4">
             <label class="block">
               <span class="text-sm">Name</span>
-              <input type="text" name="name" autocomplete="name" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mint" />
+              <input type="text" name="name" autocomplete="name" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-popcorn" />
             </label>
             <label class="block">
               <span class="text-sm">Email</span>
-              <input type="email" name="email" autocomplete="email" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mint" />
+              <input type="email" name="email" autocomplete="email" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-popcorn" />
             </label>
           </div>
           <label class="block">
             <span class="text-sm">Message</span>
-            <textarea name="message" rows="5" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mint"></textarea>
+            <textarea name="message" rows="5" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-popcorn"></textarea>
           </label>
           <div class="flex items-center gap-3">
-            <button type="submit" class="rounded-xl bg-mint text-licorice font-semibold px-6 py-3 hover:shadow-glow transition">Send</button>
+            <button type="submit" class="rounded-xl bg-popcorn text-licorice font-semibold px-6 py-3 hover:shadow-glow transition">Send</button>
             <span id="toast" class="text-sm text-almond/70 hidden" role="status" aria-live="polite">Opening your email client…</span>
           </div>
         </form>
@@ -351,7 +353,7 @@
       dots.innerHTML = '';
       for (let i=0;i<count;i++) {
         const b = document.createElement('button');
-        b.className = 'h-2 w-8 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-mint focus-visible:ring-offset-licorice ' + (i===index ? 'bg-mint' : 'bg-white/20');
+        b.className = 'h-2 w-8 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-popcorn focus-visible:ring-offset-licorice ' + (i===index ? 'bg-popcorn' : 'bg-white/20');
         b.setAttribute('role','tab');
         b.setAttribute('aria-controls', `slide-${i}`);
         b.setAttribute('aria-selected', i===index ? 'true' : 'false');
