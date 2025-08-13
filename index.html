@@ -108,6 +108,11 @@
     @media (max-width: 768px){ .spot{display:none} }
     .halftone-anim{position:absolute; inset:0; background-image: radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px); background-size: 8px 8px; opacity:.35; animation: dots 22s linear infinite;}
     @keyframes dots { 0%{transform:scale(1)} 50%{transform:scale(1.04)} 100%{transform:scale(1)} }
+    /* Review posters infinite marquee */
+    .marquee { display:flex; gap:2rem; will-change: transform; }
+    .marquee:hover { }
+    @keyframes posterLoop { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
     @media (prefers-reduced-motion:no-preference) {
       .ambient {
         background-size: 200% 200%;
@@ -288,26 +293,47 @@
       </div>
     </section>
 
-    <!-- Poster Wall Band -->
-    <section class="py-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex gap-8 overflow-x-auto snap-x snap-mandatory pb-4" aria-label="User reviews">
-          <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 snap-start rotate-[-2deg] flex flex-col justify-between relative">
-            <blockquote class="text-xl leading-relaxed font-semibold">“The only app I trust for movie night. The Tastebud score nails it every time.”</blockquote>
-            <figcaption class="text-sm text-black/70">— Alex, Toronto</figcaption>
-          </figure>
-          <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 snap-start rotate-[1.5deg] flex flex-col justify-between relative">
-            <blockquote class="text-xl leading-relaxed font-semibold">“Lists + reviews finally in one place. My ‘Mindf*ck Movies’ list is out of control.”</blockquote>
-            <figcaption class="text-sm text-black/70">— Priya, NYC</figcaption>
-          </figure>
-          <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 snap-start rotate-[-1deg] flex flex-col justify-between relative">
-            <blockquote class="text-xl leading-relaxed font-semibold">“Aftertaste ended my doom‑scrolling. Friends > algorithms.”</blockquote>
-            <figcaption class="text-sm text-black/70">— Mateo, LA</figcaption>
-          </figure>
-          <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 snap-start rotate-[2deg] flex flex-col justify-between relative">
-            <blockquote class="text-xl leading-relaxed font-semibold">“It’s Letterboxd for everything I watch and listen to. Perfect.”</blockquote>
-            <figcaption class="text-sm text-black/70">— Sam, London</figcaption>
-          </figure>
+    <!-- Reviews Poster Marquee -->
+    <section class="py-12 overflow-visible">
+      <div class="max-w-[100vw] mx-auto px-0 overflow-x-hidden overflow-y-visible py-2 md:py-3" aria-label="User reviews">
+        <div class="marquee" id="reviewsBelt" style="width:200%;">
+          <div class="flex gap-8 px-4 w-1/2" id="reviewsSetA">
+            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[-2deg] flex flex-col justify-between">
+              <blockquote class="text-xl leading-relaxed font-semibold">“The only app I trust for movie night. The Tastebud score nails it every time.”</blockquote>
+              <figcaption class="text-sm text-black/70">— Alex, Toronto</figcaption>
+            </figure>
+            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[1.5deg] flex flex-col justify-between">
+              <blockquote class="text-xl leading-relaxed font-semibold">“Lists + reviews finally in one place. My ‘Mindf*ck Movies’ list is out of control.”</blockquote>
+              <figcaption class="text-sm text-black/70">— Priya, NYC</figcaption>
+            </figure>
+            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[-1deg] flex flex-col justify-between">
+              <blockquote class="text-xl leading-relaxed font-semibold">“Aftertaste ended my doom‑scrolling. Friends > algorithms.”</blockquote>
+              <figcaption class="text-sm text-black/70">— Mateo, LA</figcaption>
+            </figure>
+            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[2deg] flex flex-col justify-between">
+              <blockquote class="text-xl leading-relaxed font-semibold">“It’s Letterboxd for everything I watch and listen to. Perfect.”</blockquote>
+              <figcaption class="text-sm text-black/70">— Sam, London</figcaption>
+            </figure>
+          </div>
+          <!-- duplicate set for seamless loop -->
+          <div class="flex gap-8 px-4 w-1/2" id="reviewsSetB">
+            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[-2deg] flex flex-col justify-between">
+              <blockquote class="text-xl leading-relaxed font-semibold">“The only app I trust for movie night. The Tastebud score nails it every time.”</blockquote>
+              <figcaption class="text-sm text-black/70">— Alex, Toronto</figcaption>
+            </figure>
+            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[1.5deg] flex flex-col justify-between">
+              <blockquote class="text-xl leading-relaxed font-semibold">“Lists + reviews finally in one place. My ‘Mindf*ck Movies’ list is out of control.”</blockquote>
+              <figcaption class="text-sm text-black/70">— Priya, NYC</figcaption>
+            </figure>
+            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[-1deg] flex flex-col justify-between">
+              <blockquote class="text-xl leading-relaxed font-semibold">“Aftertaste ended my doom‑scrolling. Friends > algorithms.”</blockquote>
+              <figcaption class="text-sm text-black/70">— Mateo, LA</figcaption>
+            </figure>
+            <figure class="min-w-[320px] h-[460px] rounded-2xl ring-1 ring-white/10 bg-coffee text-licorice p-6 rotate-[2deg] flex flex-col justify-between">
+              <blockquote class="text-xl leading-relaxed font-semibold">“It’s Letterboxd for everything I watch and listen to. Perfect.”</blockquote>
+              <figcaption class="text-sm text-black/70">— Sam, London</figcaption>
+            </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -422,20 +448,30 @@
       micObs.observe(mic);
     }
 
-    // Auto-scroll for review posters (loop every 4s)
-    const reviewBand = document.querySelector('[aria-label="User reviews"]');
-    if (reviewBand) {
-      const step = () => {
-        const first = reviewBand.firstElementChild;
-        const delta = first ? first.getBoundingClientRect().width + 32 : 320;
-        reviewBand.scrollBy({left: delta, behavior: 'smooth'});
-        if (reviewBand.scrollLeft + reviewBand.clientWidth >= reviewBand.scrollWidth - 10) {
-          reviewBand.scrollTo({left: 0, behavior: 'smooth'});
+    // Seamless infinite marquee for review posters using transform loop
+    const belt = document.getElementById('reviewsBelt');
+    const setA = document.getElementById('reviewsSetA');
+    const setB = document.getElementById('reviewsSetB');
+    if (belt && setA && setB) {
+      let x = 0;
+      let speed = 0.55; // px per frame (~33px/s @60fps)
+      let raf;
+      const tick = () => {
+        x -= speed;
+        const widthA = setA.getBoundingClientRect().width;
+        if (-x >= widthA) {
+          x += widthA; // wrap seamlessly at exactly one set width
         }
+        belt.style.transform = `translateX(${x}px)`;
+        raf = requestAnimationFrame(tick);
       };
-      let reviewTimer = setInterval(step, 4000);
-      reviewBand.addEventListener('mouseenter', ()=> clearInterval(reviewTimer));
-      reviewBand.addEventListener('mouseleave', ()=> reviewTimer = setInterval(step, 4000));
+      const start = () => { if (!raf) raf = requestAnimationFrame(tick); };
+      const stop = () => { cancelAnimationFrame(raf); raf = undefined; };
+      start();
+      // no pause on hover
+      // Reduce motion: stop the loop
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) stop();
+      window.addEventListener('resize', ()=>{ /* reset to prevent drift */ x = 0; });
     }
 
     // Simple slider
