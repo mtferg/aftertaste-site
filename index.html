@@ -108,8 +108,8 @@
     }
     @keyframes reel{0%{background-position:-20% 0} 100%{background-position:120% 0}}
     .dust-layer{position:absolute; inset:0; z-index:5; pointer-events:none; overflow:hidden}
-    .screen-boot{position:absolute; inset:0; z-index:6; pointer-events:none; background:radial-gradient(ellipse at 50% 42%, rgba(0,0,0,.75), rgba(0,0,0,.96)); animation: powerOn 750ms ease-out forwards}
-    @keyframes powerOn{0%{opacity:1}40%{opacity:.85}70%{opacity:.45}100%{opacity:0}}
+    .screen-boot{position:absolute; inset:0; z-index:6; pointer-events:none; background:radial-gradient(ellipse at 50% 42%, rgba(0,0,0,.75), rgba(0,0,0,.96)); animation: powerOn 1000ms ease-out forwards}
+    @keyframes powerOn{0%{opacity:1}10%{opacity:.8}20%{opacity:.65}40%{opacity:.45}60%{opacity:.25}80%{opacity:.15}90%{opacity:.05}100%{opacity:0}}
     @media (prefers-reduced-motion: reduce){ .screen-boot{animation:none; opacity:0} }
     /* Floating dust (specks + motes) */
     .dust{position:absolute; width:2px; height:2px; background:rgba(0,0,0,.5); border-radius:50%; filter: blur(.6px); opacity:0; animation: dustRise linear infinite; mix-blend-mode:multiply}
@@ -319,7 +319,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6l-3 2v-2H5a2 2 0 0 1-2-2zm2 0v12h14V5zm2.5 3h9a.75.75 0 0 1 0 1.5h-9A.75.75 0 0 1 7.5 8m0 3h6a.75.75 0 0 1 0 1.5h-6A.75.75 0 0 1 7.5 11"/></svg>
               </div>
               <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Deep Details</h3>
+                <h3 class="text-lg font-semibold">In-Depth Info</h3>
                 <p class="text-almond/75">Trailers, cast, genres, seasons, related picks — all in one place.</p>
                 <ul class="text-sm text-almond/60 list-disc list-inside">
                   <li>Actor pages and filmography</li>
@@ -689,7 +689,7 @@
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h3 class="font-display text-4xl text-white mb-6">Prefer the medium screen?</h3>
         <a href="https://aftertaste.app/" class="inline-block rounded-2xl bg-popcorn text-black font-semibold px-6 py-3 shadow-glow hover:shadow-lg transition">Visit us online</a>
-        <p class="text-almond/80 mt-5">All your data stays in sync with our mobile apps</p>
+        <p class="text-almond/80 mt-4">All your data stays in sync with our mobile apps</p>
       </div>
     </section>
 
@@ -739,7 +739,7 @@
           <img src="assets/tiktok.svg" alt="" class="h-5 w-5"/>
         </a>
       </div>
-      <div class="text-sm text-white/60">&copy; <span id="year">2021</span> Aftertaste.
+      <div class="text-sm text-white/60">Aftertaste, LLC
     </div>
   </footer>
 
