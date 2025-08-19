@@ -147,6 +147,31 @@
     .phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:88px;height:16px;background:#000;border-bottom-left-radius:14px;border-bottom-right-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,.06) inset;}
     .phone-shell:after{content:"";position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:90px;height:4px;border-radius:9999px;background:linear-gradient(90deg, rgba(255,255,255,.15), rgba(255,255,255,.05));}
     .spot {position:absolute; z-index:7; width:38vw; height:38vw; max-width:520px; max-height:520px; pointer-events:none; background: radial-gradient(circle at center, rgba(241,162,14,.06), transparent 60%); mix-blend-mode: screen; transform: translate(-50%,-50%); opacity:.62}
+    /* Mobile slider overrides */
+    @media (max-width: 768px) {
+      #slider {
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+      #slides {
+        transform: none !important;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        scroll-snap-align: start;
+      }
+      #slides li {
+        transform: none !important;
+        opacity: 1 !important;
+        scale: 1 !important;
+        width: 85vw !important;
+        min-width: 85vw !important;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+      }
+    }
     .spot.projector-spot{background:radial-gradient(circle at center, rgba(255,255,255,.38) 0%, rgba(255,255,255,.2) 20%, rgba(255,245,220,.10) 38%, transparent 64%); opacity:.72}
     @media (max-width: 768px){ .spot{display:none} }
     .halftone-anim{position:absolute; inset:0; background-image: radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1px); background-size: 8px 8px; opacity:.35; animation: dots 22s linear infinite;}
@@ -228,11 +253,11 @@
       <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
       <div id="spot" class="spot projector-spot" aria-hidden="true"></div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-licorice">
-        <div class="space-y-6">
+        <div class="space-y-6 text-center md:text-left">
           <h1 class="font-display text-licorice text-5xl md:text-6xl leading-none">Your Ultimate Movie and TV Hub</h1>
           <!-- <p class="text-lg text-licorice/90">Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved.</p> -->
           <p class="text-lg text-licorice/90">Track what you watch, compare tastes with friends, and discover what’s worth watching — through people you trust</p>
-          <div class="flex flex-wrap gap-4">
+          <div class="flex flex-wrap gap-4 justify-center md:justify-start">
             <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block">
               <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10 md:h-12" />
             </a>
@@ -389,13 +414,13 @@
     <section id="who" class="py-24 md:py-28 relative overflow-visible">
 
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-        <div class="relative order-2 md:order-1">
+        <div class="relative order-2 md:order-1 hidden md:block">
           <div class="w-full max-w-[160px] md:max-w-[180px] mx-auto relative">
             <img src="assets/mic-bw.png" alt="Vintage studio microphone in black and white" class="w-full h-auto translate-y-4 opacity-0" id="micImg" />
             <div class="halftone-anim" aria-hidden="true"></div>
           </div>
         </div>
-        <div class="space-y-6 order-1 md:order-2">
+        <div class="space-y-6 order-1 md:order-2 text-center md:text-left">
           <h2 class="font-display text-4xl">Who we are</h2>
           <p>Aftertaste is the social hub for Movie and TV fans who <strong>trust people over algorithms</strong>.</p>
           <p>Track what you watch, compare tastes, and get real recommendations from friends, creators, and critics — all in one place.</p>
@@ -408,20 +433,19 @@
     <section id="features" class="py-24 md:py-28 bg-black/30">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header class="flex items-end justify-between mb-10">
-          <h2 class="font-display text-4xl">Features</h2>
-          <div class="text-sm opacity-70">Use ← → keys</div>
+          <h2 class="font-display text-4xl text-center md:text-left w-full">A Menu of Features</h2>
         </header>
 
         <div class="relative">
-          <div id="slider" class="overflow-hidden rounded-3xl px-2 md:px-4" role="region" aria-roledescription="carousel" aria-label="App Features">
-            <ul id="slides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
+          <div id="slider" class="overflow-hidden rounded-3xl px-4 md:px-4" role="region" aria-roledescription="carousel" aria-label="App Features">
+            <ul id="slides" class="flex gap-0 md:gap-6 transition-transform duration-500 will-change-transform items-stretch">
               <!-- Slide 1 -->
-              <li class="min-w-[85%] md:min-w-[70%] grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+              <li class="w-full min-w-full md:min-w-[70%] flex flex-col md:grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
                 <div class="space-y-4 flex flex-col justify-center">
                   <h3 class="text-2xl font-semibold">Track &amp; Rate</h3>
                   <p>Log watched and in-progress items, score from 1–10, and keep your history tidy.</p>
                 </div>
-                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full max-w-[200px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
+                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full min-w-[160px] max-w-[180px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
                   <div class="phone-notch" aria-hidden="true"></div>
                   <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
                     <img src="assets/feature-1.webp" alt="Track & Rate screen" class="w-full h-full object-cover" />
@@ -429,12 +453,12 @@
                 </figure>
               </li>
               <!-- Slide 2 -->
-              <li class="min-w-[85%] md:min-w-[70%] grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+              <li class="w-full min-w-full md:min-w-[70%] flex flex-col md:grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
                 <div class="space-y-4 flex flex-col justify-center">
                   <h3 class="text-2xl font-semibold">Tastebuds</h3>
                   <p>Follow friends and creators; compare tastes and see what your circle is watching.</p>
                 </div>
-                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full max-w-[200px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
+                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full min-w-[160px] max-w-[180px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
                   <div class="phone-notch" aria-hidden="true"></div>
                   <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
                     <img src="assets/feature-2.webp" alt="Tastebuds feed screen" class="w-full h-full object-cover" />
@@ -442,12 +466,12 @@
                 </figure>
               </li>
               <!-- Slide 3 -->
-              <li class="min-w-[85%] md:min-w-[70%] grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+              <li class="w-full min-w-full md:min-w-[70%] flex flex-col md:grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
                 <div class="space-y-4 flex flex-col justify-center">
                   <h3 class="text-2xl font-semibold">Lists</h3>
                   <p>Curate themes and share—like <em>“Mindf*ck Movies”</em>, your crowd-pleasing rabbit hole.</p>
                 </div>
-                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full max-w-[200px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
+                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full min-w-[160px] max-w-[180px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
                   <div class="phone-notch" aria-hidden="true"></div>
                   <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
                     <img src="assets/feature-3.webp" alt="Lists screen" class="w-full h-full object-cover" />
@@ -455,45 +479,35 @@
                 </figure>
               </li>
               <!-- Slide 4 -->
-              <li class="min-w-[85%] md:min-w-[70%] grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+              <li class="w-full min-w-full md:min-w-[70%] flex flex-col md:grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
                 <div class="space-y-4 flex flex-col justify-center">
                   <h3 class="text-2xl font-semibold">Reviews &amp; Discussions</h3>
                   <p>Post reviews, react, and dive into threads that actually help you decide what to watch.</p>
                 </div>
-                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full max-w-[200px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
+                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full min-w-[160px] max-w-[180px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
                   <div class="phone-notch" aria-hidden="true"></div>
                   <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
                     <img src="assets/feature-4.webp" alt="Reviews screen" class="w-full h-full object-cover" />
                   </div>
                 </figure>
               </li>
-              <!-- Slide 5 -->
-              <li class="min-w-[85%] md:min-w-[70%] grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl">
-                <div class="space-y-4 flex flex-col justify-center">
-                  <h3 class="text-2xl font-semibold">Trending &amp; Discover</h3>
-                  <p>See what’s popping this week or month—globally and among your Tastebuds.</p>
-                </div>
-                <div class="rounded-xl bg-white/5 aspect-[16/10] flex items-center justify-center ring-1 ring-white/10 poster">
-                  <span class="text-white/40">Add more screenshots anytime</span>
-                </div>
-              </li>
             </ul>
           </div>
 
-          <!-- Controls -->
-          <div class="mt-6 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="flex gap-2" id="dots" role="tablist" aria-label="Feature slides"></div>
-              <span id="autoHint" class="inline-flex items-center text-white/60 text-[11px] opacity-0 transition-opacity select-none" title="Auto‑advance paused">
-                <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" class="mr-1"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
-                Paused
-              </span>
+                      <!-- Controls -->
+            <div class="mt-6 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="hidden md:flex gap-2" id="dots" role="tablist" aria-label="Feature slides"></div>
+                <span id="autoHint" class="inline-flex items-center text-white/60 text-[11px] opacity-0 transition-opacity select-none" title="Auto‑advance paused">
+                  <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" class="mr-1"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
+                  Paused
+                </span>
+              </div>
+              <div class="hidden md:flex gap-2">
+                <button id="prev" class="px-4 py-2 rounded-lg border border-white/20 hover:bg-white/5" aria-label="Previous slide" aria-controls="slides">←</button>
+                <button id="next" class="px-4 py-2 rounded-lg border border-white/20 hover:bg-white/5" aria-label="Next slide" aria-controls="slides">→</button>
+              </div>
             </div>
-            <div class="flex gap-2">
-              <button id="prev" class="px-4 py-2 rounded-lg border border-white/20 hover:bg-white/5" aria-label="Previous slide" aria-controls="slides">←</button>
-              <button id="next" class="px-4 py-2 rounded-lg border border-white/20 hover:bg-white/5" aria-label="Next slide" aria-controls="slides">→</button>
-            </div>
-          </div>
           <div id="status" class="sr-only" aria-live="polite"></div>
         </div>
       </div>
