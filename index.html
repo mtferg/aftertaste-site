@@ -149,6 +149,10 @@
     .spot {position:absolute; z-index:7; width:38vw; height:38vw; max-width:520px; max-height:520px; pointer-events:none; background: radial-gradient(circle at center, rgba(241,162,14,.06), transparent 60%); mix-blend-mode: screen; transform: translate(-50%,-50%); opacity:.62}
     /* Mobile slider overrides */
     @media (max-width: 768px) {
+      #chef {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
       #slider {
         overflow-x: auto;
         overflow-y: hidden;
@@ -170,6 +174,53 @@
         min-width: 85vw !important;
         flex-shrink: 0;
         scroll-snap-align: center;
+      }
+
+      #chefSlider {
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100vw;
+        width: 100%;
+        position: relative;
+      }
+      #chefSlides {
+        transform: none !important;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        scroll-snap-align: start;
+        width: max-content;
+        min-width: 100%;
+      }
+      #chefSlides li {
+        transform: none !important;
+        opacity: 1 !important;
+        scale: 1 !important;
+        width: 85vw !important;
+        min-width: 85vw !important;
+        max-width: 85vw !important;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+        padding: 1rem !important;
+      }
+
+      /* Reviews section mobile fixes */
+      #reviewsBelt {
+        width: max-content !important;
+      }
+      #reviewsSetA, #reviewsSetB {
+        width: max-content !important;
+        gap: 1rem !important;
+        padding: 0 1rem !important;
+      }
+      #reviewsSetA figure, #reviewsSetB figure {
+        width: 200px !important;
+        min-width: 200px !important;
+        max-width: 200px !important;
+        flex-shrink: 0 !important;
+        margin: 0 !important;
       }
     }
     .spot.projector-spot{background:radial-gradient(circle at center, rgba(255,255,255,.38) 0%, rgba(255,255,255,.2) 20%, rgba(255,245,220,.10) 38%, transparent 64%); opacity:.72}
@@ -219,7 +270,7 @@
   <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:ring-2 focus:ring-popcorn bg-black text-white px-3 py-2 rounded">Skip to content</a>
   <header id="top" class="fixed top-0 left-0 right-0 z-50 transition-colors">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 items-center justify-between">
+      <div class="flex h-16 items-center justify-start md:justify-between">
         <a href="#top" class="flex items-center gap-3">
           <img src="assets/logo.png" alt="Aftertaste logo" class="h-8 w-8 rounded-full ring-1 ring-white/10">
           <span class="font-display tracking-widest text-xl">AFTERTASTE</span>
@@ -515,9 +566,9 @@
 
     <!-- Chef: Recommendation System -->
     <section id="chef" class="py-24 md:py-28">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-start">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Copy -->
-        <div class="space-y-6 order-2 md:order-1">
+        <div class="space-y-6 order-2 md:order-1 text-center md:text-left">
           <div class="inline-flex items-center gap-3 rounded-full px-3 py-1 ring-1 ring-white/10 bg-white/5">
             <img src="assets/chef/logo.svg" alt="Chef logo" class="h-5 w-5" onerror="this.style.display='none'">
             <span class="text-xs tracking-widest uppercase text-white/70">Get Custom Recommendations</span>
@@ -545,7 +596,7 @@
             </div>
           </div>
 
-          <div class="flex gap-3 pt-2">
+          <div class="flex gap-3 pt-2 justify-center md:justify-start">
             <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" class="inline-block">
               <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" />
             </a>
@@ -554,7 +605,8 @@
         </div>
 
         <!-- Visual: iPhone screenshots slider -->
-        <div class="order-1 md:order-2">
+        <div class="grid md:grid-cols-2 gap-12 items-start mt-12 md:mt-0">
+          <div class="order-2 md:order-1 overflow-hidden">
           <div id="chefSlider" class="overflow-hidden rounded-3xl px-2 md:px-4" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
             <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
               <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
@@ -620,6 +672,10 @@
             </ul>
           </div>
           <!-- <div class="mt-4 text-xs text-white/60 text-center">Swipe or let Chef autoplay</div> -->
+        </div>
+          <div class="order-1 md:order-2">
+            <!-- Empty div for desktop layout balance -->
+          </div>
         </div>
       </div>
     </section>
@@ -736,8 +792,8 @@
             <span class="text-sm">Message</span>
             <textarea name="message" rows="5" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-popcorn"></textarea>
           </label>
-          <div class="flex items-center gap-3">
-            <button type="submit" class="rounded-xl bg-popcorn text-licorice font-semibold px-6 py-3 hover:shadow-glow transition">Send</button>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <button type="submit" class="w-full sm:w-auto rounded-xl bg-popcorn text-licorice font-semibold px-6 py-3 hover:shadow-glow transition">Send</button>
             <span id="toast" class="text-sm text-almond/70 hidden" role="status" aria-live="polite">Opening your email client…</span>
           </div>
         </form>
