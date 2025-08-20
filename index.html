@@ -567,8 +567,9 @@
     <!-- Chef: Recommendation System -->
     <section id="chef" class="py-24 md:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Copy -->
-        <div class="space-y-6 order-2 md:order-1 text-center md:text-left">
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+          <!-- Copy -->
+          <div class="space-y-6 order-1 md:order-1 text-center md:text-left">
           <div class="inline-flex items-center gap-3 rounded-full px-3 py-1 ring-1 ring-white/10 bg-white/5">
             <img src="assets/chef/logo.svg" alt="Chef logo" class="h-5 w-5" onerror="this.style.display='none'">
             <span class="text-xs tracking-widest uppercase text-white/70">Get Custom Recommendations</span>
@@ -604,9 +605,8 @@
           </div>
         </div>
 
-        <!-- Visual: iPhone screenshots slider -->
-        <div class="grid md:grid-cols-2 gap-12 items-start mt-12 md:mt-0">
-          <div class="order-2 md:order-1 overflow-hidden">
+          <!-- Carousel -->
+          <div class="order-2 md:order-2 overflow-hidden md:overflow-visible">
           <div id="chefSlider" class="overflow-hidden rounded-3xl px-2 md:px-4" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
             <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
               <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
@@ -673,9 +673,6 @@
           </div>
           <!-- <div class="mt-4 text-xs text-white/60 text-center">Swipe or let Chef autoplay</div> -->
         </div>
-          <div class="order-1 md:order-2">
-            <!-- Empty div for desktop layout balance -->
-          </div>
         </div>
       </div>
     </section>
