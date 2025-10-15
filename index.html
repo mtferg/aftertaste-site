@@ -8,7 +8,7 @@
   <meta property="og:title" content="Aftertaste — Your Ultimate Movie and TV Hub" />
   <meta property="og:description" content="Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/hero-screenshot.png" />
+  <meta property="og:image" content="assets/hero-portrait.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#1C1C1C" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -247,6 +247,15 @@
     .footer-social img{filter: brightness(0) invert(1)}
     /* Who we are: flat dark background (no glow) */
     .who-backlight{display:none}
+
+    /* Hide scrollbar for horizontal scroll */
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
     /* Review posters infinite marquee */
     .marquee { display:flex; gap:2rem; will-change: transform; }
     .marquee:hover { }
@@ -276,13 +285,12 @@
           <span class="font-display tracking-widest text-xl">AFTERTASTE</span>
         </a>
         <div class="hidden md:flex items-center gap-6 text-sm">
-          <a href="#top" class="hover:text-popcorn">Home</a>
+          <a href="#hero" class="hover:text-popcorn">Home</a>
           <a href="#glance" class="hover:text-popcorn">At a Glance</a>
           <a href="#who" class="hover:text-popcorn">Who we are</a>
           <a href="#features" class="hover:text-popcorn">Features</a>
           <a href="#chef" class="hover:text-popcorn">Chef</a>
-          <a href="https://aftertaste.app/" class="hover:text-popcorn">Web App</a>
-          <a href="#contact" class="hover:text-popcorn">Contact</a>
+          <!-- <a href="#contact" class="hover:text-popcorn">Contact</a> -->
           <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" class="inline-block">
             <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-8" />
           </a>
@@ -307,7 +315,7 @@
         <div class="space-y-6 text-center md:text-left">
           <h1 class="font-display text-licorice text-5xl md:text-6xl leading-none">Your Ultimate Movie and TV Hub</h1>
           <!-- <p class="text-lg text-licorice/90">Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved.</p> -->
-          <p class="text-lg text-licorice/90">Track what you watch, compare tastes with friends, and discover what’s worth watching — through people you trust</p>
+          <p class="text-lg text-licorice/90">Track what you watch, compare tastes with friends, and discover what’s worth watching — <strong>through people you trust</strong>.</p>
           <div class="flex flex-wrap gap-4 justify-center md:justify-start">
             <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block">
               <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10 md:h-12" />
@@ -318,6 +326,7 @@
             </div>
             <!-- <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="rounded-2xl border border-white/20 px-4 py-2 hover:bg-white/5 transition ring-1 ring-black/70">Prefer the Medium Screen?</a> -->
           </div>
+
         </div>
         <div class="relative">
           <img src="assets/hero-portrait.png" alt="Aftertaste app screen" class="w-full max-w-[225px] md:max-w-[280px] lg:max-w-[325px] mx-auto" />
@@ -471,91 +480,120 @@
     </section>
 
     <!-- Features Slider -->
-    <section id="features" class="py-24 md:py-28 bg-black/30">
+    <section id="features" class="py-16 md:py-28 bg-black/30">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header class="flex items-end justify-between mb-10">
           <h2 class="font-display text-4xl text-center md:text-left w-full">A Menu of Features</h2>
         </header>
 
         <div class="relative">
-          <div id="slider" class="overflow-hidden rounded-3xl px-4 md:px-4" role="region" aria-roledescription="carousel" aria-label="App Features">
-            <ul id="slides" class="flex gap-0 md:gap-6 transition-transform duration-500 will-change-transform items-stretch">
+          <div class="overflow-x-auto scrollbar-hide" role="region" aria-label="App Features">
+            <ul class="flex gap-4 p-4" style="width: max-content;">
               <!-- Slide 1 -->
-              <li class="w-full min-w-full md:min-w-[70%] flex flex-col md:grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-4 flex flex-col justify-center">
-                  <h3 class="text-2xl font-semibold">Track &amp; Rate</h3>
-                  <p>Log watched and in-progress items, score from 1–10, and keep your history tidy.</p>
+              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left items-center">
+                  <h3 class="text-2xl font-semibold">Tastebuds Feed</h3>
+                  <p>Follow friends and creators.</p>
+                  <p>Compare tastes and see what your circle is watching.</p>
                 </div>
-                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full min-w-[160px] max-w-[180px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
-                  <div class="phone-notch" aria-hidden="true"></div>
-                  <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
-                    <img src="assets/feature-1.webp" alt="Track & Rate screen" class="w-full h-full object-cover" />
-                  </div>
+                <img src="assets/features/feed.png" alt="Feeds screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
                 </figure>
               </li>
               <!-- Slide 2 -->
-              <li class="w-full min-w-full md:min-w-[70%] flex flex-col md:grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-4 flex flex-col justify-center">
-                  <h3 class="text-2xl font-semibold">Tastebuds</h3>
-                  <p>Follow friends and creators; compare tastes and see what your circle is watching.</p>
+              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left items-center">
+                  <h3 class="text-2xl font-semibold">Track Your Content</h3>
+                  <p>Easily track what you have in progress and catalog your full watch history.</p>
+                  <p>Shelve things for later or trash them if you're done.</p>
                 </div>
-                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full min-w-[160px] max-w-[180px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
-                  <div class="phone-notch" aria-hidden="true"></div>
-                  <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
-                    <img src="assets/feature-2.webp" alt="Tastebuds feed screen" class="w-full h-full object-cover" />
-                  </div>
-                </figure>
+                <img src="assets/features/tracking.png" alt="Tastebuds feed screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
               </li>
               <!-- Slide 3 -->
-              <li class="w-full min-w-full md:min-w-[70%] flex flex-col md:grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-4 flex flex-col justify-center">
-                  <h3 class="text-2xl font-semibold">Lists</h3>
-                  <p>Curate themes and share—like <em>“Mindf*ck Movies”</em>, your crowd-pleasing rabbit hole.</p>
+              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left items-center">
+                  <h3 class="text-2xl font-semibold">Create Lists (Solo or with Friends)</h3>
+                  <p>Create and share content lists - either solo or collabing with friends.</p>
                 </div>
-                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full min-w-[160px] max-w-[180px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
-                  <div class="phone-notch" aria-hidden="true"></div>
-                  <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
-                    <img src="assets/feature-3.webp" alt="Lists screen" class="w-full h-full object-cover" />
-                  </div>
-                </figure>
+                <img src="assets/features/list.png" alt="Lists screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
               </li>
               <!-- Slide 4 -->
-              <li class="w-full min-w-full md:min-w-[70%] flex flex-col md:grid md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-4 flex flex-col justify-center">
-                  <h3 class="text-2xl font-semibold">Reviews &amp; Discussions</h3>
-                  <p>Post reviews, react, and dive into threads that actually help you decide what to watch.</p>
+              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left items-center">
+                  <h3 class="text-2xl font-semibold">All the Info</h3>
+                  <p>Easily search content and view:</p>
+                  <ul class="list-disc list-inside space-y-1">
+                    <li>Descriptions</li>
+                    <li>Where to stream</li>
+                    <li>Trailers</li>
+                    <li>Cast</li>
+                    <li>Season and episode details</li>
+                    <li>Related content</li>
+                  </ul>
                 </div>
-                <figure class="rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full min-w-[160px] max-w-[180px] md:max-w-[230px] lg:max-w-[250px] mx-auto aspect-[9/19] relative">
-                  <div class="phone-notch" aria-hidden="true"></div>
-                  <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
-                    <img src="assets/feature-4.webp" alt="Reviews screen" class="w-full h-full object-cover" />
-                  </div>
-                </figure>
+                <img src="assets/features/details.png" alt="Reviews screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+              </li>
+              <!-- Slide 5 -->
+              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left items-center">
+                  <h3 class="text-2xl font-semibold">Actor Profiles</h3>
+                  <p>"Where is that person from?". Now you know</p>
+                </div>
+                <img src="assets/features/actor.png" alt="Reviews screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+              </li>
+              <!-- Slide 6 -->
+              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left items-center">
+                  <h3 class="text-2xl font-semibold">Customize Your Profile</h3>
+                  <p>Show off your Top Ate (8) movies and TV shows.</p>
+                  <p>Earn badges are you conquer the world of content.</p>
+                </div>
+                <img src="assets/features/profile.png" alt="Lists screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+              </li>
+              <!-- Slide 7 -->
+              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left items-center">
+                  <h3 class="text-2xl font-semibold">See What's Trending</h3>
+                  <p>View trending and top rated content over the last week, month, and year.</p>
+                </div>
+                <img src="assets/features/trending.png" alt="Lists screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+              </li>
+              <!-- Slide 8 -->
+              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left items-center">
+                  <h3 class="text-2xl font-semibold">Scores for You</h3>
+                  <p>Scores tailored to your taste.</p>
+                  <p>View your score, Tastebud average, and global average for content in one easy place.</p>
+                </div>
+                <img src="assets/features/scores.png" alt="Lists screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+              </li>
+              <!-- Slide 9 -->
+              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
+                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left items-center">
+                  <h3 class="text-2xl font-semibold">Discuss, Debate, Discover</h3>
+                  <p>Get into in-depth breakdowns and discuss content in nested threads filtered to your preferences.</p>
+                </div>
+                <img src="assets/features/comments.png" alt="Lists screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
               </li>
             </ul>
           </div>
 
-                      <!-- Controls -->
-            <div class="mt-6 flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="hidden md:flex gap-2" id="dots" role="tablist" aria-label="Feature slides"></div>
-                <span id="autoHint" class="inline-flex items-center text-white/60 text-[11px] opacity-0 transition-opacity select-none" title="Auto‑advance paused">
-                  <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" class="mr-1"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
-                  Paused
-                </span>
-              </div>
-              <div class="hidden md:flex gap-2">
-                <button id="prev" class="px-4 py-2 rounded-lg border border-white/20 hover:bg-white/5" aria-label="Previous slide" aria-controls="slides">←</button>
-                <button id="next" class="px-4 py-2 rounded-lg border border-white/20 hover:bg-white/5" aria-label="Next slide" aria-controls="slides">→</button>
-              </div>
+          <!-- Controls -->
+          <div class="mt-6 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="hidden md:flex gap-2" id="dots" role="tablist" aria-label="Feature slides"></div>
+              <span id="autoHint" class="inline-flex items-center text-white/60 text-[11px] opacity-0 transition-opacity select-none" title="Auto‑advance paused">
+                <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" class="mr-1"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
+                Paused
+              </span>
             </div>
+          </div>
           <div id="status" class="sr-only" aria-live="polite"></div>
         </div>
       </div>
     </section>
 
     <!-- Chef: Recommendation System -->
-    <section id="chef" class="py-24 md:py-28">
+    <section id="chef" class="py-20 md:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-12 items-start">
           <!-- Copy -->
@@ -600,68 +638,16 @@
           <div id="chefSlider" class="overflow-hidden rounded-3xl px-2 md:px-4" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
             <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
               <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <figure class="relative rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full max-w-[220px] md:max-w-[260px] lg:max-w-[300px] mx-auto aspect-[9/19]">
-                  <div class="phone-notch" aria-hidden="true"></div>
-                  <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
-                    <picture>
-                      <source srcset="assets/chef/screen-1.webp" type="image/webp" />
-                      <img src="assets/hero-screenshot.png" alt="Chef screenshot 1" class="w-full h-full object-cover" onerror="this.parentElement.parentElement.parentElement.style.display='none'" />
-                    </picture>
-                  </div>
-                  <figcaption class="sr-only">Chef screen 1</figcaption>
-                </figure>
+                <img src="assets/chef/chef-home.png" alt="Chef home screen" class="w-full h-full object-cover" />
               </li>
               <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <figure class="relative rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full max-w-[220px] md:max-w-[260px] lg:max-w-[300px] mx-auto aspect-[9/19]">
-                  <div class="phone-notch" aria-hidden="true"></div>
-                  <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
-                    <picture>
-                      <source srcset="assets/chef/screen-2.webp" type="image/webp" />
-                      <img src="assets/hero-screenshot.png" alt="Chef screenshot 2" class="w-full h-full object-cover" onerror="this.parentElement.parentElement.parentElement.style.display='none'" />
-                    </picture>
-                  </div>
-                  <figcaption class="sr-only">Chef screen 2</figcaption>
-                </figure>
+                <img src="assets/chef/chef-rec.png" alt="Chef recommendations screen" class="w-full h-full object-cover" />
               </li>
               <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <figure class="relative rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full max-w-[220px] md:max-w-[260px] lg:max-w-[300px] mx-auto aspect-[9/19]">
-                  <div class="phone-notch" aria-hidden="true"></div>
-                  <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
-                    <picture>
-                      <source srcset="assets/chef/screen-3.webp" type="image/webp" />
-                      <img src="assets/hero-screenshot.png" alt="Chef screenshot 3" class="w-full h-full object-cover" onerror="this.parentElement.parentElement.parentElement.style.display='none'" />
-                    </picture>
-                  </div>
-                  <figcaption class="sr-only">Chef screen 3</figcaption>
-                </figure>
-              </li>
-              <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <figure class="relative rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full max-w-[220px] md:max-w-[260px] lg:max-w-[300px] mx-auto aspect-[9/19]">
-                  <div class="phone-notch" aria-hidden="true"></div>
-                  <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
-                    <picture>
-                      <source srcset="assets/chef/screen-4.webp" type="image/webp" />
-                      <img src="assets/hero-screenshot.png" alt="Chef screenshot 4" class="w-full h-full object-cover" onerror="this.parentElement.parentElement.parentElement.style.display='none'" />
-                    </picture>
-                  </div>
-                  <figcaption class="sr-only">Chef screen 4</figcaption>
-                </figure>
-              </li>
-              <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <figure class="relative rounded-3xl overflow-hidden ring-1 ring-white/10 poster phone-shell phone-specular w-full max-w-[220px] md:max-w-[260px] lg:max-w-[300px] mx-auto aspect-[9/19]">
-                  <div class="phone-notch" aria-hidden="true"></div>
-                  <div class="absolute inset-[8px] rounded-[22px] overflow-hidden bg-black">
-                    <picture>
-                      <source srcset="assets/chef/screen-5.webp" type="image/webp" />
-                      <img src="assets/hero-screenshot.png" alt="Chef screenshot 5" class="w-full h-full object-cover" onerror="this.parentElement.parentElement.parentElement.style.display='none'" />
-                    </picture>
-                  </div>
-                  <figcaption class="sr-only">Chef screen 5</figcaption>
-                </figure>
+                <img src="assets/chef/chef-taste.png" alt="Chef taste profile screen" class="w-full h-full object-cover" />
               </li>
             </ul>
           </div>
-          <!-- <div class="mt-4 text-xs text-white/60 text-center">Swipe or let Chef autoplay</div> -->
         </div>
         </div>
       </div>
@@ -682,34 +668,42 @@
             <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
               <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
               <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Better than Letterboxd</h4>
-                <blockquote class="leading-relaxed">“The only app I trust for movie night. The Tastebud score nails it every time.”</blockquote>
+                <h4 class="font-display text-2xl leading-tight mb-3">Amazing Concept</h4>
+                <blockquote class="leading-relaxed">“... save hours of indecisive scrolling time on Netflix...”</blockquote>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">Starring Alex — Toronto</figcaption>
+              <figcaption class="text-sm text-black/70 text-center">@nickmamolo</figcaption>
             </figure>
             <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
               <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
               <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Endless Lists</h4>
-                <blockquote class="leading-relaxed">“Lists + reviews finally in one place. My ‘Mindf*ck Movies’ list is out of control.”</blockquote>
+                <h4 class="font-display text-2xl leading-tight mb-3">Good app and product!</h4>
+                <blockquote class="leading-relaxed">“Do IMDB or rotten tomatoes ratings matter anymore? I feel like my friends opinions are better signal for what is good!”</blockquote>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">Starring Priya — NYC</figcaption>
+              <figcaption class="text-sm text-black/70 text-center">@Landslidefink</figcaption>
             </figure>
             <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
               <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
               <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Everything I Could Ask For</h4>
-                <blockquote class="leading-relaxed">“Aftertaste ended my doom‑scrolling. Friends > algorithms.”</blockquote>
+                <h4 class="font-display text-2xl leading-tight mb-3">Great app!!</h4>
+                <blockquote class="leading-relaxed">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid...).”</blockquote>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">Starring Mateo — LA</figcaption>
+              <figcaption class="text-sm text-black/70 text-center">@ponse71820386;);</figcaption>
             </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[2deg] flex flex-col justify-between">
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
               <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
               <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">A Single Home</h4>
-                <blockquote class="leading-relaxed">“It’s Letterboxd for everything I watch and listen to. Perfect.”</blockquote>
+                <h4 class="font-display text-2xl leading-tight mb-3">Chef is incredible!</h4>
+                <blockquote class="leading-relaxed">“So interesting to see my unique taste profile, and Chef has recommended me some of my absolute favorite watches that I've ever seen.”</blockquote>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">Starring Sam — London</figcaption>
+              <figcaption class="text-sm text-black/70 text-center">@michaeltferg</figcaption>
+            </figure>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Where has this been?</h4>
+                <blockquote class="leading-relaxed">“About time an app like this came along. It knocks it out of the park.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">@pancakes</figcaption>
             </figure>
           </div>
           <!-- duplicate set for seamless loop -->
@@ -717,34 +711,85 @@
             <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
               <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
               <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Better than Letterboxd</h4>
-                <blockquote class="leading-relaxed">“The only app I trust for movie night. The Tastebud score nails it every time.”</blockquote>
+                <h4 class="font-display text-2xl leading-tight mb-3">Amazing Concept</h4>
+                <blockquote class="leading-relaxed">“... save hours of indecisive scrolling time on Netflix...”</blockquote>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">Starring Alex — Toronto</figcaption>
+              <figcaption class="text-sm text-black/70 text-center">@nickmamolo</figcaption>
             </figure>
             <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
               <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
               <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Endless Lists</h4>
-                <blockquote class="leading-relaxed">“Lists + reviews finally in one place. My ‘Mindf*ck Movies’ list is out of control.”</blockquote>
+                <h4 class="font-display text-2xl leading-tight mb-3">Good app and product!</h4>
+                <blockquote class="leading-relaxed">“Do IMDB or rotten tomatoes ratings matter anymore? I feel like my friends opinions are better signal for what is good!”</blockquote>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">Starring Priya — NYC</figcaption>
+              <figcaption class="text-sm text-black/70 text-center">@Landslidefink</figcaption>
             </figure>
             <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
               <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
               <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Everything I Could Ask For</h4>
-                <blockquote class="leading-relaxed">“Aftertaste ended my doom‑scrolling. Friends > algorithms.”</blockquote>
+                <h4 class="font-display text-2xl leading-tight mb-3">Great app!!</h4>
+                <blockquote class="leading-relaxed">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid...).”</blockquote>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">Starring Mateo — LA</figcaption>
+              <figcaption class="text-sm text-black/70 text-center">@ponse71820386;);</figcaption>
             </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[2deg] flex flex-col justify-between">
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
               <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
               <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">A Single Home</h4>
-                <blockquote class="leading-relaxed">“It’s Letterboxd for everything I watch and listen to. Perfect.”</blockquote>
+                <h4 class="font-display text-2xl leading-tight mb-3">Chef is incredible!</h4>
+                <blockquote class="leading-relaxed">“So interesting to see my unique taste profile, and Chef has recommended me some of my absolute favorite watches that I've ever seen.”</blockquote>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">Starring Sam — London</figcaption>
+              <figcaption class="text-sm text-black/70 text-center">@michaeltferg</figcaption>
+            </figure>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Where has this been?</h4>
+                <blockquote class="leading-relaxed">“About time an app like this came along. It knocks it out of the park.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">@pancakes</figcaption>
+            </figure>
+          </div>
+          <!-- duplicate set for seamless loop -->
+          <div class="flex gap-8 px-4 w-1/2" id="reviewsSetB">
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Amazing Concept</h4>
+                <blockquote class="leading-relaxed">“... save hours of indecisive scrolling time on Netflix...”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">@nickmamolo</figcaption>
+            </figure>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Good app and product!</h4>
+                <blockquote class="leading-relaxed">“Do IMDB or rotten tomatoes ratings matter anymore? I feel like my friends opinions are better signal for what is good!”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">@Landslidefink</figcaption>
+            </figure>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Great app!!</h4>
+                <blockquote class="leading-relaxed">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid...).”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">@ponse71820386;);</figcaption>
+            </figure>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Chef is incredible!</h4>
+                <blockquote class="leading-relaxed">“So interesting to see my unique taste profile, and Chef has recommended me some of my absolute favorite watches that I've ever seen.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">@michaeltferg</figcaption>
+            </figure>
+            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
+              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
+              <div class="text-center">
+                <h4 class="font-display text-2xl leading-tight mb-3">Where has this been?</h4>
+                <blockquote class="leading-relaxed">“About time an app like this came along. It knocks it out of the park.”</blockquote>
+              </div>
+              <figcaption class="text-sm text-black/70 text-center">@pancakes</figcaption>
             </figure>
           </div>
         </div>
@@ -761,7 +806,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-24 md:py-28 bg-black/30">
+    <!-- <section id="contact" class="py-24 md:py-28 bg-black/30">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="font-display text-4xl mb-6">Contact us</h2>
         <form id="contactForm" class="space-y-4">
@@ -785,7 +830,7 @@
           </div>
         </form>
       </div>
-    </section>
+    </section> -->
   </main>
 
   <!-- Footer -->
@@ -966,141 +1011,7 @@
       });
     }
 
-    // Simple slider
-    const slides = document.getElementById('slides');
-    const dots = document.getElementById('dots');
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
-    const status = document.getElementById('status');
-    const sliderRegion = document.getElementById('slider');
-    let index = 0;
-    const count = slides.children.length;
-    const slideEls = Array.from(slides.children);
 
-    // Initialize slide semantics
-    slideEls.forEach((el, i) => {
-      el.id = `slide-${i}`;
-      el.setAttribute('role', 'group');
-      el.setAttribute('aria-roledescription', 'slide');
-      el.setAttribute('aria-label', `${i+1} of ${count}`);
-      // coverflow depth
-      el.style.transition = 'transform 500ms, opacity 500ms';
-    });
-
-    function renderDots() {
-      dots.innerHTML = '';
-      for (let i=0;i<count;i++) {
-        const b = document.createElement('button');
-        b.className = 'h-2 w-8 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-popcorn focus-visible:ring-offset-licorice ' + (i===index ? 'bg-popcorn' : 'bg-white/20');
-        b.setAttribute('role','tab');
-        b.setAttribute('aria-controls', `slide-${i}`);
-        b.setAttribute('aria-selected', i===index ? 'true' : 'false');
-        b.setAttribute('tabindex', i===index ? '0' : '-1');
-        b.addEventListener('click', ()=>go(i));
-        dots.appendChild(b);
-      }
-    }
-    function go(i) {
-      index = (i+count)%count;
-      // center current slide with gap spacing accounted for
-      const basis = slideEls[0].getBoundingClientRect().width + 24; // 24 ~ gap
-      slides.style.transform = `translateX(${-index * basis}px)`;
-      renderDots();
-      // Update slide aria-hidden and live status
-      slideEls.forEach((el, j) => {
-        el.setAttribute('aria-hidden', j === index ? 'false' : 'true');
-        const delta = Math.abs(j - index);
-        const scale = j === index ? 1 : (delta === 1 ? 0.95 : 0.9);
-        const opacity = j === index ? 1 : 0.7;
-        el.style.transform = `scale(${scale})`;
-        el.style.opacity = String(opacity);
-      });
-      const currentTitle = slideEls[index].querySelector('h3')?.textContent || `Slide ${index+1}`;
-      status.textContent = `${currentTitle} — slide ${index+1} of ${count}`;
-    }
-    prev.addEventListener('click', ()=>go(index-1));
-    next.addEventListener('click', ()=>go(index+1));
-    window.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft') go(index-1);
-      if (e.key === 'ArrowRight') go(index+1);
-    });
-    renderDots();
-    go(0);
-
-    // Tablist keyboard support for dots (WAI-ARIA Tabs pattern lite)
-    dots.addEventListener('keydown', (e) => {
-      const tabs = Array.from(dots.querySelectorAll('[role="tab"]'));
-      const current = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        const nextIndex = (current - 1 + tabs.length) % tabs.length;
-        tabs[nextIndex].focus();
-        go(nextIndex);
-      }
-      if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        const nextIndex = (current + 1) % tabs.length;
-        tabs[nextIndex].focus();
-        go(nextIndex);
-      }
-      if (e.key === 'Home') {
-        e.preventDefault();
-        tabs[0].focus();
-        go(0);
-      }
-      if (e.key === 'End') {
-        e.preventDefault();
-        tabs[tabs.length - 1].focus();
-        go(tabs.length - 1);
-      }
-    });
-
-    // Auto-advance for features (every 4s) but only when in view.
-    // Hover should keep playing; only explicit user navigation stops it.
-    let featureTimer;
-    let userTookControl = false;
-    let featuresInView = false;
-    const canAuto = () => featuresInView && !userTookControl && !document.hidden;
-    const startFeatureTimer = () => {
-      if (!featureTimer && canAuto()) featureTimer = setInterval(()=> go(index+1), 4000);
-    };
-    const stopFeatureTimer = () => {
-      if (featureTimer) { clearInterval(featureTimer); featureTimer = undefined; }
-    };
-    const autoHint = document.getElementById('autoHint');
-    const setAutoHint = () => {
-      if (!autoHint) return;
-      autoHint.style.opacity = userTookControl ? '1' : '0';
-    };
-    const disableAuto = () => { userTookControl = true; stopFeatureTimer(); setAutoHint(); };
-
-    // Observe visibility of the features section
-    const featuresSection = document.getElementById('features');
-    if (featuresSection) {
-      const featuresObs = new IntersectionObserver(es => {
-        es.forEach(e => {
-          featuresInView = e.isIntersecting;
-          if (canAuto()) startFeatureTimer(); else stopFeatureTimer();
-          setAutoHint();
-        })
-      }, {threshold: 0.2});
-      featuresObs.observe(featuresSection);
-    }
-    // Pause when tab hidden; resume only if allowed
-    document.addEventListener('visibilitychange', ()=>{
-      if (!canAuto()) stopFeatureTimer(); else startFeatureTimer();
-      setAutoHint();
-    });
-    // Keep playing on hover; do not stop on wheel/touch. Only explicit navigation stops it.
-    // Treat explicit user control as opting out of auto-advance
-    prev.addEventListener('click', disableAuto);
-    next.addEventListener('click', disableAuto);
-    dots.addEventListener('click', disableAuto, true);
-    window.addEventListener('keydown', (e)=>{
-      if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && featuresInView) disableAuto();
-    });
-    // Initialize hint state
-    setAutoHint();
 
     // Chef screenshots: auto-advance slider (every 4.5s) when in view
     (function(){
@@ -1138,21 +1049,25 @@
 
     // Contact form (mailto)
     const form = document.getElementById('contactForm');
-    form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const data = new FormData(form);
-      const name = encodeURIComponent(data.get('name'));
-      const email = encodeURIComponent(data.get('email'));
-      const message = encodeURIComponent(data.get('message'));
-      const subject = encodeURIComponent(`Website contact from ${name}`);
-      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-      const mailto = `mailto:hello@aftertaste.com?subject=${subject}&body=${body}`;
-      document.getElementById('toast').classList.remove('hidden');
-      window.location.href = mailto;
-    });
+    if (form) {
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const data = new FormData(form);
+        const name = encodeURIComponent(data.get('name'));
+        const email = encodeURIComponent(data.get('email'));
+        const message = encodeURIComponent(data.get('message'));
+        const subject = encodeURIComponent(`Website contact from ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+        const mailto = `mailto:hello@aftertaste.com?subject=${subject}&body=${body}`;
+        const toast = document.getElementById('toast');
+        if (toast) toast.classList.remove('hidden');
+        window.location.href = mailto;
+      });
+    }
     // Optional hosted form submissions for later:
     // Netlify: add form attributes -> <form name="contact" data-netlify="true">
     // Formspree: set action="https://formspree.io/f/yourFormId" method="POST"
   </script>
 </body>
 </html>
+
