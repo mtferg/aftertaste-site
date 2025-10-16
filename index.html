@@ -304,6 +304,38 @@
       }
       .parallax:hover img { transform: perspective(800px) rotateY(-2.5deg) translateZ(0);       }
     }
+
+    /* Auto-scroll for feature cards */
+    .feature-scroll {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom scrollbar styling for features section */
+    .feature-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .feature-scroll::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      margin: 0 1rem;
+    }
+
+    .feature-scroll::-webkit-scrollbar-thumb {
+      background: #F1A20E;
+      border-radius: 4px;
+      transition: background 0.2s ease;
+    }
+
+    .feature-scroll::-webkit-scrollbar-thumb:hover {
+      background: #f8b744;
+    }
+
+    /* Firefox scrollbar */
+    .feature-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: #F1A20E rgba(255, 255, 255, 0.05);
+    }
   </style>
 
   <!-- Structured Data (JSON-LD) -->
@@ -601,8 +633,8 @@
         </header>
 
         <div class="relative">
-          <div class="overflow-x-auto scrollbar-hide" role="region" aria-label="App Features">
-            <ul class="flex gap-4 p-4" style="width: max-content;">
+          <div id="featuresScroller" class="overflow-x-auto feature-scroll" role="region" aria-label="App Features">
+            <ul id="featuresList" class="flex gap-4 p-4" style="width: max-content;">
               <!-- Slide 1 -->
               <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
                 <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left items-center">
@@ -1159,6 +1191,136 @@
       region.addEventListener('touchend', ()=>{ if (Math.abs(dx) > 30) go(idx + (dx < 0 ? 1 : -1)); start(); }, {passive:true});
       // Init
       go(0);
+    })();
+
+    // Features auto-scroll: smooth horizontal scrolling
+    (function(){
+      const scroller = document.getElementById('featuresScroller');
+      const list = document.getElementById('featuresList');
+      if (!scroller || !list) return;
+
+      let animationFrame;
+      let isPaused = false;
+      let userInteracting = false;
+
+      // Scroll speed (pixels per frame) - lower = slower
+      const scrollSpeed = 0.5;
+      let scrollPosition = 0;
+      let lastUserScrollTime = 0;
+
+      const autoScroll = () => {
+        if (isPaused || userInteracting) {
+          animationFrame = requestAnimationFrame(autoScroll);
+          return;
+        }
+
+        // Check if user manually scrolled recently
+        const now = Date.now();
+        if (now - lastUserScrollTime < 2000) {
+          animationFrame = requestAnimationFrame(autoScroll);
+          return;
+        }
+
+        scrollPosition += scrollSpeed;
+
+        // Get max scroll position
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+
+        // When reaching the end, smoothly reset to beginning
+        if (scrollPosition >= maxScroll) {
+          // Temporarily disable smooth scroll for instant reset
+          const originalBehavior = scroller.style.scrollBehavior;
+          scroller.style.scrollBehavior = 'auto';
+          scrollPosition = 0;
+          scroller.scrollLeft = 0;
+          // Re-enable smooth scroll after reset
+          setTimeout(() => {
+            scroller.style.scrollBehavior = originalBehavior;
+          }, 10);
+        } else {
+          scroller.scrollLeft = scrollPosition;
+        }
+
+        animationFrame = requestAnimationFrame(autoScroll);
+      };
+
+      const startAutoScroll = () => {
+        if (!animationFrame) {
+          scrollPosition = scroller.scrollLeft;
+          animationFrame = requestAnimationFrame(autoScroll);
+        }
+      };
+
+      const stopAutoScroll = () => {
+        if (animationFrame) {
+          cancelAnimationFrame(animationFrame);
+          animationFrame = null;
+        }
+      };
+
+      // Track user interaction
+      scroller.addEventListener('mousedown', () => {
+        userInteracting = true;
+        lastUserScrollTime = Date.now();
+      });
+
+      scroller.addEventListener('mouseup', () => {
+        userInteracting = false;
+      });
+
+      scroller.addEventListener('touchstart', () => {
+        userInteracting = true;
+        lastUserScrollTime = Date.now();
+      }, {passive: true});
+
+      scroller.addEventListener('touchend', () => {
+        userInteracting = false;
+      }, {passive: true});
+
+      // Detect manual scroll via wheel or touch
+      scroller.addEventListener('wheel', () => {
+        lastUserScrollTime = Date.now();
+        scrollPosition = scroller.scrollLeft;
+      }, {passive: true});
+
+      scroller.addEventListener('scroll', () => {
+        // If user manually scrolls, sync position
+        if (Math.abs(scroller.scrollLeft - scrollPosition) > 2 && userInteracting) {
+          scrollPosition = scroller.scrollLeft;
+        }
+      }, {passive: true});
+
+      // Start/stop based on visibility
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            startAutoScroll();
+          } else {
+            stopAutoScroll();
+          }
+        });
+      }, { threshold: 0.2 });
+
+      observer.observe(scroller);
+
+      // Pause when tab is hidden
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          stopAutoScroll();
+        } else if (scroller.getBoundingClientRect().top < window.innerHeight) {
+          startAutoScroll();
+        }
+      });
+
+      // Stop on reduced motion preference
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        stopAutoScroll();
+      }
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        scrollPosition = scroller.scrollLeft;
+      });
     })();
 
     // Contact form (mailto)
