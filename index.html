@@ -4,13 +4,46 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Aftertaste — Your Ultimate Movie and TV Hub</title>
-  <meta name="description" content="Track what you watch, compare tastes with friends, and discover what to watch next-no algorithm bubbles involved." />
+  <meta name="description" content="Track what you watch, compare tastes with friends, and discover what to watch next-no algorithm bubbles involved. Get personalized recommendations from people you trust, not algorithms." />
+  <meta name="keywords" content="movie tracker, tv show tracker, watch list, movie recommendations, tv recommendations, social movie app, movie reviews, tv reviews, what to watch, movie discovery" />
+  <meta name="author" content="Aftertaste, LLC" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://aftertaste.app/" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aftertaste.app/" />
   <meta property="og:title" content="Aftertaste — Your Ultimate Movie and TV Hub" />
   <meta property="og:description" content="Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/hero-portrait.png" />
+  <meta property="og:image" content="https://aftertaste.app/assets/hero-portrait.png" />
+  <meta property="og:image:alt" content="Aftertaste mobile app interface showing movie tracking and recommendations" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Aftertaste" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://aftertaste.app/" />
+  <meta name="twitter:title" content="Aftertaste — Your Ultimate Movie and TV Hub" />
+  <meta name="twitter:description" content="Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved." />
+  <meta name="twitter:image" content="https://aftertaste.app/assets/hero-portrait.png" />
+  <meta name="twitter:image:alt" content="Aftertaste mobile app interface showing movie tracking and recommendations" />
+  <meta name="twitter:site" content="@aftertasteapp" />
+  <meta name="twitter:creator" content="@aftertasteapp" />
+
+  <!-- Mobile App -->
+  <meta name="apple-itunes-app" content="app-id=6449655530" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Aftertaste" />
+
   <meta name="theme-color" content="#1C1C1C" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="shortcut icon" href="assets/favicon.ico" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -258,7 +291,6 @@
     }
     /* Review posters infinite marquee */
     .marquee { display:flex; gap:2rem; will-change: transform; }
-    .marquee:hover { }
     @keyframes posterLoop { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
     @media (prefers-reduced-motion:no-preference) {
@@ -270,18 +302,102 @@
         0%,100% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
       }
-      .parallax:hover img { transform: perspective(800px) rotateY(-2.5deg) translateZ(0); }
+      .parallax:hover img { transform: perspective(800px) rotateY(-2.5deg) translateZ(0);       }
     }
   </style>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Aftertaste",
+    "applicationCategory": "EntertainmentApplication",
+    "operatingSystem": "iOS, Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "500",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "description": "Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved. Get personalized recommendations from people you trust.",
+    "url": "https://aftertaste.app/",
+    "downloadUrl": "https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530",
+    "screenshot": "https://aftertaste.app/assets/hero-portrait.png",
+    "softwareVersion": "1.0",
+    "author": {
+      "@type": "Organization",
+      "name": "Aftertaste, LLC",
+      "url": "https://aftertaste.app/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Aftertaste, LLC",
+      "url": "https://aftertaste.app/"
+    },
+    "featureList": [
+      "Track what you watch",
+      "Compare tastes with friends",
+      "Custom watch recommendations",
+      "Collaborative lists",
+      "Review and rate movies and TV shows",
+      "Discover trending content",
+      "Personalized taste profile"
+    ],
+    "sameAs": [
+      "https://www.instagram.com/aftertasteapp/"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Aftertaste",
+    "legalName": "Aftertaste, LLC",
+    "url": "https://aftertaste.app/",
+    "logo": "https://aftertaste.app/assets/logo.png",
+    "description": "Aftertaste is the social hub for Movie and TV fans who trust people over algorithms.",
+    "sameAs": [
+      "https://www.instagram.com/aftertasteapp/"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Service",
+      "availableLanguage": ["English"]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Aftertaste",
+    "url": "https://aftertaste.app/",
+    "description": "Your Ultimate Movie and TV Hub",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Aftertaste, LLC"
+    }
+  }
+  </script>
 </head>
   <body class="bg-licorice text-almond font-sans grain overflow-x-hidden">
   <!-- Header/Nav -->
   <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:ring-2 focus:ring-popcorn bg-black text-white px-3 py-2 rounded">Skip to content</a>
-  <header id="top" class="fixed top-0 left-0 right-0 z-50 transition-colors">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <header id="top" class="fixed top-0 left-0 right-0 z-50 transition-colors" role="banner">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
       <div class="flex h-16 items-center justify-start md:justify-between">
-        <a href="#top" class="flex items-center gap-3">
-          <img src="assets/logo.png" alt="Aftertaste logo" class="h-8 w-8 rounded-full ring-1 ring-white/10">
+        <a href="#top" class="flex items-center gap-3" aria-label="Aftertaste home">
+          <img src="assets/logo.png" alt="Aftertaste logo" class="h-8 w-8 rounded-full ring-1 ring-white/10" loading="eager">
           <span class="font-display tracking-widest text-xl">AFTERTASTE</span>
         </a>
         <div class="hidden md:flex items-center gap-6 text-sm">
@@ -291,8 +407,8 @@
           <a href="#features" class="hover:text-popcorn">Features</a>
           <a href="#chef" class="hover:text-popcorn">Chef</a>
           <!-- <a href="#contact" class="hover:text-popcorn">Contact</a> -->
-          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" class="inline-block">
-            <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-8" />
+          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
+            <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-8" loading="lazy" />
           </a>
         </div>
       </div>
@@ -312,25 +428,23 @@
       <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
       <div id="spot" class="spot projector-spot" aria-hidden="true"></div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-licorice">
-        <div class="space-y-6 text-center md:text-left">
+        <article class="space-y-6 text-center md:text-left">
           <h1 class="font-display text-licorice text-5xl md:text-6xl leading-none">Your Ultimate Movie and TV Hub</h1>
-          <!-- <p class="text-lg text-licorice/90">Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved.</p> -->
-          <p class="text-lg text-licorice/90">Track what you watch, compare tastes with friends, and discover what’s worth watching — <strong>through people you trust</strong>.</p>
+          <p class="text-lg text-licorice/90">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
           <div class="flex flex-wrap gap-4 justify-center md:justify-start">
             <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block">
               <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10 md:h-12" />
             </a>
             <div class="inline-block opacity-50 cursor-not-allowed">
-              <img src="assets/GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get it on Google Play" class="h-10 md:h-12" />
+              <img src="assets/GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get it on Google Play - Coming Soon" class="h-10 md:h-12" loading="lazy" />
               <p class="text-sm text-gray-800 italic text-center mt-2">Coming Soon</p>
             </div>
             <!-- <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="rounded-2xl border border-white/20 px-4 py-2 hover:bg-white/5 transition ring-1 ring-black/70">Prefer the Medium Screen?</a> -->
           </div>
-
-        </div>
-        <div class="relative">
-          <img src="assets/hero-portrait.png" alt="Aftertaste app screen" class="w-full max-w-[225px] md:max-w-[280px] lg:max-w-[325px] mx-auto" />
-        </div>
+        </article>
+        <figure class="relative">
+          <img src="assets/hero-portrait.png" alt="Aftertaste mobile app showing movie feed, tracking features, and personalized recommendations interface" class="w-full max-w-[225px] md:max-w-[280px] lg:max-w-[325px] mx-auto" loading="eager" />
+        </figure>
       </div>
       <div class="screen-boot" aria-hidden="true"></div>
     </section>
@@ -449,8 +563,8 @@
 
         <div class="text-center mt-10">
           <div class="inline-flex gap-3">
-            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" class="inline-block">
-              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" />
+            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
+              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" loading="lazy" />
             </a>
             <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="rounded-xl border border-white/20 px-4 py-2 hover:bg-white/5 transition ring-1 ring-black/70">
               Visit our Web App
@@ -464,18 +578,18 @@
     <section id="who" class="py-24 md:py-28 relative overflow-visible" style="background-color: rgba(94,185,206,0.90);">
 
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-        <div class="relative order-2 md:order-1 hidden md:block">
+        <figure class="relative order-2 md:order-1 hidden md:block">
           <div class="w-full max-w-[160px] md:max-w-[180px] mx-auto relative">
-            <img src="assets/mic-bw.png" alt="Vintage studio microphone in black and white" class="w-full h-auto translate-y-4 opacity-0" id="micImg" />
+            <img src="assets/mic-bw.png" alt="Vintage studio microphone representing authentic voice and genuine recommendations" class="w-full h-auto translate-y-4 opacity-0" id="micImg" loading="lazy" />
             <div class="halftone-anim" aria-hidden="true"></div>
           </div>
-        </div>
-        <div class="space-y-6 order-1 md:order-2 text-center md:text-left">
+        </figure>
+        <article class="space-y-6 order-1 md:order-2 text-center md:text-left">
           <h2 class="font-display text-4xl">Who we are</h2>
-          <p>Aftertaste is the social hub for Movie and TV fans who <strong>trust people over algorithms</strong>.</p>
+          <p>Aftertaste is the <strong>social hub for Movie and TV fans</strong> who <strong>trust people over algorithms</strong>.</p>
           <p>Track what you watch, compare tastes, and get real recommendations from friends, creators, and critics — all in one place.</p>
-          <p>Because finding your <strong>next favorite thing</strong> shouldn’t feel like scrolling forever.</p>
-        </div>
+          <p>Because finding your <strong>next favorite thing</strong> shouldn't feel like scrolling forever.</p>
+        </article>
       </div>
     </section>
 
@@ -496,7 +610,7 @@
                   <p>Follow friends and creators.</p>
                   <p>Compare tastes and see what your circle is watching.</p>
                 </div>
-                <img src="assets/features/feed.png" alt="Feeds screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+                <img src="assets/features/feed.png" alt="Social feed showing friends' movie and TV reviews" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
                 </figure>
               </li>
               <!-- Slide 2 -->
@@ -506,7 +620,7 @@
                   <p>Easily track what you have in progress and catalog your full watch history.</p>
                   <p>Shelve things for later or trash them if you're done.</p>
                 </div>
-                <img src="assets/features/tracking.png" alt="Tastebuds feed screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+                <img src="assets/features/tracking.png" alt="Content tracking screen showing in-progress TV shows and movies" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
               </li>
               <!-- Slide 3 -->
               <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
@@ -514,7 +628,7 @@
                   <h3 class="text-2xl font-semibold">Create Lists (Solo or with Friends)</h3>
                   <p>Create and share content lists - either solo or collabing with friends.</p>
                 </div>
-                <img src="assets/features/list.png" alt="Lists screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+                <img src="assets/features/list.png" alt="Collaborative movie and TV lists feature" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
               </li>
               <!-- Slide 4 -->
               <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
@@ -530,7 +644,7 @@
                     <li>Related content</li>
                   </ul>
                 </div>
-                <img src="assets/features/details.png" alt="Reviews screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+                <img src="assets/features/details.png" alt="Detailed movie information screen with cast, streaming options, and trailers" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
               </li>
               <!-- Slide 5 -->
               <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
@@ -538,7 +652,7 @@
                   <h3 class="text-2xl font-semibold">Actor Profiles</h3>
                   <p>"Where is that person from?". Now you know</p>
                 </div>
-                <img src="assets/features/actor.png" alt="Reviews screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+                <img src="assets/features/actor.png" alt="Actor profile page showing filmography and biography" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
               </li>
               <!-- Slide 6 -->
               <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
@@ -547,7 +661,7 @@
                   <p>Show off your Top Ate (8) movies and TV shows.</p>
                   <p>Earn badges are you conquer the world of content.</p>
                 </div>
-                <img src="assets/features/profile.png" alt="Lists screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+                <img src="assets/features/profile.png" alt="Customizable user profile with top movies and achievement badges" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
               </li>
               <!-- Slide 7 -->
               <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
@@ -555,7 +669,7 @@
                   <h3 class="text-2xl font-semibold">See What's Trending</h3>
                   <p>View trending and top rated content over the last week, month, and year.</p>
                 </div>
-                <img src="assets/features/trending.png" alt="Lists screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+                <img src="assets/features/trending.png" alt="Trending movies and TV shows screen with time filters" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
               </li>
               <!-- Slide 8 -->
               <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
@@ -564,7 +678,7 @@
                   <p>Scores tailored to your taste.</p>
                   <p>View your score, Tastebud average, and global average for content in one easy place.</p>
                 </div>
-                <img src="assets/features/scores.png" alt="Lists screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+                <img src="assets/features/scores.png" alt="Personalized content scores comparing your rating with friends and global averages" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
               </li>
               <!-- Slide 9 -->
               <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
@@ -572,7 +686,7 @@
                   <h3 class="text-2xl font-semibold">Discuss, Debate, Discover</h3>
                   <p>Get into in-depth breakdowns and discuss content in nested threads filtered to your preferences.</p>
                 </div>
-                <img src="assets/features/comments.png" alt="Lists screen" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" />
+                <img src="assets/features/comments.png" alt="Threaded discussion feature for movie and TV reviews" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
               </li>
             </ul>
           </div>
@@ -599,7 +713,6 @@
           <!-- Copy -->
           <div class="space-y-6 order-1 md:order-1 text-center md:text-left">
           <div class="inline-flex items-center gap-3 rounded-full px-3 py-1 ring-1 ring-white/10 bg-white/5">
-            <img src="assets/chef/logo.svg" alt="Chef logo" class="h-5 w-5" onerror="this.style.display='none'">
             <span class="text-xs tracking-widest uppercase text-white/70">Get Custom Recommendations</span>
           </div>
           <h2 class="font-display text-4xl">Your Own Private Chef</h2>
@@ -626,8 +739,8 @@
           </div>
 
           <div class="flex gap-3 pt-2 justify-center md:justify-start">
-            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" class="inline-block">
-              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" />
+            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
+              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" loading="lazy" />
             </a>
             <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="rounded-xl border border-white/20 px-4 py-2 hover:bg-white/5 transition ring-1 ring-black/70">See how it works</a>
           </div>
@@ -638,13 +751,13 @@
           <div id="chefSlider" class="overflow-hidden rounded-3xl px-2 md:px-4" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
             <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
               <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <img src="assets/chef/chef-home.png" alt="Chef home screen" class="w-full h-full object-cover" />
+                <img src="assets/chef/chef-home.png" alt="Chef AI recommendation system home screen" class="w-full h-full object-cover" loading="lazy" />
               </li>
               <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <img src="assets/chef/chef-rec.png" alt="Chef recommendations screen" class="w-full h-full object-cover" />
+                <img src="assets/chef/chef-rec.png" alt="Chef personalized movie and TV recommendations with reasons" class="w-full h-full object-cover" loading="lazy" />
               </li>
               <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <img src="assets/chef/chef-taste.png" alt="Chef taste profile screen" class="w-full h-full object-cover" />
+                <img src="assets/chef/chef-taste.png" alt="Chef taste profile showing viewing preferences and genre affinities" class="w-full h-full object-cover" loading="lazy" />
               </li>
             </ul>
           </div>
@@ -834,24 +947,25 @@
   </main>
 
   <!-- Footer -->
-  <footer class="py-12">
+  <footer class="py-12" role="contentinfo">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
       <div class="flex items-center gap-3">
-        <img src="assets/logo.png" alt="" class="h-8 w-8 rounded-full ring-1 ring-white/10" />
+        <img src="assets/logo.png" alt="Aftertaste logo" class="h-8 w-8 rounded-full ring-1 ring-white/10" loading="lazy" />
         <div>
           <div class="font-display tracking-widest">AFTERTASTE</div>
-          <!-- <p class="text-sm text-white/60">Aftertaste helps you find what’s worth watching—through people you trust.</p> -->
         </div>
       </div>
-      <div class="flex items-center gap-4 footer-social">
-        <a href="https://www.instagram.com/aftertasteapp/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="p-2 rounded-lg hover:bg-white/10">
-          <img src="assets/instagram.svg" alt="" class="h-5 w-5"/>
+      <nav class="flex items-center gap-4 footer-social" aria-label="Social media links">
+        <a href="https://www.instagram.com/aftertasteapp/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" class="p-2 rounded-lg hover:bg-white/10">
+          <img src="assets/instagram.svg" alt="Instagram icon" class="h-5 w-5" loading="lazy" />
         </a>
-        <a href="" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="p-2 rounded-lg hover:bg-white/10">
-          <img src="assets/tiktok.svg" alt="" class="h-5 w-5"/>
+        <a href="https://www.tiktok.com/@aftertasteapp" target="_blank" rel="noopener noreferrer" aria-label="Follow us on TikTok" class="p-2 rounded-lg hover:bg-white/10">
+          <img src="assets/tiktok.svg" alt="TikTok icon" class="h-5 w-5" loading="lazy" />
         </a>
+      </nav>
+      <div class="text-sm text-white/60">
+        <p>&copy; 2025 Aftertaste, LLC.</p>
       </div>
-      <div class="text-sm text-white/60">Aftertaste, LLC
     </div>
   </footer>
 

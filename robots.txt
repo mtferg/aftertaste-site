@@ -1,0 +1,10 @@
+# Aftertaste Website - Robots.txt
+User-agent: *
+Allow: /
+
+# Disallow assets that don't need indexing
+Disallow: /assets/grain.svg
+
+# Sitemap location (update this when you create your sitemap)
+Sitemap: https://aftertaste.app/sitemap.xml
+
