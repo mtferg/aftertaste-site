@@ -438,7 +438,7 @@
           <a href="#who" class="hover:text-popcorn">Who we are</a>
           <a href="#features" class="hover:text-popcorn">Features</a>
           <a href="#chef" class="hover:text-popcorn">Chef</a>
-          <!-- <a href="#contact" class="hover:text-popcorn">Contact</a> -->
+          <a href="#contact" class="hover:text-popcorn">Contact</a>
           <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
             <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-8" loading="lazy" />
           </a>
@@ -950,35 +950,8 @@
       </div>
     </section>
 
-    <!-- Contact -->
-    <!-- <section id="contact" class="py-24 md:py-28 bg-black/30">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="font-display text-4xl mb-6">Contact us</h2>
-        <form id="contactForm" class="space-y-4">
-          <div class="grid md:grid-cols-2 gap-4">
-            <label class="block">
-              <span class="text-sm">Name</span>
-              <input type="text" name="name" autocomplete="name" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-popcorn" />
-            </label>
-            <label class="block">
-              <span class="text-sm">Email</span>
-              <input type="email" name="email" autocomplete="email" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-popcorn" />
-            </label>
-          </div>
-          <label class="block">
-            <span class="text-sm">Message</span>
-            <textarea name="message" rows="5" required class="mt-1 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-popcorn"></textarea>
-          </label>
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <button type="submit" class="w-full sm:w-auto rounded-xl bg-popcorn text-licorice font-semibold px-6 py-3 hover:shadow-glow transition">Send</button>
-            <span id="toast" class="text-sm text-almond/70 hidden" role="status" aria-live="polite">Opening your email client…</span>
-          </div>
-        </form>
-      </div>
-    </section> -->
-
     <!-- Contact Section -->
-    <section class="py-16 text-almond" style="background: linear-gradient(to bottom, #1C1C1C 99%, #FCF9EF 100%);">
+    <section id="contact" class="py-16 text-almond" style="border-bottom: 1px solid #FCF9EF;">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="font-display text-4xl mb-6">Curious? Comments? Questions?</h2>
         <p class="text-lg">
@@ -1167,8 +1140,6 @@
       });
     }
 
-
-
     // Chef screenshots: auto-advance slider (every 4.5s) when in view
     (function(){
       const track = document.getElementById('chefSlides');
@@ -1310,9 +1281,6 @@
         window.location.href = mailto;
       });
     }
-    // Optional hosted form submissions for later:
-    // Netlify: add form attributes -> <form name="contact" data-netlify="true">
-    // Formspree: set action="https://formspree.io/f/yourFormId" method="POST"
   </script>
 </body>
 </html>
