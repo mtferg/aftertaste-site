@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["TEAMID.com.aftertaste"],
+        "components": [
+          { "/": "/" },
+          { "/": "/feed" },
+          { "/": "/notifications" },
+          { "/": "/posts/*" },
+          { "/": "/content/*" },
+          { "/": "/lists/*" },
+          { "/": "/users/*" },
+          { "/": "/actor/*" }
+        ]
+      }
+    ]
+  }
+}
