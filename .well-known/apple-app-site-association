@@ -2,7 +2,7 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["TEAMID.com.aftertaste"],
+        "appIDs": ["8QJBYPWAPU.com.aftertaste"],
         "components": [
           { "/": "/" },
           { "/": "/feed" },
