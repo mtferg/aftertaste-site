@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.aftertaste",
+      "sha256_cert_fingerprints": ["TO_BE_FILLED_WHEN_ANDROID_SIGNING_IS_SET_UP"]
+    }
+  }
+]

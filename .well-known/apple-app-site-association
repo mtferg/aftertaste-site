@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["8QJBYPWAPU.com.aftertaste"],
+        "components": [
+          { "/": "/" },
+          { "/": "/feed" },
+          { "/": "/notifications" },
+          { "/": "/posts/*" },
+          { "/": "/content/*" },
+          { "/": "/lists/*" },
+          { "/": "/users/*" },
+          { "/": "/actor/*" }
+        ]
+      }
+    ]
+  }
+}
