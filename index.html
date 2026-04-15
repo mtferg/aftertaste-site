@@ -132,7 +132,7 @@
     .screen-vignette.soft{box-shadow: inset 0 0 20px 5px rgba(0,0,0,.02)}
 
     .screen-frame{position:absolute; inset:-14px; z-index:3; pointer-events:none; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.3)); box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset, 0 22px 60px rgba(0,0,0,.4)}
-    .reel-band{position:absolute; inset:0; z-index:4; pointer-events:none; background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.06) 48%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.06) 52%, transparent 100%); background-size: 120% 100%; opacity:.35; animation: reel 18s linear infinite}
+    .reel-band{position:absolute; inset:0; z-index:4; pointer-events:none; background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.04) 48%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.04) 52%, transparent 100%); background-size: 120% 100%; opacity:.22; animation: reel 28s linear infinite}
     @media (prefers-reduced-data: reduce){
       .cinema-screen{
         background-image: radial-gradient(120% 90% at 50% 42%, rgba(250,248,240,.95) 0%, rgba(242,239,230,.92) 46%, rgba(86,78,70,.45) 76%, rgba(0,0,0,.86) 100%);
@@ -336,6 +336,65 @@
       scrollbar-width: thin;
       scrollbar-color: #F1A20E rgba(255, 255, 255, 0.05);
     }
+
+    /* ---- Phase 1: Header + Hero polish ---- */
+
+    /* Header scroll state: transparent over hero, solid Licorice once scrolled */
+    #top { backdrop-filter: saturate(140%) blur(0px); transition: background-color 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease; }
+    #top.is-scrolled { background-color: rgba(28,28,28,.92); backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid rgba(252,249,239,.08); }
+    #top.is-scrolled .nav-divider { opacity: 0; }
+    #top:not(.is-scrolled) .nav-divider { opacity: 0; }
+
+    /* Nav link underline (Cherry), replaces popcorn color swap */
+    .nav-link { position: relative; color: #FCF9EF; opacity: .85; transition: opacity 200ms ease, color 200ms ease; }
+    .nav-link:hover, .nav-link:focus-visible { opacity: 1; color: #FCF9EF; }
+    .nav-link:after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: #E3452D; transform: scaleX(0); transform-origin: left center; transition: transform 240ms ease; }
+    .nav-link:hover:after, .nav-link:focus-visible:after { transform: scaleX(1); }
+
+    /* Compact "Get the App" pill */
+    .get-app-pill { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem .9rem; border-radius: 9999px; background: #E3452D; color: #FCF9EF; font-weight: 600; letter-spacing: .02em; font-size: .8125rem; text-transform: uppercase; box-shadow: 0 2px 0 rgba(0,0,0,.25), 0 8px 20px rgba(227,69,45,.25); transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease; }
+    .get-app-pill:hover { background: #c33a24; transform: translateY(-1px); }
+    .get-app-pill:focus-visible { outline: 2px solid #FCF9EF; outline-offset: 2px; }
+    .get-app-pill svg { width: 14px; height: 14px; }
+
+    /* Mobile nav panel */
+    #mobile-nav { transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 200ms ease, transform 200ms ease; }
+    #mobile-nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-menu-btn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; color: #FCF9EF; border: 1px solid rgba(252,249,239,.15); background: rgba(28,28,28,.4); }
+    .mobile-menu-btn:hover { background: rgba(28,28,28,.7); }
+    .mobile-menu-btn:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
+
+    /* Hero eyebrow/kicker */
+    .hero-kicker { display: inline-flex; align-items: center; gap: .6rem; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: #1C1C1C; opacity: .7; }
+    .hero-kicker:before { content: ""; display: inline-block; width: 28px; height: 1px; background: #1C1C1C; opacity: .5; }
+
+    /* Hero primary/secondary CTAs */
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; }
+    @media (min-width: 768px) { .hero-ctas { justify-content: flex-start; } }
+    .hero-cta-secondary { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.25rem; border-radius: 9999px; border: 1.5px solid #1C1C1C; color: #1C1C1C; font-weight: 600; font-size: .875rem; letter-spacing: .02em; transition: background-color 180ms ease, color 180ms ease, transform 180ms ease; }
+    .hero-cta-secondary:hover { background: #1C1C1C; color: #FCF9EF; transform: translateY(-1px); }
+    .hero-cta-secondary:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
+    .hero-cta-secondary svg { width: 14px; height: 14px; transition: transform 200ms ease; }
+    .hero-cta-secondary:hover svg { transform: translateY(2px); }
+
+    /* Vintage brand stamp in the hero corner */
+    .brand-stamp { position: absolute; top: 28px; right: 28px; z-index: 8; width: 92px; height: 92px; border-radius: 50%; background: #1C1C1C; color: #FCF9EF; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,.25), 0 0 0 2px rgba(252,249,239,.12) inset; transform: rotate(-8deg); }
+    .brand-stamp svg { width: 100%; height: 100%; }
+    .brand-stamp text { font-family: 'Anton', Impact, sans-serif; font-size: 11px; letter-spacing: 1.5px; fill: #FCF9EF; }
+    @media (max-width: 768px) { .brand-stamp { top: 14px; right: 14px; width: 68px; height: 68px; } .brand-stamp text { font-size: 9px; letter-spacing: 1px; } }
+
+    /* NOW PLAYING marquee strip (below hero) */
+    .now-playing { background: #1C1C1C; color: #FCF9EF; border-top: 1px solid rgba(252,249,239,.08); border-bottom: 1px solid rgba(252,249,239,.08); overflow: hidden; position: relative; }
+    .now-playing:before, .now-playing:after { content: ""; position: absolute; top: 0; bottom: 0; width: 64px; z-index: 2; pointer-events: none; }
+    .now-playing:before { left: 0; background: linear-gradient(90deg, #1C1C1C, rgba(28,28,28,0)); }
+    .now-playing:after { right: 0; background: linear-gradient(-90deg, #1C1C1C, rgba(28,28,28,0)); }
+    .now-playing-track { display: flex; gap: 2.5rem; padding: .85rem 0; white-space: nowrap; animation: npScroll 38s linear infinite; will-change: transform; }
+    .now-playing-track span { font-family: 'Anton', Impact, sans-serif; font-size: 1.15rem; letter-spacing: .35em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 2.5rem; }
+    .now-playing-track span:after { content: "\2022"; color: #E3452D; margin-left: 2.5rem; }
+    @keyframes npScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .now-playing-track { animation: none; justify-content: center; flex-wrap: wrap; white-space: normal; }
+    }
   </style>
 
   <!-- Structured Data (JSON-LD) -->
@@ -424,28 +483,54 @@
 </head>
   <body class="bg-licorice text-almond font-sans grain overflow-x-hidden">
   <!-- Header/Nav -->
-  <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:ring-2 focus:ring-popcorn bg-black text-white px-3 py-2 rounded">Skip to content</a>
-  <header id="top" class="fixed top-0 left-0 right-0 z-50 transition-colors" role="banner">
+  <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:ring-2 focus:ring-cherry bg-licorice text-almond px-3 py-2 rounded">Skip to content</a>
+  <header id="top" class="fixed top-0 left-0 right-0 z-50" role="banner">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
-      <div class="flex h-16 items-center justify-start md:justify-between">
-        <a href="#top" class="flex items-center gap-3" aria-label="Aftertaste home">
-          <img src="assets/logo.png" alt="Aftertaste logo" class="h-8 w-8 rounded-full ring-1 ring-white/10" loading="eager">
-          <span class="font-display tracking-widest text-xl">AFTERTASTE</span>
+      <div class="flex h-16 items-center justify-between">
+        <a href="#top" class="flex items-center gap-2.5" aria-label="Aftertaste home">
+          <img src="assets/logo.png" alt="" class="h-8 w-8 rounded-full ring-1 ring-almond/15" loading="eager">
+          <span class="font-display tracking-[0.18em] text-lg md:text-xl text-almond">AFTERTASTE</span>
         </a>
-        <div class="hidden md:flex items-center gap-6 text-sm">
-          <a href="#hero" class="hover:text-popcorn">Home</a>
-          <a href="#glance" class="hover:text-popcorn">At a Glance</a>
-          <a href="#who" class="hover:text-popcorn">Who we are</a>
-          <a href="#features" class="hover:text-popcorn">Features</a>
-          <a href="#chef" class="hover:text-popcorn">Chef</a>
-          <a href="#contact" class="hover:text-popcorn">Contact</a>
-          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
-            <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-8" loading="lazy" />
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-7 text-[13px] font-medium">
+          <a href="#glance" class="nav-link">At a Glance</a>
+          <a href="#who" class="nav-link">Who we are</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#chef" class="nav-link">Chef</a>
+          <a href="#contact" class="nav-link">Contact</a>
+          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="get-app-pill">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c.036 1.15-.39 2.26-1.127 3.08-.78.87-2.04 1.55-3.27 1.45-.06-1.14.49-2.31 1.21-3.05.78-.82 2.14-1.43 3.19-1.48zM20.5 17.27c-.58 1.34-.86 1.94-1.6 3.13-1.04 1.66-2.5 3.72-4.31 3.74-1.6.02-2.02-1.04-4.2-1.03-2.18.01-2.64 1.05-4.25 1.03-1.81-.02-3.19-1.88-4.23-3.54C-1.1 16.44-1.45 10.4 1.11 7.2 2.78 5.08 5.03 3.87 7.18 3.87c2.18 0 3.54 1.19 5.34 1.19 1.74 0 2.8-1.2 5.31-1.2 1.89 0 3.89 1.03 5.31 2.81-4.66 2.55-3.91 9.22-2.64 10.6z"/></svg>
+            Get the App
           </a>
         </div>
+
+        <!-- Mobile menu toggle -->
+        <button id="mobileMenuBtn" class="md:hidden mobile-menu-btn" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="7" x2="21" y2="7"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="17" x2="21" y2="17"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile nav panel -->
+      <div id="mobile-nav" class="md:hidden absolute left-0 right-0 top-full mx-3 mt-2 rounded-2xl bg-licorice/95 ring-1 ring-almond/10 backdrop-blur-md p-5 shadow-2xl" role="menu">
+        <div class="flex flex-col gap-1 text-[15px] font-medium">
+          <a href="#glance" class="nav-link py-2">At a Glance</a>
+          <a href="#who" class="nav-link py-2">Who we are</a>
+          <a href="#features" class="nav-link py-2">Features</a>
+          <a href="#chef" class="nav-link py-2">Chef</a>
+          <a href="#contact" class="nav-link py-2">Contact</a>
+        </div>
+        <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="get-app-pill mt-4 w-full justify-center">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c.036 1.15-.39 2.26-1.127 3.08-.78.87-2.04 1.55-3.27 1.45-.06-1.14.49-2.31 1.21-3.05.78-.82 2.14-1.43 3.19-1.48zM20.5 17.27c-.58 1.34-.86 1.94-1.6 3.13-1.04 1.66-2.5 3.72-4.31 3.74-1.6.02-2.02-1.04-4.2-1.03-2.18.01-2.64 1.05-4.25 1.03-1.81-.02-3.19-1.88-4.23-3.54C-1.1 16.44-1.45 10.4 1.11 7.2 2.78 5.08 5.03 3.87 7.18 3.87c2.18 0 3.54 1.19 5.34 1.19 1.74 0 2.8-1.2 5.31-1.2 1.89 0 3.89 1.03 5.31 2.81-4.66 2.55-3.91 9.22-2.64 10.6z"/></svg>
+          Get the App
+        </a>
       </div>
     </nav>
-    <div class="h-px w-full bg-white/5"></div>
+    <div class="nav-divider h-px w-full bg-almond/5"></div>
   </header>
 
   <main class="pt-20">
@@ -459,20 +544,33 @@
       <div class="reel-band" aria-hidden="true"></div>
       <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
       <div id="spot" class="spot projector-spot" aria-hidden="true"></div>
+      <!-- Vintage brand stamp in the corner -->
+      <div class="brand-stamp" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <path id="stamp-circle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
+          </defs>
+          <text><textPath href="#stamp-circle" startOffset="0">AFTERTASTE &#183; EST. 2023 &#183; AFTERTASTE &#183; EST. 2023 &#183; </textPath></text>
+          <circle cx="50" cy="50" r="14" fill="none" stroke="#FCF9EF" stroke-width="1.5" opacity=".5"/>
+          <circle cx="50" cy="50" r="3.5" fill="#E3452D"/>
+        </svg>
+      </div>
+
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-licorice">
         <article class="space-y-6 text-center md:text-left">
-          <h1 class="font-display text-licorice text-5xl md:text-6xl leading-none">Your Ultimate Movie and TV Hub</h1>
-          <p class="text-lg text-licorice/90">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
-          <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block">
-              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10 md:h-12" />
+          <span class="hero-kicker">A social hub for critics &amp; casual fans</span>
+          <h1 class="font-display text-licorice text-[2.75rem] sm:text-6xl md:text-7xl leading-[0.95] tracking-tight">Your Ultimate<br/>Movie &amp; TV Hub</h1>
+          <p class="text-base md:text-lg text-licorice/85 max-w-lg mx-auto md:mx-0">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
+          <div class="hero-ctas">
+            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block transition hover:-translate-y-0.5">
+              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-11 md:h-12" />
             </a>
-            <div class="inline-block opacity-50 cursor-not-allowed">
-              <img src="assets/GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get it on Google Play - Coming Soon" class="h-10 md:h-12" loading="lazy" />
-              <p class="text-sm text-gray-800 italic text-center mt-2">Coming Soon</p>
-            </div>
-            <!-- <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="rounded-2xl border border-white/20 px-4 py-2 hover:bg-white/5 transition ring-1 ring-black/70">Prefer the Medium Screen?</a> -->
+            <a href="#features" class="hero-cta-secondary" aria-label="See the app's features">
+              See the app
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/></svg>
+            </a>
           </div>
+          <p class="text-xs tracking-[0.2em] uppercase text-licorice/60 pt-2">Android &#183; Coming soon</p>
         </article>
         <figure class="relative">
           <img src="assets/hero-portrait.png" alt="Aftertaste mobile app showing movie feed, tracking features, and personalized recommendations interface" class="w-full max-w-[225px] md:max-w-[280px] lg:max-w-[325px] mx-auto" loading="eager" />
@@ -480,6 +578,14 @@
       </div>
       <div class="screen-boot" aria-hidden="true"></div>
     </section>
+
+    <!-- NOW PLAYING marquee -->
+    <div class="now-playing" aria-hidden="true">
+      <div class="now-playing-track">
+        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span>Reviews from friends for friends</span>
+        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span>Reviews from friends for friends</span>
+      </div>
+    </div>
 
     <!-- At a Glance -->
     <section id="glance" class="py-24 md:py-28 bg-black/30">
@@ -1281,6 +1387,39 @@
         window.location.href = mailto;
       });
     }
+
+    // ---- Phase 1: Header scroll state + mobile nav ----
+    (function(){
+      var header = document.getElementById('top');
+      if (header) {
+        var onScroll = function(){
+          if (window.scrollY > 12) header.classList.add('is-scrolled');
+          else header.classList.remove('is-scrolled');
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      }
+
+      var btn = document.getElementById('mobileMenuBtn');
+      var panel = document.getElementById('mobile-nav');
+      if (btn && panel) {
+        var closeMenu = function(){
+          panel.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', 'Open menu');
+        };
+        var openMenu = function(){
+          panel.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.setAttribute('aria-label', 'Close menu');
+        };
+        btn.addEventListener('click', function(){
+          if (panel.classList.contains('open')) closeMenu(); else openMenu();
+        });
+        panel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+        document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+      }
+    })();
   </script>
 </body>
 </html>
