@@ -395,6 +395,60 @@
     @media (prefers-reduced-motion: reduce) {
       .now-playing-track { animation: none; justify-content: center; flex-wrap: wrap; white-space: normal; }
     }
+
+    /* ---- Phase 2: "At a Glance" + "Who we are" refresh ---- */
+
+    /* Shared editorial kicker eyebrow (Montserrat small-caps) for section headers */
+    .section-kicker { display: inline-flex; align-items: center; gap: .6rem; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+    .section-kicker:before, .section-kicker:after { content: ""; display: inline-block; width: 28px; height: 1px; background: currentColor; opacity: .45; }
+    .section-kicker.align-start:after { display: none; }
+
+    /* Editorial section heading helpers */
+    .section-title { font-family: 'Anton', Impact, sans-serif; font-size: clamp(2.25rem, 4vw + 1rem, 3.75rem); line-height: .98; letter-spacing: .005em; text-transform: none; }
+    .section-title em { font-style: normal; color: #E3452D; }
+
+    /* Halftone duotone image chip (for "Who we are" microphone etc.) */
+    .halftone-chip { position: relative; display: inline-block; isolation: isolate; }
+    .halftone-chip img { display: block; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; width: 100%; height: auto; }
+    .halftone-chip:after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(28,28,28,.55) 1px, transparent 1.2px); background-size: 5px 5px; mix-blend-mode: multiply; pointer-events: none; opacity: .9; }
+    .halftone-chip.on-mint:after { background-image: radial-gradient(circle, rgba(28,28,28,.42) 1px, transparent 1.2px); }
+
+    /* "At a Glance" — Almond/Coffee neutral treatment */
+    #glance { background: #111 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><circle cx='1' cy='1' r='.6' fill='%23F3E7BF' opacity='.04'/></svg>") repeat; }
+    #glance .glance-eyebrow { color: #F3E7BF; opacity: .8; }
+    #glance .section-title { color: #FCF9EF; }
+    #glance .glance-lede { color: rgba(252,249,239,.78); max-width: 42rem; margin-left: auto; margin-right: auto; margin-top: .9rem; font-size: 1.05rem; line-height: 1.55; }
+    .glance-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; margin: 1.25rem auto 0; border-radius: 2px; }
+
+    /* Poster-style feature cards with coffee/almond neutral accents */
+    .glance-card { position: relative; padding: 1.6rem; border-radius: 14px; background: linear-gradient(180deg, rgba(252,249,239,.035), rgba(252,249,239,.01)); border: 1px solid rgba(243,231,191,.18); transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease; height: 100%; }
+    .glance-card:hover { transform: translateY(-2px); border-color: rgba(243,231,191,.42); background: linear-gradient(180deg, rgba(252,249,239,.06), rgba(252,249,239,.015)); }
+    .glance-card:before { content: ""; position: absolute; top: 0; left: 1.5rem; width: 36px; height: 3px; background: #F3E7BF; border-radius: 0 0 2px 2px; opacity: .75; }
+    .glance-card .card-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: rgba(243,231,191,.09); border: 1px solid rgba(243,231,191,.22); color: #F3E7BF; margin-bottom: 1rem; }
+    .glance-card .card-icon img { width: 20px; height: 20px; filter: brightness(0) saturate(100%) invert(91%) sepia(16%) saturate(397%) hue-rotate(9deg) brightness(98%) contrast(92%); }
+    .glance-card .card-icon svg { width: 20px; height: 20px; }
+    .glance-card h3 { font-family: 'Anton', Impact, sans-serif; font-size: 1.35rem; line-height: 1; letter-spacing: .02em; color: #FCF9EF; margin-bottom: .55rem; }
+    .glance-card p { color: rgba(252,249,239,.78); font-size: .95rem; line-height: 1.5; margin-bottom: .85rem; }
+    .glance-card ul { list-style: none; padding: 0; margin: 0; border-top: 1px dashed rgba(243,231,191,.18); padding-top: .7rem; }
+    .glance-card ul li { position: relative; font-size: .82rem; color: rgba(252,249,239,.62); padding-left: 1rem; line-height: 1.55; }
+    .glance-card ul li:before { content: "\2022"; position: absolute; left: 0; top: 0; color: #F3E7BF; opacity: .8; font-size: 1.05rem; line-height: 1.4; }
+
+    /* "Who we are" — Mint anchor */
+    #who { background: #419B85; color: #1C1C1C; position: relative; overflow: hidden; }
+    #who:before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(28,28,28,.08) 1px, transparent 1.2px); background-size: 7px 7px; mix-blend-mode: multiply; pointer-events: none; opacity: .6; }
+    #who:after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: repeating-linear-gradient(to right, rgba(28,28,28,.25) 0 12px, transparent 12px 20px); opacity: .5; pointer-events: none; }
+    .who-kicker { color: #1C1C1C; opacity: .75; }
+    .who-kicker:before { background: #1C1C1C; }
+    #who .section-title { color: #1C1C1C; }
+    #who .section-title em { color: #FCF9EF; background: #1C1C1C; padding: 0 .4rem; border-radius: 2px; }
+    .who-lede { font-size: 1.15rem; line-height: 1.55; color: #1C1C1C; max-width: 30rem; }
+    .who-meta { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: #1C1C1C; opacity: .75; }
+    .who-meta .who-dot { width: 6px; height: 6px; border-radius: 50%; background: #E3452D; display: inline-block; }
+    .who-mic-wrap { position: relative; padding: 1.25rem; }
+    .who-mic-wrap .halftone-chip { max-width: 200px; margin: 0 auto; }
+    .who-mic-wrap:before { content: ""; position: absolute; inset: 8% 14%; background: #FCF9EF; border-radius: 50%; opacity: .45; z-index: 0; }
+    .who-mic-wrap .halftone-chip { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .who-mic-wrap .halftone-chip { max-width: 220px; } }
   </style>
 
   <!-- Structured Data (JSON-LD) -->
@@ -588,114 +642,92 @@
     </div>
 
     <!-- At a Glance -->
-    <section id="glance" class="py-24 md:py-28 bg-black/30">
+    <section id="glance" class="py-24 md:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header class="mb-10 text-center max-w-3xl mx-auto">
-          <h2 class="font-display text-4xl">Know What to Watch — at a Glance</h2>
-          <p class="text-almond/80 mt-3">Track, discuss, and decide faster with people who share your taste.</p>
+        <header class="mb-14 text-center max-w-3xl mx-auto">
+          <span class="section-kicker glance-eyebrow">The Program</span>
+          <h2 class="section-title mt-4">Know what to watch — <em>at a glance</em>.</h2>
+          <span class="glance-divider" aria-hidden="true"></span>
+          <p class="glance-lede">Track, discuss, and decide faster — with people who actually share your taste, not an algorithm that thinks it does.</p>
         </header>
 
-        <div class="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-5 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
           <!-- Card: Tastebuds Scores -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <img src="assets/Tongue-RGB-White-SM.png" alt="Tastebud icon" class="h-5 w-5" />
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Tastebud Scores</h3>
-                <p class="text-almond/75">See reviews and ratings tailored to your circle — not the crowd.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>Tastebud scores and feeds</li>
-                  <li>Trending this week, month, and year</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <img src="assets/Tongue-RGB-White-SM.png" alt="" />
             </div>
+            <h3>Tastebud Scores</h3>
+            <p>Reviews and ratings tailored to your circle — not the crowd.</p>
+            <ul>
+              <li>Tastebud scores and feeds</li>
+              <li>Trending this week, month, and year</li>
+            </ul>
           </article>
 
           <!-- Card: Lists & Bookmarks -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M7 4h10a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.8.4L12 16l-6.2 3.9a.5.5 0 0 1-.8-.4V6a2 2 0 0 1 2-2m0 2v11.3l5-3.2l5 3.2V6z"/></svg>
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Lists &amp; Bookmarks</h3>
-                <p class="text-almond/75">Save it for later or build themed lists — solo or with friends.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>Bookmark for later</li>
-                  <li>Collaborative lists</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4h10a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.8.4L12 16l-6.2 3.9a.5.5 0 0 1-.8-.4V6a2 2 0 0 1 2-2m0 2v11.3l5-3.2l5 3.2V6z"/></svg>
             </div>
+            <h3>Lists &amp; Bookmarks</h3>
+            <p>Save it for later, or build themed lists — solo or with friends.</p>
+            <ul>
+              <li>Bookmark for later</li>
+              <li>Collaborative lists</li>
+            </ul>
           </article>
 
           <!-- Card: Track Progress -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M12 1.75A10.25 10.25 0 1 0 22.25 12A10.26 10.26 0 0 0 12 1.75m0 1.5A8.75 8.75 0 1 1 3.25 12A8.74 8.74 0 0 1 12 3.25m-.75 4a.75.75 0 0 0-1.5 0v6.25c0 .2.08.4.22.53l4.25 4.25a.75.75 0 0 0 1.06-1.06l-4.03-4.03z"/></svg>
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Track Progress</h3>
-                <p class="text-almond/75">TV seasons and episodes — always know where you left off.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>In‑progress, watched, shelved, trashed</li>
-                  <li>Catalog your entire viewing history</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.75A10.25 10.25 0 1 0 22.25 12A10.26 10.26 0 0 0 12 1.75m0 1.5A8.75 8.75 0 1 1 3.25 12A8.74 8.74 0 0 1 12 3.25m-.75 4a.75.75 0 0 0-1.5 0v6.25c0 .2.08.4.22.53l4.25 4.25a.75.75 0 0 0 1.06-1.06l-4.03-4.03z"/></svg>
             </div>
+            <h3>Track Progress</h3>
+            <p>TV seasons and episodes — always know where you left off.</p>
+            <ul>
+              <li>In&#8209;progress, watched, shelved, trashed</li>
+              <li>Your full viewing history, always on hand</li>
+            </ul>
           </article>
 
           <!-- Card: Deep Details -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6l-3 2v-2H5a2 2 0 0 1-2-2zm2 0v12h14V5zm2.5 3h9a.75.75 0 0 1 0 1.5h-9A.75.75 0 0 1 7.5 8m0 3h6a.75.75 0 0 1 0 1.5h-6A.75.75 0 0 1 7.5 11"/></svg>
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">In-Depth Info</h3>
-                <p class="text-almond/75">Trailers, cast, genres, seasons, related picks — all in one place.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>Actor pages and filmography</li>
-                  <li>Where to stream</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6l-3 2v-2H5a2 2 0 0 1-2-2zm2 0v12h14V5zm2.5 3h9a.75.75 0 0 1 0 1.5h-9A.75.75 0 0 1 7.5 8m0 3h6a.75.75 0 0 1 0 1.5h-6A.75.75 0 0 1 7.5 11"/></svg>
             </div>
+            <h3>In-Depth Info</h3>
+            <p>Trailers, cast, genres, seasons, related picks — all in one place.</p>
+            <ul>
+              <li>Actor pages and filmographies</li>
+              <li>Where to stream</li>
+            </ul>
           </article>
 
           <!-- Card: Reviews & Threads -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M6 3h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4v-4H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m1 4h10a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2m0 4h6a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2"/></svg>
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Reviews &amp; Threads</h3>
-                <p class="text-almond/75">Threaded Discussions  — on specific reviews or each title globally.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>Filter and sort</li>
-                  <li>Tastebuds only or global community</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M6 3h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4v-4H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m1 4h10a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2m0 4h6a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2"/></svg>
             </div>
+            <h3>Reviews &amp; Threads</h3>
+            <p>Threaded discussions — on a specific review, or on a title globally.</p>
+            <ul>
+              <li>Filter and sort any way you like</li>
+              <li>Tastebuds only, or the global community</li>
+            </ul>
           </article>
 
           <!-- Card: Taste Profile & Recs -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <img src="assets/chef-icon.png" alt="Chef icon" class="h-5 w-5" />
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Taste Profile &amp; Smart Recs</h3>
-                <p class="text-almond/75">A living profile of your taste that powers custom recommendations.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>Genre affinities, influences, habits</li>
-                  <li>Collaborative recs by who you’re watching with</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <img src="assets/chef-icon.png" alt="" />
             </div>
+            <h3>Taste Profile &amp; Smart Recs</h3>
+            <p>A living profile of your taste that powers custom recommendations.</p>
+            <ul>
+              <li>Genre affinities, influences, habits</li>
+              <li>Collaborative recs based on who you're watching with</li>
+            </ul>
           </article>
         </div>
 
@@ -713,20 +745,23 @@
     </section>
 
     <!-- Who we are -->
-    <section id="who" class="py-24 md:py-28 relative overflow-visible" style="background-color: rgba(94,185,206,0.90);">
-
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-        <figure class="relative order-2 md:order-1 hidden md:block">
-          <div class="w-full max-w-[160px] md:max-w-[180px] mx-auto relative">
-            <img src="assets/mic-bw.png" alt="Vintage studio microphone representing authentic voice and genuine recommendations" class="w-full h-auto translate-y-4 opacity-0" id="micImg" loading="lazy" />
-            <div class="halftone-anim" aria-hidden="true"></div>
+    <section id="who" class="py-24 md:py-32 relative overflow-hidden">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-5 gap-12 md:gap-16 items-center">
+        <figure class="order-2 md:order-1 md:col-span-2">
+          <div class="who-mic-wrap">
+            <div class="halftone-chip on-mint">
+              <img src="assets/mic-bw.png" alt="Vintage studio microphone — representing authentic voice and genuine recommendations" id="micImg" loading="lazy" />
+            </div>
           </div>
         </figure>
-        <article class="space-y-6 order-1 md:order-2 text-center md:text-left">
-          <h2 class="font-display text-4xl">Who we are</h2>
-          <p>Aftertaste is the <strong>social hub for Movie and TV fans</strong> who <strong>trust people over algorithms</strong>.</p>
-          <p>Track what you watch, compare tastes, and get real recommendations from friends, creators, and critics — all in one place.</p>
-          <p>Because finding your <strong>next favorite thing</strong> shouldn't feel like scrolling forever.</p>
+        <article class="order-1 md:order-2 md:col-span-3 space-y-6 text-center md:text-left">
+          <span class="section-kicker align-start who-kicker">The Crew</span>
+          <h2 class="section-title">People <em>over</em> algorithms.</h2>
+          <p class="who-lede mx-auto md:mx-0">Aftertaste is the social hub for movie and TV fans who'd rather hear from friends, creators, and critics than a feed that thinks it knows them.</p>
+          <p class="who-lede mx-auto md:mx-0">Track what you watch, compare tastes, and get real recommendations — because your next favorite thing shouldn't feel like scrolling forever.</p>
+          <div class="pt-2">
+            <span class="who-meta"><span class="who-dot" aria-hidden="true"></span> Est. 2023 &#183; Independent</span>
+          </div>
         </article>
       </div>
     </section>
