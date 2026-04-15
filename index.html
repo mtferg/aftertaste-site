@@ -44,6 +44,9 @@
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="shortcut icon" href="assets/favicon.ico" />
 
+  <!-- Preload the hero portrait (LCP candidate) -->
+  <link rel="preload" as="image" href="assets/hero-portrait.png" fetchpriority="high" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -55,19 +58,17 @@
           colors: {
             licorice: "#1C1C1C",
             almond: "#FCF9EF",
-            cottoncandy: "#5EB9CE",
             cherry: "#E3452D",
             bubblegum: "#FFB1C1",
             mint: "#419B85",
-            coffee: "#F3E7BF",
-            popcorn: "#F1A20E"
+            coffee: "#F3E7BF"
           },
           fontFamily: {
             sans: ["Montserrat", "ui-sans-serif", "system-ui"],
             display: ["Anton", "Impact", "sans-serif"]
           },
           boxShadow: {
-            glow: "0 0 0 3px rgba(94,185,206,.35), 0 8px 30px rgba(0,0,0,.45)"
+            glow: "0 0 0 3px rgba(227,69,45,.28), 0 8px 30px rgba(0,0,0,.45)"
           },
           backgroundImage: {
             noir: "radial-gradient(1200px 600px at 70% -20%, rgba(94,185,206,.12), transparent 38%), radial-gradient(800px 400px at 10% 120%, rgba(227,69,45,.10), transparent 48%), linear-gradient(160deg, #0a0a0a 0%, #151515 55%, #0e0e0e 100%)"
@@ -623,6 +624,78 @@
       .pullquote { width: 100%; max-width: 340px; min-width: 0; }
     }
     .reviews-set { display: flex; gap: 1.25rem; align-items: stretch; }
+
+    /* ---- Phase 5: CTA, Contact, Footer + a11y/perf pass ---- */
+
+    /* Poster-style CTA ("Visit us online") on Cherry with Coffee accents */
+    #cta { position: relative; background: #E3452D; color: #FCF9EF; overflow: hidden; padding-top: 5.5rem; padding-bottom: 5.5rem; }
+    #cta:before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(252,249,239,.10) 1px, transparent 1.2px); background-size: 7px 7px; mix-blend-mode: screen; pointer-events: none; opacity: .55; }
+    #cta:after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: repeating-linear-gradient(to right, rgba(252,249,239,.35) 0 12px, transparent 12px 20px); opacity: .6; pointer-events: none; }
+    #cta .cta-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    @media (min-width: 768px) { #cta .cta-inner { grid-template-columns: 1.15fr .85fr; gap: 3rem; text-align: left; } }
+    #cta .cta-kicker { color: #F3E7BF; }
+    #cta .cta-kicker:before, #cta .cta-kicker:after { background: #F3E7BF; opacity: .6; }
+    #cta .section-title { color: #FCF9EF; margin-top: .85rem; }
+    #cta .section-title em { color: #F3E7BF; background: #1C1C1C; padding: 0 .4rem; border-radius: 2px; }
+    #cta .cta-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; border-radius: 2px; margin: 1.1rem auto 1rem; }
+    @media (min-width: 768px) { #cta .cta-divider { margin-left: 0; margin-right: 0; } }
+    #cta .cta-lede { color: rgba(252,249,239,.92); font-size: 1.05rem; line-height: 1.55; max-width: 38rem; margin-left: auto; margin-right: auto; }
+    @media (min-width: 768px) { #cta .cta-lede { margin-left: 0; } }
+    #cta .cta-actions { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: .9rem; align-items: center; justify-content: center; }
+    @media (min-width: 768px) { #cta .cta-actions { justify-content: flex-start; } }
+    #cta .cta-primary { display: inline-flex; align-items: center; gap: .55rem; padding: .85rem 1.35rem; border-radius: 9999px; background: #1C1C1C; color: #FCF9EF; font-weight: 600; letter-spacing: .03em; font-size: .9rem; text-transform: uppercase; box-shadow: 0 2px 0 rgba(0,0,0,.22), 0 10px 24px rgba(0,0,0,.28); transition: transform 180ms ease, background-color 180ms ease; }
+    #cta .cta-primary:hover { background: #000; transform: translateY(-1px); }
+    #cta .cta-primary:focus-visible { outline: 2px solid #F3E7BF; outline-offset: 3px; }
+    #cta .cta-primary svg { width: 14px; height: 14px; }
+    #cta .cta-secondary { display: inline-flex; align-items: center; gap: .5rem; padding: .78rem 1.2rem; border-radius: 9999px; border: 1.5px solid #FCF9EF; color: #FCF9EF; font-weight: 600; font-size: .875rem; letter-spacing: .02em; transition: background-color 180ms ease, color 180ms ease, transform 180ms ease; }
+    #cta .cta-secondary:hover { background: #FCF9EF; color: #1C1C1C; transform: translateY(-1px); }
+    #cta .cta-secondary:focus-visible { outline: 2px solid #1C1C1C; outline-offset: 3px; }
+    #cta .cta-meta { margin-top: 1.15rem; color: rgba(252,249,239,.78); font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; }
+
+    /* Poster ticket stub on the right side (hidden on small screens) */
+    #cta .cta-ticket { display: none; }
+    @media (min-width: 768px) {
+      #cta .cta-ticket { display: block; position: relative; background: #F3E7BF; color: #1C1C1C; border-radius: 8px; padding: 1.4rem 1.5rem; transform: rotate(2deg); box-shadow: 0 12px 28px rgba(0,0,0,.28); }
+      #cta .cta-ticket:before, #cta .cta-ticket:after { content: ""; position: absolute; top: 50%; width: 18px; height: 18px; background: #E3452D; border-radius: 50%; transform: translateY(-50%); }
+      #cta .cta-ticket:before { left: -9px; }
+      #cta .cta-ticket:after { right: -9px; }
+      #cta .cta-ticket .ticket-no { font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(28,28,28,.6); }
+      #cta .cta-ticket .ticket-headline { font-family: 'Anton', Impact, sans-serif; font-size: 1.9rem; line-height: 1; margin-top: .4rem; }
+      #cta .cta-ticket .ticket-dashed { margin: .85rem 0; border-top: 1px dashed rgba(28,28,28,.35); }
+      #cta .cta-ticket .ticket-foot { display: flex; justify-content: space-between; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(28,28,28,.7); }
+    }
+
+    /* Contact section — editorial refresh on Licorice */
+    #contact { background: #1C1C1C; color: #FCF9EF; padding-top: 5rem; padding-bottom: 5rem; border-bottom: 1px solid rgba(252,249,239,.08); }
+    #contact .contact-inner { max-width: 48rem; margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    #contact .contact-kicker { color: #F3E7BF; opacity: .85; }
+    #contact .section-title { color: #FCF9EF; }
+    #contact .section-title em { color: #E3452D; }
+    #contact .contact-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; border-radius: 2px; margin: 1.1rem auto; }
+    #contact .contact-lede { color: rgba(252,249,239,.78); font-size: 1.02rem; line-height: 1.55; margin-bottom: 1.25rem; }
+    #contact .contact-mail { display: inline-flex; align-items: center; gap: .55rem; font-family: 'Anton', Impact, sans-serif; font-size: 1.6rem; letter-spacing: .01em; color: #FCF9EF; padding: .4rem .1rem; border-bottom: 2px solid rgba(252,249,239,.25); transition: color 180ms ease, border-color 180ms ease; }
+    #contact .contact-mail:hover, #contact .contact-mail:focus-visible { color: #E3452D; border-color: #E3452D; }
+    #contact .contact-mail:focus-visible { outline: 2px solid #E3452D; outline-offset: 4px; }
+
+    /* Footer — editorial refresh */
+    .site-footer { background: #0F0F0F; color: rgba(252,249,239,.78); padding: 3.5rem 0 2rem; border-top: 1px solid rgba(252,249,239,.06); }
+    .site-footer .footer-grid { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; }
+    @media (min-width: 768px) { .site-footer .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; gap: 3rem; } }
+    .site-footer .footer-brand { display: flex; align-items: center; gap: .75rem; }
+    .site-footer .footer-brand .footer-mark { font-family: 'Anton', Impact, sans-serif; font-size: 1.35rem; letter-spacing: .22em; color: #FCF9EF; }
+    .site-footer .footer-tag { margin-top: .85rem; font-size: .875rem; line-height: 1.55; color: rgba(252,249,239,.6); max-width: 22rem; }
+    .site-footer h4 { font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: #F3E7BF; margin-bottom: .9rem; }
+    .site-footer .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .55rem; }
+    .site-footer .footer-links a { font-size: .9rem; color: rgba(252,249,239,.78); transition: color 180ms ease; }
+    .site-footer .footer-links a:hover, .site-footer .footer-links a:focus-visible { color: #E3452D; }
+    .site-footer .footer-links a:focus-visible { outline: 2px solid #E3452D; outline-offset: 3px; border-radius: 2px; }
+    .site-footer .footer-social { display: flex; gap: .5rem; margin-top: .2rem; }
+    .site-footer .footer-social a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 999px; background: rgba(252,249,239,.06); border: 1px solid rgba(252,249,239,.08); transition: background-color 180ms ease, border-color 180ms ease; }
+    .site-footer .footer-social a:hover { background: rgba(252,249,239,.12); border-color: rgba(252,249,239,.22); }
+    .site-footer .footer-social a:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
+    .site-footer .footer-social img { width: 18px; height: 18px; }
+    .site-footer .footer-bottom { max-width: 80rem; margin: 2.5rem auto 0; padding: 1.25rem 1.5rem 0; border-top: 1px solid rgba(252,249,239,.06); display: flex; flex-direction: column; gap: .75rem; align-items: center; justify-content: space-between; text-align: center; font-size: .8rem; color: rgba(252,249,239,.55); }
+    @media (min-width: 768px) { .site-footer .footer-bottom { flex-direction: row; text-align: left; } }
   </style>
 
   <!-- Structured Data (JSON-LD) -->
@@ -801,7 +874,7 @@
           <p class="text-xs tracking-[0.2em] uppercase text-licorice/60 pt-2">Android &#183; Coming soon</p>
         </article>
         <figure class="relative">
-          <img src="assets/hero-portrait.png" alt="Aftertaste mobile app showing movie feed, tracking features, and personalized recommendations interface" class="w-full max-w-[225px] md:max-w-[280px] lg:max-w-[325px] mx-auto" loading="eager" />
+          <img src="assets/hero-portrait.png" alt="Aftertaste mobile app showing movie feed, tracking features, and personalized recommendations interface" class="w-full max-w-[225px] md:max-w-[280px] lg:max-w-[325px] mx-auto" loading="eager" decoding="async" fetchpriority="high" width="1419" height="2796" />
         </figure>
       </div>
       <div class="screen-boot" aria-hidden="true"></div>
@@ -1226,46 +1299,91 @@
     </section>
     </section>
 
-    <!-- Web app callout -->
-    <section class="py-20" style="background-color: rgba(65,155,133,0.90);">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h3 class="font-display text-4xl text-white mb-6">Prefer the medium screen?</h3>
-        <a href="https://aftertaste.app/" class="inline-block rounded-2xl bg-popcorn text-black font-semibold px-6 py-3 shadow-glow hover:shadow-lg transition">Visit us online</a>
-        <p class="text-almond/80 mt-5">All your data stays in sync with our mobile apps.</p>
+    <!-- CTA — Visit us online (poster-style) -->
+    <section id="cta" aria-labelledby="cta-title">
+      <div class="cta-inner">
+        <div>
+          <span class="section-kicker cta-kicker align-start">The Matinee</span>
+          <h2 id="cta-title" class="section-title">Prefer the <em>medium</em> screen?</h2>
+          <span class="cta-divider" aria-hidden="true"></span>
+          <p class="cta-lede">Aftertaste works just as well in your browser. Pick up where you left off, keep your watchlist in sync, and browse on the big-ish screen when the couch isn&rsquo;t cutting it.</p>
+          <div class="cta-actions">
+            <a href="https://aftertaste.app/" class="cta-primary" aria-label="Open Aftertaste on the web">
+              Visit Aftertaste
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#features" class="cta-secondary" aria-label="See what's inside the app">
+              See what&rsquo;s inside
+            </a>
+          </div>
+          <p class="cta-meta">All your data stays in sync with our mobile apps.</p>
+        </div>
+        <aside class="cta-ticket" aria-hidden="true">
+          <div class="ticket-no">Admit One &middot; Nº 01</div>
+          <div class="ticket-headline">Aftertaste<br>on the web</div>
+          <div class="ticket-dashed"></div>
+          <div class="ticket-foot">
+            <span>Now Showing</span>
+            <span>aftertaste.app</span>
+          </div>
+        </aside>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 text-almond" style="border-bottom: 1px solid #FCF9EF;">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="font-display text-4xl mb-6">Curious? Comments? Questions?</h2>
-        <p class="text-lg">
-          contact us at: <a href="mailto:hello@aftertaste.com" class="text-almond hover:text-cottoncandy transition-colors underline">hello@aftertaste.com</a>
-        </p>
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="contact-inner">
+        <span class="section-kicker contact-kicker">The Box Office</span>
+        <h2 id="contact-title" class="section-title mt-4">Curious? Comments? <em>Questions?</em></h2>
+        <span class="contact-divider" aria-hidden="true"></span>
+        <p class="contact-lede">We&rsquo;re a small, independent crew and we read every note. Drop us a line &mdash; we usually write back within a day or two.</p>
+        <a href="mailto:hello@aftertaste.com" class="contact-mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+          hello@aftertaste.com
+        </a>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="py-12" role="contentinfo">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center md:items-center justify-center md:justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <img src="assets/logo.png" alt="Aftertaste logo" class="h-8 w-8 rounded-full ring-1 ring-white/10" loading="lazy" />
-        <div>
-          <div class="font-display tracking-widest">AFTERTASTE</div>
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo.png" alt="" class="h-9 w-9 rounded-full ring-1 ring-almond/15" loading="lazy" width="36" height="36" />
+          <span class="footer-mark">AFTERTASTE</span>
         </div>
+        <p class="footer-tag">Track what you watch, compare tastes with friends, and discover what to watch next &mdash; no algorithm bubbles involved.</p>
+        <nav class="footer-social" aria-label="Social media">
+          <a href="https://www.instagram.com/aftertasteapp/" target="_blank" rel="noopener noreferrer" aria-label="Follow Aftertaste on Instagram">
+            <img src="assets/instagram.svg" alt="" loading="lazy" width="18" height="18" />
+          </a>
+          <a href="https://www.tiktok.com/@aftertasteapp" target="_blank" rel="noopener noreferrer" aria-label="Follow Aftertaste on TikTok">
+            <img src="assets/tiktok.svg" alt="" loading="lazy" width="18" height="18" />
+          </a>
+        </nav>
       </div>
-      <nav class="flex items-center gap-4 footer-social" aria-label="Social media links">
-        <a href="https://www.instagram.com/aftertasteapp/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" class="p-2 rounded-lg hover:bg-white/10">
-          <img src="assets/instagram.svg" alt="Instagram icon" class="h-5 w-5" loading="lazy" />
-        </a>
-        <a href="https://www.tiktok.com/@aftertasteapp" target="_blank" rel="noopener noreferrer" aria-label="Follow us on TikTok" class="p-2 rounded-lg hover:bg-white/10">
-          <img src="assets/tiktok.svg" alt="TikTok icon" class="h-5 w-5" loading="lazy" />
-        </a>
+      <nav aria-labelledby="footer-explore-title">
+        <h4 id="footer-explore-title">Explore</h4>
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#chef">Chef</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="https://aftertaste.app/">Web app</a></li>
+        </ul>
       </nav>
-      <div class="text-sm text-white/60">
-        <p>&copy; 2025 Aftertaste, LLC.</p>
-      </div>
+      <nav aria-labelledby="footer-legal-title">
+        <h4 id="footer-legal-title">Company</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:hello@aftertaste.com">Contact</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Aftertaste, LLC. All rights reserved.</p>
+      <p>Made with care for people who love movies.</p>
     </div>
   </footer>
 
