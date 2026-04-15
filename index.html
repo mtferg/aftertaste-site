@@ -305,36 +305,112 @@
       .parallax:hover img { transform: perspective(800px) rotateY(-2.5deg) translateZ(0);       }
     }
 
-    /* Auto-scroll for feature cards */
-    .feature-scroll {
-      scroll-behavior: smooth;
+    /* ---- Phase 3: Features poster-card grid ---- */
+    /* Background: same Coffee-dot halftone on Licorice used for #glance, for a consistent editorial block */
+    #features { background: #111 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><circle cx='1' cy='1' r='.6' fill='%23F3E7BF' opacity='.04'/></svg>") repeat; }
+    #features .features-eyebrow { color: #F3E7BF; opacity: .8; }
+    #features .section-title { color: #FCF9EF; }
+
+    /* Divider bar under the section title */
+    .features-divider { width: 56px; height: 3px; background: #F3E7BF; opacity: .85; border-radius: 2px; margin-top: 1rem; }
+    .features-lede { color: rgba(252,249,239,.72); max-width: 34rem; font-size: 1.02rem; line-height: 1.55; }
+
+    /* Poster-style feature card — uniform frame, consistent proportions */
+    .feature-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1.5rem 1.75rem;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(252,249,239,.035), rgba(252,249,239,.01));
+      border: 1px solid rgba(243,231,191,.18);
+      height: 100%;
+      transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease;
+      overflow: hidden;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(243,231,191,.42);
+      background: linear-gradient(180deg, rgba(252,249,239,.06), rgba(252,249,239,.015));
+    }
+    /* Coffee tab, matches .glance-card language */
+    .feature-card:before {
+      content: "";
+      position: absolute;
+      top: 0; left: 1.5rem;
+      width: 36px; height: 3px;
+      background: #F3E7BF;
+      border-radius: 0 0 2px 2px;
+      opacity: .75;
     }
 
-    /* Custom scrollbar styling for features section */
-    .feature-scroll::-webkit-scrollbar {
-      height: 8px;
+    /* Screenshot chip: phone-shaped poster image, uniform aspect so every card aligns */
+    .feature-card .shot {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      background: radial-gradient(ellipse at 50% 60%, rgba(243,231,191,.12), rgba(243,231,191,0) 65%);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .feature-card .shot:after {
+      /* subtle coffee-dot halftone wash to tie screenshots into the vintage look */
+      content: "";
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(243,231,191,.06) 1px, transparent 1.2px);
+      background-size: 6px 6px;
+      pointer-events: none;
+    }
+    .feature-card .shot img {
+      position: relative;
+      display: block;
+      width: auto;
+      height: 92%;
+      max-width: 78%;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,.45));
     }
 
-    .feature-scroll::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
-      margin: 0 1rem;
+    /* Ticket-stub numeral in the top-right of every card */
+    .feature-card .stub {
+      position: absolute;
+      top: 1.1rem; right: 1.25rem;
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: .82rem;
+      letter-spacing: .22em;
+      color: rgba(243,231,191,.55);
     }
 
-    .feature-scroll::-webkit-scrollbar-thumb {
-      background: #F1A20E;
-      border-radius: 4px;
-      transition: background 0.2s ease;
+    .feature-card h3 {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: 1.4rem;
+      line-height: 1.02;
+      letter-spacing: .02em;
+      color: #FCF9EF;
+      margin-bottom: .55rem;
     }
-
-    .feature-scroll::-webkit-scrollbar-thumb:hover {
-      background: #f8b744;
+    .feature-card p {
+      font-family: 'Montserrat', ui-sans-serif, system-ui;
+      color: rgba(252,249,239,.74);
+      font-size: .92rem;
+      line-height: 1.5;
+      margin: 0;
     }
-
-    /* Firefox scrollbar */
-    .feature-scroll {
-      scrollbar-width: thin;
-      scrollbar-color: #F1A20E rgba(255, 255, 255, 0.05);
+    /* Thin divider under the title, matches the poster language */
+    .feature-card h3:after {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: #E3452D;
+      opacity: .8;
+      border-radius: 1px;
+      margin-top: .55rem;
+      margin-bottom: .75rem;
     }
 
     /* ---- Phase 1: Header + Hero polish ---- */
@@ -766,115 +842,100 @@
       </div>
     </section>
 
-    <!-- Features Slider -->
-    <section id="features" class="py-16 md:py-28 bg-black/30">
+    <!-- Features Grid (Phase 3: poster-style cards) -->
+    <section id="features" class="py-16 md:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header class="flex items-end justify-between mb-10">
-          <h2 class="font-display text-4xl text-center md:text-left w-full">A Menu of Features</h2>
+        <header class="mb-12 md:mb-16 max-w-3xl">
+          <span class="section-kicker features-eyebrow align-start">The Lineup</span>
+          <h2 class="section-title mt-4">A menu of <em>features</em>.</h2>
+          <div class="features-divider"></div>
+          <p class="features-lede mt-5">Nine ways Aftertaste helps you track what you watch, trade takes with the people whose taste you trust, and figure out what to queue up next.</p>
         </header>
 
         <div class="relative">
-          <div id="featuresScroller" class="overflow-x-auto feature-scroll" role="region" aria-label="App Features">
-            <ul id="featuresList" class="flex gap-4 p-4" style="width: max-content;">
-              <!-- Slide 1 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Tastebuds Feed</h3>
-                  <p>Follow friends and creators.</p>
-                  <p>Compare tastes and see what your circle is watching.</p>
+          <ul class="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" role="list" aria-label="App Features">
+              <!-- 01 -->
+              <li class="feature-card">
+                <span class="stub">Nº 01</span>
+                <div class="shot">
+                  <img src="assets/features/feed.png" alt="Social feed showing friends' movie and TV reviews" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/feed.png" alt="Social feed showing friends' movie and TV reviews" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
-                </figure>
+                <h3>Tastebuds Feed</h3>
+                <p>Follow friends and see what the people whose taste you trust are watching.</p>
               </li>
-              <!-- Slide 2 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Track Your Content</h3>
-                  <p>Easily track what you have in progress and catalog your full watch history.</p>
-                  <p>Shelve things for later or trash them if you're done.</p>
+              <!-- 02 -->
+              <li class="feature-card">
+                <span class="stub">Nº 02</span>
+                <div class="shot">
+                  <img src="assets/features/tracking.png" alt="Content tracking screen showing in-progress TV shows and movies" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/tracking.png" alt="Content tracking screen showing in-progress TV shows and movies" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Track Your Content</h3>
+                <p>Catalog everything you’ve watched, shelve what’s in progress, and queue what’s next.</p>
               </li>
-              <!-- Slide 3 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Create Lists (Solo or with Friends)</h3>
-                  <p>Create and share content lists - either solo or collabing with friends.</p>
+              <!-- 03 -->
+              <li class="feature-card">
+                <span class="stub">Nº 03</span>
+                <div class="shot">
+                  <img src="assets/features/list.png" alt="Collaborative movie and TV lists feature" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/list.png" alt="Collaborative movie and TV lists feature" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Build Lists</h3>
+                <p>Curate watch lists solo or collaborate with friends in real time.</p>
               </li>
-              <!-- Slide 4 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">All the Info</h3>
-                  <p>Easily search content and view:</p>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li>Descriptions</li>
-                    <li>Where to stream</li>
-                    <li>Trailers</li>
-                    <li>Cast</li>
-                    <li>Season and episode details</li>
-                    <li>Related content</li>
-                  </ul>
+              <!-- 04 -->
+              <li class="feature-card">
+                <span class="stub">Nº 04</span>
+                <div class="shot">
+                  <img src="assets/features/details.png" alt="Detailed movie information screen with cast, streaming options, and trailers" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/details.png" alt="Detailed movie information screen with cast, streaming options, and trailers" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>All the Info</h3>
+                <p>Cast, trailers, where to stream, and episode details — every detail in one place.</p>
               </li>
-              <!-- Slide 5 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Actor Profiles</h3>
-                  <p>"Where is that person from?". Now you know</p>
+              <!-- 05 -->
+              <li class="feature-card">
+                <span class="stub">Nº 05</span>
+                <div class="shot">
+                  <img src="assets/features/actor.png" alt="Actor profile page showing filmography and biography" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/actor.png" alt="Actor profile page showing filmography and biography" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Actor Profiles</h3>
+                <p>Recognize that face and browse everything they’ve ever been in.</p>
               </li>
-              <!-- Slide 6 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Customize Your Profile</h3>
-                  <p>Show off your Top Ate (8) movies and TV shows.</p>
-                  <p>Earn badges are you conquer the world of content.</p>
+              <!-- 06 -->
+              <li class="feature-card">
+                <span class="stub">Nº 06</span>
+                <div class="shot">
+                  <img src="assets/features/profile.png" alt="Customizable user profile with top movies and achievement badges" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/profile.png" alt="Customizable user profile with top movies and achievement badges" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Your Profile</h3>
+                <p>Show off your Top Ate and earn badges as you rack up the hours.</p>
               </li>
-              <!-- Slide 7 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">See What's Trending</h3>
-                  <p>View trending and top rated content over the last week, month, and year.</p>
+              <!-- 07 -->
+              <li class="feature-card">
+                <span class="stub">Nº 07</span>
+                <div class="shot">
+                  <img src="assets/features/trending.png" alt="Trending movies and TV shows screen with time filters" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/trending.png" alt="Trending movies and TV shows screen with time filters" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>What’s Trending</h3>
+                <p>Follow what’s trending and top-rated over the last week, month, or year.</p>
               </li>
-              <!-- Slide 8 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Scores for You</h3>
-                  <p>Scores tailored to your taste.</p>
-                  <p>View your score, Tastebud average, and global average for content in one easy place.</p>
+              <!-- 08 -->
+              <li class="feature-card">
+                <span class="stub">Nº 08</span>
+                <div class="shot">
+                  <img src="assets/features/scores.png" alt="Personalized content scores comparing your rating with friends and global averages" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/scores.png" alt="Personalized content scores comparing your rating with friends and global averages" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Scores for You</h3>
+                <p>Your score, your Tastebuds’ average, and the global score — all side by side.</p>
               </li>
-              <!-- Slide 9 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Discuss, Debate, Discover</h3>
-                  <p>Get into in-depth breakdowns and discuss content in nested threads filtered to your preferences.</p>
+              <!-- 09 -->
+              <li class="feature-card">
+                <span class="stub">Nº 09</span>
+                <div class="shot">
+                  <img src="assets/features/comments.png" alt="Threaded discussion feature for movie and TV reviews" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/comments.png" alt="Threaded discussion feature for movie and TV reviews" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Discuss &amp; Debate</h3>
+                <p>Dig into nested threads filtered to the people and takes you actually care about.</p>
               </li>
-            </ul>
-          </div>
-
-          <!-- Controls -->
-          <div class="mt-6 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="hidden md:flex gap-2" id="dots" role="tablist" aria-label="Feature slides"></div>
-              <span id="autoHint" class="inline-flex items-center text-white/60 text-[11px] opacity-0 transition-opacity select-none" title="Auto‑advance paused">
-                <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" class="mr-1"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
-                Paused
-              </span>
-            </div>
-          </div>
-          <div id="status" class="sr-only" aria-live="polite"></div>
+          </ul>
         </div>
       </div>
     </section>
@@ -1315,95 +1376,6 @@
       go(0);
     })();
 
-    // Features auto-scroll: simple horizontal scrolling
-    (function(){
-      const scroller = document.getElementById('featuresScroller');
-      if (!scroller) return;
-
-      let animationFrame = null;
-      let lastInteractionTime = 0;
-      let isAutoScrolling = false;
-      let lastKnownScrollLeft = 0;
-      const scrollSpeed = 0.5;
-      const pauseAfterInteraction = 3000;
-
-      function autoScroll() {
-        const now = Date.now();
-        const timeSinceInteraction = now - lastInteractionTime;
-
-        if (lastInteractionTime === 0 || timeSinceInteraction >= pauseAfterInteraction) {
-          isAutoScrolling = true;
-          scroller.scrollLeft += scrollSpeed;
-          lastKnownScrollLeft = scroller.scrollLeft;
-
-          if (scroller.scrollLeft >= scroller.scrollWidth - scroller.clientWidth) {
-            scroller.scrollLeft = 0;
-            lastKnownScrollLeft = 0;
-          }
-
-          isAutoScrolling = false;
-        }
-
-        animationFrame = requestAnimationFrame(autoScroll);
-      }
-
-      function startScrolling() {
-        if (!animationFrame) {
-          lastKnownScrollLeft = scroller.scrollLeft;
-          animationFrame = requestAnimationFrame(autoScroll);
-        }
-      }
-
-      function stopScrolling() {
-        if (animationFrame) {
-          cancelAnimationFrame(animationFrame);
-          animationFrame = null;
-        }
-      }
-
-      // Only detect user scrolling if scroll position changed unexpectedly
-      scroller.addEventListener('scroll', () => {
-        if (!isAutoScrolling) {
-          const currentScroll = scroller.scrollLeft;
-          const expectedScroll = lastKnownScrollLeft;
-          const diff = Math.abs(currentScroll - expectedScroll);
-
-          // If scroll changed by more than our auto-scroll speed, user is scrolling
-          if (diff > scrollSpeed * 2) {
-            lastInteractionTime = Date.now();
-          }
-
-          lastKnownScrollLeft = currentScroll;
-        }
-      }, {passive: true});
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            startScrolling();
-          } else {
-            stopScrolling();
-          }
-        });
-      }, { threshold: 0.2 });
-
-      observer.observe(scroller);
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          stopScrolling();
-        } else {
-          const rect = scroller.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) {
-            startScrolling();
-          }
-        }
-      });
-
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        stopScrolling();
-      }
-    })();
 
     // Contact form (mailto)
     const form = document.getElementById('contactForm');
