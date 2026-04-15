@@ -525,6 +525,104 @@
     .who-mic-wrap:before { content: ""; position: absolute; inset: 8% 14%; background: #FCF9EF; border-radius: 50%; opacity: .45; z-index: 0; }
     .who-mic-wrap .halftone-chip { position: relative; z-index: 1; }
     @media (min-width: 768px) { .who-mic-wrap .halftone-chip { max-width: 220px; } }
+
+    /* ---- Phase 4: Chef + Reviews polish ---- */
+
+    /* Chef: editorial treatment matching the phase-2/3 language */
+    #chef { position: relative; background: #1C1C1C; }
+    #chef:before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(243,231,191,.04) 1px, transparent 1.2px); background-size: 7px 7px; pointer-events: none; }
+    #chef > * { position: relative; }
+    #chef .chef-eyebrow { color: #F3E7BF; opacity: .8; }
+    #chef .section-title { color: #FCF9EF; }
+    .chef-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; margin-top: 1rem; border-radius: 2px; opacity: .85; }
+    .chef-lede { color: rgba(252,249,239,.78); max-width: 34rem; font-size: 1.02rem; line-height: 1.55; margin-top: 1rem; }
+
+    /* Two-column "what it does / why it matters" split */
+    .chef-split { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.75rem; }
+    @media (min-width: 640px) { .chef-split { grid-template-columns: 1fr 1fr; gap: 1.25rem; } }
+    .chef-block { position: relative; padding: 1.1rem 1.25rem 1.25rem; border-radius: 12px; background: linear-gradient(180deg, rgba(252,249,239,.035), rgba(252,249,239,.01)); border: 1px solid rgba(243,231,191,.18); }
+    .chef-block:before { content: ""; position: absolute; top: 0; left: 1.1rem; width: 28px; height: 3px; background: #F3E7BF; border-radius: 0 0 2px 2px; opacity: .75; }
+    .chef-block h3 { font-family: 'Anton', Impact, sans-serif; font-size: 1.1rem; line-height: 1; letter-spacing: .02em; color: #FCF9EF; margin-bottom: .4rem; text-transform: uppercase; }
+    .chef-block .chef-block-kicker { display: block; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .65rem; letter-spacing: .28em; text-transform: uppercase; color: #F3E7BF; opacity: .7; margin-bottom: .35rem; }
+    .chef-block p { color: rgba(252,249,239,.78); font-size: .9rem; line-height: 1.55; margin: 0; }
+
+    /* Chef screenshot frame: single uniform poster-style chip */
+    .chef-frame { position: relative; border-radius: 16px; padding: 1rem 1rem 1.25rem; background: linear-gradient(180deg, rgba(243,231,191,.08), rgba(243,231,191,.02)); border: 1px solid rgba(243,231,191,.22); overflow: hidden; }
+    .chef-frame:before { content: ""; position: absolute; top: 0; left: 1.25rem; width: 48px; height: 3px; background: #E3452D; border-radius: 0 0 2px 2px; opacity: .85; }
+    .chef-frame:after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(243,231,191,.05) 1px, transparent 1.2px); background-size: 6px 6px; pointer-events: none; }
+    .chef-frame .chef-frame-meta { position: absolute; top: .9rem; right: 1.1rem; font-family: 'Anton', Impact, sans-serif; font-size: .78rem; letter-spacing: .22em; color: rgba(243,231,191,.6); z-index: 2; }
+    .chef-frame #chefSlider { position: relative; z-index: 1; }
+
+    /* ---- Reviews: festival pull-quote strip ---- */
+    #reviews { background: #1C1C1C; position: relative; padding-top: 1.25rem; padding-bottom: 2.5rem; overflow: hidden; }
+    #reviews:before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(243,231,191,.04) 1px, transparent 1.2px); background-size: 7px 7px; pointer-events: none; }
+    #reviews .reviews-eyebrow { color: #F3E7BF; opacity: .8; }
+    #reviews .section-title { color: #FCF9EF; }
+    #reviews .section-title em { color: #E3452D; }
+    .reviews-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; margin-top: 1rem; border-radius: 2px; opacity: .85; }
+    .reviews-lede { color: rgba(252,249,239,.72); max-width: 32rem; font-size: .98rem; line-height: 1.5; margin-top: .75rem; }
+    .reviews-header { position: relative; z-index: 1; }
+    .reviews-header:after { content: ""; display: block; margin: 1.5rem 0 0; height: 1px; background: repeating-linear-gradient(to right, rgba(243,231,191,.4) 0 12px, transparent 12px 22px); opacity: .55; }
+
+    /* Pull-quote card — vintage film-festival poster */
+    .pullquote {
+      position: relative;
+      width: 320px;
+      min-width: 320px;
+      max-width: 320px;
+      min-height: 260px;
+      padding: 1.4rem 1.4rem 1.25rem;
+      background: #F3E7BF;
+      color: #1C1C1C;
+      border: 1px solid rgba(28,28,28,.12);
+      border-radius: 4px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: 0 10px 24px rgba(0,0,0,.25), 0 1px 0 rgba(255,255,255,.45) inset;
+      flex-shrink: 0;
+    }
+    .pullquote:before {
+      content: "\201C";
+      position: absolute; top: -.25rem; left: .6rem;
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: 6rem; line-height: 1;
+      color: #E3452D; opacity: .88;
+      pointer-events: none;
+    }
+    .pullquote .pq-kicker { font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .62rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: rgba(28,28,28,.55); margin-bottom: .35rem; position: relative; z-index: 1; padding-left: 2.6rem; }
+    .pullquote .pq-title { font-family: 'Anton', Impact, sans-serif; font-size: 1.7rem; line-height: 1; letter-spacing: .01em; text-transform: uppercase; color: #1C1C1C; margin-top: .15rem; position: relative; z-index: 1; }
+    .pullquote .pq-body { font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .9rem; line-height: 1.5; color: rgba(28,28,28,.78); margin-top: .6rem; flex: 1; }
+    .pullquote .pq-rule { display: block; width: 28px; height: 2px; background: #E3452D; margin: .75rem 0 .5rem; border-radius: 1px; opacity: .85; }
+    .pullquote .pq-by { font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(28,28,28,.62); }
+
+    .pullquote.variant-cherry { background: #E3452D; color: #FCF9EF; }
+    .pullquote.variant-cherry:before { color: #1C1C1C; opacity: .5; }
+    .pullquote.variant-cherry .pq-kicker { color: rgba(252,249,239,.7); }
+    .pullquote.variant-cherry .pq-title { color: #FCF9EF; }
+    .pullquote.variant-cherry .pq-body { color: rgba(252,249,239,.88); }
+    .pullquote.variant-cherry .pq-rule { background: #1C1C1C; }
+    .pullquote.variant-cherry .pq-by { color: rgba(252,249,239,.82); }
+
+    .pullquote.variant-mint { background: #419B85; color: #FCF9EF; }
+    .pullquote.variant-mint:before { color: #1C1C1C; opacity: .55; }
+    .pullquote.variant-mint .pq-kicker { color: rgba(252,249,239,.72); }
+    .pullquote.variant-mint .pq-title { color: #FCF9EF; }
+    .pullquote.variant-mint .pq-body { color: rgba(252,249,239,.9); }
+    .pullquote.variant-mint .pq-rule { background: #1C1C1C; }
+    .pullquote.variant-mint .pq-by { color: rgba(252,249,239,.8); }
+
+    /* Review belt: smooth CSS-driven marquee (no RAF), with a reduced-motion static grid fallback */
+    .reviews-belt-wrap { position: relative; overflow: hidden; padding: 1.5rem 0 .25rem; mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%); }
+    .reviews-belt { display: flex; gap: 1.25rem; width: max-content; animation: pullquoteLoop 80s linear infinite; will-change: transform; padding: 0 1rem; }
+    .reviews-belt:hover { animation-play-state: paused; }
+    @keyframes pullquoteLoop { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .reviews-belt-wrap { mask-image: none; -webkit-mask-image: none; overflow: visible; }
+      .reviews-belt { animation: none; width: 100%; flex-wrap: wrap; justify-content: center; }
+      /* A single set is enough when reduced-motion hides the duplicate */
+      .reviews-belt .reviews-set.is-duplicate { display: none; }
+      .pullquote { width: 100%; max-width: 340px; min-width: 0; }
+    }
+    .reviews-set { display: flex; gap: 1.25rem; align-items: stretch; }
   </style>
 
   <!-- Structured Data (JSON-LD) -->
@@ -943,204 +1041,189 @@
     <!-- Chef: Recommendation System -->
     <section id="chef" class="py-20 md:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-12 items-start">
-          <!-- Copy -->
-          <div class="space-y-6 order-1 md:order-1 text-center md:text-left">
-          <div class="inline-flex items-center gap-3 rounded-full px-3 py-1 ring-1 ring-white/10 bg-white/5">
-            <span class="text-xs tracking-widest uppercase text-white/70">Get Custom Recommendations</span>
-          </div>
-          <h2 class="font-display text-4xl">Your Own Private Chef</h2>
-          <p class="text-almond/80">Chef learns your palate and can serve you an order of 5 custom watch recommendations — with clear reasons why each choice fits you (or your group).</p>
+        <div class="grid md:grid-cols-12 gap-10 md:gap-12 items-start">
+          <!-- Copy (left, 7 cols) -->
+          <div class="md:col-span-7 order-1 text-center md:text-left">
+            <span class="section-kicker chef-eyebrow align-start">The Special</span>
+            <h2 class="section-title mt-4">Your own private <em>chef</em>.</h2>
+            <span class="chef-divider" aria-hidden="true"></span>
+            <p class="chef-lede">Five custom watch recommendations, served with clear reasons why each one fits you — or the room. Chef learns your palate over time and adjusts each order to the table.</p>
 
-          <div class="grid gap-6">
-            <div>
-              <h3 class="font-semibold mb-2">Taste Profile</h3>
-              <ul class="list-disc list-inside text-almond/75 space-y-1">
-                <li>Tagline and taste description built specifically to your watch style</li>
-                <li>Unlock genre affinities, creative influences, and cinematic preferences</li>
-                <li>Understand your viewing habits and taste evolution over time</li>
-              </ul>
+            <div class="chef-split">
+              <div class="chef-block">
+                <span class="chef-block-kicker">What it does</span>
+                <h3>Reads your taste</h3>
+                <p>A living taste profile — genres, creative influences, and the patterns in what you actually finish — translated into a tagline that reads like a short review of you.</p>
+              </div>
+              <div class="chef-block">
+                <span class="chef-block-kicker">Why it matters</span>
+                <h3>Custom orders</h3>
+                <p>Pick a party, a vibe (seasoning), a spice level, and any allergies. Chef balances everyone at the table and always tells you <em>why</em> each pick made the cut.</p>
+              </div>
             </div>
-            <div>
-              <h3 class="font-semibold mb-2">Custom Orders</h3>
-              <ul class="list-disc list-inside text-almond/75 space-y-1">
-                <li>TV, Movies (or both)</li>
-                <li>Who you’re watching with <strong>(balances everyone’s taste)</strong></li>
-                <li>Preferred genres and allergies (triggers/want to avoid)</li>
-                <li>Seasoning (custom prompt) and spice level (safe → out there)</li>
-              </ul>
+
+            <div class="hero-ctas mt-8">
+              <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
+                <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" loading="lazy" />
+              </a>
+              <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="hero-cta-secondary" style="border-color:#FCF9EF;color:#FCF9EF;">
+                See how it works
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
             </div>
           </div>
 
-          <div class="flex gap-3 pt-2 justify-center md:justify-start">
-            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
-              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" loading="lazy" />
-            </a>
-            <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="rounded-xl border border-white/20 px-4 py-2 hover:bg-white/5 transition ring-1 ring-black/70">See how it works</a>
+          <!-- Screenshot poster (right, 5 cols) -->
+          <div class="md:col-span-5 order-2 overflow-hidden md:overflow-visible">
+            <div class="chef-frame">
+              <span class="chef-frame-meta">Nº 01 · Tonight</span>
+              <div id="chefSlider" class="overflow-hidden rounded-2xl px-2 md:px-3 pt-6" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
+                <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
+                  <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
+                    <img src="assets/chef/chef-home.png" alt="Chef AI recommendation system home screen" class="w-full h-full object-cover" loading="lazy" />
+                  </li>
+                  <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
+                    <img src="assets/chef/chef-rec.png" alt="Chef personalized movie and TV recommendations with reasons" class="w-full h-full object-cover" loading="lazy" />
+                  </li>
+                  <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
+                    <img src="assets/chef/chef-taste.png" alt="Chef taste profile showing viewing preferences and genre affinities" class="w-full h-full object-cover" loading="lazy" />
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </div>
-
-          <!-- Carousel -->
-          <div class="order-2 md:order-2 overflow-hidden md:overflow-visible">
-          <div id="chefSlider" class="overflow-hidden rounded-3xl px-2 md:px-4" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
-            <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
-              <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <img src="assets/chef/chef-home.png" alt="Chef AI recommendation system home screen" class="w-full h-full object-cover" loading="lazy" />
-              </li>
-              <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <img src="assets/chef/chef-rec.png" alt="Chef personalized movie and TV recommendations with reasons" class="w-full h-full object-cover" loading="lazy" />
-              </li>
-              <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <img src="assets/chef/chef-taste.png" alt="Chef taste profile showing viewing preferences and genre affinities" class="w-full h-full object-cover" loading="lazy" />
-              </li>
-            </ul>
-          </div>
-        </div>
         </div>
       </div>
     </section>
 
-    <!-- Theater marquee + Reviews Poster Marquee -->
-    <section class="py-12 overflow-visible">
-      <div class="theater-section">
-        <div id="reviews-marquee">
-          <div class="theater-neon-bar top" id="neonTop"></div>
-          <div class="theater-marquee-message"><span>User Reviews</span></div>
-          <div class="theater-neon-bar bottom" id="neonBottom"></div>
-        </div>
+    <!-- Reviews: festival pull-quote strip -->
+    <section id="reviews" class="py-16 md:py-20">
+      <div class="reviews-header max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
+        <span class="section-kicker reviews-eyebrow align-start">The Reviews</span>
+        <h2 class="section-title mt-4">What the <em>critics</em> say.</h2>
+        <span class="reviews-divider" aria-hidden="true"></span>
+        <p class="reviews-lede">A strip of pull-quotes from real Aftertaste moviegoers — lightly edited, not lightly held.</p>
       </div>
-      <div class="max-w-[100vw] mx-auto px-0 overflow-x-hidden overflow-y-visible py-2 md:py-3" aria-label="User reviews">
-        <div class="marquee" id="reviewsBelt" style="width:200%;">
-          <div class="flex gap-8 px-4 w-1/2" id="reviewsSetA">
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Amazing Concept</h4>
-                <blockquote class="leading-relaxed">“... save hours of indecisive scrolling time on Netflix...”</blockquote>
+      <div class="reviews-belt-wrap mt-4">
+        <div class="reviews-belt" id="reviewsBelt">
+          <div class="reviews-set" id="reviewsSetA">
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Amazing Concept.</div>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@nickmamolo</figcaption>
+              <p class="pq-body">“Save hours of indecisive scrolling time on Netflix.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@nickmamolo</figcaption>
+              </div>
             </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Good app and product!</h4>
-                <blockquote class="leading-relaxed">“Do IMDB or rotten tomatoes ratings matter anymore? I feel like my friends opinions are better signal for what is good!”</blockquote>
+            <figure class="pullquote variant-cherry">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Signal over noise.</div>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@Landslidefink</figcaption>
+              <p class="pq-body">“Do IMDB or Rotten Tomatoes ratings matter anymore? My friends&rsquo; opinions are better signal for what is good.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@Landslidefink</figcaption>
+              </div>
             </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Great app!!</h4>
-                <blockquote class="leading-relaxed">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid...).”</blockquote>
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Great app!!</div>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@ponse71820386;);</figcaption>
+              <p class="pq-body">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid).”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@ponse71820386</figcaption>
+              </div>
             </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Chef is incredible!</h4>
-                <blockquote class="leading-relaxed">“So interesting to see my unique taste profile, and Chef has recommended me some of my absolute favorite watches that I've ever seen.”</blockquote>
+            <figure class="pullquote variant-mint">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Chef is incredible!</div>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@michaeltferg</figcaption>
+              <p class="pq-body">“So interesting to see my unique taste profile — Chef has recommended some of my absolute favourite watches ever.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@michaeltferg</figcaption>
+              </div>
             </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Where has this been?</h4>
-                <blockquote class="leading-relaxed">“About time an app like this came along. It knocks it out of the park.”</blockquote>
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Where has this been?</div>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@pancakes</figcaption>
-            </figure>
-          </div>
-          <!-- duplicate set for seamless loop -->
-          <div class="flex gap-8 px-4 w-1/2" id="reviewsSetB">
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Amazing Concept</h4>
-                <blockquote class="leading-relaxed">“... save hours of indecisive scrolling time on Netflix...”</blockquote>
+              <p class="pq-body">“About time an app like this came along. It knocks it out of the park.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@pancakes</figcaption>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@nickmamolo</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Good app and product!</h4>
-                <blockquote class="leading-relaxed">“Do IMDB or rotten tomatoes ratings matter anymore? I feel like my friends opinions are better signal for what is good!”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@Landslidefink</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Great app!!</h4>
-                <blockquote class="leading-relaxed">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid...).”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@ponse71820386;);</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Chef is incredible!</h4>
-                <blockquote class="leading-relaxed">“So interesting to see my unique taste profile, and Chef has recommended me some of my absolute favorite watches that I've ever seen.”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@michaeltferg</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Where has this been?</h4>
-                <blockquote class="leading-relaxed">“About time an app like this came along. It knocks it out of the park.”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@pancakes</figcaption>
             </figure>
           </div>
-          <!-- duplicate set for seamless loop -->
-          <div class="flex gap-8 px-4 w-1/2" id="reviewsSetB">
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Amazing Concept</h4>
-                <blockquote class="leading-relaxed">“... save hours of indecisive scrolling time on Netflix...”</blockquote>
+          <!-- duplicate set for seamless CSS marquee loop (hidden via CSS on reduced-motion) -->
+          <div class="reviews-set is-duplicate" aria-hidden="true">
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Amazing Concept.</div>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@nickmamolo</figcaption>
+              <p class="pq-body">“Save hours of indecisive scrolling time on Netflix.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@nickmamolo</figcaption>
+              </div>
             </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Good app and product!</h4>
-                <blockquote class="leading-relaxed">“Do IMDB or rotten tomatoes ratings matter anymore? I feel like my friends opinions are better signal for what is good!”</blockquote>
+            <figure class="pullquote variant-cherry">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Signal over noise.</div>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@Landslidefink</figcaption>
+              <p class="pq-body">“Do IMDB or Rotten Tomatoes ratings matter anymore? My friends&rsquo; opinions are better signal for what is good.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@Landslidefink</figcaption>
+              </div>
             </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Great app!!</h4>
-                <blockquote class="leading-relaxed">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid...).”</blockquote>
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Great app!!</div>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@ponse71820386;);</figcaption>
+              <p class="pq-body">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid).”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@ponse71820386</figcaption>
+              </div>
             </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Chef is incredible!</h4>
-                <blockquote class="leading-relaxed">“So interesting to see my unique taste profile, and Chef has recommended me some of my absolute favorite watches that I've ever seen.”</blockquote>
+            <figure class="pullquote variant-mint">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Chef is incredible!</div>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@michaeltferg</figcaption>
+              <p class="pq-body">“So interesting to see my unique taste profile — Chef has recommended some of my absolute favourite watches ever.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@michaeltferg</figcaption>
+              </div>
             </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Where has this been?</h4>
-                <blockquote class="leading-relaxed">“About time an app like this came along. It knocks it out of the park.”</blockquote>
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Where has this been?</div>
               </div>
-              <figcaption class="text-sm text-black/70 text-center">@pancakes</figcaption>
+              <p class="pq-body">“About time an app like this came along. It knocks it out of the park.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@pancakes</figcaption>
+              </div>
             </figure>
           </div>
         </div>
       </div>
+    </section>
     </section>
 
     <!-- Web app callout -->
