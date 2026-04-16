@@ -44,6 +44,9 @@
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="shortcut icon" href="assets/favicon.ico" />
 
+  <!-- Preload the hero portrait (LCP candidate) -->
+  <link rel="preload" as="image" href="assets/hero-portrait.png" fetchpriority="high" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -55,19 +58,17 @@
           colors: {
             licorice: "#1C1C1C",
             almond: "#FCF9EF",
-            cottoncandy: "#5EB9CE",
             cherry: "#E3452D",
             bubblegum: "#FFB1C1",
             mint: "#419B85",
-            coffee: "#F3E7BF",
-            popcorn: "#F1A20E"
+            coffee: "#F3E7BF"
           },
           fontFamily: {
             sans: ["Montserrat", "ui-sans-serif", "system-ui"],
             display: ["Anton", "Impact", "sans-serif"]
           },
           boxShadow: {
-            glow: "0 0 0 3px rgba(94,185,206,.35), 0 8px 30px rgba(0,0,0,.45)"
+            glow: "0 0 0 3px rgba(227,69,45,.28), 0 8px 30px rgba(0,0,0,.45)"
           },
           backgroundImage: {
             noir: "radial-gradient(1200px 600px at 70% -20%, rgba(94,185,206,.12), transparent 38%), radial-gradient(800px 400px at 10% 120%, rgba(227,69,45,.10), transparent 48%), linear-gradient(160deg, #0a0a0a 0%, #151515 55%, #0e0e0e 100%)"
@@ -132,7 +133,7 @@
     .screen-vignette.soft{box-shadow: inset 0 0 20px 5px rgba(0,0,0,.02)}
 
     .screen-frame{position:absolute; inset:-14px; z-index:3; pointer-events:none; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.3)); box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset, 0 22px 60px rgba(0,0,0,.4)}
-    .reel-band{position:absolute; inset:0; z-index:4; pointer-events:none; background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.06) 48%, rgba(255,255,255,.12) 50%, rgba(255,255,255,.06) 52%, transparent 100%); background-size: 120% 100%; opacity:.35; animation: reel 18s linear infinite}
+    .reel-band{position:absolute; inset:0; z-index:4; pointer-events:none; background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.04) 48%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.04) 52%, transparent 100%); background-size: 120% 100%; opacity:.22; animation: reel 28s linear infinite}
     @media (prefers-reduced-data: reduce){
       .cinema-screen{
         background-image: radial-gradient(120% 90% at 50% 42%, rgba(250,248,240,.95) 0%, rgba(242,239,230,.92) 46%, rgba(86,78,70,.45) 76%, rgba(0,0,0,.86) 100%);
@@ -305,27 +306,360 @@
       .parallax:hover img { transform: perspective(800px) rotateY(-2.5deg) translateZ(0);       }
     }
 
-    /* Auto-scroll for feature cards */
-    .feature-scroll {
-      scroll-behavior: smooth;
+    /* ---- Phase 3: Features poster-card grid ---- */
+    /* Background: same Coffee-dot halftone on Licorice used for #glance, for a consistent editorial block */
+    #features { background: #111 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><circle cx='1' cy='1' r='.6' fill='%23F3E7BF' opacity='.04'/></svg>") repeat; }
+    #features .features-eyebrow { color: #F3E7BF; opacity: .8; }
+    #features .section-title { color: #FCF9EF; }
+
+    /* Divider bar under the section title */
+    .features-divider { width: 56px; height: 3px; background: #F3E7BF; opacity: .85; border-radius: 2px; margin-top: 1rem; }
+    .features-lede { color: rgba(252,249,239,.72); max-width: 34rem; font-size: 1.02rem; line-height: 1.55; }
+
+    /* Poster-style feature card — uniform frame, consistent proportions */
+    .feature-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem 1.5rem 1.75rem;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(252,249,239,.035), rgba(252,249,239,.01));
+      border: 1px solid rgba(243,231,191,.18);
+      height: 100%;
+      transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease;
+      overflow: hidden;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(243,231,191,.42);
+      background: linear-gradient(180deg, rgba(252,249,239,.06), rgba(252,249,239,.015));
+    }
+    /* Coffee tab, matches .glance-card language */
+    .feature-card:before {
+      content: "";
+      position: absolute;
+      top: 0; left: 1.5rem;
+      width: 36px; height: 3px;
+      background: #F3E7BF;
+      border-radius: 0 0 2px 2px;
+      opacity: .75;
     }
 
-    /* Custom scrollbar styling for features section */
-    .feature-scroll::-webkit-scrollbar {
-      height: 8px;
+    /* Screenshot chip: phone-shaped poster image, uniform aspect so every card aligns */
+    .feature-card .shot {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      background: radial-gradient(ellipse at 50% 60%, rgba(243,231,191,.12), rgba(243,231,191,0) 65%);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .feature-card .shot:after {
+      /* subtle coffee-dot halftone wash to tie screenshots into the vintage look */
+      content: "";
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(243,231,191,.06) 1px, transparent 1.2px);
+      background-size: 6px 6px;
+      pointer-events: none;
+    }
+    .feature-card .shot img {
+      position: relative;
+      display: block;
+      width: auto;
+      height: 92%;
+      max-width: 78%;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,.45));
     }
 
-    .feature-scroll::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
+    /* Ticket-stub numeral in the top-right of every card */
+    .feature-card .stub {
+      position: absolute;
+      top: 1.1rem; right: 1.25rem;
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: .82rem;
+      letter-spacing: .22em;
+      color: rgba(243,231,191,.55);
+    }
+
+    .feature-card h3 {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: 1.4rem;
+      line-height: 1.02;
+      letter-spacing: .02em;
+      color: #FCF9EF;
+      margin-bottom: .55rem;
+    }
+    .feature-card p {
+      font-family: 'Montserrat', ui-sans-serif, system-ui;
+      color: rgba(252,249,239,.74);
+      font-size: .92rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    /* Thin divider under the title, matches the poster language */
+    .feature-card h3:after {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: #E3452D;
+      opacity: .8;
+      border-radius: 1px;
+      margin-top: .55rem;
+      margin-bottom: .75rem;
+    }
+
+    /* ---- Phase 1: Header + Hero polish ---- */
+
+    /* Header scroll state: transparent over hero, solid Licorice once scrolled */
+    #top { backdrop-filter: saturate(140%) blur(0px); transition: background-color 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease; }
+    #top.is-scrolled { background-color: rgba(28,28,28,.92); backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid rgba(252,249,239,.08); }
+    #top.is-scrolled .nav-divider { opacity: 0; }
+    #top:not(.is-scrolled) .nav-divider { opacity: 0; }
+
+    /* Nav link underline (Cherry), replaces popcorn color swap */
+    .nav-link { position: relative; color: #FCF9EF; opacity: .85; transition: opacity 200ms ease, color 200ms ease; }
+    .nav-link:hover, .nav-link:focus-visible { opacity: 1; color: #FCF9EF; }
+    .nav-link:after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: #E3452D; transform: scaleX(0); transform-origin: left center; transition: transform 240ms ease; }
+    .nav-link:hover:after, .nav-link:focus-visible:after { transform: scaleX(1); }
+
+    /* Mobile nav panel */
+    #mobile-nav { transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 200ms ease, transform 200ms ease; }
+    #mobile-nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-menu-btn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; color: #FCF9EF; border: 1px solid rgba(252,249,239,.15); background: rgba(28,28,28,.4); }
+    .mobile-menu-btn:hover { background: rgba(28,28,28,.7); }
+    .mobile-menu-btn:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
+
+    /* Hero primary/secondary CTAs */
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; }
+    @media (min-width: 768px) { .hero-ctas { justify-content: flex-start; } }
+    .hero-cta-secondary { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.25rem; border-radius: 9999px; border: 1.5px solid #1C1C1C; color: #1C1C1C; font-weight: 600; font-size: .875rem; letter-spacing: .02em; transition: background-color 180ms ease, color 180ms ease, transform 180ms ease; }
+    .hero-cta-secondary:hover { background: #1C1C1C; color: #FCF9EF; transform: translateY(-1px); }
+    .hero-cta-secondary:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
+    .hero-cta-secondary svg { width: 14px; height: 14px; transition: transform 200ms ease; }
+    .hero-cta-secondary:hover svg { transform: translateY(2px); }
+
+    /* NOW PLAYING marquee strip (below hero) */
+    .now-playing { background: #1C1C1C; color: #FCF9EF; border-top: 1px solid rgba(252,249,239,.08); border-bottom: 1px solid rgba(252,249,239,.08); overflow: hidden; position: relative; }
+    .now-playing:before, .now-playing:after { content: ""; position: absolute; top: 0; bottom: 0; width: 64px; z-index: 2; pointer-events: none; }
+    .now-playing:before { left: 0; background: linear-gradient(90deg, #1C1C1C, rgba(28,28,28,0)); }
+    .now-playing:after { right: 0; background: linear-gradient(-90deg, #1C1C1C, rgba(28,28,28,0)); }
+    .now-playing-track { display: flex; gap: 2.5rem; padding: .85rem 0; white-space: nowrap; animation: npScroll 38s linear infinite; will-change: transform; }
+    .now-playing-track span { font-family: 'Anton', Impact, sans-serif; font-size: 1.15rem; letter-spacing: .35em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 2.5rem; }
+    .now-playing-track span:after { content: "\2022"; color: #E3452D; margin-left: 2.5rem; }
+    @keyframes npScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .now-playing-track { animation: none; justify-content: center; flex-wrap: wrap; white-space: normal; }
+    }
+
+    /* ---- Phase 2: "At a Glance" + "Who we are" refresh ---- */
+
+    /* Shared editorial kicker eyebrow (Montserrat small-caps) for section headers */
+    .section-kicker { display: inline-flex; align-items: center; gap: .6rem; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+    .section-kicker:before, .section-kicker:after { content: ""; display: inline-block; width: 28px; height: 1px; background: currentColor; opacity: .45; }
+    .section-kicker.align-start:after { display: none; }
+
+    /* Editorial section heading helpers */
+    .section-title { font-family: 'Anton', Impact, sans-serif; font-size: clamp(2.25rem, 4vw + 1rem, 3.75rem); line-height: .98; letter-spacing: .005em; text-transform: none; }
+    .section-title em { font-style: normal; color: #E3452D; }
+
+    /* Halftone duotone image chip (for "Who we are" microphone etc.) */
+    .halftone-chip { position: relative; display: inline-block; isolation: isolate; }
+    .halftone-chip img { display: block; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; width: 100%; height: auto; }
+    .halftone-chip:after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(28,28,28,.55) 1px, transparent 1.2px); background-size: 5px 5px; mix-blend-mode: multiply; pointer-events: none; opacity: .9; }
+    .halftone-chip.on-mint:after { background-image: radial-gradient(circle, rgba(28,28,28,.42) 1px, transparent 1.2px); }
+
+    /* "At a Glance" — Almond/Coffee neutral treatment */
+    #glance { background: #111 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><circle cx='1' cy='1' r='.6' fill='%23F3E7BF' opacity='.04'/></svg>") repeat; }
+    #glance .glance-eyebrow { color: #F3E7BF; opacity: .8; }
+    #glance .section-title { color: #FCF9EF; }
+    #glance .glance-lede { color: rgba(252,249,239,.78); max-width: 42rem; margin-left: auto; margin-right: auto; margin-top: .9rem; font-size: 1.05rem; line-height: 1.55; }
+    .glance-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; margin: 1.25rem auto 0; border-radius: 2px; }
+
+    /* Poster-style feature cards with coffee/almond neutral accents */
+    .glance-card { position: relative; padding: 1.6rem; border-radius: 14px; background: linear-gradient(180deg, rgba(252,249,239,.035), rgba(252,249,239,.01)); border: 1px solid rgba(243,231,191,.18); transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease; height: 100%; }
+    .glance-card:hover { transform: translateY(-2px); border-color: rgba(243,231,191,.42); background: linear-gradient(180deg, rgba(252,249,239,.06), rgba(252,249,239,.015)); }
+    .glance-card:before { content: ""; position: absolute; top: 0; left: 1.5rem; width: 36px; height: 3px; background: #F3E7BF; border-radius: 0 0 2px 2px; opacity: .75; }
+    .glance-card .card-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: rgba(243,231,191,.09); border: 1px solid rgba(243,231,191,.22); color: #F3E7BF; margin-bottom: 1rem; }
+    .glance-card .card-icon img { width: 20px; height: 20px; filter: brightness(0) saturate(100%) invert(91%) sepia(16%) saturate(397%) hue-rotate(9deg) brightness(98%) contrast(92%); }
+    .glance-card .card-icon svg { width: 20px; height: 20px; }
+    .glance-card h3 { font-family: 'Anton', Impact, sans-serif; font-size: 1.35rem; line-height: 1; letter-spacing: .02em; color: #FCF9EF; margin-bottom: .55rem; }
+    .glance-card p { color: rgba(252,249,239,.78); font-size: .95rem; line-height: 1.5; margin-bottom: .85rem; }
+    .glance-card ul { list-style: none; padding: 0; margin: 0; border-top: 1px dashed rgba(243,231,191,.18); padding-top: .7rem; }
+    .glance-card ul li { position: relative; font-size: .82rem; color: rgba(252,249,239,.62); padding-left: 1rem; line-height: 1.55; }
+    .glance-card ul li:before { content: "\2022"; position: absolute; left: 0; top: 0; color: #F3E7BF; opacity: .8; font-size: 1.05rem; line-height: 1.4; }
+
+    /* "Who we are" — Mint anchor */
+    #who { background: #419B85; color: #1C1C1C; position: relative; overflow: hidden; }
+    #who:before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(28,28,28,.08) 1px, transparent 1.2px); background-size: 7px 7px; mix-blend-mode: multiply; pointer-events: none; opacity: .6; }
+    #who:after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: repeating-linear-gradient(to right, rgba(28,28,28,.25) 0 12px, transparent 12px 20px); opacity: .5; pointer-events: none; }
+    .who-kicker { color: #1C1C1C; opacity: .75; }
+    .who-kicker:before { background: #1C1C1C; }
+    #who .section-title { color: #1C1C1C; }
+    #who .section-title em { color: #FCF9EF; background: #1C1C1C; padding: 0 .4rem; border-radius: 2px; }
+    .who-lede { font-size: 1.15rem; line-height: 1.55; color: #1C1C1C; max-width: 30rem; }
+    .who-meta { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: #1C1C1C; opacity: .75; }
+    .who-meta .who-dot { width: 6px; height: 6px; border-radius: 50%; background: #E3452D; display: inline-block; }
+    .who-mic-wrap { position: relative; padding: 1.25rem; }
+    .who-mic-wrap .halftone-chip { max-width: 200px; margin: 0 auto; }
+    .who-mic-wrap:before { content: ""; position: absolute; inset: 8% 14%; background: #FCF9EF; border-radius: 50%; opacity: .45; z-index: 0; }
+    .who-mic-wrap .halftone-chip { position: relative; z-index: 1; }
+    @media (min-width: 768px) { .who-mic-wrap .halftone-chip { max-width: 220px; } }
+
+    /* ---- Phase 4: Chef + Reviews polish ---- */
+
+    /* Chef: editorial treatment matching the phase-2/3 language */
+    #chef { position: relative; background: #1C1C1C; }
+    #chef:before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(243,231,191,.04) 1px, transparent 1.2px); background-size: 7px 7px; pointer-events: none; }
+    #chef > * { position: relative; }
+    #chef .chef-eyebrow { color: #F3E7BF; opacity: .8; }
+    #chef .section-title { color: #FCF9EF; }
+    .chef-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; margin-top: 1rem; border-radius: 2px; opacity: .85; }
+    .chef-lede { color: rgba(252,249,239,.78); max-width: 34rem; font-size: 1.02rem; line-height: 1.55; margin-top: 1rem; }
+
+    /* Two-column "what it does / why it matters" split */
+    .chef-split { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.75rem; }
+    @media (min-width: 640px) { .chef-split { grid-template-columns: 1fr 1fr; gap: 1.25rem; } }
+    .chef-block { position: relative; padding: 1.1rem 1.25rem 1.25rem; border-radius: 12px; background: linear-gradient(180deg, rgba(252,249,239,.035), rgba(252,249,239,.01)); border: 1px solid rgba(243,231,191,.18); }
+    .chef-block:before { content: ""; position: absolute; top: 0; left: 1.1rem; width: 28px; height: 3px; background: #F3E7BF; border-radius: 0 0 2px 2px; opacity: .75; }
+    .chef-block h3 { font-family: 'Anton', Impact, sans-serif; font-size: 1.1rem; line-height: 1; letter-spacing: .02em; color: #FCF9EF; margin-bottom: .4rem; text-transform: uppercase; }
+    .chef-block .chef-block-kicker { display: block; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .65rem; letter-spacing: .28em; text-transform: uppercase; color: #F3E7BF; opacity: .7; margin-bottom: .35rem; }
+    .chef-block p { color: rgba(252,249,239,.78); font-size: .9rem; line-height: 1.55; margin: 0; }
+
+    /* Chef screenshot frame: single uniform poster-style chip */
+    .chef-frame { position: relative; border-radius: 16px; padding: 1rem 1rem 1.25rem; background: linear-gradient(180deg, rgba(243,231,191,.08), rgba(243,231,191,.02)); border: 1px solid rgba(243,231,191,.22); overflow: hidden; }
+    .chef-frame:before { content: ""; position: absolute; top: 0; left: 1.25rem; width: 48px; height: 3px; background: #E3452D; border-radius: 0 0 2px 2px; opacity: .85; }
+    .chef-frame:after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(243,231,191,.05) 1px, transparent 1.2px); background-size: 6px 6px; pointer-events: none; }
+    .chef-frame .chef-frame-meta { position: absolute; top: .9rem; right: 1.1rem; font-family: 'Anton', Impact, sans-serif; font-size: .78rem; letter-spacing: .22em; color: rgba(243,231,191,.6); z-index: 2; }
+    .chef-frame #chefSlider { position: relative; z-index: 1; }
+
+    /* ---- Reviews: festival pull-quote strip ---- */
+    #reviews { background: #1C1C1C; position: relative; padding-top: 1.25rem; padding-bottom: 2.5rem; overflow: hidden; }
+    #reviews:before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(243,231,191,.04) 1px, transparent 1.2px); background-size: 7px 7px; pointer-events: none; }
+    #reviews .reviews-eyebrow { color: #F3E7BF; opacity: .8; }
+    #reviews .section-title { color: #FCF9EF; }
+    #reviews .section-title em { color: #E3452D; }
+    .reviews-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; margin-top: 1rem; border-radius: 2px; opacity: .85; }
+    .reviews-lede { color: rgba(252,249,239,.72); max-width: 32rem; font-size: .98rem; line-height: 1.5; margin-top: .75rem; }
+    .reviews-header { position: relative; z-index: 1; }
+    .reviews-header:after { content: ""; display: block; margin: 1.5rem 0 0; height: 1px; background: repeating-linear-gradient(to right, rgba(243,231,191,.4) 0 12px, transparent 12px 22px); opacity: .55; }
+
+    /* Pull-quote card — vintage film-festival poster */
+    .pullquote {
+      position: relative;
+      width: 320px;
+      min-width: 320px;
+      max-width: 320px;
+      min-height: 260px;
+      padding: 1.4rem 1.4rem 1.25rem;
+      background: #F3E7BF;
+      color: #1C1C1C;
+      border: 1px solid rgba(28,28,28,.12);
       border-radius: 4px;
-      margin: 0 1rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: 0 10px 24px rgba(0,0,0,.25), 0 1px 0 rgba(255,255,255,.45) inset;
+      flex-shrink: 0;
+    }
+    .pullquote:before {
+      content: "\201C";
+      position: absolute; top: -.25rem; left: .6rem;
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: 6rem; line-height: 1;
+      color: #E3452D; opacity: .88;
+      pointer-events: none;
+    }
+    .pullquote .pq-kicker { font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .62rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: rgba(28,28,28,.55); margin-bottom: .35rem; position: relative; z-index: 1; padding-left: 2.6rem; }
+    .pullquote .pq-title { font-family: 'Anton', Impact, sans-serif; font-size: 1.7rem; line-height: 1; letter-spacing: .01em; text-transform: uppercase; color: #1C1C1C; margin-top: .15rem; position: relative; z-index: 1; }
+    .pullquote .pq-body { font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .9rem; line-height: 1.5; color: rgba(28,28,28,.78); margin-top: .6rem; flex: 1; }
+    .pullquote .pq-rule { display: block; width: 28px; height: 2px; background: #E3452D; margin: .75rem 0 .5rem; border-radius: 1px; opacity: .85; }
+    .pullquote .pq-by { font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(28,28,28,.62); }
+
+    .pullquote.variant-cherry { background: #E3452D; color: #FCF9EF; }
+    .pullquote.variant-cherry:before { color: #1C1C1C; opacity: .5; }
+    .pullquote.variant-cherry .pq-kicker { color: rgba(252,249,239,.7); }
+    .pullquote.variant-cherry .pq-title { color: #FCF9EF; }
+    .pullquote.variant-cherry .pq-body { color: rgba(252,249,239,.88); }
+    .pullquote.variant-cherry .pq-rule { background: #1C1C1C; }
+    .pullquote.variant-cherry .pq-by { color: rgba(252,249,239,.82); }
+
+    .pullquote.variant-mint { background: #419B85; color: #FCF9EF; }
+    .pullquote.variant-mint:before { color: #1C1C1C; opacity: .55; }
+    .pullquote.variant-mint .pq-kicker { color: rgba(252,249,239,.72); }
+    .pullquote.variant-mint .pq-title { color: #FCF9EF; }
+    .pullquote.variant-mint .pq-body { color: rgba(252,249,239,.9); }
+    .pullquote.variant-mint .pq-rule { background: #1C1C1C; }
+    .pullquote.variant-mint .pq-by { color: rgba(252,249,239,.8); }
+
+    /* Review belt: smooth CSS-driven marquee (no RAF), with a reduced-motion static grid fallback */
+    .reviews-belt-wrap { position: relative; overflow: hidden; padding: 1.5rem 0 .25rem; mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%); }
+    .reviews-belt { display: flex; gap: 1.25rem; width: max-content; animation: pullquoteLoop 80s linear infinite; will-change: transform; padding: 0 1rem; }
+    .reviews-belt:hover { animation-play-state: paused; }
+    @keyframes pullquoteLoop { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .reviews-belt-wrap { mask-image: none; -webkit-mask-image: none; overflow: visible; }
+      .reviews-belt { animation: none; width: 100%; flex-wrap: wrap; justify-content: center; }
+      /* A single set is enough when reduced-motion hides the duplicate */
+      .reviews-belt .reviews-set.is-duplicate { display: none; }
+      .pullquote { width: 100%; max-width: 340px; min-width: 0; }
+    }
+    .reviews-set { display: flex; gap: 1.25rem; align-items: stretch; }
+
+    /* ---- Phase 5: CTA, Contact, Footer + a11y/perf pass ---- */
+
+    /* Poster-style CTA ("Visit us online") on Cherry with Coffee accents */
+    #cta { position: relative; background: #E3452D; color: #FCF9EF; overflow: hidden; padding-top: 5.5rem; padding-bottom: 5.5rem; }
+    #cta:before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(252,249,239,.10) 1px, transparent 1.2px); background-size: 7px 7px; mix-blend-mode: screen; pointer-events: none; opacity: .55; }
+    #cta:after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: repeating-linear-gradient(to right, rgba(252,249,239,.35) 0 12px, transparent 12px 20px); opacity: .6; pointer-events: none; }
+    #cta .cta-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    @media (min-width: 768px) { #cta .cta-inner { grid-template-columns: 1.15fr .85fr; gap: 3rem; text-align: left; } }
+    #cta .cta-kicker { color: #F3E7BF; }
+    #cta .cta-kicker:before, #cta .cta-kicker:after { background: #F3E7BF; opacity: .6; }
+    #cta .section-title { color: #FCF9EF; margin-top: .85rem; }
+    #cta .section-title em { color: #F3E7BF; background: #1C1C1C; padding: 0 .4rem; border-radius: 2px; }
+    #cta .cta-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; border-radius: 2px; margin: 1.1rem auto 1rem; }
+    @media (min-width: 768px) { #cta .cta-divider { margin-left: 0; margin-right: 0; } }
+    #cta .cta-lede { color: rgba(252,249,239,.92); font-size: 1.05rem; line-height: 1.55; max-width: 38rem; margin-left: auto; margin-right: auto; }
+    @media (min-width: 768px) { #cta .cta-lede { margin-left: 0; } }
+    #cta .cta-actions { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: .9rem; align-items: center; justify-content: center; }
+    @media (min-width: 768px) { #cta .cta-actions { justify-content: flex-start; } }
+    #cta .cta-primary { display: inline-flex; align-items: center; gap: .55rem; padding: .85rem 1.35rem; border-radius: 9999px; background: #1C1C1C; color: #FCF9EF; font-weight: 600; letter-spacing: .03em; font-size: .9rem; text-transform: uppercase; box-shadow: 0 2px 0 rgba(0,0,0,.22), 0 10px 24px rgba(0,0,0,.28); transition: transform 180ms ease, background-color 180ms ease; }
+    #cta .cta-primary:hover { background: #000; transform: translateY(-1px); }
+    #cta .cta-primary:focus-visible { outline: 2px solid #F3E7BF; outline-offset: 3px; }
+    #cta .cta-primary svg { width: 14px; height: 14px; }
+    #cta .cta-secondary { display: inline-flex; align-items: center; gap: .5rem; padding: .78rem 1.2rem; border-radius: 9999px; border: 1.5px solid #FCF9EF; color: #FCF9EF; font-weight: 600; font-size: .875rem; letter-spacing: .02em; transition: background-color 180ms ease, color 180ms ease, transform 180ms ease; }
+    #cta .cta-secondary:hover { background: #FCF9EF; color: #1C1C1C; transform: translateY(-1px); }
+    #cta .cta-secondary:focus-visible { outline: 2px solid #1C1C1C; outline-offset: 3px; }
+    #cta .cta-meta { margin-top: 1.15rem; color: rgba(252,249,239,.78); font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; }
+
+    /* Poster ticket stub on the right side (hidden on small screens) */
+    #cta .cta-ticket { display: none; }
+    @media (min-width: 768px) {
+      #cta .cta-ticket { display: block; position: relative; background: #F3E7BF; color: #1C1C1C; border-radius: 8px; padding: 1.4rem 1.5rem; transform: rotate(2deg); box-shadow: 0 12px 28px rgba(0,0,0,.28); }
+      #cta .cta-ticket:before, #cta .cta-ticket:after { content: ""; position: absolute; top: 50%; width: 18px; height: 18px; background: #E3452D; border-radius: 50%; transform: translateY(-50%); }
+      #cta .cta-ticket:before { left: -9px; }
+      #cta .cta-ticket:after { right: -9px; }
+      #cta .cta-ticket .ticket-no { font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(28,28,28,.6); }
+      #cta .cta-ticket .ticket-headline { font-family: 'Anton', Impact, sans-serif; font-size: 1.9rem; line-height: 1; margin-top: .4rem; }
+      #cta .cta-ticket .ticket-dashed { margin: .85rem 0; border-top: 1px dashed rgba(28,28,28,.35); }
+      #cta .cta-ticket .ticket-foot { display: flex; justify-content: space-between; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(28,28,28,.7); }
     }
 
-    .feature-scroll::-webkit-scrollbar-thumb {
-      background: #F1A20E;
-      border-radius: 4px;
-      transition: background 0.2s ease;
-    }
+    /* Contact section — editorial refresh on Licorice */
+    #contact { background: #1C1C1C; color: #FCF9EF; padding-top: 5rem; padding-bottom: 5rem; border-bottom: 1px solid rgba(252,249,239,.08); }
+    #contact .contact-inner { max-width: 48rem; margin: 0 auto; padding: 0 1.5rem; text-align: center; }
+    #contact .contact-kicker { color: #F3E7BF; opacity: .85; }
+    #contact .section-title { color: #FCF9EF; }
+    #contact .section-title em { color: #E3452D; }
+    #contact .contact-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; border-radius: 2px; margin: 1.1rem auto; }
+    #contact .contact-lede { color: rgba(252,249,239,.78); font-size: 1.02rem; line-height: 1.55; margin-bottom: 1.25rem; }
+    #contact .contact-mail { display: inline-flex; align-items: center; gap: .55rem; font-family: 'Anton', Impact, sans-serif; font-size: 1.6rem; letter-spacing: .01em; color: #FCF9EF; padding: .4rem .1rem; border-bottom: 2px solid rgba(252,249,239,.25); transition: color 180ms ease, border-color 180ms ease; }
+    #contact .contact-mail:hover, #contact .contact-mail:focus-visible { color: #E3452D; border-color: #E3452D; }
+    #contact .contact-mail:focus-visible { outline: 2px solid #E3452D; outline-offset: 4px; }
 
     .feature-scroll::-webkit-scrollbar-thumb:hover {
       background: #f8b744;
@@ -336,6 +670,80 @@
       scrollbar-width: thin;
       scrollbar-color: #F1A20E rgba(255, 255, 255, 0.05);
     }
+
+    /* ---- Phase 1: Header + Hero polish ---- */
+
+    /* Header scroll state: transparent over hero, solid Licorice once scrolled */
+    #top { backdrop-filter: saturate(140%) blur(0px); transition: background-color 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease; }
+    #top.is-scrolled { background-color: rgba(28,28,28,.92); backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid rgba(252,249,239,.08); }
+    #top.is-scrolled .nav-divider { opacity: 0; }
+    #top:not(.is-scrolled) .nav-divider { opacity: 0; }
+
+    /* Nav link underline (Cherry), replaces popcorn color swap */
+    .nav-link { position: relative; color: #FCF9EF; opacity: .85; transition: opacity 200ms ease, color 200ms ease; }
+    .nav-link:hover, .nav-link:focus-visible { opacity: 1; color: #FCF9EF; }
+    .nav-link:after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: #E3452D; transform: scaleX(0); transform-origin: left center; transition: transform 240ms ease; }
+    .nav-link:hover:after, .nav-link:focus-visible:after { transform: scaleX(1); }
+
+    /* "Get the App" nav badge */
+    .get-app-badge { display: inline-block; transition: transform 180ms ease; }
+    .get-app-badge:hover { transform: translateY(-1px); }
+    .get-app-badge:focus-visible { outline: 2px solid #FCF9EF; outline-offset: 2px; border-radius: 6px; }
+    .get-app-badge img { height: 32px; display: block; }
+    @media (min-width: 768px) {
+      header nav > div.flex > div.hidden.md\:flex .get-app-badge img { height: 36px; width: auto; }
+    }
+
+    /* Mobile nav panel */
+    #mobile-nav { transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 200ms ease, transform 200ms ease; }
+    #mobile-nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-menu-btn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; color: #FCF9EF; border: 1px solid rgba(252,249,239,.15); background: rgba(28,28,28,.4); }
+    .mobile-menu-btn:hover { background: rgba(28,28,28,.7); }
+    .mobile-menu-btn:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
+
+    /* Hero eyebrow/kicker */
+
+    /* Hero primary/secondary CTAs */
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; }
+    @media (min-width: 768px) { .hero-ctas { justify-content: flex-start; } }
+    .hero-cta-secondary { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.25rem; border-radius: 9999px; border: 1.5px solid #1C1C1C; color: #1C1C1C; font-weight: 600; font-size: .875rem; letter-spacing: .02em; transition: background-color 180ms ease, color 180ms ease, transform 180ms ease; }
+    .hero-cta-secondary:hover { background: #1C1C1C; color: #FCF9EF; transform: translateY(-1px); }
+    .hero-cta-secondary:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
+    .hero-cta-secondary svg { width: 14px; height: 14px; transition: transform 200ms ease; }
+    .hero-cta-secondary:hover svg { transform: translateY(2px); }
+
+    /* NOW PLAYING marquee strip (below hero) */
+    .now-playing { background: #1C1C1C; color: #FCF9EF; border-top: 1px solid rgba(252,249,239,.08); border-bottom: 1px solid rgba(252,249,239,.08); overflow: hidden; position: relative; }
+    .now-playing:before, .now-playing:after { content: ""; position: absolute; top: 0; bottom: 0; width: 64px; z-index: 2; pointer-events: none; }
+    .now-playing:before { left: 0; background: linear-gradient(90deg, #1C1C1C, rgba(28,28,28,0)); }
+    .now-playing:after { right: 0; background: linear-gradient(-90deg, #1C1C1C, rgba(28,28,28,0)); }
+    .now-playing-track { display: flex; gap: 2.5rem; padding: .85rem 0; white-space: nowrap; animation: npScroll 38s linear infinite; will-change: transform; }
+    .now-playing-track span { font-family: 'Anton', Impact, sans-serif; font-size: 1.15rem; letter-spacing: .35em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 2.5rem; }
+    .now-playing-track span:after { content: "\2022"; color: #E3452D; margin-left: 2.5rem; }
+    @keyframes npScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .now-playing-track { animation: none; justify-content: center; flex-wrap: wrap; white-space: normal; }
+    }
+
+    /* Footer — editorial refresh */
+    .site-footer { background: #0F0F0F; color: rgba(252,249,239,.78); padding: 3.5rem 0 2rem; border-top: 1px solid rgba(252,249,239,.06); }
+    .site-footer .footer-grid { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; }
+    @media (min-width: 768px) { .site-footer .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; gap: 3rem; } }
+    .site-footer .footer-brand { display: flex; align-items: center; gap: .75rem; }
+    .site-footer .footer-brand .footer-mark { font-family: 'Anton', Impact, sans-serif; font-size: 1.35rem; letter-spacing: .22em; color: #FCF9EF; }
+    .site-footer .footer-tag { margin-top: .85rem; font-size: .875rem; line-height: 1.55; color: rgba(252,249,239,.6); max-width: 22rem; }
+    .site-footer h4 { font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: #F3E7BF; margin-bottom: .9rem; }
+    .site-footer .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .55rem; }
+    .site-footer .footer-links a { font-size: .9rem; color: rgba(252,249,239,.78); transition: color 180ms ease; }
+    .site-footer .footer-links a:hover, .site-footer .footer-links a:focus-visible { color: #E3452D; }
+    .site-footer .footer-links a:focus-visible { outline: 2px solid #E3452D; outline-offset: 3px; border-radius: 2px; }
+    .site-footer .footer-social { display: flex; gap: .5rem; margin-top: .2rem; }
+    .site-footer .footer-social a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 999px; background: rgba(252,249,239,.06); border: 1px solid rgba(252,249,239,.08); transition: background-color 180ms ease, border-color 180ms ease; }
+    .site-footer .footer-social a:hover { background: rgba(252,249,239,.12); border-color: rgba(252,249,239,.22); }
+    .site-footer .footer-social a:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
+    .site-footer .footer-social img { width: 18px; height: 18px; }
+    .site-footer .footer-bottom { max-width: 80rem; margin: 2.5rem auto 0; padding: 1.25rem 1.5rem 0; border-top: 1px solid rgba(252,249,239,.06); display: flex; flex-direction: column; gap: .75rem; align-items: center; justify-content: space-between; text-align: center; font-size: .8rem; color: rgba(252,249,239,.55); }
+    @media (min-width: 768px) { .site-footer .footer-bottom { flex-direction: row; text-align: left; } }
   </style>
 
   <!-- Structured Data (JSON-LD) -->
@@ -424,28 +832,52 @@
 </head>
   <body class="bg-licorice text-almond font-sans grain overflow-x-hidden">
   <!-- Header/Nav -->
-  <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:ring-2 focus:ring-popcorn bg-black text-white px-3 py-2 rounded">Skip to content</a>
-  <header id="top" class="fixed top-0 left-0 right-0 z-50 transition-colors" role="banner">
+  <a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:ring-2 focus:ring-cherry bg-licorice text-almond px-3 py-2 rounded">Skip to content</a>
+  <header id="top" class="fixed top-0 left-0 right-0 z-50" role="banner">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
-      <div class="flex h-16 items-center justify-start md:justify-between">
-        <a href="#top" class="flex items-center gap-3" aria-label="Aftertaste home">
-          <img src="assets/logo.png" alt="Aftertaste logo" class="h-8 w-8 rounded-full ring-1 ring-white/10" loading="eager">
-          <span class="font-display tracking-widest text-xl">AFTERTASTE</span>
+      <div class="flex h-16 items-center justify-between">
+        <a href="#top" class="flex items-center gap-2.5" aria-label="Aftertaste home">
+          <img src="assets/logo.png" alt="" class="h-8 w-8 rounded-full ring-1 ring-almond/15" loading="eager">
+          <span class="font-display tracking-[0.18em] text-lg md:text-xl text-almond">AFTERTASTE</span>
         </a>
-        <div class="hidden md:flex items-center gap-6 text-sm">
-          <a href="#hero" class="hover:text-popcorn">Home</a>
-          <a href="#glance" class="hover:text-popcorn">At a Glance</a>
-          <a href="#who" class="hover:text-popcorn">Who we are</a>
-          <a href="#features" class="hover:text-popcorn">Features</a>
-          <a href="#chef" class="hover:text-popcorn">Chef</a>
-          <a href="#contact" class="hover:text-popcorn">Contact</a>
-          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
-            <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-8" loading="lazy" />
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center gap-7 text-[13px] font-medium">
+          <a href="#glance" class="nav-link">At a Glance</a>
+          <a href="#who" class="nav-link">Who we are</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#chef" class="nav-link">Chef</a>
+          <a href="#contact" class="nav-link">Contact</a>
+          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="get-app-badge">
+            <img src="assets/App_Store_Download.svg" alt="Download on the App Store" width="135" height="45" loading="eager" decoding="async" />
           </a>
         </div>
+
+        <!-- Mobile menu toggle -->
+        <button id="mobileMenuBtn" class="md:hidden mobile-menu-btn" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="7" x2="21" y2="7"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="17" x2="21" y2="17"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile nav panel -->
+      <div id="mobile-nav" class="md:hidden absolute left-0 right-0 top-full mx-3 mt-2 rounded-2xl bg-licorice/95 ring-1 ring-almond/10 backdrop-blur-md p-5 shadow-2xl" role="menu">
+        <div class="flex flex-col gap-1 text-[15px] font-medium">
+          <a href="#glance" class="nav-link py-2">At a Glance</a>
+          <a href="#who" class="nav-link py-2">Who we are</a>
+          <a href="#features" class="nav-link py-2">Features</a>
+          <a href="#chef" class="nav-link py-2">Chef</a>
+          <a href="#contact" class="nav-link py-2">Contact</a>
+        </div>
+        <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="get-app-badge mt-4 flex justify-center">
+          <img src="assets/App_Store_Download.svg" alt="Download on the App Store" width="120" height="40" loading="lazy" decoding="async" />
+        </a>
       </div>
     </nav>
-    <div class="h-px w-full bg-white/5"></div>
+    <div class="nav-divider h-px w-full bg-almond/5"></div>
   </header>
 
   <main class="pt-20">
@@ -461,135 +893,121 @@
       <div id="spot" class="spot projector-spot" aria-hidden="true"></div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-licorice">
         <article class="space-y-6 text-center md:text-left">
-          <h1 class="font-display text-licorice text-5xl md:text-6xl leading-none">Your Ultimate Movie and TV Hub</h1>
-          <p class="text-lg text-licorice/90">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
-          <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block">
-              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10 md:h-12" />
+          <h1 class="font-display text-licorice text-[2.75rem] sm:text-6xl md:text-7xl leading-[0.95] tracking-tight">Your Ultimate<br/>Movie &amp; TV Hub</h1>
+          <p class="text-base md:text-lg text-licorice/85 max-w-lg mx-auto md:mx-0">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
+          <div class="hero-ctas">
+            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block transition hover:-translate-y-0.5">
+              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-11 md:h-12" />
             </a>
-            <div class="inline-block opacity-50 cursor-not-allowed">
-              <img src="assets/GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get it on Google Play - Coming Soon" class="h-10 md:h-12" loading="lazy" />
-              <p class="text-sm text-gray-800 italic text-center mt-2">Coming Soon</p>
-            </div>
-            <!-- <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="rounded-2xl border border-white/20 px-4 py-2 hover:bg-white/5 transition ring-1 ring-black/70">Prefer the Medium Screen?</a> -->
+            <a href="#features" class="hero-cta-secondary" aria-label="See the app's features">
+              See the app
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/></svg>
+            </a>
           </div>
+          <p class="text-xs tracking-[0.2em] uppercase text-licorice/60 pt-2">Android &#183; Coming soon</p>
         </article>
         <figure class="relative">
-          <img src="assets/hero-portrait.png" alt="Aftertaste mobile app showing movie feed, tracking features, and personalized recommendations interface" class="w-full max-w-[225px] md:max-w-[280px] lg:max-w-[325px] mx-auto" loading="eager" />
+          <img src="assets/hero-portrait.png" alt="Aftertaste mobile app showing movie feed, tracking features, and personalized recommendations interface" class="w-full max-w-[225px] md:max-w-[280px] lg:max-w-[325px] mx-auto" loading="eager" decoding="async" fetchpriority="high" width="1419" height="2796" />
         </figure>
       </div>
       <div class="screen-boot" aria-hidden="true"></div>
     </section>
 
+    <!-- NOW PLAYING marquee -->
+    <div class="now-playing" aria-hidden="true">
+      <div class="now-playing-track">
+        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span>Reviews from friends for friends</span>
+        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span>Reviews from friends for friends</span>
+      </div>
+    </div>
+
     <!-- At a Glance -->
-    <section id="glance" class="py-24 md:py-28 bg-black/30">
+    <section id="glance" class="py-24 md:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header class="mb-10 text-center max-w-3xl mx-auto">
-          <h2 class="font-display text-4xl">Know What to Watch — at a Glance</h2>
-          <p class="text-almond/80 mt-3">Track, discuss, and decide faster with people who share your taste.</p>
+        <header class="mb-14 text-center max-w-3xl mx-auto">
+          <span class="section-kicker glance-eyebrow">The Program</span>
+          <h2 class="section-title mt-4">Know what to watch — <em>at a glance</em>.</h2>
+          <span class="glance-divider" aria-hidden="true"></span>
+          <p class="glance-lede">Track, discuss, and decide faster — with people who actually share your taste, not an algorithm that thinks it does.</p>
         </header>
 
-        <div class="grid gap-6 md:gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid gap-5 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
           <!-- Card: Tastebuds Scores -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <img src="assets/Tongue-RGB-White-SM.png" alt="Tastebud icon" class="h-5 w-5" />
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Tastebud Scores</h3>
-                <p class="text-almond/75">See reviews and ratings tailored to your circle — not the crowd.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>Tastebud scores and feeds</li>
-                  <li>Trending this week, month, and year</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <img src="assets/Tongue-RGB-White-SM.png" alt="" />
             </div>
+            <h3>Tastebud Scores</h3>
+            <p>Reviews and ratings tailored to your circle — not the crowd.</p>
+            <ul>
+              <li>Tastebud scores and feeds</li>
+              <li>Trending this week, month, and year</li>
+            </ul>
           </article>
 
           <!-- Card: Lists & Bookmarks -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M7 4h10a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.8.4L12 16l-6.2 3.9a.5.5 0 0 1-.8-.4V6a2 2 0 0 1 2-2m0 2v11.3l5-3.2l5 3.2V6z"/></svg>
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Lists &amp; Bookmarks</h3>
-                <p class="text-almond/75">Save it for later or build themed lists — solo or with friends.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>Bookmark for later</li>
-                  <li>Collaborative lists</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4h10a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.8.4L12 16l-6.2 3.9a.5.5 0 0 1-.8-.4V6a2 2 0 0 1 2-2m0 2v11.3l5-3.2l5 3.2V6z"/></svg>
             </div>
+            <h3>Lists &amp; Bookmarks</h3>
+            <p>Save it for later, or build themed lists — solo or with friends.</p>
+            <ul>
+              <li>Bookmark for later</li>
+              <li>Collaborative lists</li>
+            </ul>
           </article>
 
           <!-- Card: Track Progress -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M12 1.75A10.25 10.25 0 1 0 22.25 12A10.26 10.26 0 0 0 12 1.75m0 1.5A8.75 8.75 0 1 1 3.25 12A8.74 8.74 0 0 1 12 3.25m-.75 4a.75.75 0 0 0-1.5 0v6.25c0 .2.08.4.22.53l4.25 4.25a.75.75 0 0 0 1.06-1.06l-4.03-4.03z"/></svg>
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Track Progress</h3>
-                <p class="text-almond/75">TV seasons and episodes — always know where you left off.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>In‑progress, watched, shelved, trashed</li>
-                  <li>Catalog your entire viewing history</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.75A10.25 10.25 0 1 0 22.25 12A10.26 10.26 0 0 0 12 1.75m0 1.5A8.75 8.75 0 1 1 3.25 12A8.74 8.74 0 0 1 12 3.25m-.75 4a.75.75 0 0 0-1.5 0v6.25c0 .2.08.4.22.53l4.25 4.25a.75.75 0 0 0 1.06-1.06l-4.03-4.03z"/></svg>
             </div>
+            <h3>Track Progress</h3>
+            <p>TV seasons and episodes — always know where you left off.</p>
+            <ul>
+              <li>In&#8209;progress, watched, shelved, trashed</li>
+              <li>Your full viewing history, always on hand</li>
+            </ul>
           </article>
 
           <!-- Card: Deep Details -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6l-3 2v-2H5a2 2 0 0 1-2-2zm2 0v12h14V5zm2.5 3h9a.75.75 0 0 1 0 1.5h-9A.75.75 0 0 1 7.5 8m0 3h6a.75.75 0 0 1 0 1.5h-6A.75.75 0 0 1 7.5 11"/></svg>
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">In-Depth Info</h3>
-                <p class="text-almond/75">Trailers, cast, genres, seasons, related picks — all in one place.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>Actor pages and filmography</li>
-                  <li>Where to stream</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6l-3 2v-2H5a2 2 0 0 1-2-2zm2 0v12h14V5zm2.5 3h9a.75.75 0 0 1 0 1.5h-9A.75.75 0 0 1 7.5 8m0 3h6a.75.75 0 0 1 0 1.5h-6A.75.75 0 0 1 7.5 11"/></svg>
             </div>
+            <h3>In-Depth Info</h3>
+            <p>Trailers, cast, genres, seasons, related picks — all in one place.</p>
+            <ul>
+              <li>Actor pages and filmographies</li>
+              <li>Where to stream</li>
+            </ul>
           </article>
 
           <!-- Card: Reviews & Threads -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M6 3h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4v-4H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m1 4h10a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2m0 4h6a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2"/></svg>
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Reviews &amp; Threads</h3>
-                <p class="text-almond/75">Threaded Discussions  — on specific reviews or each title globally.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>Filter and sort</li>
-                  <li>Tastebuds only or global community</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M6 3h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4v-4H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m1 4h10a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2m0 4h6a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2"/></svg>
             </div>
+            <h3>Reviews &amp; Threads</h3>
+            <p>Threaded discussions — on a specific review, or on a title globally.</p>
+            <ul>
+              <li>Filter and sort any way you like</li>
+              <li>Tastebuds only, or the global community</li>
+            </ul>
           </article>
 
           <!-- Card: Taste Profile & Recs -->
-          <article class="p-6 rounded-2xl ring-1 ring-white/10 bg-gradient-to-br from-[#0d0d0d] to-[#171717] poster h-full">
-            <div class="flex items-start gap-4">
-              <div class="shrink-0 h-10 w-10 rounded-xl bg-white/5 ring-1 ring-white/10 flex items-center justify-center">
-                <img src="assets/chef-icon.png" alt="Chef icon" class="h-5 w-5" />
-              </div>
-              <div class="space-y-2">
-                <h3 class="text-lg font-semibold">Taste Profile &amp; Smart Recs</h3>
-                <p class="text-almond/75">A living profile of your taste that powers custom recommendations.</p>
-                <ul class="text-sm text-almond/60 list-disc list-inside">
-                  <li>Genre affinities, influences, habits</li>
-                  <li>Collaborative recs by who you’re watching with</li>
-                </ul>
-              </div>
+          <article class="glance-card">
+            <div class="card-icon" aria-hidden="true">
+              <img src="assets/chef-icon.png" alt="" />
             </div>
+            <h3>Taste Profile &amp; Smart Recs</h3>
+            <p>A living profile of your taste that powers custom recommendations.</p>
+            <ul>
+              <li>Genre affinities, influences, habits</li>
+              <li>Collaborative recs based on who you're watching with</li>
+            </ul>
           </article>
         </div>
 
@@ -607,133 +1025,121 @@
     </section>
 
     <!-- Who we are -->
-    <section id="who" class="py-24 md:py-28 relative overflow-visible" style="background-color: rgba(94,185,206,0.90);">
-
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-        <figure class="relative order-2 md:order-1 hidden md:block">
-          <div class="w-full max-w-[160px] md:max-w-[180px] mx-auto relative">
-            <img src="assets/mic-bw.png" alt="Vintage studio microphone representing authentic voice and genuine recommendations" class="w-full h-auto translate-y-4 opacity-0" id="micImg" loading="lazy" />
-            <div class="halftone-anim" aria-hidden="true"></div>
+    <section id="who" class="py-24 md:py-32 relative overflow-hidden">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-5 gap-12 md:gap-16 items-center">
+        <figure class="order-2 md:order-1 md:col-span-2">
+          <div class="who-mic-wrap">
+            <div class="halftone-chip on-mint">
+              <img src="assets/mic-bw.png" alt="Vintage studio microphone — representing authentic voice and genuine recommendations" id="micImg" loading="lazy" />
+            </div>
           </div>
         </figure>
-        <article class="space-y-6 order-1 md:order-2 text-center md:text-left">
-          <h2 class="font-display text-4xl">Who we are</h2>
-          <p>Aftertaste is the <strong>social hub for Movie and TV fans</strong> who <strong>trust people over algorithms</strong>.</p>
-          <p>Track what you watch, compare tastes, and get real recommendations from friends, creators, and critics — all in one place.</p>
-          <p>Because finding your <strong>next favorite thing</strong> shouldn't feel like scrolling forever.</p>
+        <article class="order-1 md:order-2 md:col-span-3 space-y-6 text-center md:text-left">
+          <span class="section-kicker align-start who-kicker">The Crew</span>
+          <h2 class="section-title">People <em>over</em> algorithms.</h2>
+          <p class="who-lede mx-auto md:mx-0">Aftertaste is the social hub for movie and TV fans who'd rather hear from friends, creators, and critics than a feed that thinks it knows them.</p>
+          <p class="who-lede mx-auto md:mx-0">Track what you watch, compare tastes, and get real recommendations — because your next favorite thing shouldn't feel like scrolling forever.</p>
+          <div class="pt-2">
+            <span class="who-meta"><span class="who-dot" aria-hidden="true"></span> Independent &#183; Est. 2021</span>
+          </div>
         </article>
       </div>
     </section>
 
-    <!-- Features Slider -->
-    <section id="features" class="py-16 md:py-28 bg-black/30">
+    <!-- Features Grid (Phase 3: poster-style cards) -->
+    <section id="features" class="py-16 md:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <header class="flex items-end justify-between mb-10">
-          <h2 class="font-display text-4xl text-center md:text-left w-full">A Menu of Features</h2>
+        <header class="mb-12 md:mb-16 max-w-3xl">
+          <span class="section-kicker features-eyebrow align-start">The Lineup</span>
+          <h2 class="section-title mt-4">A menu of <em>features</em>.</h2>
+          <div class="features-divider"></div>
+          <p class="features-lede mt-5">Nine ways Aftertaste helps you track what you watch, trade takes with the people whose taste you trust, and figure out what to queue up next.</p>
         </header>
 
         <div class="relative">
-          <div id="featuresScroller" class="overflow-x-auto feature-scroll" role="region" aria-label="App Features">
-            <ul id="featuresList" class="flex gap-4 p-4" style="width: max-content;">
-              <!-- Slide 1 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Tastebuds Feed</h3>
-                  <p>Follow friends and creators.</p>
-                  <p>Compare tastes and see what your circle is watching.</p>
+          <ul class="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" role="list" aria-label="App Features">
+              <!-- 01 -->
+              <li class="feature-card">
+                <span class="stub">Nº 01</span>
+                <div class="shot">
+                  <img src="assets/features/feed.png" alt="Social feed showing friends' movie and TV reviews" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/feed.png" alt="Social feed showing friends' movie and TV reviews" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
-                </figure>
+                <h3>Tastebuds Feed</h3>
+                <p>Follow friends and see what the people whose taste you trust are watching.</p>
               </li>
-              <!-- Slide 2 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Track Your Content</h3>
-                  <p>Easily track what you have in progress and catalog your full watch history.</p>
-                  <p>Shelve things for later or trash them if you're done.</p>
+              <!-- 02 -->
+              <li class="feature-card">
+                <span class="stub">Nº 02</span>
+                <div class="shot">
+                  <img src="assets/features/tracking.png" alt="Content tracking screen showing in-progress TV shows and movies" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/tracking.png" alt="Content tracking screen showing in-progress TV shows and movies" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Track Your Content</h3>
+                <p>Catalog everything you’ve watched, shelve what’s in progress, and queue what’s next.</p>
               </li>
-              <!-- Slide 3 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Create Lists (Solo or with Friends)</h3>
-                  <p>Create and share content lists - either solo or collabing with friends.</p>
+              <!-- 03 -->
+              <li class="feature-card">
+                <span class="stub">Nº 03</span>
+                <div class="shot">
+                  <img src="assets/features/list.png" alt="Collaborative movie and TV lists feature" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/list.png" alt="Collaborative movie and TV lists feature" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Build Lists</h3>
+                <p>Curate watch lists solo or collaborate with friends in real time.</p>
               </li>
-              <!-- Slide 4 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">All the Info</h3>
-                  <p>Easily search content and view:</p>
-                  <ul class="list-disc list-inside space-y-1">
-                    <li>Descriptions</li>
-                    <li>Where to stream</li>
-                    <li>Trailers</li>
-                    <li>Cast</li>
-                    <li>Season and episode details</li>
-                    <li>Related content</li>
-                  </ul>
+              <!-- 04 -->
+              <li class="feature-card">
+                <span class="stub">Nº 04</span>
+                <div class="shot">
+                  <img src="assets/features/details.png" alt="Detailed movie information screen with cast, streaming options, and trailers" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/details.png" alt="Detailed movie information screen with cast, streaming options, and trailers" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>All the Info</h3>
+                <p>Cast, trailers, where to stream, and episode details — every detail in one place.</p>
               </li>
-              <!-- Slide 5 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Actor Profiles</h3>
-                  <p>"Where is that person from?". Now you know</p>
+              <!-- 05 -->
+              <li class="feature-card">
+                <span class="stub">Nº 05</span>
+                <div class="shot">
+                  <img src="assets/features/actor.png" alt="Actor profile page showing filmography and biography" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/actor.png" alt="Actor profile page showing filmography and biography" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Actor Profiles</h3>
+                <p>Recognize that face and browse everything they’ve ever been in.</p>
               </li>
-              <!-- Slide 6 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Customize Your Profile</h3>
-                  <p>Show off your Top Ate (8) movies and TV shows.</p>
-                  <p>Earn badges are you conquer the world of content.</p>
+              <!-- 06 -->
+              <li class="feature-card">
+                <span class="stub">Nº 06</span>
+                <div class="shot">
+                  <img src="assets/features/profile.png" alt="Customizable user profile with top movies and achievement badges" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/profile.png" alt="Customizable user profile with top movies and achievement badges" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Your Profile</h3>
+                <p>Show off your Top Ate and earn badges as you rack up the hours.</p>
               </li>
-              <!-- Slide 7 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">See What's Trending</h3>
-                  <p>View trending and top rated content over the last week, month, and year.</p>
+              <!-- 07 -->
+              <li class="feature-card">
+                <span class="stub">Nº 07</span>
+                <div class="shot">
+                  <img src="assets/features/trending.png" alt="Trending movies and TV shows screen with time filters" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/trending.png" alt="Trending movies and TV shows screen with time filters" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>What’s Trending</h3>
+                <p>Follow what’s trending and top-rated over the last week, month, or year.</p>
               </li>
-              <!-- Slide 8 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Scores for You</h3>
-                  <p>Scores tailored to your taste.</p>
-                  <p>View your score, Tastebud average, and global average for content in one easy place.</p>
+              <!-- 08 -->
+              <li class="feature-card">
+                <span class="stub">Nº 08</span>
+                <div class="shot">
+                  <img src="assets/features/scores.png" alt="Personalized content scores comparing your rating with friends and global averages" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/scores.png" alt="Personalized content scores comparing your rating with friends and global averages" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Scores for You</h3>
+                <p>Your score, your Tastebuds’ average, and the global score — all side by side.</p>
               </li>
-              <!-- Slide 9 -->
-              <li class="w-[85vw] md:w-[550px] flex-shrink-0 flex flex-col md:grid md:grid-cols-2 gap-3 p-4 md:gap-8 md:p-8 bg-gradient-to-br from-[#0d0d0d] to-[#171717] rounded-3xl ring-1 ring-white/5">
-                <div class="space-y-2 md:space-y-4 flex flex-col justify-center text-center md:text-left">
-                  <h3 class="text-2xl font-semibold">Discuss, Debate, Discover</h3>
-                  <p>Get into in-depth breakdowns and discuss content in nested threads filtered to your preferences.</p>
+              <!-- 09 -->
+              <li class="feature-card">
+                <span class="stub">Nº 09</span>
+                <div class="shot">
+                  <img src="assets/features/comments.png" alt="Threaded discussion feature for movie and TV reviews" loading="lazy" width="300" height="600" />
                 </div>
-                <img src="assets/features/comments.png" alt="Threaded discussion feature for movie and TV reviews" class="w-full max-w-[225px] md:max-w-[250px] lg:max-w-[300px] mx-auto md:ml-2" loading="lazy" />
+                <h3>Discuss &amp; Debate</h3>
+                <p>Dig into nested threads filtered to the people and takes you actually care about.</p>
               </li>
-            </ul>
-          </div>
-
-          <!-- Controls -->
-          <div class="mt-6 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="hidden md:flex gap-2" id="dots" role="tablist" aria-label="Feature slides"></div>
-              <span id="autoHint" class="inline-flex items-center text-white/60 text-[11px] opacity-0 transition-opacity select-none" title="Auto‑advance paused">
-                <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true" class="mr-1"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>
-                Paused
-              </span>
-            </div>
-          </div>
-          <div id="status" class="sr-only" aria-live="polite"></div>
+          </ul>
         </div>
       </div>
     </section>
@@ -741,246 +1147,276 @@
     <!-- Chef: Recommendation System -->
     <section id="chef" class="py-20 md:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-12 items-start">
-          <!-- Copy -->
-          <div class="space-y-6 order-1 md:order-1 text-center md:text-left">
-          <div class="inline-flex items-center gap-3 rounded-full px-3 py-1 ring-1 ring-white/10 bg-white/5">
-            <span class="text-xs tracking-widest uppercase text-white/70">Get Custom Recommendations</span>
-          </div>
-          <h2 class="font-display text-4xl">Your Own Private Chef</h2>
-          <p class="text-almond/80">Chef learns your palate and can serve you an order of 5 custom watch recommendations — with clear reasons why each choice fits you (or your group).</p>
+        <div class="grid md:grid-cols-12 gap-10 md:gap-12 items-start">
+          <!-- Copy (left, 7 cols) -->
+          <div class="md:col-span-7 order-1 text-center md:text-left">
+            <span class="section-kicker chef-eyebrow align-start">The Special</span>
+            <h2 class="section-title mt-4">Your own private <em>chef</em>.</h2>
+            <span class="chef-divider" aria-hidden="true"></span>
+            <p class="chef-lede">Five custom watch recommendations, served with clear reasons why each one fits you — or the room. Chef learns your palate over time and adjusts each order to the table.</p>
 
-          <div class="grid gap-6">
-            <div>
-              <h3 class="font-semibold mb-2">Taste Profile</h3>
-              <ul class="list-disc list-inside text-almond/75 space-y-1">
-                <li>Tagline and taste description built specifically to your watch style</li>
-                <li>Unlock genre affinities, creative influences, and cinematic preferences</li>
-                <li>Understand your viewing habits and taste evolution over time</li>
-              </ul>
+            <div class="chef-split">
+              <div class="chef-block">
+                <span class="chef-block-kicker">What it does</span>
+                <h3>Reads your taste</h3>
+                <p>A living taste profile — genres, creative influences, and the patterns in what you actually finish — translated into a tagline that reads like a short review of you.</p>
+              </div>
+              <div class="chef-block">
+                <span class="chef-block-kicker">Why it matters</span>
+                <h3>Custom orders</h3>
+                <p>Pick a party, a vibe (seasoning), a spice level, and any allergies. Chef balances everyone at the table and always tells you <em>why</em> each pick made the cut.</p>
+              </div>
             </div>
-            <div>
-              <h3 class="font-semibold mb-2">Custom Orders</h3>
-              <ul class="list-disc list-inside text-almond/75 space-y-1">
-                <li>TV, Movies (or both)</li>
-                <li>Who you’re watching with <strong>(balances everyone’s taste)</strong></li>
-                <li>Preferred genres and allergies (triggers/want to avoid)</li>
-                <li>Seasoning (custom prompt) and spice level (safe → out there)</li>
-              </ul>
+
+            <div class="hero-ctas mt-8">
+              <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
+                <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" loading="lazy" />
+              </a>
+              <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="hero-cta-secondary" style="border-color:#FCF9EF;color:#FCF9EF;">
+                See how it works
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
             </div>
           </div>
 
-          <div class="flex gap-3 pt-2 justify-center md:justify-start">
-            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
-              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" loading="lazy" />
+          <!-- Screenshot poster (right, 5 cols) -->
+          <div class="md:col-span-5 order-2 overflow-hidden md:overflow-visible">
+            <div class="chef-frame">
+              <span class="chef-frame-meta">&#183; Order Up &#183;</span>
+              <div id="chefSlider" class="overflow-hidden rounded-2xl px-2 md:px-3 pt-6" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
+                <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
+                  <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
+                    <img src="assets/chef/chef-home.png" alt="Chef AI recommendation system home screen" class="w-full h-full object-cover" loading="lazy" />
+                  </li>
+                  <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
+                    <img src="assets/chef/chef-rec.png" alt="Chef personalized movie and TV recommendations with reasons" class="w-full h-full object-cover" loading="lazy" />
+                  </li>
+                  <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
+                    <img src="assets/chef/chef-taste.png" alt="Chef taste profile showing viewing preferences and genre affinities" class="w-full h-full object-cover" loading="lazy" />
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews: festival pull-quote strip -->
+    <section id="reviews" class="py-16 md:py-20">
+      <div class="reviews-header max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
+        <span class="section-kicker reviews-eyebrow align-start">The Reviews</span>
+        <h2 class="section-title mt-4">What the <em>critics</em> say.</h2>
+        <span class="reviews-divider" aria-hidden="true"></span>
+        <p class="reviews-lede">Real quotes from real Aftertaste users.</p>
+      </div>
+      <div class="reviews-belt-wrap mt-4">
+        <div class="reviews-belt" id="reviewsBelt">
+          <div class="reviews-set" id="reviewsSetA">
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Amazing Concept.</div>
+              </div>
+              <p class="pq-body">“Save hours of indecisive scrolling time on Netflix.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@nickmamolo</figcaption>
+              </div>
+            </figure>
+            <figure class="pullquote variant-cherry">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Signal over noise.</div>
+              </div>
+              <p class="pq-body">“Do IMDB or Rotten Tomatoes ratings matter anymore? My friends&rsquo; opinions are better signal for what is good.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@Landslidefink</figcaption>
+              </div>
+            </figure>
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Great app!!</div>
+              </div>
+              <p class="pq-body">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid).”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@ponse71820386</figcaption>
+              </div>
+            </figure>
+            <figure class="pullquote variant-mint">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Chef is incredible!</div>
+              </div>
+              <p class="pq-body">“So interesting to see my unique taste profile — Chef has recommended some of my absolute favourite watches ever.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@michaeltferg</figcaption>
+              </div>
+            </figure>
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Where has this been?</div>
+              </div>
+              <p class="pq-body">“About time an app like this came along. It knocks it out of the park.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@pancakes</figcaption>
+              </div>
+            </figure>
+          </div>
+          <!-- duplicate set for seamless CSS marquee loop (hidden via CSS on reduced-motion) -->
+          <div class="reviews-set is-duplicate" aria-hidden="true">
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Amazing Concept.</div>
+              </div>
+              <p class="pq-body">“Save hours of indecisive scrolling time on Netflix.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@nickmamolo</figcaption>
+              </div>
+            </figure>
+            <figure class="pullquote variant-cherry">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Signal over noise.</div>
+              </div>
+              <p class="pq-body">“Do IMDB or Rotten Tomatoes ratings matter anymore? My friends&rsquo; opinions are better signal for what is good.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@Landslidefink</figcaption>
+              </div>
+            </figure>
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Great app!!</div>
+              </div>
+              <p class="pq-body">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid).”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@ponse71820386</figcaption>
+              </div>
+            </figure>
+            <figure class="pullquote variant-mint">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Chef is incredible!</div>
+              </div>
+              <p class="pq-body">“So interesting to see my unique taste profile — Chef has recommended some of my absolute favourite watches ever.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@michaeltferg</figcaption>
+              </div>
+            </figure>
+            <figure class="pullquote">
+              <div>
+                <div class="pq-kicker">Aftertaste Reviews</div>
+                <div class="pq-title">Where has this been?</div>
+              </div>
+              <p class="pq-body">“About time an app like this came along. It knocks it out of the park.”</p>
+              <div>
+                <span class="pq-rule" aria-hidden="true"></span>
+                <figcaption class="pq-by">@pancakes</figcaption>
+              </div>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+    </section>
+
+    <!-- CTA — Visit us online (poster-style) -->
+    <section id="cta" aria-labelledby="cta-title">
+      <div class="cta-inner">
+        <div>
+          <span class="section-kicker cta-kicker align-start">The Matinee</span>
+          <h2 id="cta-title" class="section-title">Prefer the <em>medium</em> screen?</h2>
+          <span class="cta-divider" aria-hidden="true"></span>
+          <p class="cta-lede">Aftertaste works just as well in your browser. Pick up where you left off, keep your watchlist in sync, and browse on the big-ish screen when the couch isn&rsquo;t cutting it.</p>
+          <div class="cta-actions">
+            <a href="https://aftertaste.app/" class="cta-primary" aria-label="Open Aftertaste on the web">
+              Visit Aftertaste
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </a>
-            <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="rounded-xl border border-white/20 px-4 py-2 hover:bg-white/5 transition ring-1 ring-black/70">See how it works</a>
+            <a href="#features" class="cta-secondary" aria-label="See what's inside the app">
+              See what&rsquo;s inside
+            </a>
           </div>
+          <p class="cta-meta">All your data stays in sync with our mobile apps.</p>
         </div>
-
-          <!-- Carousel -->
-          <div class="order-2 md:order-2 overflow-hidden md:overflow-visible">
-          <div id="chefSlider" class="overflow-hidden rounded-3xl px-2 md:px-4" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
-            <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
-              <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <img src="assets/chef/chef-home.png" alt="Chef AI recommendation system home screen" class="w-full h-full object-cover" loading="lazy" />
-              </li>
-              <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <img src="assets/chef/chef-rec.png" alt="Chef personalized movie and TV recommendations with reasons" class="w-full h-full object-cover" loading="lazy" />
-              </li>
-              <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[60%] p-4 flex items-center justify-center">
-                <img src="assets/chef/chef-taste.png" alt="Chef taste profile showing viewing preferences and genre affinities" class="w-full h-full object-cover" loading="lazy" />
-              </li>
-            </ul>
+        <aside class="cta-ticket" aria-hidden="true">
+          <div class="ticket-no">Admit One &middot;</div>
+          <div class="ticket-headline">Aftertaste<br>on the web</div>
+          <div class="ticket-dashed"></div>
+          <div class="ticket-foot">
+            <span>Now Showing</span>
+            <span>aftertaste.app</span>
           </div>
-        </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Theater marquee + Reviews Poster Marquee -->
-    <section class="py-12 overflow-visible">
-      <div class="theater-section">
-        <div id="reviews-marquee">
-          <div class="theater-neon-bar top" id="neonTop"></div>
-          <div class="theater-marquee-message"><span>User Reviews</span></div>
-          <div class="theater-neon-bar bottom" id="neonBottom"></div>
-        </div>
-      </div>
-      <div class="max-w-[100vw] mx-auto px-0 overflow-x-hidden overflow-y-visible py-2 md:py-3" aria-label="User reviews">
-        <div class="marquee" id="reviewsBelt" style="width:200%;">
-          <div class="flex gap-8 px-4 w-1/2" id="reviewsSetA">
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Amazing Concept</h4>
-                <blockquote class="leading-relaxed">“... save hours of indecisive scrolling time on Netflix...”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@nickmamolo</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Good app and product!</h4>
-                <blockquote class="leading-relaxed">“Do IMDB or rotten tomatoes ratings matter anymore? I feel like my friends opinions are better signal for what is good!”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@Landslidefink</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Great app!!</h4>
-                <blockquote class="leading-relaxed">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid...).”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@ponse71820386;);</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Chef is incredible!</h4>
-                <blockquote class="leading-relaxed">“So interesting to see my unique taste profile, and Chef has recommended me some of my absolute favorite watches that I've ever seen.”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@michaeltferg</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Where has this been?</h4>
-                <blockquote class="leading-relaxed">“About time an app like this came along. It knocks it out of the park.”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@pancakes</figcaption>
-            </figure>
-          </div>
-          <!-- duplicate set for seamless loop -->
-          <div class="flex gap-8 px-4 w-1/2" id="reviewsSetB">
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Amazing Concept</h4>
-                <blockquote class="leading-relaxed">“... save hours of indecisive scrolling time on Netflix...”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@nickmamolo</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Good app and product!</h4>
-                <blockquote class="leading-relaxed">“Do IMDB or rotten tomatoes ratings matter anymore? I feel like my friends opinions are better signal for what is good!”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@Landslidefink</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Great app!!</h4>
-                <blockquote class="leading-relaxed">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid...).”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@ponse71820386;);</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Chef is incredible!</h4>
-                <blockquote class="leading-relaxed">“So interesting to see my unique taste profile, and Chef has recommended me some of my absolute favorite watches that I've ever seen.”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@michaeltferg</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Where has this been?</h4>
-                <blockquote class="leading-relaxed">“About time an app like this came along. It knocks it out of the park.”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@pancakes</figcaption>
-            </figure>
-          </div>
-          <!-- duplicate set for seamless loop -->
-          <div class="flex gap-8 px-4 w-1/2" id="reviewsSetB">
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-2deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Amazing Concept</h4>
-                <blockquote class="leading-relaxed">“... save hours of indecisive scrolling time on Netflix...”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@nickmamolo</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[1.5deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Good app and product!</h4>
-                <blockquote class="leading-relaxed">“Do IMDB or rotten tomatoes ratings matter anymore? I feel like my friends opinions are better signal for what is good!”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@Landslidefink</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Great app!!</h4>
-                <blockquote class="leading-relaxed">“Goodreads meets IMDB meets friendship. So glad to have an app that tells me the next big show or movie I should watch (or avoid...).”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@ponse71820386;);</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Chef is incredible!</h4>
-                <blockquote class="leading-relaxed">“So interesting to see my unique taste profile, and Chef has recommended me some of my absolute favorite watches that I've ever seen.”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@michaeltferg</figcaption>
-            </figure>
-            <figure class="w-[260px] md:w-[280px] aspect-[2/3] rounded-xl ring-1 ring-white/10 bg-coffee text-licorice p-5 rotate-[-1deg] flex flex-col justify-between">
-              <header class="text-[10px] tracking-[0.2em] uppercase text-black/60 text-center">Aftertaste Reviews</header>
-              <div class="text-center">
-                <h4 class="font-display text-2xl leading-tight mb-3">Where has this been?</h4>
-                <blockquote class="leading-relaxed">“About time an app like this came along. It knocks it out of the park.”</blockquote>
-              </div>
-              <figcaption class="text-sm text-black/70 text-center">@pancakes</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Web app callout -->
-    <section class="py-20" style="background-color: rgba(65,155,133,0.90);">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h3 class="font-display text-4xl text-white mb-6">Prefer the medium screen?</h3>
-        <a href="https://aftertaste.app/" class="inline-block rounded-2xl bg-popcorn text-black font-semibold px-6 py-3 shadow-glow hover:shadow-lg transition">Visit us online</a>
-        <p class="text-almond/80 mt-5">All your data stays in sync with our mobile apps.</p>
+        </aside>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 text-almond" style="border-bottom: 1px solid #FCF9EF;">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="font-display text-4xl mb-6">Curious? Comments? Questions?</h2>
-        <p class="text-lg">
-          contact us at: <a href="mailto:hello@aftertaste.com" class="text-almond hover:text-cottoncandy transition-colors underline">hello@aftertaste.com</a>
-        </p>
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="contact-inner">
+        <span class="section-kicker contact-kicker">The Box Office</span>
+        <h2 id="contact-title" class="section-title mt-4">Curious? Comments? <em>Questions?</em></h2>
+        <span class="contact-divider" aria-hidden="true"></span>
+        <p class="contact-lede">We&rsquo;re a small, independent crew and we read every note. Drop us a line &mdash; we usually write back within a day or two.</p>
+        <a href="mailto:hello@aftertaste.com" class="contact-mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+          hello@aftertaste.com
+        </a>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="py-12" role="contentinfo">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center md:items-center justify-center md:justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <img src="assets/logo.png" alt="Aftertaste logo" class="h-8 w-8 rounded-full ring-1 ring-white/10" loading="lazy" />
-        <div>
-          <div class="font-display tracking-widest">AFTERTASTE</div>
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo.png" alt="" class="h-9 w-9 rounded-full ring-1 ring-almond/15" loading="lazy" width="36" height="36" />
+          <span class="footer-mark">AFTERTASTE</span>
         </div>
+        <p class="footer-tag">Track what you watch, compare tastes with friends, and discover what to watch next &mdash; no algorithm bubbles involved.</p>
+        <nav class="footer-social" aria-label="Social media">
+          <a href="https://www.instagram.com/aftertasteapp/" target="_blank" rel="noopener noreferrer" aria-label="Follow Aftertaste on Instagram">
+            <img src="assets/instagram.svg" alt="" loading="lazy" width="18" height="18" />
+          </a>
+          <a href="https://www.tiktok.com/@aftertasteapp" target="_blank" rel="noopener noreferrer" aria-label="Follow Aftertaste on TikTok">
+            <img src="assets/tiktok.svg" alt="" loading="lazy" width="18" height="18" />
+          </a>
+        </nav>
       </div>
-      <nav class="flex items-center gap-4 footer-social" aria-label="Social media links">
-        <a href="https://www.instagram.com/aftertasteapp/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram" class="p-2 rounded-lg hover:bg-white/10">
-          <img src="assets/instagram.svg" alt="Instagram icon" class="h-5 w-5" loading="lazy" />
-        </a>
-        <a href="https://www.tiktok.com/@aftertasteapp" target="_blank" rel="noopener noreferrer" aria-label="Follow us on TikTok" class="p-2 rounded-lg hover:bg-white/10">
-          <img src="assets/tiktok.svg" alt="TikTok icon" class="h-5 w-5" loading="lazy" />
-        </a>
+      <nav aria-labelledby="footer-explore-title">
+        <h4 id="footer-explore-title">Explore</h4>
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#chef">Chef</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="https://aftertaste.app/">Web app</a></li>
+        </ul>
       </nav>
-      <div class="text-sm text-white/60">
-        <p>&copy; 2025 Aftertaste, LLC.</p>
-      </div>
+      <nav aria-labelledby="footer-legal-title">
+        <h4 id="footer-legal-title">Company</h4>
+        <ul class="footer-links">
+          <li><a href="mailto:hello@aftertaste.com">Contact</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Aftertaste, LLC. All rights reserved.</p>
+      <p>Made with care for people who love movies.</p>
     </div>
   </footer>
 
@@ -1174,95 +1610,6 @@
       go(0);
     })();
 
-    // Features auto-scroll: simple horizontal scrolling
-    (function(){
-      const scroller = document.getElementById('featuresScroller');
-      if (!scroller) return;
-
-      let animationFrame = null;
-      let lastInteractionTime = 0;
-      let isAutoScrolling = false;
-      let lastKnownScrollLeft = 0;
-      const scrollSpeed = 0.5;
-      const pauseAfterInteraction = 3000;
-
-      function autoScroll() {
-        const now = Date.now();
-        const timeSinceInteraction = now - lastInteractionTime;
-
-        if (lastInteractionTime === 0 || timeSinceInteraction >= pauseAfterInteraction) {
-          isAutoScrolling = true;
-          scroller.scrollLeft += scrollSpeed;
-          lastKnownScrollLeft = scroller.scrollLeft;
-
-          if (scroller.scrollLeft >= scroller.scrollWidth - scroller.clientWidth) {
-            scroller.scrollLeft = 0;
-            lastKnownScrollLeft = 0;
-          }
-
-          isAutoScrolling = false;
-        }
-
-        animationFrame = requestAnimationFrame(autoScroll);
-      }
-
-      function startScrolling() {
-        if (!animationFrame) {
-          lastKnownScrollLeft = scroller.scrollLeft;
-          animationFrame = requestAnimationFrame(autoScroll);
-        }
-      }
-
-      function stopScrolling() {
-        if (animationFrame) {
-          cancelAnimationFrame(animationFrame);
-          animationFrame = null;
-        }
-      }
-
-      // Only detect user scrolling if scroll position changed unexpectedly
-      scroller.addEventListener('scroll', () => {
-        if (!isAutoScrolling) {
-          const currentScroll = scroller.scrollLeft;
-          const expectedScroll = lastKnownScrollLeft;
-          const diff = Math.abs(currentScroll - expectedScroll);
-
-          // If scroll changed by more than our auto-scroll speed, user is scrolling
-          if (diff > scrollSpeed * 2) {
-            lastInteractionTime = Date.now();
-          }
-
-          lastKnownScrollLeft = currentScroll;
-        }
-      }, {passive: true});
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            startScrolling();
-          } else {
-            stopScrolling();
-          }
-        });
-      }, { threshold: 0.2 });
-
-      observer.observe(scroller);
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-          stopScrolling();
-        } else {
-          const rect = scroller.getBoundingClientRect();
-          if (rect.top < window.innerHeight && rect.bottom > 0) {
-            startScrolling();
-          }
-        }
-      });
-
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        stopScrolling();
-      }
-    })();
 
     // Contact form (mailto)
     const form = document.getElementById('contactForm');
@@ -1281,6 +1628,39 @@
         window.location.href = mailto;
       });
     }
+
+    // ---- Phase 1: Header scroll state + mobile nav ----
+    (function(){
+      var header = document.getElementById('top');
+      if (header) {
+        var onScroll = function(){
+          if (window.scrollY > 12) header.classList.add('is-scrolled');
+          else header.classList.remove('is-scrolled');
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      }
+
+      var btn = document.getElementById('mobileMenuBtn');
+      var panel = document.getElementById('mobile-nav');
+      if (btn && panel) {
+        var closeMenu = function(){
+          panel.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', 'Open menu');
+        };
+        var openMenu = function(){
+          panel.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.setAttribute('aria-label', 'Close menu');
+        };
+        btn.addEventListener('click', function(){
+          if (panel.classList.contains('open')) closeMenu(); else openMenu();
+        });
+        panel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
+        document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+      }
+    })();
   </script>
 </body>
 </html>
