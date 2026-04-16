@@ -428,22 +428,12 @@
     .nav-link:after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: #E3452D; transform: scaleX(0); transform-origin: left center; transition: transform 240ms ease; }
     .nav-link:hover:after, .nav-link:focus-visible:after { transform: scaleX(1); }
 
-    /* Compact "Get the App" pill */
-    .get-app-pill { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem .9rem; border-radius: 9999px; background: #E3452D; color: #FCF9EF; font-weight: 600; letter-spacing: .02em; font-size: .8125rem; text-transform: uppercase; box-shadow: 0 2px 0 rgba(0,0,0,.25), 0 8px 20px rgba(227,69,45,.25); transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease; }
-    .get-app-pill:hover { background: #c33a24; transform: translateY(-1px); }
-    .get-app-pill:focus-visible { outline: 2px solid #FCF9EF; outline-offset: 2px; }
-    .get-app-pill svg { width: 14px; height: 14px; }
-
     /* Mobile nav panel */
     #mobile-nav { transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 200ms ease, transform 200ms ease; }
     #mobile-nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
     .mobile-menu-btn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; color: #FCF9EF; border: 1px solid rgba(252,249,239,.15); background: rgba(28,28,28,.4); }
     .mobile-menu-btn:hover { background: rgba(28,28,28,.7); }
     .mobile-menu-btn:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
-
-    /* Hero eyebrow/kicker */
-    .hero-kicker { display: inline-flex; align-items: center; gap: .6rem; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: #1C1C1C; opacity: .7; }
-    .hero-kicker:before { content: ""; display: inline-block; width: 28px; height: 1px; background: #1C1C1C; opacity: .5; }
 
     /* Hero primary/secondary CTAs */
     .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; }
@@ -453,12 +443,6 @@
     .hero-cta-secondary:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
     .hero-cta-secondary svg { width: 14px; height: 14px; transition: transform 200ms ease; }
     .hero-cta-secondary:hover svg { transform: translateY(2px); }
-
-    /* Vintage brand stamp in the hero corner */
-    .brand-stamp { position: absolute; top: 28px; right: 28px; z-index: 8; width: 92px; height: 92px; border-radius: 50%; background: #1C1C1C; color: #FCF9EF; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,.25), 0 0 0 2px rgba(252,249,239,.12) inset; transform: rotate(-8deg); }
-    .brand-stamp svg { width: 100%; height: 100%; }
-    .brand-stamp text { font-family: 'Anton', Impact, sans-serif; font-size: 11px; letter-spacing: 1.5px; fill: #FCF9EF; }
-    @media (max-width: 768px) { .brand-stamp { top: 14px; right: 14px; width: 68px; height: 68px; } .brand-stamp text { font-size: 9px; letter-spacing: 1px; } }
 
     /* NOW PLAYING marquee strip (below hero) */
     .now-playing { background: #1C1C1C; color: #FCF9EF; border-top: 1px solid rgba(252,249,239,.08); border-bottom: 1px solid rgba(252,249,239,.08); overflow: hidden; position: relative; }
@@ -800,9 +784,8 @@
           <a href="#features" class="nav-link">Features</a>
           <a href="#chef" class="nav-link">Chef</a>
           <a href="#contact" class="nav-link">Contact</a>
-          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="get-app-pill">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c.036 1.15-.39 2.26-1.127 3.08-.78.87-2.04 1.55-3.27 1.45-.06-1.14.49-2.31 1.21-3.05.78-.82 2.14-1.43 3.19-1.48zM20.5 17.27c-.58 1.34-.86 1.94-1.6 3.13-1.04 1.66-2.5 3.72-4.31 3.74-1.6.02-2.02-1.04-4.2-1.03-2.18.01-2.64 1.05-4.25 1.03-1.81-.02-3.19-1.88-4.23-3.54C-1.1 16.44-1.45 10.4 1.11 7.2 2.78 5.08 5.03 3.87 7.18 3.87c2.18 0 3.54 1.19 5.34 1.19 1.74 0 2.8-1.2 5.31-1.2 1.89 0 3.89 1.03 5.31 2.81-4.66 2.55-3.91 9.22-2.64 10.6z"/></svg>
-            Get the App
+          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block shrink-0 transition hover:-translate-y-0.5">
+            <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" loading="eager" decoding="async" width="120" height="40" />
           </a>
         </div>
 
@@ -825,9 +808,8 @@
           <a href="#chef" class="nav-link py-2">Chef</a>
           <a href="#contact" class="nav-link py-2">Contact</a>
         </div>
-        <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="get-app-pill mt-4 w-full justify-center">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c.036 1.15-.39 2.26-1.127 3.08-.78.87-2.04 1.55-3.27 1.45-.06-1.14.49-2.31 1.21-3.05.78-.82 2.14-1.43 3.19-1.48zM20.5 17.27c-.58 1.34-.86 1.94-1.6 3.13-1.04 1.66-2.5 3.72-4.31 3.74-1.6.02-2.02-1.04-4.2-1.03-2.18.01-2.64 1.05-4.25 1.03-1.81-.02-3.19-1.88-4.23-3.54C-1.1 16.44-1.45 10.4 1.11 7.2 2.78 5.08 5.03 3.87 7.18 3.87c2.18 0 3.54 1.19 5.34 1.19 1.74 0 2.8-1.2 5.31-1.2 1.89 0 3.89 1.03 5.31 2.81-4.66 2.55-3.91 9.22-2.64 10.6z"/></svg>
-          Get the App
+        <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="mt-4 flex justify-center transition hover:-translate-y-0.5">
+          <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-11" loading="lazy" decoding="async" width="120" height="40" />
         </a>
       </div>
     </nav>
@@ -845,21 +827,9 @@
       <div class="reel-band" aria-hidden="true"></div>
       <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
       <div id="spot" class="spot projector-spot" aria-hidden="true"></div>
-      <!-- Vintage brand stamp in the corner -->
-      <div class="brand-stamp" aria-hidden="true">
-        <svg viewBox="0 0 100 100">
-          <defs>
-            <path id="stamp-circle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
-          </defs>
-          <text><textPath href="#stamp-circle" startOffset="0">AFTERTASTE &#183; EST. 2023 &#183; AFTERTASTE &#183; EST. 2023 &#183; </textPath></text>
-          <circle cx="50" cy="50" r="14" fill="none" stroke="#FCF9EF" stroke-width="1.5" opacity=".5"/>
-          <circle cx="50" cy="50" r="3.5" fill="#E3452D"/>
-        </svg>
-      </div>
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-licorice">
         <article class="space-y-6 text-center md:text-left">
-          <span class="hero-kicker">A social hub for critics &amp; casual fans</span>
           <h1 class="font-display text-licorice text-[2.75rem] sm:text-6xl md:text-7xl leading-[0.95] tracking-tight">Your Ultimate<br/>Movie &amp; TV Hub</h1>
           <p class="text-base md:text-lg text-licorice/85 max-w-lg mx-auto md:mx-0">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
           <div class="hero-ctas">
@@ -1007,7 +977,7 @@
           <p class="who-lede mx-auto md:mx-0">Aftertaste is the social hub for movie and TV fans who'd rather hear from friends, creators, and critics than a feed that thinks it knows them.</p>
           <p class="who-lede mx-auto md:mx-0">Track what you watch, compare tastes, and get real recommendations — because your next favorite thing shouldn't feel like scrolling forever.</p>
           <div class="pt-2">
-            <span class="who-meta"><span class="who-dot" aria-hidden="true"></span> Est. 2023 &#183; Independent</span>
+            <span class="who-meta"><span class="who-dot" aria-hidden="true"></span> Independent Crew &#183; Est. 2021</span>
           </div>
         </article>
       </div>
@@ -1149,7 +1119,7 @@
           <!-- Screenshot poster (right, 5 cols) -->
           <div class="md:col-span-5 order-2 overflow-hidden md:overflow-visible">
             <div class="chef-frame">
-              <span class="chef-frame-meta">Nº 01 · Tonight</span>
+              <span class="chef-frame-meta">Tonight's Order</span>
               <div id="chefSlider" class="overflow-hidden rounded-2xl px-2 md:px-3 pt-6" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
                 <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
                   <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
@@ -1175,7 +1145,7 @@
         <span class="section-kicker reviews-eyebrow align-start">The Reviews</span>
         <h2 class="section-title mt-4">What the <em>critics</em> say.</h2>
         <span class="reviews-divider" aria-hidden="true"></span>
-        <p class="reviews-lede">A strip of pull-quotes from real Aftertaste moviegoers — lightly edited, not lightly held.</p>
+        <p class="reviews-lede">Real quotes from real Aftertaste users.</p>
       </div>
       <div class="reviews-belt-wrap mt-4">
         <div class="reviews-belt" id="reviewsBelt">
@@ -1319,7 +1289,7 @@
           <p class="cta-meta">All your data stays in sync with our mobile apps.</p>
         </div>
         <aside class="cta-ticket" aria-hidden="true">
-          <div class="ticket-no">Admit One &middot; Nº 01</div>
+          <div class="ticket-no">Admit One &middot;</div>
           <div class="ticket-headline">Aftertaste<br>on the web</div>
           <div class="ticket-dashed"></div>
           <div class="ticket-foot">
