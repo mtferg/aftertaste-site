@@ -661,6 +661,67 @@
     #contact .contact-mail:hover, #contact .contact-mail:focus-visible { color: #E3452D; border-color: #E3452D; }
     #contact .contact-mail:focus-visible { outline: 2px solid #E3452D; outline-offset: 4px; }
 
+    .feature-scroll::-webkit-scrollbar-thumb:hover {
+      background: #f8b744;
+    }
+
+    /* Firefox scrollbar */
+    .feature-scroll {
+      scrollbar-width: thin;
+      scrollbar-color: #F1A20E rgba(255, 255, 255, 0.05);
+    }
+
+    /* ---- Phase 1: Header + Hero polish ---- */
+
+    /* Header scroll state: transparent over hero, solid Licorice once scrolled */
+    #top { backdrop-filter: saturate(140%) blur(0px); transition: background-color 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease; }
+    #top.is-scrolled { background-color: rgba(28,28,28,.92); backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid rgba(252,249,239,.08); }
+    #top.is-scrolled .nav-divider { opacity: 0; }
+    #top:not(.is-scrolled) .nav-divider { opacity: 0; }
+
+    /* Nav link underline (Cherry), replaces popcorn color swap */
+    .nav-link { position: relative; color: #FCF9EF; opacity: .85; transition: opacity 200ms ease, color 200ms ease; }
+    .nav-link:hover, .nav-link:focus-visible { opacity: 1; color: #FCF9EF; }
+    .nav-link:after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: #E3452D; transform: scaleX(0); transform-origin: left center; transition: transform 240ms ease; }
+    .nav-link:hover:after, .nav-link:focus-visible:after { transform: scaleX(1); }
+
+    /* "Get the App" nav badge */
+    .get-app-badge { display: inline-block; transition: transform 180ms ease; }
+    .get-app-badge:hover { transform: translateY(-1px); }
+    .get-app-badge:focus-visible { outline: 2px solid #FCF9EF; outline-offset: 2px; border-radius: 6px; }
+    .get-app-badge img { height: 32px; display: block; }
+
+    /* Mobile nav panel */
+    #mobile-nav { transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 200ms ease, transform 200ms ease; }
+    #mobile-nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .mobile-menu-btn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; color: #FCF9EF; border: 1px solid rgba(252,249,239,.15); background: rgba(28,28,28,.4); }
+    .mobile-menu-btn:hover { background: rgba(28,28,28,.7); }
+    .mobile-menu-btn:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
+
+    /* Hero eyebrow/kicker */
+
+    /* Hero primary/secondary CTAs */
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; }
+    @media (min-width: 768px) { .hero-ctas { justify-content: flex-start; } }
+    .hero-cta-secondary { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.25rem; border-radius: 9999px; border: 1.5px solid #1C1C1C; color: #1C1C1C; font-weight: 600; font-size: .875rem; letter-spacing: .02em; transition: background-color 180ms ease, color 180ms ease, transform 180ms ease; }
+    .hero-cta-secondary:hover { background: #1C1C1C; color: #FCF9EF; transform: translateY(-1px); }
+    .hero-cta-secondary:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
+    .hero-cta-secondary svg { width: 14px; height: 14px; transition: transform 200ms ease; }
+    .hero-cta-secondary:hover svg { transform: translateY(2px); }
+
+    /* NOW PLAYING marquee strip (below hero) */
+    .now-playing { background: #1C1C1C; color: #FCF9EF; border-top: 1px solid rgba(252,249,239,.08); border-bottom: 1px solid rgba(252,249,239,.08); overflow: hidden; position: relative; }
+    .now-playing:before, .now-playing:after { content: ""; position: absolute; top: 0; bottom: 0; width: 64px; z-index: 2; pointer-events: none; }
+    .now-playing:before { left: 0; background: linear-gradient(90deg, #1C1C1C, rgba(28,28,28,0)); }
+    .now-playing:after { right: 0; background: linear-gradient(-90deg, #1C1C1C, rgba(28,28,28,0)); }
+    .now-playing-track { display: flex; gap: 2.5rem; padding: .85rem 0; white-space: nowrap; animation: npScroll 38s linear infinite; will-change: transform; }
+    .now-playing-track span { font-family: 'Anton', Impact, sans-serif; font-size: 1.15rem; letter-spacing: .35em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 2.5rem; }
+    .now-playing-track span:after { content: "\2022"; color: #E3452D; margin-left: 2.5rem; }
+    @keyframes npScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .now-playing-track { animation: none; justify-content: center; flex-wrap: wrap; white-space: normal; }
+    }
+
     /* Footer — editorial refresh */
     .site-footer { background: #0F0F0F; color: rgba(252,249,239,.78); padding: 3.5rem 0 2rem; border-top: 1px solid rgba(252,249,239,.06); }
     .site-footer .footer-grid { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; }
@@ -784,8 +845,8 @@
           <a href="#features" class="nav-link">Features</a>
           <a href="#chef" class="nav-link">Chef</a>
           <a href="#contact" class="nav-link">Contact</a>
-          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block shrink-0 transition hover:-translate-y-0.5">
-            <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" loading="eager" decoding="async" width="120" height="40" />
+          <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="get-app-badge">
+            <img src="assets/App_Store_Download.svg" alt="Download on the App Store" width="120" height="40" loading="eager" decoding="async" />
           </a>
         </div>
 
@@ -808,8 +869,8 @@
           <a href="#chef" class="nav-link py-2">Chef</a>
           <a href="#contact" class="nav-link py-2">Contact</a>
         </div>
-        <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="mt-4 flex justify-center transition hover:-translate-y-0.5">
-          <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-11" loading="lazy" decoding="async" width="120" height="40" />
+        <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="get-app-badge mt-4 flex justify-center">
+          <img src="assets/App_Store_Download.svg" alt="Download on the App Store" width="120" height="40" loading="lazy" decoding="async" />
         </a>
       </div>
     </nav>
@@ -827,7 +888,6 @@
       <div class="reel-band" aria-hidden="true"></div>
       <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
       <div id="spot" class="spot projector-spot" aria-hidden="true"></div>
-
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-licorice">
         <article class="space-y-6 text-center md:text-left">
           <h1 class="font-display text-licorice text-[2.75rem] sm:text-6xl md:text-7xl leading-[0.95] tracking-tight">Your Ultimate<br/>Movie &amp; TV Hub</h1>
@@ -977,7 +1037,7 @@
           <p class="who-lede mx-auto md:mx-0">Aftertaste is the social hub for movie and TV fans who'd rather hear from friends, creators, and critics than a feed that thinks it knows them.</p>
           <p class="who-lede mx-auto md:mx-0">Track what you watch, compare tastes, and get real recommendations — because your next favorite thing shouldn't feel like scrolling forever.</p>
           <div class="pt-2">
-            <span class="who-meta"><span class="who-dot" aria-hidden="true"></span> Independent Crew &#183; Est. 2021</span>
+            <span class="who-meta"><span class="who-dot" aria-hidden="true"></span> Independent &#183; Est. 2021</span>
           </div>
         </article>
       </div>
@@ -1119,7 +1179,7 @@
           <!-- Screenshot poster (right, 5 cols) -->
           <div class="md:col-span-5 order-2 overflow-hidden md:overflow-visible">
             <div class="chef-frame">
-              <span class="chef-frame-meta">Tonight's Order</span>
+              <span class="chef-frame-meta">&#183; Order Up &#183;</span>
               <div id="chefSlider" class="overflow-hidden rounded-2xl px-2 md:px-3 pt-6" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
                 <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
                   <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
