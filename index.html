@@ -690,6 +690,9 @@
     .get-app-badge:hover { transform: translateY(-1px); }
     .get-app-badge:focus-visible { outline: 2px solid #FCF9EF; outline-offset: 2px; border-radius: 6px; }
     .get-app-badge img { height: 32px; display: block; }
+    @media (min-width: 768px) {
+      header nav > div.flex > div.hidden.md\:flex .get-app-badge img { height: 36px; width: auto; }
+    }
 
     /* Mobile nav panel */
     #mobile-nav { transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 200ms ease, transform 200ms ease; }
@@ -846,7 +849,7 @@
           <a href="#chef" class="nav-link">Chef</a>
           <a href="#contact" class="nav-link">Contact</a>
           <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="get-app-badge">
-            <img src="assets/App_Store_Download.svg" alt="Download on the App Store" width="120" height="40" loading="eager" decoding="async" />
+            <img src="assets/App_Store_Download.svg" alt="Download on the App Store" width="135" height="45" loading="eager" decoding="async" />
           </a>
         </div>
 
