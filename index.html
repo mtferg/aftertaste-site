@@ -14,8 +14,11 @@
   <meta property="og:url" content="https://aftertaste.com/" />
   <meta property="og:title" content="Aftertaste — Your Ultimate Movie and TV Hub" />
   <meta property="og:description" content="Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved." />
-  <meta property="og:image" content="https://aftertaste.com/assets/hero-portrait.png" />
-  <meta property="og:image:alt" content="Aftertaste mobile app interface showing movie tracking and recommendations" />
+  <meta property="og:image" content="https://aftertaste.com/assets/og-card.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Aftertaste — Your Ultimate Movie and TV Hub. Track. Trade takes. Trust your tastebuds." />
   <meta property="og:site_name" content="Aftertaste" />
   <meta property="og:locale" content="en_US" />
 
@@ -24,8 +27,8 @@
   <meta name="twitter:url" content="https://aftertaste.com/" />
   <meta name="twitter:title" content="Aftertaste — Your Ultimate Movie and TV Hub" />
   <meta name="twitter:description" content="Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved." />
-  <meta name="twitter:image" content="https://aftertaste.com/assets/hero-portrait.png" />
-  <meta name="twitter:image:alt" content="Aftertaste mobile app interface showing movie tracking and recommendations" />
+  <meta name="twitter:image" content="https://aftertaste.com/assets/og-card.png" />
+  <meta name="twitter:image:alt" content="Aftertaste — Your Ultimate Movie and TV Hub. Track. Trade takes. Trust your tastebuds." />
   <meta name="twitter:site" content="@aftertasteapp" />
   <meta name="twitter:creator" content="@aftertasteapp" />
 
@@ -744,83 +747,263 @@
   </style>
 
   <!-- Structured Data (JSON-LD) -->
+  <!--
+    Core entity graph: the Organization, the WebSite it publishes, and the
+    SoftwareApplication it offers. Consolidated into a single @graph so
+    shared fields (url, publisher, sameAs) stay in sync and reference each
+    other by @id. FAQPage, BreadcrumbList, and ItemList are kept in
+    dedicated blocks so Google's Rich Results Test can be run against each
+    one in isolation.
+  -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Aftertaste",
-    "applicationCategory": "EntertainmentApplication",
-    "operatingSystem": "iOS, Web",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "description": "Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved. Get personalized recommendations from people you trust.",
-    "url": "https://aftertaste.com/",
-    "downloadUrl": "https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530",
-    "screenshot": "https://aftertaste.com/assets/hero-portrait.png",
-    "softwareVersion": "3.1.0",
-    "author": {
-      "@type": "Organization",
-      "name": "Aftertaste, LLC",
-      "url": "https://aftertaste.com/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Aftertaste, LLC",
-      "url": "https://aftertaste.com/"
-    },
-    "featureList": [
-      "Track what you watch",
-      "Compare tastes with friends",
-      "Custom watch recommendations",
-      "Collaborative lists",
-      "Review and rate movies and TV shows",
-      "Discover trending content",
-      "Personalized taste profile"
-    ],
-    "sameAs": [
-      "https://www.instagram.com/aftertasteapp/",
-      "https://www.tiktok.com/@aftertasteapp",
-      "https://x.com/aftertasteapp"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://aftertaste.com/#organization",
+        "name": "Aftertaste",
+        "legalName": "Aftertaste, LLC",
+        "url": "https://aftertaste.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://aftertaste.com/assets/logo.png",
+          "width": 512,
+          "height": 512
+        },
+        "description": "Aftertaste is the social hub for Movie and TV fans who trust people over algorithms.",
+        "sameAs": [
+          "https://www.instagram.com/aftertasteapp/",
+          "https://www.tiktok.com/@aftertasteapp",
+          "https://x.com/aftertasteapp"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "Customer Service",
+          "availableLanguage": ["English"]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://aftertaste.com/#website",
+        "name": "Aftertaste",
+        "url": "https://aftertaste.com/",
+        "description": "Your Ultimate Movie and TV Hub",
+        "inLanguage": "en-US",
+        "publisher": { "@id": "https://aftertaste.com/#organization" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://aftertaste.com/#app",
+        "name": "Aftertaste",
+        "applicationCategory": "EntertainmentApplication",
+        "operatingSystem": "iOS, Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved. Get personalized recommendations from people you trust.",
+        "url": "https://aftertaste.com/",
+        "downloadUrl": "https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530",
+        "screenshot": "https://aftertaste.com/assets/hero-portrait.png",
+        "softwareVersion": "3.1.0",
+        "author": { "@id": "https://aftertaste.com/#organization" },
+        "publisher": { "@id": "https://aftertaste.com/#organization" },
+        "featureList": [
+          "Track what you watch",
+          "Compare tastes with friends",
+          "Custom watch recommendations",
+          "Collaborative lists",
+          "Review and rate movies and TV shows",
+          "Discover trending content",
+          "Personalized taste profile"
+        ],
+        "sameAs": [
+          "https://www.instagram.com/aftertasteapp/",
+          "https://www.tiktok.com/@aftertasteapp",
+          "https://x.com/aftertasteapp"
+        ]
+      }
     ]
   }
   </script>
 
+  <!-- FAQ rich results -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Aftertaste",
-    "legalName": "Aftertaste, LLC",
-    "url": "https://aftertaste.com/",
-    "logo": "https://aftertaste.com/assets/logo.png",
-    "description": "Aftertaste is the social hub for Movie and TV fans who trust people over algorithms.",
-    "sameAs": [
-      "https://www.instagram.com/aftertasteapp/",
-      "https://www.tiktok.com/@aftertasteapp",
-      "https://x.com/aftertasteapp"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "Customer Service",
-      "availableLanguage": ["English"]
-    }
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Aftertaste free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Aftertaste is free to download and use on the App Store and on the web. You can track what you watch, build lists, and follow friends at no cost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is Aftertaste different from algorithmic recommendation apps?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Aftertaste is built on the people whose taste you trust instead of an opaque algorithm. You follow friends (your Tastebuds), see their ratings and reviews, and get recommendations informed by real people — not a recommendation engine guessing at your preferences."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Aftertaste work for TV shows as well as movies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Aftertaste tracks both movies and TV shows, including individual seasons and episodes, so you always know where you left off on a series and can rate or discuss each episode."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there an Android version of Aftertaste?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An Android version is coming soon. In the meantime, Aftertaste is available on iOS and via the web app at aftertaste.app, which works on any modern browser including mobile."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Chef in Aftertaste?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Chef is Aftertaste's personal recommendation feature. It learns your taste over time — your genre affinities, creative influences, and what you actually finish — and serves five custom watch recommendations tuned to you or the group you're watching with, each with a clear reason why it fits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I build collaborative watchlists with friends?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can build lists solo or invite friends to collaborate in real time — great for road trips, date nights, movie clubs, or sharing themed lists like horror marathons or all-time favorites."
+        }
+      }
+    ]
   }
   </script>
 
+  <!-- Breadcrumbs (single-page today; scaffolded for future /privacy, /press, etc.) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Aftertaste",
-    "url": "https://aftertaste.com/",
-    "description": "Your Ultimate Movie and TV Hub",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Aftertaste, LLC"
-    }
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://aftertaste.com/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Features list (mirrors the "A menu of features" grid on the page) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Aftertaste app features",
+    "description": "Nine ways Aftertaste helps you track what you watch, trade takes with the people whose taste you trust, and figure out what to queue up next.",
+    "itemListOrder": "https://schema.org/ItemListOrderAscending",
+    "numberOfItems": 9,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "Tastebuds Feed",
+          "description": "Follow friends and see what the people whose taste you trust are watching.",
+          "url": "https://aftertaste.com/#features"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "Track Your Content",
+          "description": "Catalog everything you've watched, shelve what's in progress, and queue what's next.",
+          "url": "https://aftertaste.com/#features"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "Build Lists",
+          "description": "Curate watch lists solo or collaborate with friends in real time.",
+          "url": "https://aftertaste.com/#features"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "All the Info",
+          "description": "Cast, trailers, where to stream, and episode details — every detail in one place.",
+          "url": "https://aftertaste.com/#features"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "Actor Profiles",
+          "description": "Recognize that face and browse everything they've ever been in.",
+          "url": "https://aftertaste.com/#features"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "Your Profile",
+          "description": "Show off your Top Ate and earn badges as you rack up the hours.",
+          "url": "https://aftertaste.com/#features"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "What's Trending",
+          "description": "Follow what's trending and top-rated over the last week, month, or year.",
+          "url": "https://aftertaste.com/#features"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 8,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "Scores for You",
+          "description": "Your score, your Tastebuds' average, and the global score — all side by side.",
+          "url": "https://aftertaste.com/#features"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 9,
+        "item": {
+          "@type": "CreativeWork",
+          "name": "Discuss & Debate",
+          "description": "Dig into nested threads filtered to the people and takes you actually care about.",
+          "url": "https://aftertaste.com/#features"
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -831,7 +1014,7 @@
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
       <div class="flex h-16 items-center justify-between">
         <a href="#top" class="flex items-center gap-2.5" aria-label="Aftertaste home">
-          <img src="assets/logo.png" alt="" class="h-8 w-8 rounded-full ring-1 ring-almond/15" loading="eager">
+          <img src="assets/logo.png" alt="" role="presentation" class="h-8 w-8 rounded-full ring-1 ring-almond/15" loading="eager" width="32" height="32">
           <span class="font-display tracking-[0.18em] text-lg md:text-xl text-almond">AFTERTASTE</span>
         </a>
 
@@ -1377,7 +1560,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-brand">
-          <img src="assets/logo.png" alt="" class="h-9 w-9 rounded-full ring-1 ring-almond/15" loading="lazy" width="36" height="36" />
+          <img src="assets/logo.png" alt="" role="presentation" class="h-9 w-9 rounded-full ring-1 ring-almond/15" loading="lazy" width="36" height="36" />
           <span class="footer-mark">AFTERTASTE</span>
         </div>
         <p class="footer-tag">Track what you watch, compare tastes with friends, and discover what to watch next &mdash; no algorithm bubbles involved.</p>
