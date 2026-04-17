@@ -6,5 +6,5 @@ Allow: /
 Disallow: /assets/grain.svg
 
 # Sitemap location (update this when you create your sitemap)
-Sitemap: https://aftertaste.app/sitemap.xml
+Sitemap: https://aftertaste.com/sitemap.xml
 
