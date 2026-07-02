@@ -68,6 +68,8 @@
   <!-- Site-specific custom styles (previously inlined in <head>; extracted so
        the HTML fits comfortably in the initial TCP window for faster FCP). -->
   <link rel="stylesheet" href="assets/site.css">
+  <!-- JS gate: reveal-on-scroll initial states only apply when JS can undo them -->
+  <script>document.documentElement.classList.add('js');</script>
 
   <!-- Structured Data (JSON-LD) -->
   <!--
@@ -393,6 +395,15 @@
       <div class="reel-band" aria-hidden="true"></div>
       <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
       <div id="spot" class="spot projector-spot" aria-hidden="true"></div>
+      <div class="film-scratch s1" aria-hidden="true"></div>
+      <div class="film-scratch s2" aria-hidden="true"></div>
+      <div class="cue-mark" aria-hidden="true"></div>
+      <!-- Curtain call: velvet curtains part on load; scalloped valance frames the top -->
+      <div class="curtain-stage" aria-hidden="true">
+        <div class="curtain curtain-left"></div>
+        <div class="curtain curtain-right"></div>
+        <div class="curtain-valance"></div>
+      </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-licorice">
         <article class="space-y-6 text-center md:text-left">
           <span class="hero-kicker" aria-hidden="true">Now Showing</span>
@@ -436,9 +447,11 @@
 
     <!-- NOW PLAYING marquee -->
     <div class="now-playing" aria-hidden="true">
+      <div class="bulb-row top"></div>
+      <div class="bulb-row bottom"></div>
       <div class="now-playing-track">
-        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span>Reviews from friends for friends</span>
-        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span>Reviews from friends for friends</span>
+        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span class="np-egg" title="Take five?">Intermission</span><span>Reviews from friends for friends</span>
+        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span class="np-egg" title="Take five?">Intermission</span><span>Reviews from friends for friends</span>
       </div>
     </div>
 
@@ -871,7 +884,7 @@
           </div>
           <p class="cta-meta">All your data stays in sync with our mobile apps.</p>
         </div>
-        <aside class="cta-ticket" aria-hidden="true">
+        <aside class="cta-ticket" id="ctaTicket" aria-hidden="true">
           <div class="ticket-no">Admit One &middot;</div>
           <div class="ticket-headline">Aftertaste<br>on the web</div>
           <div class="ticket-dashed"></div>
@@ -879,6 +892,7 @@
             <span>Now Showing</span>
             <span>aftertaste.app</span>
           </div>
+          <span class="ticket-stamp">Admitted</span>
         </aside>
       </div>
     </section>
@@ -939,9 +953,13 @@
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 Aftertaste, LLC. All rights reserved.</p>
+      <p class="egg-hint">Psst &mdash; type &ldquo;NOIR&rdquo;</p>
       <p>Made with care for people who love movies.</p>
     </div>
   </footer>
+
+  <!-- Film-strip scroll progress -->
+  <div id="filmstrip" aria-hidden="true"><div class="fs-fill"></div></div>
 
   <script>
     // Pointer spotlight constrained to hero (disabled on touch)
@@ -1007,7 +1025,7 @@
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          e.target.classList.add('opacity-100', 'translate-y-0');
+          e.target.classList.add('opacity-100', 'translate-y-0', 'sec-in');
           observer.unobserve(e.target);
         }
       });
@@ -1100,6 +1118,219 @@
         panel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeMenu); });
         document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
       }
+    })();
+
+    // ================================================================
+    // ACT VI — Creative pass
+    // ================================================================
+    (function(){
+      var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ---- Marquee-bulb headline: each letter flickers on like a theater sign ----
+      var h1 = document.querySelector('#hero h1');
+      if (h1 && !REDUCED) {
+        h1.setAttribute('aria-label', h1.textContent.replace(/\s+/g, ' ').trim());
+        var wrapLetters = function(node){
+          Array.prototype.slice.call(node.childNodes).forEach(function(child){
+            if (child.nodeType === 3) {
+              var frag = document.createDocumentFragment();
+              child.textContent.split('').forEach(function(ch){
+                if (!ch.trim()) { frag.appendChild(document.createTextNode(ch)); return; }
+                var s = document.createElement('span');
+                s.className = 'mq-letter';
+                s.textContent = ch;
+                s.style.animationDelay = (1.2 + Math.random() * 0.75).toFixed(2) + 's';
+                frag.appendChild(s);
+              });
+              node.replaceChild(frag, child);
+            } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+              wrapLetters(child);
+            }
+          });
+        };
+        wrapLetters(h1);
+      }
+
+      // ---- Film-strip scroll progress ----
+      var strip = document.getElementById('filmstrip');
+      var fsFill = strip && strip.querySelector('.fs-fill');
+      if (strip && fsFill) {
+        var fsTick = false;
+        var updateStrip = function(){
+          fsTick = false;
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          fsFill.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+          strip.classList.toggle('show', window.scrollY > 320);
+        };
+        window.addEventListener('scroll', function(){
+          if (!fsTick) { fsTick = true; requestAnimationFrame(updateStrip); }
+        }, { passive: true });
+        updateStrip();
+      }
+
+      // ---- Gentle hero parallax (desktop, full motion only) ----
+      if (!REDUCED && window.matchMedia('(min-width: 768px)').matches) {
+        var heroInner = document.querySelector('#hero > .max-w-7xl');
+        if (heroInner) {
+          var pxTick = false;
+          var parallax = function(){
+            pxTick = false;
+            var y = window.scrollY;
+            if (y > window.innerHeight * 1.2) return;
+            heroInner.style.transform = 'translateY(' + (y * 0.14).toFixed(1) + 'px)';
+          };
+          window.addEventListener('scroll', function(){
+            if (!pxTick) { pxTick = true; requestAnimationFrame(parallax); }
+          }, { passive: true });
+        }
+      }
+
+      // ---- Poster paste-up: cards settle in with a stagger ----
+      var cards = document.querySelectorAll('.feature-card, .glance-card');
+      if ('IntersectionObserver' in window && cards.length) {
+        var cardObs = new IntersectionObserver(function(es){
+          es.forEach(function(e){
+            if (!e.isIntersecting) return;
+            var el = e.target;
+            el.classList.add('pasted');
+            el.addEventListener('transitionend', function(){ el.style.transitionDelay = ''; }, { once: true });
+            cardObs.unobserve(el);
+          });
+        }, { threshold: .12 });
+        cards.forEach(function(c, i){
+          c.style.transitionDelay = ((i % 3) * 90) + 'ms';
+          cardObs.observe(c);
+        });
+      } else {
+        cards.forEach(function(c){ c.classList.add('pasted'); });
+      }
+
+      // ---- NOIR mode: type “noir” anywhere. Esc turns the lights back on. ----
+      var noirQuips = [
+        'The algorithm swore it knew me. It was bluffing.',
+        'She had a watchlist a mile long and nobody to trust.',
+        'In this town, everybody’s a critic. We just made it official.',
+        'Five recommendations walked in. None of them had an alibi.',
+        'The credits rolled, but the aftertaste lingered.',
+        'Trust your tastebuds, kid. They never lie.'
+      ];
+      var noirBuf = '', noirCap, noirTimer, quipIdx = 0;
+      var setCaption = function(){
+        if (noirCap) noirCap.textContent = '“' + noirQuips[quipIdx++ % noirQuips.length] + '”';
+      };
+      var toggleNoir = function(){
+        if (!noirCap) {
+          var ov = document.createElement('div');
+          ov.className = 'noir-overlay';
+          ov.setAttribute('aria-hidden', 'true');
+          noirCap = document.createElement('div');
+          noirCap.className = 'noir-caption';
+          noirCap.setAttribute('role', 'status');
+          document.body.appendChild(ov);
+          document.body.appendChild(noirCap);
+        }
+        var on = document.body.classList.toggle('noir');
+        clearInterval(noirTimer);
+        if (on) { quipIdx = 0; setCaption(); noirTimer = setInterval(setCaption, 8000); }
+      };
+      document.addEventListener('keydown', function(e){
+        var t = e.target;
+        if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+        if (e.key === 'Escape' && document.body.classList.contains('noir')) { toggleNoir(); return; }
+        if (e.key && e.key.length === 1) {
+          noirBuf = (noirBuf + e.key.toLowerCase()).slice(-4);
+          if (noirBuf === 'noir') { noirBuf = ''; toggleNoir(); }
+        }
+      });
+
+      // ---- INTERMISSION: Konami code, or the hidden word in the marquee ----
+      var konami = ['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
+      var kIdx = 0;
+      document.addEventListener('keydown', function(e){
+        var k = (e.key || '').toLowerCase();
+        kIdx = (k === konami[kIdx]) ? kIdx + 1 : (k === konami[0] ? 1 : 0);
+        if (kIdx === konami.length) { kIdx = 0; openIntermission(); }
+      });
+
+      var ix = null, ixTimer, kernels = 0, scoreEl;
+      function spawnKernel(){
+        if (!ix || ix.querySelectorAll('.popcorn').length > 24) return;
+        var p = document.createElement('span');
+        p.className = 'popcorn';
+        p.textContent = '🍿';
+        p.style.left = (4 + Math.random() * 90) + '%';
+        p.style.fontSize = (1.4 + Math.random() * 1.4) + 'rem';
+        p.style.animationDuration = (3.2 + Math.random() * 3) + 's';
+        p.addEventListener('pointerdown', function(ev){
+          kernels++;
+          if (scoreEl) scoreEl.textContent = kernels;
+          var b = document.createElement('span');
+          b.className = 'pc-burst';
+          b.textContent = '+1';
+          b.style.left = ev.clientX + 'px';
+          b.style.top = (ev.clientY - 14) + 'px';
+          if (ix) { ix.appendChild(b); setTimeout(function(){ b.remove(); }, 600); }
+          p.remove();
+        }, { once: true });
+        p.addEventListener('animationend', function(){ p.remove(); });
+        ix.appendChild(p);
+      }
+      function openIntermission(){
+        if (ix) return;
+        kernels = 0;
+        ix = document.createElement('div');
+        ix.id = 'intermission';
+        ix.setAttribute('role', 'dialog');
+        ix.setAttribute('aria-modal', 'true');
+        ix.setAttribute('aria-label', 'Intermission');
+        ix.innerHTML =
+          '<div class="ix-curtain ix-left" aria-hidden="true"></div>' +
+          '<div class="ix-curtain ix-right" aria-hidden="true"></div>' +
+          '<div class="ix-inner">' +
+            '<span class="ix-kicker">&middot; A Brief &middot;</span>' +
+            '<h2 class="ix-title">Intermission</h2>' +
+            '<p class="ix-sub">The reels are being swapped. Catch some popcorn while you wait.</p>' +
+            '<p class="ix-score">Kernels caught: <span id="ixScore" aria-live="polite">0</span></p>' +
+            '<button type="button" class="ix-resume">Resume the feature</button>' +
+            '<p class="ix-hint">or press Esc</p>' +
+          '</div>';
+        document.body.appendChild(ix);
+        document.body.style.overflow = 'hidden';
+        scoreEl = ix.querySelector('#ixScore');
+        ix.querySelector('.ix-resume').addEventListener('click', closeIntermission);
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            ix.classList.add('open');
+            ix.querySelector('.ix-resume').focus();
+          });
+        });
+        if (!REDUCED) ixTimer = setInterval(spawnKernel, 620);
+      }
+      function closeIntermission(){
+        if (!ix) return;
+        clearInterval(ixTimer);
+        var el = ix;
+        ix = null;
+        el.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(function(){ el.remove(); }, 1000);
+      }
+      document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeIntermission(); });
+      document.querySelectorAll('.np-egg').forEach(function(el){
+        el.addEventListener('click', openIntermission);
+      });
+
+      // ---- Ticket stub: punch it ----
+      var ticket = document.getElementById('ctaTicket');
+      if (ticket) {
+        ticket.addEventListener('click', function(){ ticket.classList.toggle('torn'); });
+      }
+
+      // ---- Tab-away wink ----
+      var baseTitle = document.title;
+      document.addEventListener('visibilitychange', function(){
+        document.title = document.hidden ? '🍿 Intermission? — Aftertaste' : baseTitle;
+      });
     })();
   </script>
 </body>
