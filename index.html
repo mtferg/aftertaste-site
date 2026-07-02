@@ -1357,6 +1357,62 @@
       document.addEventListener('visibilitychange', function(){
         document.title = document.hidden ? '🍿 Intermission? — Aftertaste' : baseTitle;
       });
+
+      // ---- Slower, smoother anchor scrolling (a leisurely pan, not a whip) ----
+      if (!REDUCED) {
+        var HEADER_OFFSET = 72; // matches scroll-margin-top: 4.5rem
+        var scrollAnim = null;
+        var easeInOutCubic = function(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; };
+        var cancelScroll = function(){ scrollAnim = null; };
+        window.addEventListener('wheel', cancelScroll, { passive: true });
+        window.addEventListener('touchstart', cancelScroll, { passive: true });
+        var glideTo = function(targetEl, onDone){
+          // Re-measure the destination every frame: lazy-loaded images can
+          // grow the document mid-glide and native smooth scroll misses.
+          var measure = function(){
+            var y = targetEl.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+            return Math.max(0, Math.min(y, document.documentElement.scrollHeight - window.innerHeight));
+          };
+          var startY = window.scrollY;
+          var dist = measure() - startY;
+          if (Math.abs(dist) < 2) { if (onDone) onDone(); return; }
+          // Longer trips take longer, within reason
+          var duration = Math.min(1500, Math.max(750, 450 + Math.abs(dist) * 0.25));
+          var t0 = performance.now();
+          var html = document.documentElement;
+          var prevBehavior = html.style.scrollBehavior;
+          html.style.scrollBehavior = 'auto'; // keep CSS smooth-scroll out of the loop
+          var token = {};
+          scrollAnim = token;
+          var step = function(now){
+            if (scrollAnim !== token) { html.style.scrollBehavior = prevBehavior; return; }
+            var p = Math.min(1, (now - t0) / duration);
+            window.scrollTo(0, startY + (measure() - startY) * easeInOutCubic(p));
+            if (p < 1) { requestAnimationFrame(step); }
+            else {
+              scrollAnim = null;
+              html.style.scrollBehavior = prevBehavior;
+              if (onDone) onDone();
+            }
+          };
+          requestAnimationFrame(step);
+        };
+        document.querySelectorAll('a[href^="#"]').forEach(function(a){
+          if (a.classList.contains('sr-only')) return; // skip link stays instant
+          a.addEventListener('click', function(e){
+            var id = a.getAttribute('href').slice(1);
+            if (!id) return;
+            var target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            glideTo(target, function(){
+              target.setAttribute('tabindex', '-1');
+              target.focus({ preventScroll: true });
+            });
+            if (history.pushState) history.pushState(null, '', '#' + id);
+          });
+        });
+      }
     })();
   </script>
 </body>
