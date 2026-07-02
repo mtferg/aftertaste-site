@@ -810,6 +810,45 @@
     /* ---- Footer egg hint ---- */
     .egg-hint { opacity: .4; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; }
 
+    /* ---- Picture-format switch (bottom of hero): the discoverable NOIR door ---- */
+    .film-format {
+      position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 8;
+      display: flex; align-items: center; gap: .7rem; white-space: nowrap;
+      font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .68rem; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      opacity: 0; animation: ffIn .7s ease 1.7s forwards;
+    }
+    @keyframes ffIn { to { opacity: 1; } }
+    .ff-btn {
+      position: relative; cursor: pointer; background: none; border: none; padding: .2rem .05rem;
+      font: inherit; letter-spacing: inherit; text-transform: inherit;
+      background-clip: text; -webkit-background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+      transition: filter 200ms ease;
+    }
+    .ff-btn:hover { filter: brightness(1.15); }
+    .ff-color { background-image: linear-gradient(90deg, #E3452D, #FFB1C1, #419B85, #5EB9CE, #E3452D); }
+    .ff-bw    { background-image: linear-gradient(90deg, #1C1C1C, #9a938a, #1C1C1C); }
+    .ff-btn:after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px;
+      background: rgba(28,28,28,.6); border-radius: 1px;
+      transform: scaleX(0); transform-origin: center; transition: transform 240ms ease;
+    }
+    .ff-btn.is-active:after { transform: scaleX(1); }
+    .ff-btn:focus-visible { outline: 2px solid #E3452D; outline-offset: 3px; }
+    .ff-sep { color: rgba(28,28,28,.5); }
+
+    /* ---- Intermission invite (top of the features section) ---- */
+    .ix-invite-wrap { text-align: center; margin-bottom: 1.5rem; }
+    @media (min-width: 768px) { .ix-invite-wrap { text-align: right; margin-bottom: .5rem; } }
+    .ix-invite {
+      display: inline-block; cursor: pointer; background: none; border: none; padding: .25rem 0;
+      font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .7rem; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase; color: rgba(252,249,239,.45);
+      transition: color 200ms ease;
+    }
+    .ix-invite:hover, .ix-invite:focus-visible { color: #E3452D; }
+    .ix-invite:focus-visible { outline: 2px solid #E3452D; outline-offset: 3px; }
+
     /* ---- Reduced motion: the show still goes on, just without the moves ---- */
     @media (prefers-reduced-motion: reduce) {
       .curtain-left  { animation: none; transform: translateX(calc(-1 * var(--open-x))); }
@@ -826,4 +865,5 @@
       #intermission .ix-inner { transition: opacity .3s ease; }
       #filmstrip { transition: none; }
       .ticket-stamp { transition: opacity .2s ease; }
+      .film-format { animation: none; opacity: 1; }
     }

@@ -442,6 +442,12 @@
           </picture>
         </figure>
       </div>
+      <!-- Picture-format switch: a more discoverable door into NOIR mode -->
+      <div class="film-format" role="group" aria-label="Picture format">
+        <button type="button" class="ff-btn ff-color is-active" id="ffColor" aria-pressed="true">Full Color</button>
+        <span class="ff-sep" aria-hidden="true">&middot;</span>
+        <button type="button" class="ff-btn ff-bw" id="ffBw" aria-pressed="false">Black and White</button>
+      </div>
       <div class="screen-boot" aria-hidden="true"></div>
     </section>
 
@@ -583,6 +589,9 @@
     <!-- Features Grid (Phase 3: poster-style cards) -->
     <section id="features" class="py-16 md:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="ix-invite-wrap">
+          <button type="button" class="ix-invite" id="ixInvite">Psst &mdash; getting bored? Take an intermission.</button>
+        </div>
         <header class="mb-12 md:mb-16 max-w-3xl">
           <span class="section-kicker features-eyebrow align-start">The Lineup</span>
           <h2 class="section-title mt-4">A menu of <em>features</em>.</h2>
@@ -1232,7 +1241,22 @@
         var on = document.body.classList.toggle('noir');
         clearInterval(noirTimer);
         if (on) { quipIdx = 0; setCaption(); noirTimer = setInterval(setCaption, 8000); }
+        syncFormatUI(on);
       };
+      // Picture-format switch at the bottom of the hero mirrors noir state
+      var ffColor = document.getElementById('ffColor');
+      var ffBw = document.getElementById('ffBw');
+      var syncFormatUI = function(on){
+        if (!ffColor || !ffBw) return;
+        ffColor.classList.toggle('is-active', !on);
+        ffBw.classList.toggle('is-active', on);
+        ffColor.setAttribute('aria-pressed', String(!on));
+        ffBw.setAttribute('aria-pressed', String(on));
+      };
+      if (ffColor && ffBw) {
+        ffColor.addEventListener('click', function(){ if (document.body.classList.contains('noir')) toggleNoir(); });
+        ffBw.addEventListener('click', function(){ if (!document.body.classList.contains('noir')) toggleNoir(); });
+      }
       document.addEventListener('keydown', function(e){
         var t = e.target;
         if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
@@ -1319,6 +1343,8 @@
       document.querySelectorAll('.np-egg').forEach(function(el){
         el.addEventListener('click', openIntermission);
       });
+      var ixInvite = document.getElementById('ixInvite');
+      if (ixInvite) ixInvite.addEventListener('click', openIntermission);
 
       // ---- Ticket stub: punch it ----
       var ticket = document.getElementById('ctaTicket');
