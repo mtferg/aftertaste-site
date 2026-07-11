@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Aftertaste</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <script>
+    // Deep links (app content) live on the web app at aftertaste.app.
+    // Old shared links pointed at aftertaste.com — forward those paths so
+    // stale links keep working for humans. Everything else shows a 404.
+    (function () {
+      var deepLink = /^\/(posts|content|lists|users|actor)\//
+      var exact = { '/feed': 1, '/notifications': 1, '/chef': 1 }
+      var p = window.location.pathname
+      if (deepLink.test(p) || exact[p]) {
+        window.location.replace('https://aftertaste.app' + p + window.location.search)
+      }
+    })()
+  </script>
+  <style>
+    body { margin: 0; display: flex; min-height: 100vh; align-items: center; justify-content: center; background: #1C1C1C; color: #FCF9EF; font-family: 'Poppins', system-ui, sans-serif; text-align: center; }
+    a { color: #E3452D; }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Page not found</h1>
+    <p>Looking for the app? It lives at <a href="https://aftertaste.app">aftertaste.app</a>.</p>
+    <p><a href="/">Back to aftertaste.com</a></p>
+  </div>
+</body>
+</html>
