@@ -49,13 +49,6 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="assets/site.webmanifest" />
 
-  <!-- Preload the hero screenshot (LCP candidate) — responsive WebP -->
-  <link rel="preload" as="image"
-        imagesrcset="assets/tastebud-feed-440w.webp 440w, assets/tastebud-feed-660w.webp 660w"
-        imagesizes="(max-width: 767px) 210px, (max-width: 1023px) 250px, 290px"
-        type="image/webp"
-        fetchpriority="high" />
-
   <!-- Fonts: non-render-blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -379,30 +372,28 @@
   </header>
 
   <main class="pt-20">
-    <!-- Hero -->
-    <section id="hero" class="cinema-hero hero-rel">
-      <!-- Screen layers -->
-      <div class="cinema-screen film-jitter" aria-hidden="true"></div>
-      <div class="screen-grain" aria-hidden="true"></div>
-      <div class="screen-vignette" aria-hidden="true"></div>
-      <div class="screen-frame" aria-hidden="true"></div>
-      <div class="reel-band" aria-hidden="true"></div>
-      <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
-      <div id="spot" class="spot projector-spot" aria-hidden="true"></div>
-      <div class="film-scratch s1" aria-hidden="true"></div>
-      <div class="film-scratch s2" aria-hidden="true"></div>
-      <div class="cue-mark" aria-hidden="true"></div>
-      <!-- Curtain call: velvet curtains part on load; scalloped valance frames the top -->
-      <div class="curtain-stage" aria-hidden="true">
-        <div class="curtain curtain-left"></div>
-        <div class="curtain curtain-right"></div>
-        <div class="curtain-valance"></div>
+    <!-- Hero: noir one-sheet — an old-Hollywood premiere staged as a movie
+         poster. Oversized AFTERTASTE watermark ghosted across the wall,
+         crossed searchlight beams, dust and grain; black-and-white type
+         with a single cherry neon "Now Showing" sign, and a classic
+         billing block where the credits would run. -->
+    <section id="hero" class="noir-hero hero-rel">
+      <!-- Scene layers -->
+      <div class="nh-backdrop" aria-hidden="true"></div>
+      <div class="nh-beams" aria-hidden="true">
+        <span class="nh-beam nh-beam-l"></span>
+        <span class="nh-beam nh-beam-r"></span>
       </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-licorice">
-        <article class="space-y-6 text-center md:text-left">
-          <h1 class="font-display text-licorice text-[2.75rem] sm:text-6xl md:text-7xl leading-[0.95] tracking-tight">Your Ultimate<br/>Movie &amp; TV <em class="hero-accent">Hub</em></h1>
-          <p class="text-base md:text-lg text-licorice/85 max-w-lg mx-auto md:mx-0">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
-          <div class="hero-ctas">
+      <div class="nh-watermark" aria-hidden="true">Aftertaste</div>
+      <div class="screen-grain" aria-hidden="true"></div>
+      <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
+      <div class="nh-vignette" aria-hidden="true"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-almond">
+        <article class="nh-inner">
+          <p class="nh-sign"><span class="nh-neon">Now Showing</span></p>
+          <h1 class="nh-title font-display">Your Ultimate<br/>Movie &amp; TV <em>Hub</em></h1>
+          <p class="nh-lede text-base md:text-lg text-almond/85 max-w-xl mx-auto">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
+          <div class="hero-ctas nh-ctas">
             <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block transition hover:-translate-y-0.5">
               <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-11 md:h-12" />
             </a>
@@ -415,30 +406,11 @@
             <span class="hero-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
             <span>Loved by film fans &mdash; read the reviews</span>
           </a>
-          <p class="text-xs tracking-[0.2em] uppercase text-licorice/60 pt-2">Android &#183; Coming soon</p>
-        </article>
-        <figure class="relative">
-          <div class="iphone-frame mx-auto">
-            <span class="iphone-island" aria-hidden="true"></span>
-            <picture>
-              <source
-                type="image/webp"
-                srcset="assets/tastebud-feed-440w.webp 440w, assets/tastebud-feed-660w.webp 660w"
-                sizes="(max-width: 767px) 210px, (max-width: 1023px) 250px, 290px" />
-              <img
-                class="iphone-screen"
-                src="assets/tastebud-feed.png"
-                alt="Aftertaste mobile app showing the Tastebuds feed with friends' ratings and reviews"
-                loading="eager"
-                decoding="async"
-                fetchpriority="high"
-                width="660"
-                height="1434" />
-            </picture>
+          <div class="nh-billing">
+            <span class="nh-bill-line nh-bill-foot"><span class="nh-bill-seg">Now Playing on iPhone &amp; Web</span> <i>&middot;</i> <span class="nh-bill-seg">Coming Soon to Android</span></span>
           </div>
-        </figure>
+        </article>
       </div>
-      <div class="screen-boot" aria-hidden="true"></div>
     </section>
 
     <!-- ============================================================
@@ -479,7 +451,7 @@
                   <p><strong>Jess</strong> and 2 other Tastebuds rated it this week</p>
                 </div>
                 <div class="at-card-quote" data-el="quote">
-                  <span class="at-score-ring yum" data-el="scorering" data-score="9.0">
+                  <span class="at-score-ring yum" data-score="9.0">
                     <svg viewBox="0 0 44 44" aria-hidden="true">
                       <circle class="asr-track" cx="22" cy="22" r="19"></circle>
                       <circle class="asr-fill" cx="22" cy="22" r="19"></circle>
@@ -491,7 +463,7 @@
                 </div>
               </div>
               <span class="float-chip fc-follow" data-el="chip-follow">+ Follow</span>
-              <span class="float-chip fc-react" data-el="chip-react">&#128293; 12 &nbsp;&#128172; 5</span>
+              <span class="float-chip fc-react" data-el="chip-react"><img class="fc-ic" src="assets/app/reaction-like.png" alt="" loading="lazy" width="18" height="18"> 7<img class="fc-ic" src="assets/app/reaction-popcorn.png" alt="" loading="lazy" width="18" height="18"> 3<img class="fc-ic" src="assets/app/reaction-spicy.png" alt="" loading="lazy" width="18" height="18"> 5<svg class="chip-comment-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h3v3.59c0 .45.54.67.85.36L11.83 19H20a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/></svg> 3</span>
             </div>
           </div>
         </article>
@@ -517,7 +489,7 @@
                     <circle class="ring-fill" cx="60" cy="60" r="52"/>
                   </svg>
                   <span class="ring-value">0.0</span>
-                  <span class="ring-label">Tastebud Score</span>
+                  <span class="ring-label">Tastebud<br>Score</span>
                   <span class="ring-verdict">YUM</span>
                 </div>
                 <div class="score-ring is-meh" data-el="ring-global" data-score="6.4">
@@ -526,7 +498,7 @@
                     <circle class="ring-fill" cx="60" cy="60" r="52"/>
                   </svg>
                   <span class="ring-value">0.0</span>
-                  <span class="ring-label">Global Score</span>
+                  <span class="ring-label">Global<br>Score</span>
                   <span class="ring-verdict">MEH</span>
                 </div>
               </div>
@@ -577,9 +549,9 @@
             </div>
             <div class="panel-stage stage-swipe md:order-1" aria-hidden="true">
               <div class="swipe-deck">
-                <!-- Beat 3 · the title everyone agreed on -->
+                <!-- Beat 3 · the title everyone agreed on (La La Land) -->
                 <div class="swipe-card sw-match" data-el="sw-match">
-                  <img src="https://image.tmdb.org/t/p/w342/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg" alt="" loading="lazy" width="342" height="513">
+                  <img src="https://image.tmdb.org/t/p/w342/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg" alt="" loading="lazy" width="342" height="513">
                   <div class="match-banner" data-el="match-banner">
                     <span class="match-title">It&rsquo;s a match!</span>
                     <span class="match-avatars">
@@ -590,22 +562,22 @@
                     </span>
                   </div>
                 </div>
-                <!-- Beat 2 · same title, both say yes -->
+                <!-- Beat 2 · same title (La La Land), both say yes -->
                 <div class="swipe-card sw-r2-left" data-el="r2l">
-                  <img src="https://image.tmdb.org/t/p/w342/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg" alt="" loading="lazy" width="342" height="513">
+                  <img src="https://image.tmdb.org/t/p/w342/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg" alt="" loading="lazy" width="342" height="513">
                   <span class="swipe-stamp stamp-like stamp-tilt-left">Like</span>
                 </div>
                 <div class="swipe-card sw-r2-right" data-el="r2r">
-                  <img src="https://image.tmdb.org/t/p/w342/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg" alt="" loading="lazy" width="342" height="513">
+                  <img src="https://image.tmdb.org/t/p/w342/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg" alt="" loading="lazy" width="342" height="513">
                   <span class="swipe-stamp stamp-like stamp-tilt-right">Like</span>
                 </div>
-                <!-- Beat 1 · two different titles, split decision -->
+                <!-- Beat 1 · same title (Get Out), split decision -->
                 <div class="swipe-card sw-r1-left" data-el="r1l">
                   <img src="https://image.tmdb.org/t/p/w342/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg" alt="" loading="lazy" width="342" height="513">
                   <span class="swipe-stamp stamp-pass stamp-tilt-left">Pass</span>
                 </div>
                 <div class="swipe-card sw-r1-right" data-el="r1r">
-                  <img src="https://image.tmdb.org/t/p/w342/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg" alt="" loading="lazy" width="342" height="513">
+                  <img src="https://image.tmdb.org/t/p/w342/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg" alt="" loading="lazy" width="342" height="513">
                   <span class="swipe-stamp stamp-like stamp-tilt-right">Like</span>
                 </div>
               </div>
@@ -643,7 +615,7 @@
                 </span>
                 <span class="menu-chip mc-badge" data-el="mc4"><img class="mc-badge-art" src="assets/app/badge-review-100.png" alt="" loading="lazy" width="22" height="22"> 100 Reviews Club</span>
                 <span class="menu-chip mc-list" data-el="mc5">&#128278; Cozy Fall Horror &middot; 12 titles</span>
-                <span class="menu-chip mc-thread" data-el="mc6">&#128172; 34 comments &middot; 3 Tastebuds</span>
+                <span class="menu-chip mc-thread" data-el="mc6"><svg class="chip-comment-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h3v3.59c0 .45.54.67.85.36L11.83 19H20a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/></svg> 34 comments &middot; 3 Tastebuds</span>
               </div>
             </div>
             <div class="text-center mt-12">
@@ -1020,7 +992,8 @@
           gsap.set([r1r, r2r], { opacity: 0, x: '46%', rotation: 7, scale: 0.9 });
           gsap.set(swMatch, { opacity: 0, y: 0, scale: 0.82 });
 
-          gsap.timeline({ scrollTrigger: panelTrigger(p4, pinned) })
+          // Longer pin distance = slower, more legible swipe choreography
+          gsap.timeline({ scrollTrigger: panelTrigger(p4, pinned, pinned ? { end: '+=150%' } : null) })
             // Beat 1 · two DIFFERENT titles clash — one Pass, one Like
             .to([r1l, r1r], { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' })
             .to(r1l, { x: '-17%', rotation: -3, duration: 0.45, ease: 'power2.inOut' }, '<')
@@ -1063,19 +1036,11 @@
   </script>
 
   <script>
-    // Pointer spotlight constrained to hero (disabled on touch)
-    const spot = document.getElementById('spot');
+    // Light the "Now Showing" neon shortly after load (CSS drives the
+    // tube flicker-on off the .lit class)
     const heroEl = document.getElementById('hero');
-    if (window.matchMedia('(pointer:fine)').matches && spot && heroEl) {
-      const moveSpot = (e)=>{
-        const rect = heroEl.getBoundingClientRect();
-        // Ignore if cursor is outside hero
-        if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) return;
-        const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-        spot.style.left = x + 'px';
-        spot.style.top = y + 'px';
-      };
-      window.addEventListener('mousemove', moveSpot, {passive:true});
+    if (heroEl) {
+      window.setTimeout(() => heroEl.classList.add('lit'), 600);
     }
 
     // Floating dust generator
@@ -1110,18 +1075,6 @@
       }, {threshold: 0});
       heroObs.observe(heroEl);
     }
-    // After boot: soften vignette only
-    (function(){
-      const vignette = document.querySelector('.screen-vignette');
-      if (!vignette) return;
-
-      const softenVignette = ()=> vignette.classList.add('soft');
-
-      // Soften vignette shortly after boot overlay fades
-      const bootDurationMs = 750; // matches CSS @keyframes powerOn
-      setTimeout(softenVignette, bootDurationMs + 200);
-    })();
-
     // Reveal on scroll
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
