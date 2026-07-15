@@ -49,10 +49,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="assets/site.webmanifest" />
 
-  <!-- Preload the hero portrait (LCP candidate) — responsive WebP -->
+  <!-- Preload the hero screenshot (LCP candidate) — responsive WebP -->
   <link rel="preload" as="image"
-        imagesrcset="assets/hero-portrait-720w.webp 720w, assets/hero-portrait-1080w.webp 1080w"
-        imagesizes="(max-width: 767px) 225px, (max-width: 1023px) 280px, 325px"
+        imagesrcset="assets/tastebud-feed-440w.webp 440w, assets/tastebud-feed-660w.webp 660w"
+        imagesizes="(max-width: 767px) 210px, (max-width: 1023px) 250px, 290px"
         type="image/webp"
         fetchpriority="high" />
 
@@ -131,7 +131,7 @@
         "description": "Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved. Get personalized recommendations from people you trust.",
         "url": "https://aftertaste.com/",
         "downloadUrl": "https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530",
-        "screenshot": "https://aftertaste.com/assets/hero-portrait.png",
+        "screenshot": "https://aftertaste.com/assets/tastebud-feed.png",
         "softwareVersion": "3.1.0",
         "author": { "@id": "https://aftertaste.com/#organization" },
         "publisher": { "@id": "https://aftertaste.com/#organization" },
@@ -400,7 +400,6 @@
       </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-licorice">
         <article class="space-y-6 text-center md:text-left">
-          <span class="hero-kicker" aria-hidden="true">Now Showing</span>
           <h1 class="font-display text-licorice text-[2.75rem] sm:text-6xl md:text-7xl leading-[0.95] tracking-tight">Your Ultimate<br/>Movie &amp; TV <em class="hero-accent">Hub</em></h1>
           <p class="text-base md:text-lg text-licorice/85 max-w-lg mx-auto md:mx-0">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
           <div class="hero-ctas">
@@ -419,61 +418,40 @@
           <p class="text-xs tracking-[0.2em] uppercase text-licorice/60 pt-2">Android &#183; Coming soon</p>
         </article>
         <figure class="relative">
-          <picture>
-            <source
-              type="image/webp"
-              srcset="assets/hero-portrait-720w.webp 720w, assets/hero-portrait-1080w.webp 1080w"
-              sizes="(max-width: 767px) 225px, (max-width: 1023px) 280px, 325px" />
-            <img
-              src="assets/hero-portrait.png"
-              alt="Aftertaste mobile app showing movie feed, tracking features, and personalized recommendations interface"
-              class="w-full max-w-[225px] md:max-w-[280px] lg:max-w-[325px] mx-auto"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-              width="1419"
-              height="2796" />
-          </picture>
+          <div class="iphone-frame mx-auto">
+            <span class="iphone-island" aria-hidden="true"></span>
+            <picture>
+              <source
+                type="image/webp"
+                srcset="assets/tastebud-feed-440w.webp 440w, assets/tastebud-feed-660w.webp 660w"
+                sizes="(max-width: 767px) 210px, (max-width: 1023px) 250px, 290px" />
+              <img
+                class="iphone-screen"
+                src="assets/tastebud-feed.png"
+                alt="Aftertaste mobile app showing the Tastebuds feed with friends' ratings and reviews"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+                width="660"
+                height="1434" />
+            </picture>
+          </div>
         </figure>
       </div>
       <div class="screen-boot" aria-hidden="true"></div>
     </section>
-
-    <!-- NOW PLAYING marquee -->
-    <div class="now-playing" aria-hidden="true">
-      <div class="bulb-row top"></div>
-      <div class="bulb-row bottom"></div>
-      <div class="now-playing-track">
-        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span class="np-egg" title="Take five?">Intermission</span><span>Reviews from friends for friends</span>
-        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span class="np-egg" title="Take five?">Intermission</span><span>Reviews from friends for friends</span>
-      </div>
-    </div>
 
     <!-- ============================================================
          THE FEATURE PRESENTATION — scroll-driven story of the app,
          built from live replicas of real in-app elements.
          ============================================================ -->
     <section id="features" class="story-section">
-      <div class="story-header max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <!-- Picture-format switch: door into NOIR mode (moved from Glance) -->
-        <div class="film-format" role="group" aria-label="Picture format">
-          <button type="button" class="ff-btn ff-color is-active" id="ffColor" aria-pressed="true">Full Color</button>
-          <span class="ff-sep" aria-hidden="true">&middot;</span>
-          <button type="button" class="ff-btn ff-bw" id="ffBw" aria-pressed="false">Black and White</button>
-        </div>
-        <span class="section-kicker story-eyebrow">The Feature Presentation</span>
-        <h2 class="section-title mt-4">Taste the <em>app</em>.</h2>
-        <span class="story-divider" aria-hidden="true"></span>
-        <p class="story-lede">Five ways Aftertaste changes how you decide what to watch. Keep scrolling &mdash; the reel does the rest.</p>
-      </div>
-
       <div id="story">
 
         <!-- ================= 01 · FIND YOUR TASTEBUDS ================= -->
         <article class="story-panel" id="tastebuds" aria-label="Find your Tastebuds">
           <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div class="panel-copy">
-              <span class="panel-no" aria-hidden="true">Reel 01</span>
               <h3 class="panel-title">Find your <em>Tastebuds</em>.</h3>
               <p class="panel-lede">Follow friends, critics, and kindred spirits. Your feed becomes the people whose taste you trust &mdash; watching, rating, and trading takes in real time.</p>
             </div>
@@ -494,14 +472,21 @@
                 </div>
                 <div class="at-card-social" data-el="social">
                   <div class="at-avatars">
-                    <span class="at-avatar av-mint">JD</span>
-                    <span class="at-avatar av-cherry">KR</span>
-                    <span class="at-avatar av-gold">SM</span>
+                    <img class="at-avatar" src="assets/app/avatar-fox.png" alt="" loading="lazy" width="28" height="28">
+                    <img class="at-avatar" src="assets/app/avatar-owl.png" alt="" loading="lazy" width="28" height="28">
+                    <img class="at-avatar" src="assets/app/avatar-penguin.png" alt="" loading="lazy" width="28" height="28">
                   </div>
                   <p><strong>Jess</strong> and 2 other Tastebuds rated it this week</p>
                 </div>
                 <div class="at-card-quote" data-el="quote">
-                  <span class="at-score-chip yum">9.0</span>
+                  <span class="at-score-ring yum" data-el="scorering" data-score="9.0">
+                    <svg viewBox="0 0 44 44" aria-hidden="true">
+                      <circle class="asr-track" cx="22" cy="22" r="19"></circle>
+                      <circle class="asr-fill" cx="22" cy="22" r="19"></circle>
+                    </svg>
+                    <span class="asr-value">9.0</span>
+                  </span>
+                  <span class="at-verdict yum">YUM</span>
                   <p>&ldquo;Visually staggering. The theater shook. I shook.&rdquo;</p>
                 </div>
               </div>
@@ -515,7 +500,6 @@
         <article class="story-panel" id="scores" aria-label="Your circle versus the crowd">
           <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div class="panel-copy md:order-2">
-              <span class="panel-no" aria-hidden="true">Reel 02</span>
               <h3 class="panel-title">Your circle <em>vs</em> the crowd.</h3>
               <p class="panel-lede">Every title gets two numbers: what <strong>your Tastebuds</strong> think, and what the whole world thinks. When they disagree &mdash; that&rsquo;s the interesting part.</p>
             </div>
@@ -554,7 +538,6 @@
         <article class="story-panel" id="taste-profile" aria-label="Your unique taste profile">
           <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div class="panel-copy">
-              <span class="panel-no" aria-hidden="true">Reel 03</span>
               <h3 class="panel-title">Your name in <em>lights</em>.</h3>
               <p class="panel-lede">A living taste profile, built from what you actually watch and finish &mdash; distilled into a title worthy of the marquee. It only gets sharper the more you use it.</p>
             </div>
@@ -568,9 +551,18 @@
                 </div>
               </div>
               <div class="tp-chips">
-                <span class="tp-chip" data-el="chip1">Slow&#8209;burn Thrillers &middot; 92%</span>
-                <span class="tp-chip" data-el="chip2">Practical&#8209;effects Loyalist</span>
-                <span class="tp-chip" data-el="chip3">Finishes what he starts &middot; 87%</span>
+                <span class="tp-chip tp-chip--trend" data-el="chip1">
+                  <svg class="tp-chip-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17.5 10 11l4 4 6.5-6.5"/><path d="M15 8.5h5.5V14"/></svg>
+                  Slow&#8209;burn Thrillers <b>92%</b>
+                </span>
+                <span class="tp-chip tp-chip--love" data-el="chip2">
+                  <svg class="tp-chip-ic tp-chip-ic--fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6S3.4 14.9 3.4 9.1A4.7 4.7 0 0 1 12 6.4a4.7 4.7 0 0 1 8.6 2.7c0 5.8-8.6 11.5-8.6 11.5Z"/></svg>
+                  Practical&#8209;effects Loyalist
+                </span>
+                <span class="tp-chip tp-chip--stat" data-el="chip3">
+                  <svg class="tp-chip-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>
+                  Finishes what he starts <b>87%</b>
+                </span>
               </div>
             </div>
           </div>
@@ -580,31 +572,41 @@
         <article class="story-panel" id="swipe" aria-label="Swipe with friends">
           <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div class="panel-copy md:order-2">
-              <span class="panel-no" aria-hidden="true">Reel 04</span>
               <h3 class="panel-title">Swipe with <em>friends</em>.</h3>
               <p class="panel-lede">Movie night, minus the forty-minute argument. Everyone swipes, nobody scrolls forever &mdash; the first title you all say yes to wins the evening.</p>
             </div>
             <div class="panel-stage stage-swipe md:order-1" aria-hidden="true">
               <div class="swipe-deck">
+                <!-- Beat 3 · the title everyone agreed on -->
                 <div class="swipe-card sw-match" data-el="sw-match">
                   <img src="https://image.tmdb.org/t/p/w342/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg" alt="" loading="lazy" width="342" height="513">
                   <div class="match-banner" data-el="match-banner">
                     <span class="match-title">It&rsquo;s a match!</span>
                     <span class="match-avatars">
-                      <span class="at-avatar av-mint">JD</span>
-                      <span class="at-avatar av-cherry">KR</span>
-                      <span class="at-avatar av-gold">SM</span>
-                      <span class="at-avatar av-info">ME</span>
+                      <img class="at-avatar" src="assets/app/avatar-fox.png" alt="" loading="lazy" width="24" height="24">
+                      <img class="at-avatar" src="assets/app/avatar-owl.png" alt="" loading="lazy" width="24" height="24">
+                      <img class="at-avatar" src="assets/app/avatar-penguin.png" alt="" loading="lazy" width="24" height="24">
+                      <img class="at-avatar" src="assets/app/avatar-otter.png" alt="" loading="lazy" width="24" height="24">
                     </span>
                   </div>
                 </div>
-                <div class="swipe-card sw-left" data-el="sw-left">
-                  <img src="https://image.tmdb.org/t/p/w342/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg" alt="" loading="lazy" width="342" height="513">
-                  <span class="swipe-stamp stamp-nope">Seen it</span>
+                <!-- Beat 2 · same title, both say yes -->
+                <div class="swipe-card sw-r2-left" data-el="r2l">
+                  <img src="https://image.tmdb.org/t/p/w342/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg" alt="" loading="lazy" width="342" height="513">
+                  <span class="swipe-stamp stamp-like stamp-tilt-left">Like</span>
                 </div>
-                <div class="swipe-card sw-right" data-el="sw-right">
+                <div class="swipe-card sw-r2-right" data-el="r2r">
+                  <img src="https://image.tmdb.org/t/p/w342/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg" alt="" loading="lazy" width="342" height="513">
+                  <span class="swipe-stamp stamp-like stamp-tilt-right">Like</span>
+                </div>
+                <!-- Beat 1 · two different titles, split decision -->
+                <div class="swipe-card sw-r1-left" data-el="r1l">
+                  <img src="https://image.tmdb.org/t/p/w342/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg" alt="" loading="lazy" width="342" height="513">
+                  <span class="swipe-stamp stamp-pass stamp-tilt-left">Pass</span>
+                </div>
+                <div class="swipe-card sw-r1-right" data-el="r1r">
                   <img src="https://image.tmdb.org/t/p/w342/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg" alt="" loading="lazy" width="342" height="513">
-                  <span class="swipe-stamp stamp-like">3 of 4</span>
+                  <span class="swipe-stamp stamp-like stamp-tilt-right">Like</span>
                 </div>
               </div>
             </div>
@@ -615,7 +617,6 @@
         <article class="story-panel story-panel-wide" id="full-menu" aria-label="The full menu">
           <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="panel-copy text-center max-w-3xl mx-auto">
-              <span class="panel-no" aria-hidden="true">Reel 05</span>
               <h3 class="panel-title">The full <em>menu</em>.</h3>
               <p class="panel-lede">Trailers, cast, where to stream, episode tracking, collaborative lists, badges, threads &mdash; everything else is already on the table.</p>
             </div>
@@ -627,16 +628,20 @@
                   <img class="menu-poster mp-3" data-el="mp3" src="https://image.tmdb.org/t/p/w342/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg" alt="" loading="lazy" width="342" height="513">
                   <img class="menu-poster mp-4" data-el="mp4" src="https://image.tmdb.org/t/p/w342/7fn624j5lj3xTme2SgiLCeuedmO.jpg" alt="" loading="lazy" width="342" height="513">
                 </div>
+                <!-- TODO(stream-logos): swap the placeholder dots below for official
+                     provider logos once supplied. Drop e.g. assets/app/stream-netflix.png,
+                     stream-max.png, stream-appletv.png in and replace each .stream-dot with:
+                     <img class="stream-logo" src="assets/app/stream-netflix.png" alt="Netflix" width="18" height="18"> -->
                 <span class="menu-chip mc-stream" data-el="mc1">
                   <span class="stream-dot sd-red"></span><span class="stream-dot sd-blue"></span><span class="stream-dot sd-teal"></span>
                   Where to stream
                 </span>
-                <span class="menu-chip mc-actor" data-el="mc2"><span class="at-avatar av-coffee">FP</span> Florence Pugh &middot; Filmography</span>
+                <span class="menu-chip mc-actor" data-el="mc2"><img class="at-avatar" src="assets/app/avatar-clapper.png" alt="" loading="lazy" width="24" height="24"> Florence Pugh &middot; Filmography</span>
                 <span class="menu-chip mc-progress" data-el="mc3">
                   <span class="mc-progress-label">Severance &middot; S2 E5</span>
                   <span class="mc-progress-track"><span class="mc-progress-fill"></span></span>
                 </span>
-                <span class="menu-chip mc-badge" data-el="mc4">&#127871; 100 Hours Club</span>
+                <span class="menu-chip mc-badge" data-el="mc4"><img class="mc-badge-art" src="assets/app/badge-review-100.png" alt="" loading="lazy" width="22" height="22"> 100 Reviews Club</span>
                 <span class="menu-chip mc-list" data-el="mc5">&#128278; Cozy Fall Horror &middot; 12 titles</span>
                 <span class="menu-chip mc-thread" data-el="mc6">&#128172; 34 comments &middot; 3 Tastebuds</span>
               </div>
@@ -901,6 +906,14 @@
       var REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || REDUCED_MOTION) {
         storyRoot.classList.add('story-static');
+        // Static fallback: score rings render filled at their final values
+        Array.prototype.forEach.call(storyRoot.querySelectorAll('.score-ring'), function (ring) {
+          var score = parseFloat(ring.getAttribute('data-score')) || 0;
+          var fill = ring.querySelector('.ring-fill');
+          var valueEl = ring.querySelector('.ring-value');
+          if (fill) fill.style.strokeDashoffset = String(326.73 * (1 - score / 10));
+          if (valueEl) valueEl.textContent = score.toFixed(1);
+        });
         // Still light the marquee + match card when they come into view
         var lateBits = [
           { sel: '.tp-marquee', cls: 'lit' },
@@ -982,36 +995,49 @@
         var p3 = q('#taste-profile');
         if (p3) {
           var marqueeWrap = p3.querySelector('.tp-marquee');
-          gsap.timeline({
-            scrollTrigger: panelTrigger(p3, pinned, {
-              onEnter: function () { if (marqueeWrap) marqueeWrap.classList.add('lit'); }
-            })
-          })
+          gsap.timeline({ scrollTrigger: panelTrigger(p3, pinned) })
             .to(p3.querySelector('[data-el="marquee"]'), { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' })
+            // Light the sign only after the board is fully visible, so the
+            // neon flicker-on (ported from the app's TasteProfileMarquee)
+            // actually reads as a flicker instead of finishing off-screen.
+            .call(function () { if (marqueeWrap) marqueeWrap.classList.add('lit'); })
             .to([p3.querySelector('[data-el="chip1"]'), p3.querySelector('[data-el="chip2"]'), p3.querySelector('[data-el="chip3"]')],
                 { opacity: 1, y: 0, duration: 0.35, stagger: 0.12, ease: 'back.out(1.7)' }, '+=0.2')
             .to({}, { duration: 0.5 });
         }
 
-        // ---- 04 · Swipe with Friends: two clash, then the group match ----
+        // ---- 04 · Swipe with Friends: split vote first, then a unanimous match ----
         var p4 = q('#swipe');
         if (p4) {
-          var swLeft = p4.querySelector('[data-el="sw-left"]');
-          var swRight = p4.querySelector('[data-el="sw-right"]');
+          var r1l = p4.querySelector('[data-el="r1l"]'); // beat 1, Pass
+          var r1r = p4.querySelector('[data-el="r1r"]'); // beat 1, Like (different title)
+          var r2l = p4.querySelector('[data-el="r2l"]'); // beat 2, Like (same title)
+          var r2r = p4.querySelector('[data-el="r2r"]'); // beat 2, Like (same title)
           var swMatch = p4.querySelector('[data-el="sw-match"]');
-          // Deck-specific initial states (override generic data-el state)
-          gsap.set(swLeft, { opacity: 1, y: 0, x: '-46%', rotation: -7 });
-          gsap.set(swRight, { opacity: 1, y: 0, x: '46%', rotation: 7 });
+          // Deck-specific initial states (override generic data-el state). Stamps are
+          // children, so they fade in and out with their card automatically.
+          gsap.set([r1l, r2l], { opacity: 0, x: '-46%', rotation: -7, scale: 0.9 });
+          gsap.set([r1r, r2r], { opacity: 0, x: '46%', rotation: 7, scale: 0.9 });
           gsap.set(swMatch, { opacity: 0, y: 0, scale: 0.82 });
+
           gsap.timeline({ scrollTrigger: panelTrigger(p4, pinned) })
-            // clash to center
-            .to(swLeft, { x: '-4%', rotation: -3, duration: 0.5, ease: 'power2.inOut' })
-            .to(swRight, { x: '4%', rotation: 3, duration: 0.5, ease: 'power2.inOut' }, '<')
-            // swipe away
-            .to(swLeft, { x: '-150%', rotation: -22, opacity: 0, duration: 0.6, ease: 'power2.in' }, '+=0.25')
-            .to(swRight, { x: '150%', rotation: 22, opacity: 0, duration: 0.6, ease: 'power2.in' }, '-=0.35')
-            // the match lands
-            .to(swMatch, { opacity: 1, scale: 1, duration: 0.55, ease: 'back.out(1.5)' }, '-=0.3')
+            // Beat 1 · two DIFFERENT titles clash — one Pass, one Like
+            .to([r1l, r1r], { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' })
+            .to(r1l, { x: '-17%', rotation: -3, duration: 0.45, ease: 'power2.inOut' }, '<')
+            .to(r1r, { x: '17%', rotation: 3, duration: 0.45, ease: 'power2.inOut' }, '<')
+            .to({}, { duration: 0.5 }) // hold the split verdict
+            // they disagree — both fly off, no match
+            .to(r1l, { x: '-155%', rotation: -22, opacity: 0, duration: 0.55, ease: 'power2.in' })
+            .to(r1r, { x: '155%', rotation: 22, opacity: 0, duration: 0.55, ease: 'power2.in' }, '<')
+            // Beat 2 · the SAME title comes up — both say Like
+            .to([r2l, r2r], { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }, '-=0.1')
+            .to(r2l, { x: '-15%', rotation: -3, duration: 0.45, ease: 'power2.inOut' }, '<')
+            .to(r2r, { x: '15%', rotation: 3, duration: 0.45, ease: 'power2.inOut' }, '<')
+            .to({}, { duration: 0.5 }) // hold the agreement
+            // agreement — the two votes converge on the shared pick
+            .to([r2l, r2r], { x: '0%', rotation: 0, scale: 0.9, opacity: 0, duration: 0.5, ease: 'power2.in' })
+            // Beat 3 · the match lands
+            .to(swMatch, { opacity: 1, scale: 1, duration: 0.55, ease: 'back.out(1.5)' }, '-=0.25')
             .call(function () { if (swMatch) swMatch.classList.add('matched'); }, null, '-=0.15')
             .to({}, { duration: 0.7 }); // hold the match on screen through the end of the pin
         }
@@ -1151,31 +1177,6 @@
     (function(){
       var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // ---- Marquee-bulb headline: each letter flickers on like a theater sign ----
-      var h1 = document.querySelector('#hero h1');
-      if (h1 && !REDUCED) {
-        h1.setAttribute('aria-label', h1.textContent.replace(/\s+/g, ' ').trim());
-        var wrapLetters = function(node){
-          Array.prototype.slice.call(node.childNodes).forEach(function(child){
-            if (child.nodeType === 3) {
-              var frag = document.createDocumentFragment();
-              child.textContent.split('').forEach(function(ch){
-                if (!ch.trim()) { frag.appendChild(document.createTextNode(ch)); return; }
-                var s = document.createElement('span');
-                s.className = 'mq-letter';
-                s.textContent = ch;
-                s.style.animationDelay = (1.2 + Math.random() * 0.75).toFixed(2) + 's';
-                frag.appendChild(s);
-              });
-              node.replaceChild(frag, child);
-            } else if (child.nodeType === 1 && child.tagName !== 'BR') {
-              wrapLetters(child);
-            }
-          });
-        };
-        wrapLetters(h1);
-      }
-
       // ---- Film-strip scroll progress ----
       var strip = document.getElementById('filmstrip');
       var fsFill = strip && strip.querySelector('.fs-fill');
@@ -1257,22 +1258,7 @@
         var on = document.body.classList.toggle('noir');
         clearInterval(noirTimer);
         if (on) { quipIdx = 0; setCaption(); noirTimer = setInterval(setCaption, 8000); }
-        syncFormatUI(on);
       };
-      // Picture-format switch at the bottom of the hero mirrors noir state
-      var ffColor = document.getElementById('ffColor');
-      var ffBw = document.getElementById('ffBw');
-      var syncFormatUI = function(on){
-        if (!ffColor || !ffBw) return;
-        ffColor.classList.toggle('is-active', !on);
-        ffBw.classList.toggle('is-active', on);
-        ffColor.setAttribute('aria-pressed', String(!on));
-        ffBw.setAttribute('aria-pressed', String(on));
-      };
-      if (ffColor && ffBw) {
-        ffColor.addEventListener('click', function(){ if (document.body.classList.contains('noir')) toggleNoir(); });
-        ffBw.addEventListener('click', function(){ if (!document.body.classList.contains('noir')) toggleNoir(); });
-      }
       document.addEventListener('keydown', function(e){
         var t = e.target;
         if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
@@ -1356,9 +1342,6 @@
         setTimeout(function(){ el.remove(); }, 1000);
       }
       document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeIntermission(); });
-      document.querySelectorAll('.np-egg').forEach(function(el){
-        el.addEventListener('click', openIntermission);
-      });
       var ixInvite = document.getElementById('ixInvite');
       if (ixInvite) ixInvite.addEventListener('click', openIntermission);
 
