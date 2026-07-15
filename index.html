@@ -379,28 +379,23 @@
   </header>
 
   <main class="pt-20">
-    <!-- Hero -->
-    <section id="hero" class="cinema-hero hero-rel">
-      <!-- Screen layers -->
-      <div class="cinema-screen film-jitter" aria-hidden="true"></div>
+    <!-- Hero: dark neon marquee — the headline is a lit theater sign on a
+         night-dark wall, extending the "name in lights" language of the
+         story panels below. -->
+    <section id="hero" class="marquee-hero hero-rel">
+      <!-- Scene layers -->
+      <div class="mh-backdrop" aria-hidden="true"></div>
       <div class="screen-grain" aria-hidden="true"></div>
-      <div class="screen-vignette" aria-hidden="true"></div>
-      <div class="screen-frame" aria-hidden="true"></div>
-      <div class="reel-band" aria-hidden="true"></div>
       <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
-      <div id="spot" class="spot projector-spot" aria-hidden="true"></div>
-      <div class="film-scratch s1" aria-hidden="true"></div>
-      <div class="film-scratch s2" aria-hidden="true"></div>
-      <div class="cue-mark" aria-hidden="true"></div>
-      <!-- Curtain call: velvet curtains part on load; scalloped valance frames the top -->
-      <div class="curtain-stage" aria-hidden="true">
-        <div class="curtain curtain-left"></div>
-        <div class="curtain curtain-right"></div>
-        <div class="curtain-valance"></div>
-      </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-almond">
         <article class="space-y-6 text-center md:text-left">
-          <h1 class="font-display text-almond text-[2.75rem] sm:text-6xl md:text-7xl leading-[0.95] tracking-tight">Your Ultimate<br/>Movie &amp; TV <em class="hero-accent">Hub</em></h1>
+          <p class="mh-eyebrow"><span aria-hidden="true">&#9733;</span> Now Showing <span aria-hidden="true">&#9733;</span></p>
+          <div class="mh-sign">
+            <span class="mh-halo" aria-hidden="true"></span>
+            <span class="mh-bulbs mh-bulbs-top" aria-hidden="true"></span>
+            <span class="mh-bulbs mh-bulbs-bottom" aria-hidden="true"></span>
+            <h1 class="mh-board font-display">Your Ultimate<br/>Movie &amp; TV <em class="mh-neon">Hub</em></h1>
+          </div>
           <p class="text-base md:text-lg text-almond/85 max-w-lg mx-auto md:mx-0">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
           <div class="hero-ctas">
             <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block transition hover:-translate-y-0.5">
@@ -418,6 +413,7 @@
           <p class="text-xs tracking-[0.2em] uppercase text-almond/60 pt-2">Android &#183; Coming soon</p>
         </article>
         <figure class="relative">
+          <span class="mh-phone-glow" aria-hidden="true"></span>
           <div class="iphone-frame mx-auto">
             <span class="iphone-island" aria-hidden="true"></span>
             <picture>
@@ -438,7 +434,6 @@
           </div>
         </figure>
       </div>
-      <div class="screen-boot" aria-hidden="true"></div>
     </section>
 
     <!-- ============================================================
@@ -1064,19 +1059,11 @@
   </script>
 
   <script>
-    // Pointer spotlight constrained to hero (disabled on touch)
-    const spot = document.getElementById('spot');
+    // Light the marquee sign shortly after load (CSS drives the bulb chase,
+    // neon flicker-on, and room glow off the .lit class)
     const heroEl = document.getElementById('hero');
-    if (window.matchMedia('(pointer:fine)').matches && spot && heroEl) {
-      const moveSpot = (e)=>{
-        const rect = heroEl.getBoundingClientRect();
-        // Ignore if cursor is outside hero
-        if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) return;
-        const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-        spot.style.left = x + 'px';
-        spot.style.top = y + 'px';
-      };
-      window.addEventListener('mousemove', moveSpot, {passive:true});
+    if (heroEl) {
+      window.setTimeout(() => heroEl.classList.add('lit'), 600);
     }
 
     // Floating dust generator
@@ -1111,18 +1098,6 @@
       }, {threshold: 0});
       heroObs.observe(heroEl);
     }
-    // After boot: soften vignette only
-    (function(){
-      const vignette = document.querySelector('.screen-vignette');
-      if (!vignette) return;
-
-      const softenVignette = ()=> vignette.classList.add('soft');
-
-      // Soften vignette shortly after boot overlay fades
-      const bootDurationMs = 750; // matches CSS @keyframes powerOn
-      setTimeout(softenVignette, bootDurationMs + 200);
-    })();
-
     // Reveal on scroll
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
