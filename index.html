@@ -40,21 +40,14 @@
 
   <meta name="theme-color" content="#1C1C1C" />
 
-  <!-- Favicon / PWA -->
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-  <link rel="shortcut icon" href="assets/favicon.ico" />
+  <!-- Favicon / PWA (same assets as aftertaste-ui) -->
+  <link rel="icon" type="image/png" sizes="128x128" href="assets/icons/favicon-128x128.png" />
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/icons/favicon-96x96.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png" />
+  <link rel="icon" type="image/ico" href="assets/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="assets/site.webmanifest" />
-
-  <!-- Preload the hero portrait (LCP candidate) — responsive WebP -->
-  <link rel="preload" as="image"
-        imagesrcset="assets/hero-portrait-720w.webp 720w, assets/hero-portrait-1080w.webp 1080w"
-        imagesizes="(max-width: 767px) 225px, (max-width: 1023px) 280px, 325px"
-        type="image/webp"
-        fetchpriority="high" />
 
   <!-- Fonts: non-render-blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,7 +124,7 @@
         "description": "Track what you watch, compare tastes with friends, and discover what to watch next—no algorithm bubbles involved. Get personalized recommendations from people you trust.",
         "url": "https://aftertaste.com/",
         "downloadUrl": "https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530",
-        "screenshot": "https://aftertaste.com/assets/hero-portrait.png",
+        "screenshot": "https://aftertaste.com/assets/tastebud-feed.png",
         "softwareVersion": "3.1.0",
         "author": { "@id": "https://aftertaste.com/#organization" },
         "publisher": { "@id": "https://aftertaste.com/#organization" },
@@ -345,11 +338,8 @@
 
         <!-- Desktop links -->
         <div class="hidden md:flex items-center gap-7 text-[13px] font-medium">
-          <a href="#glance" class="nav-link">At a Glance</a>
-          <a href="#who" class="nav-link">Who we are</a>
-          <a href="#features" class="nav-link">Features</a>
-          <a href="#chef" class="nav-link">Chef</a>
-          <a href="#reviews" class="nav-link">Reviews</a>
+                              <a href="#features" class="nav-link">Features</a>
+                    <a href="#reviews" class="nav-link">Reviews</a>
           <a href="#contact" class="nav-link">Contact</a>
           <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="get-app-badge">
             <img src="assets/App_Store_Download.svg" alt="Download on the App Store" width="135" height="45" loading="eager" decoding="async" />
@@ -369,11 +359,8 @@
       <!-- Mobile nav panel -->
       <div id="mobile-nav" class="md:hidden absolute left-0 right-0 top-full mx-3 mt-2 rounded-2xl bg-licorice/95 ring-1 ring-almond/10 backdrop-blur-md p-5 shadow-2xl" role="menu">
         <div class="flex flex-col gap-1 text-[15px] font-medium">
-          <a href="#glance" class="nav-link py-2">At a Glance</a>
-          <a href="#who" class="nav-link py-2">Who we are</a>
-          <a href="#features" class="nav-link py-2">Features</a>
-          <a href="#chef" class="nav-link py-2">Chef</a>
-          <a href="#reviews" class="nav-link py-2">Reviews</a>
+                              <a href="#features" class="nav-link py-2">Features</a>
+                    <a href="#reviews" class="nav-link py-2">Reviews</a>
           <a href="#contact" class="nav-link py-2">Contact</a>
         </div>
         <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="get-app-badge mt-4 flex justify-center">
@@ -385,31 +372,28 @@
   </header>
 
   <main class="pt-20">
-    <!-- Hero -->
-    <section id="hero" class="cinema-hero hero-rel">
-      <!-- Screen layers -->
-      <div class="cinema-screen film-jitter" aria-hidden="true"></div>
-      <div class="screen-grain" aria-hidden="true"></div>
-      <div class="screen-vignette" aria-hidden="true"></div>
-      <div class="screen-frame" aria-hidden="true"></div>
-      <div class="reel-band" aria-hidden="true"></div>
-      <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
-      <div id="spot" class="spot projector-spot" aria-hidden="true"></div>
-      <div class="film-scratch s1" aria-hidden="true"></div>
-      <div class="film-scratch s2" aria-hidden="true"></div>
-      <div class="cue-mark" aria-hidden="true"></div>
-      <!-- Curtain call: velvet curtains part on load; scalloped valance frames the top -->
-      <div class="curtain-stage" aria-hidden="true">
-        <div class="curtain curtain-left"></div>
-        <div class="curtain curtain-right"></div>
-        <div class="curtain-valance"></div>
+    <!-- Hero: noir one-sheet — an old-Hollywood premiere staged as a movie
+         poster. Oversized AFTERTASTE watermark ghosted across the wall,
+         crossed searchlight beams, dust and grain; black-and-white type
+         with a single cherry neon "Now Showing" sign, and a classic
+         billing block where the credits would run. -->
+    <section id="hero" class="noir-hero hero-rel">
+      <!-- Scene layers -->
+      <div class="nh-backdrop" aria-hidden="true"></div>
+      <div class="nh-beams" aria-hidden="true">
+        <span class="nh-beam nh-beam-l"></span>
+        <span class="nh-beam nh-beam-r"></span>
       </div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-licorice">
-        <article class="space-y-6 text-center md:text-left">
-          <span class="hero-kicker" aria-hidden="true">Now Showing</span>
-          <h1 class="font-display text-licorice text-[2.75rem] sm:text-6xl md:text-7xl leading-[0.95] tracking-tight">Your Ultimate<br/>Movie &amp; TV <em class="hero-accent">Hub</em></h1>
-          <p class="text-base md:text-lg text-licorice/85 max-w-lg mx-auto md:mx-0">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
-          <div class="hero-ctas">
+      <div class="nh-watermark" aria-hidden="true">Aftertaste</div>
+      <div class="screen-grain" aria-hidden="true"></div>
+      <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
+      <div class="nh-vignette" aria-hidden="true"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-almond">
+        <article class="nh-inner">
+          <p class="nh-sign"><span class="nh-neon">Now Showing</span></p>
+          <h1 class="nh-title font-display">Your Ultimate<br/>Movie &amp; TV <em>Hub</em></h1>
+          <p class="nh-lede text-base md:text-lg text-almond/85 max-w-xl mx-auto">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
+          <div class="hero-ctas nh-ctas">
             <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block transition hover:-translate-y-0.5">
               <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-11 md:h-12" />
             </a>
@@ -422,326 +406,301 @@
             <span class="hero-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
             <span>Loved by film fans &mdash; read the reviews</span>
           </a>
-          <p class="text-xs tracking-[0.2em] uppercase text-licorice/60 pt-2">Android &#183; Coming soon</p>
-        </article>
-        <figure class="relative">
-          <picture>
-            <source
-              type="image/webp"
-              srcset="assets/hero-portrait-720w.webp 720w, assets/hero-portrait-1080w.webp 1080w"
-              sizes="(max-width: 767px) 225px, (max-width: 1023px) 280px, 325px" />
-            <img
-              src="assets/hero-portrait.png"
-              alt="Aftertaste mobile app showing movie feed, tracking features, and personalized recommendations interface"
-              class="w-full max-w-[225px] md:max-w-[280px] lg:max-w-[325px] mx-auto"
-              loading="eager"
-              decoding="async"
-              fetchpriority="high"
-              width="1419"
-              height="2796" />
-          </picture>
-        </figure>
-      </div>
-      <div class="screen-boot" aria-hidden="true"></div>
-    </section>
-
-    <!-- NOW PLAYING marquee -->
-    <div class="now-playing" aria-hidden="true">
-      <div class="bulb-row top"></div>
-      <div class="bulb-row bottom"></div>
-      <div class="now-playing-track">
-        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span class="np-egg" title="Take five?">Intermission</span><span>Reviews from friends for friends</span>
-        <span>Now Playing</span><span>Create</span><span>Critique</span><span>Explore</span><span>Connect</span><span>Curate</span><span class="np-egg" title="Take five?">Intermission</span><span>Reviews from friends for friends</span>
-      </div>
-    </div>
-
-    <!-- At a Glance -->
-    <section id="glance" class="py-24 md:py-28">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Picture-format switch: a more discoverable door into NOIR mode -->
-        <div class="film-format" role="group" aria-label="Picture format">
-          <button type="button" class="ff-btn ff-color is-active" id="ffColor" aria-pressed="true">Full Color</button>
-          <span class="ff-sep" aria-hidden="true">&middot;</span>
-          <button type="button" class="ff-btn ff-bw" id="ffBw" aria-pressed="false">Black and White</button>
-        </div>
-        <header class="mb-14 text-center max-w-3xl mx-auto">
-          <span class="section-kicker glance-eyebrow">The Program</span>
-          <h2 class="section-title mt-4">Know what to watch — <em>at a glance</em>.</h2>
-          <span class="glance-divider" aria-hidden="true"></span>
-          <p class="glance-lede">Track, discuss, and decide faster — with people who actually share your taste, not an algorithm that thinks it does.</p>
-        </header>
-
-        <div class="grid gap-5 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <!-- Card: Tastebuds Scores -->
-          <article class="glance-card">
-            <div class="card-icon" aria-hidden="true">
-              <img src="assets/Tongue-RGB-White-SM.png" alt="" />
-            </div>
-            <h3>Tastebud Scores</h3>
-            <p>Reviews and ratings tailored to your circle — not the crowd.</p>
-            <ul>
-              <li>Tastebud scores and feeds</li>
-              <li>Trending this week, month, and year</li>
-            </ul>
-          </article>
-
-          <!-- Card: Lists & Bookmarks -->
-          <article class="glance-card">
-            <div class="card-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4h10a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.8.4L12 16l-6.2 3.9a.5.5 0 0 1-.8-.4V6a2 2 0 0 1 2-2m0 2v11.3l5-3.2l5 3.2V6z"/></svg>
-            </div>
-            <h3>Lists &amp; Bookmarks</h3>
-            <p>Save it for later, or build themed lists — solo or with friends.</p>
-            <ul>
-              <li>Bookmark for later</li>
-              <li>Collaborative lists</li>
-            </ul>
-          </article>
-
-          <!-- Card: Track Progress -->
-          <article class="glance-card">
-            <div class="card-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.75A10.25 10.25 0 1 0 22.25 12A10.26 10.26 0 0 0 12 1.75m0 1.5A8.75 8.75 0 1 1 3.25 12A8.74 8.74 0 0 1 12 3.25m-.75 4a.75.75 0 0 0-1.5 0v6.25c0 .2.08.4.22.53l4.25 4.25a.75.75 0 0 0 1.06-1.06l-4.03-4.03z"/></svg>
-            </div>
-            <h3>Track Progress</h3>
-            <p>TV seasons and episodes — always know where you left off.</p>
-            <ul>
-              <li>In&#8209;progress, watched, shelved, trashed</li>
-              <li>Your full viewing history, always on hand</li>
-            </ul>
-          </article>
-
-          <!-- Card: Deep Details -->
-          <article class="glance-card">
-            <div class="card-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6l-3 2v-2H5a2 2 0 0 1-2-2zm2 0v12h14V5zm2.5 3h9a.75.75 0 0 1 0 1.5h-9A.75.75 0 0 1 7.5 8m0 3h6a.75.75 0 0 1 0 1.5h-6A.75.75 0 0 1 7.5 11"/></svg>
-            </div>
-            <h3>In-Depth Info</h3>
-            <p>Trailers, cast, genres, seasons, related picks — all in one place.</p>
-            <ul>
-              <li>Actor pages and filmographies</li>
-              <li>Where to stream</li>
-            </ul>
-          </article>
-
-          <!-- Card: Reviews & Threads -->
-          <article class="glance-card">
-            <div class="card-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M6 3h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4v-4H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m1 4h10a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2m0 4h6a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2"/></svg>
-            </div>
-            <h3>Reviews &amp; Threads</h3>
-            <p>Threaded discussions — on a specific review, or on a title globally.</p>
-            <ul>
-              <li>Filter and sort any way you like</li>
-              <li>Tastebuds only, or the global community</li>
-            </ul>
-          </article>
-
-          <!-- Card: Taste Profile & Recs -->
-          <article class="glance-card">
-            <div class="card-icon" aria-hidden="true">
-              <img src="assets/chef-icon.png" alt="" />
-            </div>
-            <h3>Taste Profile &amp; Smart Recs</h3>
-            <p>A living profile of your taste that powers custom recommendations.</p>
-            <ul>
-              <li>Genre affinities, influences, habits</li>
-              <li>Collaborative recs based on who you're watching with</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="text-center mt-10">
-          <div class="inline-flex gap-3">
-            <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
-              <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" loading="lazy" />
-            </a>
-            <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="rounded-xl border border-white/20 px-4 py-2 hover:bg-white/5 transition ring-1 ring-black/70">
-              Visit our Web App
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Who we are -->
-    <section id="who" class="py-24 md:py-32 relative overflow-hidden">
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-5 gap-12 md:gap-16 items-center">
-        <figure class="order-2 md:order-1 md:col-span-2">
-          <div class="who-mic-wrap">
-            <div class="halftone-chip on-mint">
-              <img src="assets/mic-bw.png" alt="Vintage studio microphone — representing authentic voice and genuine recommendations" id="micImg" loading="lazy" />
-            </div>
-          </div>
-        </figure>
-        <article class="order-1 md:order-2 md:col-span-3 space-y-6 text-center md:text-left">
-          <span class="section-kicker align-start who-kicker">The Crew</span>
-          <h2 class="section-title">People <em>over</em> algorithms.</h2>
-          <p class="who-lede mx-auto md:mx-0">Aftertaste is the social hub for movie and TV fans who'd rather hear from friends, creators, and critics than a feed that thinks it knows them.</p>
-          <p class="who-lede mx-auto md:mx-0">Track what you watch, compare tastes, and get real recommendations — because your next favorite thing shouldn't feel like scrolling forever.</p>
-          <div class="pt-2">
-            <span class="who-meta"><span class="who-dot" aria-hidden="true"></span> Independent &#183; Est. 2021</span>
+          <div class="nh-billing">
+            <span class="nh-bill-line nh-bill-foot"><span class="nh-bill-seg">Now Playing on iPhone &amp; Web</span> <i>&middot;</i> <span class="nh-bill-seg">Coming Soon to Android</span></span>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- Features Grid (Phase 3: poster-style cards) -->
-    <section id="features" class="py-16 md:py-28">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="ix-invite-wrap">
-          <button type="button" class="ix-invite" id="ixInvite">Psst &mdash; getting bored? Take an intermission.</button>
-        </div>
-        <header class="mb-12 md:mb-16 max-w-3xl">
-          <span class="section-kicker features-eyebrow align-start">The Lineup</span>
-          <h2 class="section-title mt-4">A menu of <em>features</em>.</h2>
-          <div class="features-divider"></div>
-          <p class="features-lede mt-5">Nine ways Aftertaste helps you track what you watch, trade takes with the people whose taste you trust, and figure out what to queue up next.</p>
-        </header>
+    <!-- ============================================================
+         THE FEATURE PRESENTATION — scroll-driven story of the app,
+         built from live replicas of real in-app elements.
+         ============================================================ -->
+    <section id="features" class="story-section">
+      <div id="story">
 
-        <div class="relative">
-          <ul class="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" role="list" aria-label="App Features">
-              <!-- 01 -->
-              <li class="feature-card">
-                <span class="stub">Nº 01</span>
-                <div class="shot">
-                  <img src="assets/features/feed.png" alt="Social feed showing friends' movie and TV reviews" loading="lazy" width="300" height="600" />
+        <!-- ================= 01 · FIND YOUR TASTEBUDS ================= -->
+        <article class="story-panel" id="tastebuds" aria-label="Find your Tastebuds">
+          <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div class="panel-copy">
+              <h3 class="panel-title">Find your <em>Tastebuds</em>.</h3>
+              <p class="panel-lede">Follow friends, critics, and kindred spirits. Your feed becomes the people whose taste you trust &mdash; watching, rating, and trading takes in real time.</p>
+            </div>
+            <div class="panel-stage stage-tastebuds" aria-hidden="true">
+              <!-- Aggregate feed card replica -->
+              <div class="at-card" data-el="card">
+                <div class="at-card-backdrop">
+                  <img src="https://image.tmdb.org/t/p/w780/jYEW5xZkZk2WTrdbMGAPFuBqbDc.jpg" alt="" loading="lazy" width="780" height="439">
+                  <div class="at-card-fade"></div>
+                  <span class="at-pill" data-el="pill">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                    Trending with Tastebuds
+                  </span>
+                  <div class="at-card-titleblock" data-el="titleblock">
+                    <div class="at-card-title">Dune</div>
+                    <div class="at-card-meta">Movie &middot; 2021 &middot; Sci&#8209;Fi &middot; Adventure</div>
+                  </div>
                 </div>
-                <h3>Tastebuds Feed</h3>
-                <p>Follow friends and see what the people whose taste you trust are watching.</p>
-              </li>
-              <!-- 02 -->
-              <li class="feature-card">
-                <span class="stub">Nº 02</span>
-                <div class="shot">
-                  <img src="assets/features/tracking.png" alt="Content tracking screen showing in-progress TV shows and movies" loading="lazy" width="300" height="600" />
+                <div class="at-card-social" data-el="social">
+                  <div class="at-avatars">
+                    <img class="at-avatar" src="assets/app/avatar-fox.png" alt="" loading="lazy" width="28" height="28">
+                    <img class="at-avatar" src="assets/app/avatar-owl.png" alt="" loading="lazy" width="28" height="28">
+                    <img class="at-avatar" src="assets/app/avatar-penguin.png" alt="" loading="lazy" width="28" height="28">
+                  </div>
+                  <p><strong>Jess</strong> and 2 other Tastebuds rated it this week</p>
                 </div>
-                <h3>Track Your Content</h3>
-                <p>Catalog everything you’ve watched, shelve what’s in progress, and queue what’s next.</p>
-              </li>
-              <!-- 03 -->
-              <li class="feature-card">
-                <span class="stub">Nº 03</span>
-                <div class="shot">
-                  <img src="assets/features/list.png" alt="Collaborative movie and TV lists feature" loading="lazy" width="300" height="600" />
+                <div class="at-card-quote" data-el="quote">
+                  <span class="at-score-ring yum" data-score="9.0">
+                    <svg viewBox="0 0 44 44" aria-hidden="true">
+                      <circle class="asr-track" cx="22" cy="22" r="19"></circle>
+                      <circle class="asr-fill" cx="22" cy="22" r="19"></circle>
+                    </svg>
+                    <span class="asr-value">9.0</span>
+                  </span>
+                  <span class="at-verdict yum">YUM</span>
+                  <p>&ldquo;Visually staggering. The theater shook. I shook.&rdquo;</p>
                 </div>
-                <h3>Build Lists</h3>
-                <p>Curate watch lists solo or collaborate with friends in real time.</p>
-              </li>
-              <!-- 04 -->
-              <li class="feature-card">
-                <span class="stub">Nº 04</span>
-                <div class="shot">
-                  <img src="assets/features/details.png" alt="Detailed movie information screen with cast, streaming options, and trailers" loading="lazy" width="300" height="600" />
+              </div>
+              <span class="float-chip fc-follow" data-el="chip-follow">+ Follow</span>
+              <span class="float-chip fc-react" data-el="chip-react"><img class="fc-ic" src="assets/app/reaction-popcorn.png" alt="" loading="lazy" width="18" height="18"> 17<svg class="chip-comment-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h3v3.59c0 .45.54.67.85.36L11.83 19H20a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/></svg> 4</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ================= 02 · YOUR CIRCLE VS THE CROWD ================= -->
+        <article class="story-panel" id="scores" aria-label="Your circle versus the crowd">
+          <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div class="panel-copy md:order-2">
+              <h3 class="panel-title">Your circle <em>vs</em> the crowd.</h3>
+              <p class="panel-lede">Every title gets two numbers: what <strong>your Tastebuds</strong> think, and what the whole world thinks. When they disagree &mdash; that&rsquo;s the interesting part.</p>
+            </div>
+            <div class="panel-stage stage-scores md:order-1" aria-hidden="true">
+              <div class="score-backdrop" data-el="backdrop">
+                <img src="https://image.tmdb.org/t/p/w780/ilRyazdMJwN05exqhwK4tMKBYZs.jpg" alt="" loading="lazy" width="780" height="439">
+              </div>
+              <div class="score-poster" data-el="poster">
+                <img src="https://image.tmdb.org/t/p/w342/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg" alt="" loading="lazy" width="342" height="513">
+              </div>
+              <div class="score-rings">
+                <div class="score-ring is-yum" data-el="ring-tastebud" data-score="9.2">
+                  <svg viewBox="0 0 120 120">
+                    <circle class="ring-track" cx="60" cy="60" r="52"/>
+                    <circle class="ring-fill" cx="60" cy="60" r="52"/>
+                  </svg>
+                  <span class="ring-value">0.0</span>
+                  <span class="ring-label">Tastebud<br>Score</span>
+                  <span class="ring-verdict">YUM</span>
                 </div>
-                <h3>All the Info</h3>
-                <p>Cast, trailers, where to stream, and episode details — every detail in one place.</p>
-              </li>
-              <!-- 05 -->
-              <li class="feature-card">
-                <span class="stub">Nº 05</span>
-                <div class="shot">
-                  <img src="assets/features/actor.png" alt="Actor profile page showing filmography and biography" loading="lazy" width="300" height="600" />
+                <div class="score-ring is-meh" data-el="ring-global" data-score="6.4">
+                  <svg viewBox="0 0 120 120">
+                    <circle class="ring-track" cx="60" cy="60" r="52"/>
+                    <circle class="ring-fill" cx="60" cy="60" r="52"/>
+                  </svg>
+                  <span class="ring-value">0.0</span>
+                  <span class="ring-label">Global<br>Score</span>
+                  <span class="ring-verdict">MEH</span>
                 </div>
-                <h3>Actor Profiles</h3>
-                <p>Recognize that face and browse everything they’ve ever been in.</p>
-              </li>
-              <!-- 06 -->
-              <li class="feature-card">
-                <span class="stub">Nº 06</span>
-                <div class="shot">
-                  <img src="assets/features/profile.png" alt="Customizable user profile with top movies and achievement badges" loading="lazy" width="300" height="600" />
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ================= 03 · BUILD LISTS TOGETHER ================= -->
+        <article class="story-panel" id="lists" aria-label="Build lists together">
+          <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div class="panel-copy">
+              <h3 class="panel-title">Build lists <em>together</em>.</h3>
+              <p class="panel-lede">Every list is a group project. Your Tastebuds pile in their picks, the collage fills up, and the likes decide what you watch first.</p>
+            </div>
+            <div class="panel-stage stage-lists" aria-hidden="true">
+              <!-- Collaborative list replica (list page header + content rows) -->
+              <div class="at-list" data-el="list-card">
+                <div class="at-list-head">
+                  <!-- 2x2 poster mash-up, exactly like the app's list grid image -->
+                  <div class="at-list-grid">
+                    <span class="alg-slot"><img data-el="lg1" src="https://image.tmdb.org/t/p/w342/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg" alt="" loading="lazy" width="342" height="513"></span>
+                    <span class="alg-slot"><img data-el="lg2" src="https://image.tmdb.org/t/p/w342/4GDy0PHYX3VRXUtwK5ysFbg3kEx.jpg" alt="" loading="lazy" width="342" height="513"></span>
+                    <span class="alg-slot"><img data-el="lg3" src="https://image.tmdb.org/t/p/w342/yuNs09hvpHVU1cBTCAk9zxsL2oW.jpg" alt="" loading="lazy" width="342" height="513"></span>
+                    <span class="alg-slot"><img data-el="lg4" src="https://image.tmdb.org/t/p/w342/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" alt="" loading="lazy" width="342" height="513"></span>
+                  </div>
+                  <div class="at-list-meta">
+                    <div class="at-list-title">Mindf*ck Movies</div>
+                    <div class="at-list-sub">Collaborative &middot; 4 Tastebuds</div>
+                    <div class="at-avatars">
+                      <img class="at-avatar" src="assets/app/avatar-fox.png" alt="" loading="lazy" width="28" height="28">
+                      <img class="at-avatar" src="assets/app/avatar-owl.png" alt="" loading="lazy" width="28" height="28">
+                      <img class="at-avatar" src="assets/app/avatar-penguin.png" alt="" loading="lazy" width="28" height="28">
+                      <img class="at-avatar" src="assets/app/avatar-otter.png" alt="" loading="lazy" width="28" height="28">
+                    </div>
+                  </div>
                 </div>
-                <h3>Your Profile</h3>
-                <p>Show off your Top Ate and earn badges as you rack up the hours.</p>
-              </li>
-              <!-- 07 -->
-              <li class="feature-card">
-                <span class="stub">Nº 07</span>
-                <div class="shot">
-                  <img src="assets/features/trending.png" alt="Trending movies and TV shows screen with time filters" loading="lazy" width="300" height="600" />
+                <div class="at-list-rows">
+                  <div class="at-list-row" data-el="lrow1">
+                    <img class="alr-poster" src="https://image.tmdb.org/t/p/w154/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg" alt="" loading="lazy" width="154" height="231">
+                    <div class="alr-info">
+                      <div class="alr-title">Inception</div>
+                      <div class="alr-user"><img class="at-avatar" src="assets/app/avatar-fox.png" alt="" loading="lazy" width="20" height="20"> Added by <strong>Jess</strong></div>
+                    </div>
+                    <span class="alr-like" data-el="llike1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg> 3</span>
+                  </div>
+                  <div class="at-list-row" data-el="lrow2">
+                    <img class="alr-poster" src="https://image.tmdb.org/t/p/w154/4GDy0PHYX3VRXUtwK5ysFbg3kEx.jpg" alt="" loading="lazy" width="154" height="231">
+                    <div class="alr-info">
+                      <div class="alr-title">Shutter Island</div>
+                      <div class="alr-user"><img class="at-avatar" src="assets/app/avatar-owl.png" alt="" loading="lazy" width="20" height="20"> Added by <strong>Marco</strong></div>
+                    </div>
+                    <span class="alr-like" data-el="llike2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg> 1</span>
+                  </div>
+                  <div class="at-list-row" data-el="lrow3">
+                    <img class="alr-poster" src="https://image.tmdb.org/t/p/w154/yuNs09hvpHVU1cBTCAk9zxsL2oW.jpg" alt="" loading="lazy" width="154" height="231">
+                    <div class="alr-info">
+                      <div class="alr-title">Memento</div>
+                      <div class="alr-user"><img class="at-avatar" src="assets/app/avatar-penguin.png" alt="" loading="lazy" width="20" height="20"> Added by <strong>Priya</strong></div>
+                    </div>
+                    <span class="alr-like" data-el="llike3"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg> 5</span>
+                  </div>
+                  <div class="at-list-row" data-el="lrow4">
+                    <img class="alr-poster" src="https://image.tmdb.org/t/p/w154/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" alt="" loading="lazy" width="154" height="231">
+                    <div class="alr-info">
+                      <div class="alr-title">Fight Club</div>
+                      <div class="alr-user"><img class="at-avatar" src="assets/app/avatar-otter.png" alt="" loading="lazy" width="20" height="20"> Added by <strong>Theo</strong></div>
+                    </div>
+                    <span class="alr-like" data-el="llike4"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg> 2</span>
+                  </div>
                 </div>
-                <h3>What’s Trending</h3>
-                <p>Follow what’s trending and top-rated over the last week, month, or year.</p>
-              </li>
-              <!-- 08 -->
-              <li class="feature-card">
-                <span class="stub">Nº 08</span>
-                <div class="shot">
-                  <img src="assets/features/scores.png" alt="Personalized content scores comparing your rating with friends and global averages" loading="lazy" width="300" height="600" />
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ================= 04 · SWIPE WITH FRIENDS ================= -->
+        <article class="story-panel" id="swipe" aria-label="Swipe with friends">
+          <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div class="panel-copy md:order-2">
+              <h3 class="panel-title">Swipe with <em>friends</em>.</h3>
+              <p class="panel-lede">Movie night, minus the forty-minute argument. Everyone swipes, nobody scrolls forever &mdash; the first title you all say yes to wins the evening.</p>
+            </div>
+            <div class="panel-stage stage-swipe md:order-1" aria-hidden="true">
+              <div class="swipe-deck">
+                <!-- Beat 3 · the title everyone agreed on (La La Land) -->
+                <div class="swipe-card sw-match" data-el="sw-match">
+                  <img src="https://image.tmdb.org/t/p/w342/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg" alt="" loading="lazy" width="342" height="513">
+                  <div class="match-banner" data-el="match-banner">
+                    <span class="match-title">It&rsquo;s a match!</span>
+                    <span class="match-avatars">
+                      <img class="at-avatar" src="assets/app/avatar-fox.png" alt="" loading="lazy" width="24" height="24">
+                      <img class="at-avatar" src="assets/app/avatar-owl.png" alt="" loading="lazy" width="24" height="24">
+                      <img class="at-avatar" src="assets/app/avatar-penguin.png" alt="" loading="lazy" width="24" height="24">
+                      <img class="at-avatar" src="assets/app/avatar-otter.png" alt="" loading="lazy" width="24" height="24">
+                    </span>
+                  </div>
                 </div>
-                <h3>Scores for You</h3>
-                <p>Your score, your Tastebuds’ average, and the global score — all side by side.</p>
-              </li>
-              <!-- 09 -->
-              <li class="feature-card">
-                <span class="stub">Nº 09</span>
-                <div class="shot">
-                  <img src="assets/features/comments.png" alt="Threaded discussion feature for movie and TV reviews" loading="lazy" width="300" height="600" />
+                <!-- Beat 2 · same title (La La Land), both say yes -->
+                <div class="swipe-card sw-r2-left" data-el="r2l">
+                  <img src="https://image.tmdb.org/t/p/w342/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg" alt="" loading="lazy" width="342" height="513">
+                  <span class="swipe-stamp stamp-like stamp-tilt-left">Like</span>
                 </div>
-                <h3>Discuss &amp; Debate</h3>
-                <p>Dig into nested threads filtered to the people and takes you actually care about.</p>
-              </li>
-          </ul>
-        </div>
+                <div class="swipe-card sw-r2-right" data-el="r2r">
+                  <img src="https://image.tmdb.org/t/p/w342/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg" alt="" loading="lazy" width="342" height="513">
+                  <span class="swipe-stamp stamp-like stamp-tilt-right">Like</span>
+                </div>
+                <!-- Beat 1 · same title (Get Out), split decision -->
+                <div class="swipe-card sw-r1-left" data-el="r1l">
+                  <img src="https://image.tmdb.org/t/p/w342/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg" alt="" loading="lazy" width="342" height="513">
+                  <span class="swipe-stamp stamp-pass stamp-tilt-left">Pass</span>
+                </div>
+                <div class="swipe-card sw-r1-right" data-el="r1r">
+                  <img src="https://image.tmdb.org/t/p/w342/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg" alt="" loading="lazy" width="342" height="513">
+                  <span class="swipe-stamp stamp-like stamp-tilt-right">Like</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ================= 05 · YOUR UNIQUE TASTE PROFILE ================= -->
+        <article class="story-panel" id="taste-profile" aria-label="Your unique taste profile">
+          <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div class="panel-copy">
+              <h3 class="panel-title">Your name in <em>lights</em>.</h3>
+              <p class="panel-lede">A living taste profile, built from what you actually watch and finish &mdash; distilled into a title worthy of the marquee. It only gets sharper the more you use it.</p>
+            </div>
+            <div class="panel-stage stage-marquee" aria-hidden="true">
+              <!-- Taste Profile Marquee replica -->
+              <div class="tp-marquee" data-el="marquee">
+                <div class="tp-board">
+                  <div class="tp-neon-bar top"></div>
+                  <div class="tp-message"><span id="tpTitle">Sci&#8209;Fi Savant</span></div>
+                  <div class="tp-neon-bar bottom"></div>
+                </div>
+              </div>
+              <div class="tp-chips">
+                <span class="tp-chip tp-chip--trend" data-el="chip1">
+                  <svg class="tp-chip-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 17.5 10 11l4 4 6.5-6.5"/><path d="M15 8.5h5.5V14"/></svg>
+                  Slow&#8209;burn Thrillers <b>92%</b>
+                </span>
+                <span class="tp-chip tp-chip--love" data-el="chip2">
+                  <svg class="tp-chip-ic tp-chip-ic--fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.6S3.4 14.9 3.4 9.1A4.7 4.7 0 0 1 12 6.4a4.7 4.7 0 0 1 8.6 2.7c0 5.8-8.6 11.5-8.6 11.5Z"/></svg>
+                  Practical&#8209;effects Loyalist
+                </span>
+                <span class="tp-chip tp-chip--stat" data-el="chip3">
+                  <svg class="tp-chip-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>
+                  Finishes what he starts <b>87%</b>
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ================= 06 · THE FULL MENU ================= -->
+        <article class="story-panel story-panel-wide" id="full-menu" aria-label="The full menu">
+          <div class="panel-inner max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="panel-copy text-center max-w-3xl mx-auto">
+              <h3 class="panel-title">The full <em>menu</em>.</h3>
+              <p class="panel-lede">Trailers, cast, where to stream, episode tracking, badges, threads &mdash; everything else is already on the table.</p>
+            </div>
+            <div class="panel-stage stage-menu" aria-hidden="true">
+              <div class="menu-collage">
+                <div class="menu-posters">
+                  <img class="menu-poster mp-1" data-el="mp1" src="https://image.tmdb.org/t/p/w342/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg" alt="" loading="lazy" width="342" height="513">
+                  <img class="menu-poster mp-2" data-el="mp2" src="https://image.tmdb.org/t/p/w342/49WJfeN0moxb9IPfGn8AIqMGskD.jpg" alt="" loading="lazy" width="342" height="513">
+                  <img class="menu-poster mp-3" data-el="mp3" src="https://image.tmdb.org/t/p/w342/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg" alt="" loading="lazy" width="342" height="513">
+                  <img class="menu-poster mp-4" data-el="mp4" src="https://image.tmdb.org/t/p/w342/7fn624j5lj3xTme2SgiLCeuedmO.jpg" alt="" loading="lazy" width="342" height="513">
+                </div>
+                <!-- TODO(stream-logos): swap the placeholder dots below for official
+                     provider logos once supplied. Drop e.g. assets/app/stream-netflix.png,
+                     stream-max.png, stream-appletv.png in and replace each .stream-dot with:
+                     <img class="stream-logo" src="assets/app/stream-netflix.png" alt="Netflix" width="18" height="18"> -->
+                <span class="menu-chip mc-stream" data-el="mc1">
+                  <span class="stream-dot sd-red"></span><span class="stream-dot sd-blue"></span><span class="stream-dot sd-teal"></span>
+                  Where to stream
+                </span>
+                <span class="menu-chip mc-actor" data-el="mc2"><img class="at-avatar" src="assets/app/avatar-clapper.png" alt="" loading="lazy" width="24" height="24"> Actors &middot; Filmography</span>
+                <span class="menu-chip mc-progress" data-el="mc3">
+                  <span class="mc-progress-label">Severance &middot; S2 E5</span>
+                  <span class="mc-progress-track"><span class="mc-progress-fill"></span></span>
+                </span>
+                <span class="menu-chip mc-badge" data-el="mc4"><img class="mc-badge-art" src="assets/app/badge-review-100.png" alt="" loading="lazy" width="22" height="22"> 100 Reviews Club</span>
+                <span class="menu-chip mc-list" data-el="mc5">&#128278; Cozy Fall Horror &middot; 12 titles</span>
+                <span class="menu-chip mc-thread" data-el="mc6"><svg class="chip-comment-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h3v3.59c0 .45.54.67.85.36L11.83 19H20a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/></svg> 34 comments &middot; 3 Tastebuds</span>
+              </div>
+            </div>
+            <div class="text-center mt-12">
+              <div class="inline-flex gap-3 items-center">
+                <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block transition hover:-translate-y-0.5">
+                  <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-11" loading="lazy" />
+                </a>
+                <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="hero-cta-secondary" style="border-color:#FCF9EF;color:#FCF9EF;">Visit the web app</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
       </div>
-    </section>
 
-    <!-- Chef: Recommendation System -->
-    <section id="chef" class="py-20 md:py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-12 gap-10 md:gap-12 items-start">
-          <!-- Copy (left, 7 cols) -->
-          <div class="md:col-span-7 order-1 text-center md:text-left">
-            <span class="section-kicker chef-eyebrow align-start">The Special</span>
-            <h2 class="section-title mt-4">Your own private <em>chef</em>.</h2>
-            <span class="chef-divider" aria-hidden="true"></span>
-            <p class="chef-lede">Five custom watch recommendations, served with clear reasons why each one fits you — or the room. Chef learns your palate over time and adjusts each order to the table.</p>
-
-            <div class="chef-split">
-              <div class="chef-block">
-                <span class="chef-block-kicker">What it does</span>
-                <h3>Reads your taste</h3>
-                <p>A living taste profile — genres, creative influences, and the patterns in what you actually finish — translated into a tagline that reads like a short review of you.</p>
-              </div>
-              <div class="chef-block">
-                <span class="chef-block-kicker">Why it matters</span>
-                <h3>Custom orders</h3>
-                <p>Pick a party, a vibe (seasoning), a spice level, and any allergies. Chef balances everyone at the table and always tells you <em>why</em> each pick made the cut.</p>
-              </div>
-            </div>
-
-            <div class="hero-ctas mt-8">
-              <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download Aftertaste on the App Store" class="inline-block">
-                <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-10" loading="lazy" />
-              </a>
-              <a href="https://aftertaste.app/" target="_blank" rel="noopener noreferrer" class="hero-cta-secondary" style="border-color:#FCF9EF;color:#FCF9EF;">
-                See how it works
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </a>
-            </div>
-          </div>
-
-          <!-- Screenshot poster (right, 5 cols) -->
-          <div class="md:col-span-5 order-2 overflow-hidden md:overflow-visible">
-            <div class="chef-frame">
-              <span class="chef-frame-meta">&#183; Order Up &#183;</span>
-              <div id="chefSlider" class="overflow-hidden rounded-2xl px-2 md:px-3 pt-6" role="region" aria-roledescription="carousel" aria-label="Chef screenshots">
-                <ul id="chefSlides" class="flex gap-6 transition-transform duration-500 will-change-transform items-stretch">
-                  <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
-                    <img src="assets/chef/chef-home.png" alt="Chef AI recommendation system home screen" class="w-full h-full object-cover" loading="lazy" />
-                  </li>
-                  <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
-                    <img src="assets/chef/chef-rec.png" alt="Chef personalized movie and TV recommendations with reasons" class="w-full h-full object-cover" loading="lazy" />
-                  </li>
-                  <li class="min-w-[85%] sm:min-w-[70%] lg:min-w-[78%] p-3 flex items-center justify-center">
-                    <img src="assets/chef/chef-taste.png" alt="Chef taste profile showing viewing preferences and genre affinities" class="w-full h-full object-cover" loading="lazy" />
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="ix-invite-wrap story-ix">
+        <button type="button" class="ix-invite" id="ixInvite">That was a lot of scrolling... Need an intermission?</button>
       </div>
     </section>
 
@@ -946,7 +905,7 @@
         <h4 id="footer-explore-title">Explore</h4>
         <ul class="footer-links">
           <li><a href="#features">Features</a></li>
-          <li><a href="#chef">Chef</a></li>
+          <li><a href="#taste-profile">Taste Profile</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="https://aftertaste.app/">Web app</a></li>
         </ul>
@@ -960,6 +919,12 @@
         </ul>
       </nav>
     </div>
+    <div class="footer-attribution">
+      <a href="https://www.themoviedb.org/" target="_blank" rel="noopener noreferrer" class="footer-tmdb-logo" aria-label="The Movie Database (TMDB)">
+        <img src="assets/tmdb_logo.svg" alt="The Movie Database (TMDB)" width="140" height="18" loading="lazy" />
+      </a>
+      <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+    </div>
     <div class="footer-bottom">
       <p>&copy; 2026 Aftertaste, LLC. All rights reserved.</p>
       <p class="egg-hint">Psst &mdash; type &ldquo;NOIR&rdquo;</p>
@@ -970,20 +935,212 @@
   <!-- Film-strip scroll progress -->
   <div id="filmstrip" aria-hidden="true"><div class="fs-fill"></div></div>
 
+  <!-- GSAP + ScrollTrigger: powers The Feature Presentation scroll story -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script>
-    // Pointer spotlight constrained to hero (disabled on touch)
-    const spot = document.getElementById('spot');
+    // ================================================================
+    // ACT VII — The Feature Presentation (scroll-driven app story)
+    // Pinned, scrubbed panels on desktop; lightweight triggered reveals
+    // on mobile; static layout when GSAP is unavailable or motion is
+    // reduced (CSS handles those via .story-static / media query).
+    // ================================================================
+    window.addEventListener('DOMContentLoaded', function () {
+      var storyRoot = document.getElementById('features');
+      if (!storyRoot) return;
+      var REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || REDUCED_MOTION) {
+        storyRoot.classList.add('story-static');
+        // Static fallback: score rings render filled at their final values
+        Array.prototype.forEach.call(storyRoot.querySelectorAll('.score-ring'), function (ring) {
+          var score = parseFloat(ring.getAttribute('data-score')) || 0;
+          var fill = ring.querySelector('.ring-fill');
+          var valueEl = ring.querySelector('.ring-value');
+          if (fill) fill.style.strokeDashoffset = String(326.73 * (1 - score / 10));
+          if (valueEl) valueEl.textContent = score.toFixed(1);
+        });
+        // Still light the marquee + match card when they come into view
+        var lateBits = [
+          { sel: '.tp-marquee', cls: 'lit' },
+          { sel: '.sw-match', cls: 'matched' }
+        ];
+        if ('IntersectionObserver' in window) {
+          lateBits.forEach(function (b) {
+            var el = storyRoot.querySelector(b.sel);
+            if (!el) return;
+            var io = new IntersectionObserver(function (es) {
+              es.forEach(function (e) {
+                if (e.isIntersecting) { el.classList.add(b.cls); io.disconnect(); }
+              });
+            }, { threshold: 0.4 });
+            io.observe(el);
+          });
+        } else {
+          lateBits.forEach(function (b) {
+            var el = storyRoot.querySelector(b.sel);
+            if (el) el.classList.add(b.cls);
+          });
+        }
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+      var mm = gsap.matchMedia();
+      var CIRC = 326.73; // 2πr for r=52 score rings
+
+      // Shared builders — `pinned` decides desktop (pin+scrub) vs mobile (play once)
+      function panelTrigger(panel, pinned, extra) {
+        var base = pinned
+          ? { trigger: panel, start: 'top top', end: '+=85%', pin: true, scrub: 0.6, anticipatePin: 1 }
+          : { trigger: panel, start: 'top 70%', toggleActions: 'play none none none' };
+        return Object.assign(base, extra || {});
+      }
+
+      function buildStory(pinned) {
+        var q = function (sel) { return storyRoot.querySelector(sel); };
+
+        // ---- 01 · Find your Tastebuds: feed card assembles in layers ----
+        var p1 = q('#tastebuds');
+        if (p1) {
+          gsap.timeline({ scrollTrigger: panelTrigger(p1, pinned) })
+            .to(p1.querySelector('[data-el="card"]'), { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' })
+            .to(p1.querySelector('[data-el="pill"]'), { opacity: 1, y: 0, duration: 0.35 }, '-=0.15')
+            .to(p1.querySelector('[data-el="titleblock"]'), { opacity: 1, y: 0, duration: 0.35 }, '-=0.1')
+            .to(p1.querySelector('[data-el="social"]'), { opacity: 1, y: 0, duration: 0.35 })
+            .to(p1.querySelector('[data-el="quote"]'), { opacity: 1, y: 0, duration: 0.35 })
+            .to(p1.querySelector('[data-el="chip-follow"]'), { opacity: 1, y: 0, duration: 0.3, ease: 'back.out(2)' })
+            .to(p1.querySelector('[data-el="chip-react"]'), { opacity: 1, y: 0, duration: 0.3, ease: 'back.out(2)' }, '-=0.15')
+            .to({}, { duration: 0.5 });
+        }
+
+        // ---- 02 · Circle vs Crowd: rings draw + scores count up ----
+        var p2 = q('#scores');
+        if (p2) {
+          var tl2 = gsap.timeline({ scrollTrigger: panelTrigger(p2, pinned) })
+            .to(p2.querySelector('[data-el="backdrop"]'), { opacity: 1, y: 0, duration: 0.5 })
+            .to(p2.querySelector('[data-el="poster"]'), { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2');
+          ['ring-tastebud', 'ring-global'].forEach(function (name, i) {
+            var ring = p2.querySelector('[data-el="' + name + '"]');
+            if (!ring) return;
+            var score = parseFloat(ring.getAttribute('data-score')) || 0;
+            var fill = ring.querySelector('.ring-fill');
+            var valueEl = ring.querySelector('.ring-value');
+            var counter = { v: 0 };
+            tl2.to(ring, { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(1.6)' }, i === 0 ? '+=0.05' : '-=0.25')
+               .to(fill, { strokeDashoffset: CIRC * (1 - score / 10), duration: 0.9, ease: 'power2.out' }, '<')
+               .to(counter, {
+                 v: score, duration: 0.9, ease: 'power2.out',
+                 onUpdate: function () { valueEl.textContent = counter.v.toFixed(1); }
+               }, '<');
+          });
+          tl2.to({}, { duration: 0.5 });
+        }
+
+        // ---- 03 · Build Lists Together: rows snap in, the grid fills up ----
+        var p3 = q('#lists');
+        if (p3) {
+          var rows = ['lrow1', 'lrow2', 'lrow3', 'lrow4'].map(function (n) { return p3.querySelector('[data-el="' + n + '"]'); });
+          var cells = ['lg1', 'lg2', 'lg3', 'lg4'].map(function (n) { return p3.querySelector('[data-el="' + n + '"]'); });
+          var likes = ['llike1', 'llike2', 'llike3', 'llike4'].map(function (n) { return p3.querySelector('[data-el="' + n + '"]'); });
+          // Deck-specific initial states: rows wait further down so they visibly
+          // "collide" into the list; grid cells pop from nothing inside their slot.
+          gsap.set(rows, { opacity: 0, y: 84 });
+          gsap.set(cells, { opacity: 0, y: 0, scale: 0.35 });
+          gsap.set(likes, { opacity: 0, y: 0, scale: 0.4 });
+
+          var tl3 = gsap.timeline({ scrollTrigger: panelTrigger(p3, pinned, pinned ? { end: '+=130%' } : null) })
+            // The empty list: header, title, Tastebuds — no posters yet
+            .to(p3.querySelector('[data-el="list-card"]'), { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out' })
+            .to({}, { duration: 0.2 });
+          // Each Tastebud's pick snaps into the list… and its poster lands in
+          // the mash-up grid (TL → TR → BL → BR), just like in the app.
+          rows.forEach(function (row, i) {
+            tl3.to(row, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.6)' }, i === 0 ? '+=0.05' : '+=0.15')
+               .to(cells[i], { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2.2)' }, '-=0.18');
+          });
+          // The votes roll in — Tastebuds like what their friends added
+          tl3.to(likes, { opacity: 1, scale: 1, duration: 0.35, stagger: 0.14, ease: 'back.out(2.4)' }, '+=0.2')
+             .to({}, { duration: 0.6 }); // hold the finished list
+        }
+
+        // ---- 04 · Swipe with Friends: split vote first, then a unanimous match ----
+        var p4 = q('#swipe');
+        if (p4) {
+          var r1l = p4.querySelector('[data-el="r1l"]'); // beat 1, Pass
+          var r1r = p4.querySelector('[data-el="r1r"]'); // beat 1, Like (different title)
+          var r2l = p4.querySelector('[data-el="r2l"]'); // beat 2, Like (same title)
+          var r2r = p4.querySelector('[data-el="r2r"]'); // beat 2, Like (same title)
+          var swMatch = p4.querySelector('[data-el="sw-match"]');
+          // Deck-specific initial states (override generic data-el state). Stamps are
+          // children, so they fade in and out with their card automatically.
+          gsap.set([r1l, r2l], { opacity: 0, x: '-46%', rotation: -7, scale: 0.9 });
+          gsap.set([r1r, r2r], { opacity: 0, x: '46%', rotation: 7, scale: 0.9 });
+          gsap.set(swMatch, { opacity: 0, y: 0, scale: 0.82 });
+
+          // Longer pin distance = slower, more legible swipe choreography
+          gsap.timeline({ scrollTrigger: panelTrigger(p4, pinned, pinned ? { end: '+=150%' } : null) })
+            // Beat 1 · two DIFFERENT titles clash — one Pass, one Like
+            .to([r1l, r1r], { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' })
+            .to(r1l, { x: '-17%', rotation: -3, duration: 0.45, ease: 'power2.inOut' }, '<')
+            .to(r1r, { x: '17%', rotation: 3, duration: 0.45, ease: 'power2.inOut' }, '<')
+            .to({}, { duration: 0.5 }) // hold the split verdict
+            // they disagree — both fly off, no match
+            .to(r1l, { x: '-155%', rotation: -22, opacity: 0, duration: 0.55, ease: 'power2.in' })
+            .to(r1r, { x: '155%', rotation: 22, opacity: 0, duration: 0.55, ease: 'power2.in' }, '<')
+            // Beat 2 · the SAME title comes up — both say Like
+            .to([r2l, r2r], { opacity: 1, scale: 1, duration: 0.4, ease: 'power2.out' }, '-=0.1')
+            .to(r2l, { x: '-15%', rotation: -3, duration: 0.45, ease: 'power2.inOut' }, '<')
+            .to(r2r, { x: '15%', rotation: 3, duration: 0.45, ease: 'power2.inOut' }, '<')
+            .to({}, { duration: 0.5 }) // hold the agreement
+            // agreement — the two votes converge on the shared pick
+            .to([r2l, r2r], { x: '0%', rotation: 0, scale: 0.9, opacity: 0, duration: 0.5, ease: 'power2.in' })
+            // Beat 3 · the match lands
+            .to(swMatch, { opacity: 1, scale: 1, duration: 0.55, ease: 'back.out(1.5)' }, '-=0.25')
+            .call(function () { if (swMatch) swMatch.classList.add('matched'); }, null, '-=0.15')
+            .to({}, { duration: 0.7 }); // hold the match on screen through the end of the pin
+        }
+
+        // ---- 05 · Taste Profile: marquee rises, neon flickers on ----
+        var p5 = q('#taste-profile');
+        if (p5) {
+          var marqueeWrap = p5.querySelector('.tp-marquee');
+          gsap.timeline({ scrollTrigger: panelTrigger(p5, pinned) })
+            .to(p5.querySelector('[data-el="marquee"]'), { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' })
+            // Light the sign only after the board is fully visible, so the
+            // neon flicker-on (ported from the app's TasteProfileMarquee)
+            // actually reads as a flicker instead of finishing off-screen.
+            .call(function () { if (marqueeWrap) marqueeWrap.classList.add('lit'); })
+            .to([p5.querySelector('[data-el="chip1"]'), p5.querySelector('[data-el="chip2"]'), p5.querySelector('[data-el="chip3"]')],
+                { opacity: 1, y: 0, duration: 0.35, stagger: 0.12, ease: 'back.out(1.7)' }, '+=0.2')
+            .to({}, { duration: 0.5 });
+        }
+
+        // ---- 06 · The Full Menu: collage assembles from the center ----
+        var p6 = q('#full-menu');
+        if (p6) {
+          var posters = ['mp1', 'mp2', 'mp3', 'mp4'].map(function (n) { return p6.querySelector('[data-el="' + n + '"]'); });
+          var chips = ['mc1', 'mc2', 'mc3', 'mc4', 'mc5', 'mc6'].map(function (n) { return p6.querySelector('[data-el="' + n + '"]'); });
+          gsap.timeline({ scrollTrigger: panelTrigger(p6, pinned) })
+            .to(posters, { opacity: 1, y: 0, duration: 0.55, stagger: 0.1, ease: 'power2.out' })
+            .to(chips, { opacity: 1, y: 0, duration: 0.4, stagger: 0.09, ease: 'back.out(1.6)' }, '-=0.25')
+            .to({}, { duration: 0.5 });
+        }
+      }
+
+      mm.add('(min-width: 768px)', function () { buildStory(true); });
+      mm.add('(max-width: 767px)', function () { buildStory(false); });
+
+      // Pinning changes layout height — keep other scroll code honest
+      window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+    });
+  </script>
+
+  <script>
+    // Light the "Now Showing" neon shortly after load (CSS drives the
+    // tube flicker-on off the .lit class)
     const heroEl = document.getElementById('hero');
-    if (window.matchMedia('(pointer:fine)').matches && spot && heroEl) {
-      const moveSpot = (e)=>{
-        const rect = heroEl.getBoundingClientRect();
-        // Ignore if cursor is outside hero
-        if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) return;
-        const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-        spot.style.left = x + 'px';
-        spot.style.top = y + 'px';
-      };
-      window.addEventListener('mousemove', moveSpot, {passive:true});
+    if (heroEl) {
+      window.setTimeout(() => heroEl.classList.add('lit'), 600);
     }
 
     // Floating dust generator
@@ -1018,18 +1175,6 @@
       }, {threshold: 0});
       heroObs.observe(heroEl);
     }
-    // After boot: soften vignette only
-    (function(){
-      const vignette = document.querySelector('.screen-vignette');
-      if (!vignette) return;
-
-      const softenVignette = ()=> vignette.classList.add('soft');
-
-      // Soften vignette shortly after boot overlay fades
-      const bootDurationMs = 750; // matches CSS @keyframes powerOn
-      setTimeout(softenVignette, bootDurationMs + 200);
-    })();
-
     // Reveal on scroll
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -1039,61 +1184,11 @@
         }
       });
     }, { threshold: 0.15 });
-    document.querySelectorAll('section').forEach(s => {
+    document.querySelectorAll('section:not(.story-section)').forEach(s => {
       s.classList.add('opacity-0', 'translate-y-3', 'transition', 'duration-700', 'will-change-transform');
       observer.observe(s);
     });
-    // Mic slide-in
-    const mic = document.getElementById('micImg');
-    if (mic) {
-      const micObs = new IntersectionObserver(es => {
-        es.forEach(e => {
-          if (e.isIntersecting) {
-            mic.classList.remove('opacity-0');
-            mic.classList.add('opacity-100');
-            mic.style.transition = 'transform 700ms ease, opacity 700ms ease';
-            mic.style.transform = 'translateY(0)';
-            // no backlight glow anymore
-            micObs.disconnect();
-          }
-        })
-      }, {threshold:.3});
-      micObs.observe(mic);
-    }
 
-    // Chef screenshots: auto-advance slider (every 4.5s) when in view
-    (function(){
-      const track = document.getElementById('chefSlides');
-      const region = document.getElementById('chefSlider');
-      if (!track || !region) return;
-      const items = Array.from(track.children);
-      let idx = 0;
-      const count = items.length;
-      const basis = () => items[0]?.getBoundingClientRect().width + 24 || 0; // 24 ~ gap
-      const go = (i)=>{
-        idx = (i + count) % count;
-        track.style.transform = `translateX(${-idx * basis()}px)`;
-      };
-      let t;
-      const start = ()=>{ if (!t) t = setInterval(()=> go(idx+1), 4500); };
-      const stop = ()=>{ if (t) { clearInterval(t); t = undefined; } };
-      // Start when section is visible
-      const io = new IntersectionObserver(es=>{
-        es.forEach(e=>{ if (e.isIntersecting) start(); else stop(); });
-      }, {threshold: 0.2});
-      io.observe(region);
-      // Pause on tab hide
-      document.addEventListener('visibilitychange', ()=>{ if (document.hidden) stop(); else start(); });
-      // Resize recalculates basis; snap to current index
-      window.addEventListener('resize', ()=>{ go(idx); });
-      // Touch swipe (basic)
-      let sx = 0, dx = 0;
-      region.addEventListener('touchstart', (e)=>{ sx = e.touches[0].clientX; dx = 0; stop(); }, {passive:true});
-      region.addEventListener('touchmove', (e)=>{ dx = e.touches[0].clientX - sx; }, {passive:true});
-      region.addEventListener('touchend', ()=>{ if (Math.abs(dx) > 30) go(idx + (dx < 0 ? 1 : -1)); start(); }, {passive:true});
-      // Init
-      go(0);
-    })();
 
 
     // ---- Header scroll state + mobile nav ----
@@ -1134,31 +1229,6 @@
     // ================================================================
     (function(){
       var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      // ---- Marquee-bulb headline: each letter flickers on like a theater sign ----
-      var h1 = document.querySelector('#hero h1');
-      if (h1 && !REDUCED) {
-        h1.setAttribute('aria-label', h1.textContent.replace(/\s+/g, ' ').trim());
-        var wrapLetters = function(node){
-          Array.prototype.slice.call(node.childNodes).forEach(function(child){
-            if (child.nodeType === 3) {
-              var frag = document.createDocumentFragment();
-              child.textContent.split('').forEach(function(ch){
-                if (!ch.trim()) { frag.appendChild(document.createTextNode(ch)); return; }
-                var s = document.createElement('span');
-                s.className = 'mq-letter';
-                s.textContent = ch;
-                s.style.animationDelay = (1.2 + Math.random() * 0.75).toFixed(2) + 's';
-                frag.appendChild(s);
-              });
-              node.replaceChild(frag, child);
-            } else if (child.nodeType === 1 && child.tagName !== 'BR') {
-              wrapLetters(child);
-            }
-          });
-        };
-        wrapLetters(h1);
-      }
 
       // ---- Film-strip scroll progress ----
       var strip = document.getElementById('filmstrip');
@@ -1241,22 +1311,7 @@
         var on = document.body.classList.toggle('noir');
         clearInterval(noirTimer);
         if (on) { quipIdx = 0; setCaption(); noirTimer = setInterval(setCaption, 8000); }
-        syncFormatUI(on);
       };
-      // Picture-format switch at the bottom of the hero mirrors noir state
-      var ffColor = document.getElementById('ffColor');
-      var ffBw = document.getElementById('ffBw');
-      var syncFormatUI = function(on){
-        if (!ffColor || !ffBw) return;
-        ffColor.classList.toggle('is-active', !on);
-        ffBw.classList.toggle('is-active', on);
-        ffColor.setAttribute('aria-pressed', String(!on));
-        ffBw.setAttribute('aria-pressed', String(on));
-      };
-      if (ffColor && ffBw) {
-        ffColor.addEventListener('click', function(){ if (document.body.classList.contains('noir')) toggleNoir(); });
-        ffBw.addEventListener('click', function(){ if (!document.body.classList.contains('noir')) toggleNoir(); });
-      }
       document.addEventListener('keydown', function(e){
         var t = e.target;
         if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
@@ -1340,9 +1395,6 @@
         setTimeout(function(){ el.remove(); }, 1000);
       }
       document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeIntermission(); });
-      document.querySelectorAll('.np-egg').forEach(function(el){
-        el.addEventListener('click', openIntermission);
-      });
       var ixInvite = document.getElementById('ixInvite');
       if (ixInvite) ixInvite.addEventListener('click', openIntermission);
 
