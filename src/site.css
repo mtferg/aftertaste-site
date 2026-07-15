@@ -561,7 +561,13 @@
     .site-footer .footer-social a:hover { background: rgba(252,249,239,.12); border-color: rgba(252,249,239,.22); }
     .site-footer .footer-social a:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
     .site-footer .footer-social img { width: 18px; height: 18px; }
-    .site-footer .footer-bottom { max-width: 80rem; margin: 2.5rem auto 0; padding: 1.25rem 1.5rem 0; border-top: 1px solid rgba(252,249,239,.06); display: flex; flex-direction: column; gap: .75rem; align-items: center; justify-content: space-between; text-align: center; font-size: .8rem; color: rgba(252,249,239,.55); }
+    .site-footer .footer-attribution { max-width: 80rem; margin: 2.5rem auto 0; padding: 1.5rem 1.5rem 0; border-top: 1px solid rgba(252,249,239,.06); display: flex; flex-direction: column; align-items: center; gap: .75rem; text-align: center; }
+    .site-footer .footer-attribution p { margin: 0; max-width: 28rem; font-size: .75rem; line-height: 1.5; color: rgba(252,249,239,.45); }
+    .site-footer .footer-tmdb-logo { display: inline-flex; opacity: .85; transition: opacity 180ms ease; }
+    .site-footer .footer-tmdb-logo:hover { opacity: 1; }
+    .site-footer .footer-tmdb-logo:focus-visible { outline: 2px solid #E3452D; outline-offset: 3px; border-radius: 2px; }
+    .site-footer .footer-tmdb-logo img { width: 140px; height: auto; display: block; }
+    .site-footer .footer-bottom { max-width: 80rem; margin: 1.5rem auto 0; padding: 1.25rem 1.5rem 0; border-top: 1px solid rgba(252,249,239,.06); display: flex; flex-direction: column; gap: .75rem; align-items: center; justify-content: space-between; text-align: center; font-size: .8rem; color: rgba(252,249,239,.55); }
     @media (min-width: 768px) { .site-footer .footer-bottom { flex-direction: row; text-align: left; } }
 
 
@@ -1209,8 +1215,6 @@
     .sd-red { background:#E50914; }
     .sd-blue { background:#0064E5; margin-left:-4px; }
     .sd-teal { background:#1CE783; margin-left:-4px; }
-    .menu-tmdb-note { margin-top:1.4rem; font-size:.68rem; color:rgba(252,249,239,.4); }
-    .menu-tmdb-note a { text-decoration:underline; }
     @media (max-width:640px) {
       .mc-list { top:30%; }
       .mc-thread { bottom:32%; right:0; }
