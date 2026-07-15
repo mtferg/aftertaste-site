@@ -1,0 +1,33 @@
+name: Check CSS is built
+
+# assets/site.css is a generated file that GitHub Pages serves directly (the
+# deploy workflow uploads the repo as-is and never builds). That makes it
+# tempting to edit assets/site.css by hand, which works until someone runs
+# `npm run build:site` and silently reverts the change. This job catches that.
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  css-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Rebuild assets/site.css from src/site.css
+        run: npm run build:site
+
+      - name: Fail if assets/site.css is out of sync with src/site.css
+        run: |
+          if ! git diff --exit-code -- assets/site.css; then
+            echo "::error file=assets/site.css::assets/site.css does not match a fresh build from src/site.css."
+            echo "This usually means assets/site.css was edited directly."
+            echo "Fix: move your changes into src/site.css, run 'npm run build:site', and commit both files."
+            exit 1
+          fi

@@ -1,3 +1,10 @@
+/* GENERATED FILE - DO NOT EDIT.
+   Built from src/site.css by `npm run build:site`. Edits made here are
+   overwritten by the next build. Edit src/site.css instead. */
+/* Aftertaste site styles.
+   Pipeline: src/site.css (edit here) -> `npm run build:site` -> assets/site.css
+   (the file index.html loads). Never edit assets/site.css; the next build
+   overwrites it. CI fails if the two are out of sync. */
     html {scroll-behavior: smooth;}
     /* Subtle page vignette */
     .grain:after {
