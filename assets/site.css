@@ -9,16 +9,18 @@
     }
     /* Premium motion + lighting */
     .hero-rel {position: relative; overflow: hidden;}
-    /* Vintage cinema screen hero */
+    /* Darkened theater hero — same stage, house lights down. The screen
+       texture stays for tooth, blended softly over a licorice radial that
+       matches the story panels below (app palette, light-on-dark). */
     .cinema-hero{position:relative; background:#0b0b0b; overflow:hidden}
     .cinema-screen{position:absolute; inset:0; z-index:0; background-image:
       url('cinema-screen.webp'),
-      radial-gradient(120% 90% at 50% 42%, rgba(250,248,240,.90) 0%, rgba(242,239,230,.86) 46%, rgba(86,78,70,.40) 76%, rgba(0,0,0,.82) 100%);
+      radial-gradient(120% 90% at 50% 42%, #2c2a2f 0%, #1e1d21 46%, #121114 76%, #050506 100%);
       background-size: cover, 100% 100%;
       background-position: center, center;
       background-repeat: no-repeat, no-repeat;
-      background-blend-mode: multiply, normal}
-    .screen-grain{position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.05; background-image:url('grain.svg'); background-size:420px 420px; mix-blend-mode:multiply}
+      background-blend-mode: soft-light, normal}
+    .screen-grain{position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.07; background-image:url('grain.svg'); background-size:420px 420px; mix-blend-mode:overlay}
 
     .screen-vignette{position:absolute; inset:0; z-index:3; pointer-events:none; box-shadow: inset 0 0 40px 10px rgba(0,0,0,.05); transition: box-shadow 600ms ease, opacity 600ms ease}
     .screen-vignette.soft{box-shadow: inset 0 0 20px 5px rgba(0,0,0,.02)}
@@ -27,7 +29,7 @@
     .reel-band{position:absolute; inset:0; z-index:4; pointer-events:none; background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.04) 48%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.04) 52%, transparent 100%); background-size: 120% 100%; opacity:.22; animation: reel 28s linear infinite}
     @media (prefers-reduced-data: reduce){
       .cinema-screen{
-        background-image: radial-gradient(120% 90% at 50% 42%, rgba(250,248,240,.95) 0%, rgba(242,239,230,.92) 46%, rgba(86,78,70,.45) 76%, rgba(0,0,0,.86) 100%);
+        background-image: radial-gradient(120% 90% at 50% 42%, #2c2a2f 0%, #1e1d21 46%, #121114 76%, #050506 100%);
         background-blend-mode: normal;
       }
     }
@@ -36,9 +38,10 @@
     .screen-boot{position:absolute; inset:0; z-index:6; pointer-events:none; background:radial-gradient(ellipse at 50% 42%, rgba(0,0,0,.5), rgba(0,0,0,.8)); animation: powerOn 1000ms ease-out forwards}
     @keyframes powerOn{0%{opacity:1}10%{opacity:.8}20%{opacity:.65}40%{opacity:.45}60%{opacity:.25}80%{opacity:.15}90%{opacity:.05}100%{opacity:0}}
     @media (prefers-reduced-motion: reduce){ .screen-boot{animation:none; opacity:0} }
-    /* Floating dust (specks + motes) */
-    .dust{position:absolute; width:2px; height:2px; background:rgba(0,0,0,.5); border-radius:50%; filter: blur(.6px); opacity:0; animation: dustRise linear infinite; mix-blend-mode:multiply}
-    .mote{position:absolute; width:3px; height:3px; background:rgba(0,0,0,.25); border-radius:50%; filter: blur(1px); opacity:0; animation: moteDrift linear infinite; mix-blend-mode:multiply}
+    /* Floating dust (specks + motes) — lit by the projector, so they read
+       as pale motes drifting through the beam on the dark stage */
+    .dust{position:absolute; width:2px; height:2px; background:rgba(255,248,230,.6); border-radius:50%; filter: blur(.6px); opacity:0; animation: dustRise linear infinite; mix-blend-mode:screen}
+    .mote{position:absolute; width:3px; height:3px; background:rgba(255,248,230,.35); border-radius:50%; filter: blur(1px); opacity:0; animation: moteDrift linear infinite; mix-blend-mode:screen}
     @keyframes dustRise{0%{transform:translateY(10%); opacity:0}10%{opacity:.28}60%{opacity:.12}90%{opacity:.22}100%{transform:translateY(-12%); opacity:0}}
     @keyframes moteDrift{0%{transform:translate3d(-2%, 12%, 0); opacity:0}15%{opacity:.22}60%{opacity:.12}100%{transform:translate3d(2%, -16%, 0); opacity:0}}
     @media (prefers-reduced-motion: reduce){ .reel-band{animation:none} .dust, .mote{animation:none; opacity:.08} }
@@ -243,8 +246,8 @@
     /* Hero primary/secondary CTAs */
     .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; }
     @media (min-width: 768px) { .hero-ctas { justify-content: flex-start; } }
-    .hero-cta-secondary { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.25rem; border-radius: 9999px; border: 1.5px solid #1C1C1C; color: #1C1C1C; font-weight: 600; font-size: .875rem; letter-spacing: .02em; transition: background-color 180ms ease, color 180ms ease, transform 180ms ease; }
-    .hero-cta-secondary:hover { background: #1C1C1C; color: #FCF9EF; transform: translateY(-1px); }
+    .hero-cta-secondary { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.25rem; border-radius: 9999px; border: 1.5px solid #FCF9EF; color: #FCF9EF; font-weight: 600; font-size: .875rem; letter-spacing: .02em; transition: background-color 180ms ease, color 180ms ease, transform 180ms ease; }
+    .hero-cta-secondary:hover { background: #FCF9EF; color: #1C1C1C; transform: translateY(-1px); }
     .hero-cta-secondary:focus-visible { outline: 2px solid #E3452D; outline-offset: 2px; }
     .hero-cta-secondary svg { width: 14px; height: 14px; transition: transform 200ms ease; }
     .hero-cta-secondary:hover svg { transform: translateY(2px); }
@@ -498,8 +501,8 @@
 
     /* ---- Polish pass: hero ---- */
 
-    /* Cherry accent word in the headline */
-    .hero-accent { font-style: normal; color: #E3452D; }
+    /* Gold accent word in the headline — matches the story-panel titles */
+    .hero-accent { font-style: normal; color: #f4bc25; }
 
     /* ---- iPhone device frame around the hero screenshot ---- */
     .iphone-frame {
@@ -507,8 +510,9 @@
       border-radius: 44px;
       background: linear-gradient(160deg, #3c3c42, #17171a 30%, #0c0c0f 72%, #2a2a30);
       box-shadow:
-        0 34px 70px rgba(0,0,0,.45), 0 8px 20px rgba(0,0,0,.3),
-        inset 0 0 2px 2px #0a0a0c, inset 0 0 0 4px rgba(255,255,255,.07);
+        0 34px 70px rgba(0,0,0,.55), 0 8px 20px rgba(0,0,0,.4),
+        0 0 70px 6px rgba(255,245,220,.09),
+        inset 0 0 2px 2px #0a0a0c, inset 0 0 0 4px rgba(255,255,255,.12);
     }
     .iphone-island {
       position: absolute; top: 3.6%; left: 50%; transform: translateX(-50%);
@@ -529,12 +533,12 @@
       display: inline-flex; align-items: center; gap: .6rem;
       font-family: 'Montserrat', ui-sans-serif, system-ui;
       font-size: .8rem; font-weight: 600; letter-spacing: .04em;
-      color: rgba(28,28,28,.72);
+      color: rgba(252,249,239,.72);
       border-bottom: 1px solid transparent;
       transition: color 180ms ease, border-color 180ms ease;
     }
-    .hero-proof:hover, .hero-proof:focus-visible { color: #1C1C1C; border-color: rgba(28,28,28,.5); }
-    .hero-proof .hero-stars { color: #E3452D; font-size: .9rem; letter-spacing: .18em; }
+    .hero-proof:hover, .hero-proof:focus-visible { color: #FCF9EF; border-color: rgba(252,249,239,.5); }
+    .hero-proof .hero-stars { color: #f4bc25; font-size: .9rem; letter-spacing: .18em; }
     @media (max-width: 767px) { .hero-proof { justify-content: center; } }
 
     /* ---- Polish pass: micro-interactions ---- */
@@ -654,25 +658,25 @@
 
     .hero-accent { animation: accentBuzz 4.6s 2.6s ease-in-out infinite; }
     @keyframes accentBuzz {
-      0%, 100% { text-shadow: 0 0 0 rgba(227,69,45,0); }
-      8%  { text-shadow: 0 0 18px rgba(227,69,45,.55); }
-      12% { text-shadow: 0 0 6px rgba(227,69,45,.2); }
-      16% { text-shadow: 0 0 22px rgba(227,69,45,.6); }
-      34% { text-shadow: 0 0 10px rgba(227,69,45,.3); }
-      60% { text-shadow: 0 0 16px rgba(227,69,45,.45); }
+      0%, 100% { text-shadow: 0 0 0 rgba(244,188,37,0); }
+      8%  { text-shadow: 0 0 18px rgba(244,188,37,.55); }
+      12% { text-shadow: 0 0 6px rgba(244,188,37,.2); }
+      16% { text-shadow: 0 0 22px rgba(244,188,37,.6); }
+      34% { text-shadow: 0 0 10px rgba(244,188,37,.3); }
+      60% { text-shadow: 0 0 16px rgba(244,188,37,.45); }
     }
 
     /* ---- 3. Projection-booth artifacts: print scratches + reel-change cue dot ---- */
     .film-scratch {
       position: absolute; top: 0; bottom: 0; width: 1px; z-index: 5; opacity: 0; pointer-events: none;
-      background: linear-gradient(rgba(28,28,28,0), rgba(28,28,28,.22) 30%, rgba(28,28,28,.06) 60%, rgba(28,28,28,.25));
+      background: linear-gradient(rgba(252,249,239,0), rgba(252,249,239,.22) 30%, rgba(252,249,239,.06) 60%, rgba(252,249,239,.25));
     }
     .film-scratch.s1 { left: 23%; animation: scratchPop 9s 3s steps(1) infinite; }
     .film-scratch.s2 { left: 71%; animation: scratchPop 13s 6.5s steps(1) infinite; }
     @keyframes scratchPop { 0%, 3% { opacity: .5; } 4%, 100% { opacity: 0; } }
     .cue-mark {
       position: absolute; top: 9%; right: 5.5%; width: 22px; height: 22px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(20,16,12,.5), rgba(20,16,12,.18) 70%, transparent 75%);
+      background: radial-gradient(circle, rgba(252,249,239,.55), rgba(252,249,239,.18) 70%, transparent 75%);
       z-index: 6; opacity: 0; pointer-events: none; animation: cueBlink 26s 8s infinite;
     }
     @keyframes cueBlink {
@@ -843,6 +847,7 @@
     .story-section {
       --at-accent:#00E6B4; --at-yellow:#f0b40f; --at-coral:#FC696E;
       --at-gold:#f4bc25;   --at-info:#13c8ec;   --at-mint:#419B85;
+      --at-bubblegum:#FFB1C1;
       padding: 2rem 0 3rem;
       overflow: hidden;
     }
@@ -857,10 +862,10 @@
       line-height:1.02; color:#FCF9EF; letter-spacing:.01em;
     }
     .panel-title em { font-style:normal; color:var(--at-gold); }
-    #scores .panel-title em { color:var(--at-accent); }
+    #scores .panel-title em { color:var(--at-bubblegum); }
     #taste-profile .panel-title em {
       color:#ff073a;
-      text-shadow:0 0 6px rgba(255,7,58,.55), 0 0 16px rgba(255,7,58,.4), 0 0 30px rgba(255,7,58,.25);
+      text-shadow:0 0 8px rgba(255,7,58,.5), 0 0 22px rgba(255,7,58,.38), 0 0 48px rgba(255,7,58,.26), 0 0 90px rgba(255,7,58,.15);
     }
     #swipe .panel-title em { color:var(--at-coral); }
     .panel-lede { margin-top:1.1rem; max-width:30rem; color:rgba(252,249,239,.72); font-size:1.02rem; line-height:1.65; }
@@ -933,7 +938,11 @@
       padding:.45rem .85rem; box-shadow:0 10px 26px rgba(0,0,0,.45);
     }
     .fc-follow { top:8%; right:2%; color:#141414; background:var(--at-gold); border-color:transparent; }
-    .fc-react { bottom:6%; left:0; }
+    .fc-react { bottom:6%; left:0; display:inline-flex; align-items:center; gap:.35rem; }
+    /* In-app reaction art + comment glyph inside chips */
+    .fc-ic { width:18px; height:18px; flex:none; display:inline-block; border-radius:50%; }
+    .chip-comment-ic { width:15px; height:15px; flex:none; display:inline-block; fill:rgba(252,249,239,.88); }
+    .fc-react .chip-comment-ic { margin-left:.35rem; }
 
     /* ================= 02 · Circle vs Crowd ================= */
     .stage-scores { min-height:400px; }
@@ -993,17 +1002,30 @@
     .tp-message { width:100%; display:table; }
     .tp-message > span { display:table-cell; vertical-align:middle; word-break:break-word; padding:.35em .1em; }
     .tp-board::after {
-      content:''; position:absolute; bottom:-30px; left:50%; transform:translateX(-50%);
-      width:90%; height:40px;
-      background:radial-gradient(ellipse at top, rgba(255,7,58,.4) 0%, rgba(255,7,58,.2) 40%, transparent 80%);
-      filter:blur(10px); pointer-events:none; opacity:0;
+      content:''; position:absolute; bottom:-42px; left:50%; transform:translateX(-50%);
+      width:104%; height:58px;
+      background:radial-gradient(ellipse at top, rgba(255,7,58,.42) 0%, rgba(255,7,58,.18) 45%, transparent 78%);
+      filter:blur(18px); pointer-events:none; opacity:0;
     }
     .tp-marquee.lit .tp-board::after { animation:tpGlowIn 1s ease-in-out .9s forwards; }
-    /* Ambient bloom off the whole board once the sign is lit (app-style glow). */
-    .tp-board { transition:box-shadow .8s ease; }
+    /* Ambient bloom off the whole board once the sign is lit (app-style glow):
+       tight core + two wide, soft falloff layers for a diffuse neon wash. */
+    .tp-board { transition:box-shadow 1.1s ease; }
     .tp-marquee.lit .tp-board {
-      box-shadow:0 0 32px rgba(255,7,58,.28), 0 0 70px rgba(255,7,58,.14);
+      box-shadow:
+        0 0 26px rgba(255,7,58,.32),
+        0 0 80px 18px rgba(255,7,58,.17),
+        0 0 160px 56px rgba(255,7,58,.08);
     }
+    /* Room glow: a big blurred halo behind the whole sign, faded in late so
+       the marquee feels like it's actually lighting the wall around it. */
+    .tp-marquee { position:relative; }
+    .tp-marquee::before {
+      content:''; position:absolute; inset:-22% -8%; z-index:-1; pointer-events:none;
+      background:radial-gradient(ellipse at center, rgba(255,7,58,.17) 0%, rgba(255,7,58,.07) 45%, transparent 72%);
+      filter:blur(26px); opacity:0; transition:opacity 1.4s ease .9s;
+    }
+    .tp-marquee.lit::before { opacity:1; }
     .tp-neon-bar { left:0; right:0; height:20px; position:absolute; background-color:#111; }
     .tp-neon-bar.top { top:-20px; }
     .tp-neon-bar.bottom { bottom:-20px; }
@@ -1023,7 +1045,11 @@
         background-image:linear-gradient(#33000a, #660014, #33000a);
       }
       35%, 37%, 39%, 41%, 100% {
-        background:#ff073a; box-shadow:0 0 6px 0 #ff073a;
+        background:#ff073a;
+        box-shadow:
+          0 0 7px 1px rgba(255,7,58,.9),
+          0 0 22px 5px rgba(255,7,58,.5),
+          0 0 55px 14px rgba(255,7,58,.22);
         background-image:linear-gradient(#cc0025, #ff073a, #cc0025);
       }
     }
@@ -1137,7 +1163,7 @@
     @media (prefers-reduced-motion: reduce) {
       .js .story-section [data-el] { opacity:1; transform:none; }
       .tp-marquee.lit .tp-neon-bar::after,
-      .tp-marquee.lit .tp-neon-bar::before { animation:none; background:#ff073a; box-shadow:0 0 6px 0 #ff073a; }
+      .tp-marquee.lit .tp-neon-bar::before { animation:none; background:#ff073a; box-shadow:0 0 7px 1px rgba(255,7,58,.9), 0 0 22px 5px rgba(255,7,58,.5); }
       .tp-marquee.lit .tp-board::after { animation:none; opacity:1; }
     }
 
