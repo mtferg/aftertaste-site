@@ -858,7 +858,10 @@
     }
     .panel-title em { font-style:normal; color:var(--at-gold); }
     #scores .panel-title em { color:var(--at-accent); }
-    #taste-profile .panel-title em { color:#ff073a; }
+    #taste-profile .panel-title em {
+      color:#ff073a;
+      text-shadow:0 0 6px rgba(255,7,58,.55), 0 0 16px rgba(255,7,58,.4), 0 0 30px rgba(255,7,58,.25);
+    }
     #swipe .panel-title em { color:var(--at-coral); }
     .panel-lede { margin-top:1.1rem; max-width:30rem; color:rgba(252,249,239,.72); font-size:1.02rem; line-height:1.65; }
     .panel-copy { text-align:center; }
@@ -887,7 +890,7 @@
       background:rgba(28,28,32,.62); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
       border:1px solid rgba(252,249,239,.16); border-radius:999px; padding:.3rem .7rem;
     }
-    .at-pill svg { color:var(--at-accent); }
+    .at-pill svg { color:var(--at-gold); }
     .at-card-titleblock { position:absolute; left:14px; right:14px; bottom:10px; }
     .at-card-title { font-family:'Anton',sans-serif; font-size:1.5rem; color:#FCF9EF; letter-spacing:.02em; }
     .at-card-meta { font-size:.72rem; color:rgba(252,249,239,.65); margin-top:.15rem; }
@@ -909,6 +912,21 @@
       font-weight:700; font-size:.8rem;
     }
     .at-score-chip.yum { color:var(--at-accent); border:2.5px solid var(--at-accent); background:rgba(0,230,180,.08); }
+    /* Score as a proportional progress ring (9.0 => 90% swept), app-style. */
+    .at-score-ring { flex:none; position:relative; width:42px; height:42px; display:inline-flex; align-items:center; justify-content:center; }
+    .at-score-ring svg { width:42px; height:42px; transform:rotate(-90deg); display:block; }
+    .at-score-ring .asr-track { fill:none; stroke:rgba(252,249,239,.15); stroke-width:4; }
+    .at-score-ring .asr-fill {
+      fill:none; stroke-width:4; stroke-linecap:round;
+      stroke-dasharray:119.38; stroke-dashoffset:11.94; /* 1 - 9.0/10 = 10% gap */
+    }
+    .at-score-ring.yum .asr-fill { stroke:var(--at-accent); }
+    .at-score-ring .asr-value { position:absolute; font-weight:700; font-size:.78rem; color:var(--at-accent); }
+    .at-verdict {
+      flex:none; font-family:'Anton',sans-serif; font-size:.72rem; letter-spacing:.12em;
+      padding:.12rem .5rem; border-radius:4px; line-height:1.4;
+    }
+    .at-verdict.yum { color:var(--at-accent); border:1px solid var(--at-accent); }
     .float-chip {
       position:absolute; font-size:.72rem; font-weight:600; color:#FCF9EF;
       background:rgba(28,28,32,.85); border:1px solid rgba(252,249,239,.18); border-radius:999px;
@@ -981,15 +999,20 @@
       filter:blur(10px); pointer-events:none; opacity:0;
     }
     .tp-marquee.lit .tp-board::after { animation:tpGlowIn 1s ease-in-out .9s forwards; }
+    /* Ambient bloom off the whole board once the sign is lit (app-style glow). */
+    .tp-board { transition:box-shadow .8s ease; }
+    .tp-marquee.lit .tp-board {
+      box-shadow:0 0 32px rgba(255,7,58,.28), 0 0 70px rgba(255,7,58,.14);
+    }
     .tp-neon-bar { left:0; right:0; height:20px; position:absolute; background-color:#111; }
     .tp-neon-bar.top { top:-20px; }
     .tp-neon-bar.bottom { bottom:-20px; }
+    /* Glowing neon tubes — geometry ported from aftertaste-ui TasteProfileMarquee. */
     .tp-neon-bar::after, .tp-neon-bar::before {
-      height:5px; content:' '; display:block; position:absolute;
-      left:-5px; right:-5px; box-shadow:0 0 6px 0 black; border-radius:5px;
+      content:' '; display:block; position:absolute;
+      top:2px; bottom:5px; left:-5px; right:-5px; box-shadow:0 0 6px 0 black; border-radius:5px;
       background-color:#660014;
     }
-    .tp-neon-bar::after { top:2px; }
     .tp-neon-bar::before { top:10px; }
     .tp-marquee.lit .tp-neon-bar::after,
     .tp-marquee.lit .tp-neon-bar::before { animation:tpFlicker 3s ease-in-out forwards; }
@@ -1006,9 +1029,20 @@
     }
     .tp-chips { display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem; margin-top:2.6rem; }
     .tp-chip {
-      font-size:.74rem; font-weight:600; color:rgba(252,249,239,.85);
-      background:rgba(28,28,32,.7); border:1px solid rgba(252,249,239,.16); border-radius:999px; padding:.42rem .85rem;
+      display:inline-flex; align-items:center; gap:.42rem;
+      font-size:.74rem; font-weight:600; color:rgba(252,249,239,.9);
+      background:rgba(28,28,32,.7); border:1px solid rgba(252,249,239,.16); border-radius:999px; padding:.42rem .8rem .42rem .62rem;
     }
+    .tp-chip b { font-weight:800; color:var(--at-gold); letter-spacing:.02em; }
+    .tp-chip-ic { width:15px; height:15px; flex:none; fill:none; stroke:var(--at-gold); stroke-width:2.1; stroke-linecap:round; stroke-linejoin:round; }
+    .tp-chip-ic--fill { fill:var(--at-gold); stroke:none; }
+    /* Per-affinity accents — mirrors the app's colour-coded taste chips. */
+    .tp-chip--trend { border-color:rgba(244,188,37,.4); background:rgba(244,188,37,.09); }
+    .tp-chip--love { border-color:rgba(252,105,110,.4); background:rgba(252,105,110,.09); }
+    .tp-chip--love .tp-chip-ic--fill { fill:var(--at-coral); }
+    .tp-chip--stat { border-color:rgba(0,230,180,.4); background:rgba(0,230,180,.09); }
+    .tp-chip--stat .tp-chip-ic { stroke:var(--at-accent); }
+    .tp-chip--stat b { color:var(--at-accent); }
 
     /* ================= 04 · Swipe deck ================= */
     .stage-swipe { min-height:420px; }
@@ -1019,16 +1053,20 @@
       background:#1e1e22;
     }
     .swipe-card img { width:100%; height:100%; object-fit:cover; display:block; }
-    .sw-left { z-index:3; }
-    .sw-right { z-index:2; }
+    .sw-r1-left { z-index:5; }
+    .sw-r1-right { z-index:4; }
+    .sw-r2-left { z-index:3; }
+    .sw-r2-right { z-index:2; }
     .sw-match { z-index:1; }
     /* Intent stamps — mirror the app's swipe deck (RecommendationSwipeStack):
-       solid $primary wordmark, dark text, rotated like a real stamp. */
+       LIKE is the solid $primary gold wordmark, PASS is the red pass wordmark. */
     .swipe-stamp {
       position:absolute; top:14px; font-weight:800; font-size:1.15rem; line-height:1.1; letter-spacing:2px;
       text-transform:uppercase; padding:6px 16px; border-radius:8px;
-      color:#141414; background:var(--at-accent); box-shadow:0 8px 20px rgba(0,0,0,.4);
+      box-shadow:0 8px 20px rgba(0,0,0,.4);
     }
+    .stamp-like { color:#141414; background:var(--at-gold); }
+    .stamp-pass { color:#fff; background:#ff5a5f; }
     .stamp-tilt-left { left:12px; transform:rotate(-14deg); }
     .stamp-tilt-right { right:12px; transform:rotate(14deg); }
     .match-banner {
@@ -1037,11 +1075,20 @@
       opacity:0; transform:translateY(14px);
     }
     .match-title { display:block; font-family:'Anton',sans-serif; font-size:1.35rem; color:var(--at-accent); letter-spacing:.05em; text-transform:uppercase; }
-    .match-avatars { display:inline-flex; margin-top:.55rem; }
-    .match-avatars .at-avatar { border-color:#141414; }
+    .match-avatars { display:inline-flex; margin-top:.5rem; }
+    .match-avatars .at-avatar { width:24px; height:24px; border-width:2px; border-color:#141414; }
     .match-avatars .at-avatar + .at-avatar { margin-left:-8px; }
     .sw-match.matched { box-shadow:0 0 0 3px var(--at-accent), 0 24px 55px rgba(0,0,0,.6), 0 0 44px rgba(0,230,180,.35); }
     .sw-match.matched .match-banner { opacity:1; transform:none; transition:opacity .45s ease .1s, transform .45s ease .1s; }
+    /* Static / no-JS fallback: skip the swipe choreography, show only the match card. */
+    .story-section.story-static .swipe-deck .sw-r1-left,
+    .story-section.story-static .swipe-deck .sw-r1-right,
+    .story-section.story-static .swipe-deck .sw-r2-left,
+    .story-section.story-static .swipe-deck .sw-r2-right,
+    html:not(.js) .story-section .swipe-deck .sw-r1-left,
+    html:not(.js) .story-section .swipe-deck .sw-r1-right,
+    html:not(.js) .story-section .swipe-deck .sw-r2-left,
+    html:not(.js) .story-section .swipe-deck .sw-r2-right { display:none; }
 
     /* ================= 05 · Full menu collage ================= */
     .stage-menu { min-height:460px; margin-top:2.5rem; }
