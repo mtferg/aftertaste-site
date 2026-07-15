@@ -61,15 +61,15 @@
       position:absolute; top:50%; left:50%; z-index:0;
       transform:translate(-50%,-50%);
       font-family:'Anton', Impact, sans-serif;
-      font-size:clamp(10rem, 26vw, 30rem); line-height:1; white-space:nowrap;
+      font-size:clamp(8rem, 21vw, 24rem); line-height:1; white-space:nowrap;
       text-transform:uppercase; letter-spacing:.02em;
-      color:rgba(252,249,239,.05);
+      color:rgba(252,249,239,.04);
       -webkit-mask-image:linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
               mask-image:linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
       user-select:none; pointer-events:none;
     }
     @media (max-width:767px){
-      .nh-watermark{ top:54%; color:rgba(252,249,239,.04); }
+      .nh-watermark{ top:54%; color:rgba(252,249,239,.03); }
     }
     /* Deep poster vignette: above the scene, below the content */
     .nh-vignette{position:absolute; inset:0; z-index:2; pointer-events:none;
@@ -861,7 +861,7 @@
       line-height:1.02; color:#FCF9EF; letter-spacing:.01em;
     }
     .panel-title em { font-style:normal; color:var(--at-gold); }
-    #scores .panel-title em { color:var(--at-bubblegum); }
+    #scores .panel-title em { color:var(--at-mint); }
     #taste-profile .panel-title em {
       color:#ff073a;
       text-shadow:0 0 8px rgba(255,7,58,.5), 0 0 22px rgba(255,7,58,.38), 0 0 48px rgba(255,7,58,.26), 0 0 90px rgba(255,7,58,.15);

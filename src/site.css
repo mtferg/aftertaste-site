@@ -870,7 +870,7 @@
       line-height:1.02; color:#FCF9EF; letter-spacing:.01em;
     }
     .panel-title em { font-style:normal; color:var(--at-gold); }
-    #scores .panel-title em { color:var(--at-bubblegum); }
+    #scores .panel-title em { color:var(--at-mint); }
     #taste-profile .panel-title em {
       color:#ff073a;
       text-shadow:0 0 8px rgba(255,7,58,.5), 0 0 22px rgba(255,7,58,.38), 0 0 48px rgba(255,7,58,.26), 0 0 90px rgba(255,7,58,.15);
