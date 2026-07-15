@@ -9,17 +9,15 @@
     }
     /* Premium motion + lighting */
     .hero-rel {position: relative; overflow: hidden;}
-    /* ================= Dark neon marquee hero =================
-       A night-dark theater wall (same licorice family as the story
-       panels + #features halftone) with the headline mounted as a lit
-       marquee sign: gold bulb chase top/bottom, cherry neon accent
-       word, warm room glow spilling onto the wall and the phone. */
-    .marquee-hero{position:relative; background:#0b0b0c; overflow:hidden}
-    .mh-backdrop{position:absolute; inset:0; z-index:0; background:
-      radial-gradient(85% 65% at 30% 36%, rgba(244,188,37,.05), transparent 62%),
-      radial-gradient(70% 55% at 72% 58%, rgba(227,69,45,.05), transparent 66%),
-      radial-gradient(120% 90% at 50% 42%, #1f1d22 0%, #17161a 45%, #101013 75%, #060607 100%);}
-    .mh-backdrop::after{content:""; position:absolute; inset:0;
+    /* ================= Noir one-sheet hero =================
+       An old-Hollywood premiere staged as a movie poster: night-dark
+       theater wall, oversized AFTERTASTE watermark ghosted across it,
+       two crossed searchlight beams sweeping slowly, dust drifting in
+       the light. Strictly black-and-white except one cherry neon sign. */
+    .noir-hero{position:relative; background:#0a0a0b; overflow:hidden}
+    .nh-backdrop{position:absolute; inset:0; z-index:0; background:
+      radial-gradient(120% 90% at 50% 40%, #1b1a1e 0%, #141316 45%, #0e0d10 72%, #060607 100%);}
+    .nh-backdrop::after{content:""; position:absolute; inset:0;
       background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><circle cx='1' cy='1' r='.6' fill='%23F3E7BF' opacity='.035'/></svg>");
       background-repeat:repeat;}
     .screen-grain{position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.07; background-image:url('grain.svg'); background-size:420px 420px; mix-blend-mode:overlay}
@@ -32,102 +30,115 @@
     @keyframes moteDrift{0%{transform:translate3d(-2%, 12%, 0); opacity:0}15%{opacity:.22}60%{opacity:.12}100%{transform:translate3d(2%, -16%, 0); opacity:0}}
     @media (prefers-reduced-motion: reduce){ .dust, .mote{animation:none; opacity:.08} }
     /* Pause heavy animations when hero not visible */
-    #hero.paused .dust, #hero.paused .mote, #hero.paused .mh-bulbs {
+    #hero.paused .dust, #hero.paused .mote, #hero.paused .nh-beam {
       animation-play-state: paused !important;
     }
 
-    /* ---- The sign ---- */
-    .mh-eyebrow{
-      font-family:'Anton', Impact, sans-serif; font-size:.8rem; letter-spacing:.42em;
-      text-transform:uppercase; color:rgba(244,188,37,.8);
+    /* ---- The scene ---- */
+    /* Crossed premiere searchlights: pale beams rising from below the
+       fold, widening upward, swaying slowly. Screen-blended so they
+       read as light on the wall, not shapes. */
+    .nh-beams{position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;}
+    .nh-beam{
+      position:absolute; bottom:-28%; height:155%;
+      width:clamp(240px, 30vw, 520px);
+      background:linear-gradient(to top, rgba(252,249,239,.14), rgba(252,249,239,.05) 50%, transparent 84%);
+      clip-path:polygon(44% 100%, 56% 100%, 100% 0, 0 0);
+      filter:blur(14px); mix-blend-mode:screen; opacity:.6;
+      transform-origin:50% 100%;
     }
-    .mh-eyebrow span{ color:rgba(244,188,37,.55); }
-    .mh-sign{
-      position:relative; display:block; max-width:600px; margin:0 auto;
-      padding:clamp(26px,3vw,34px) clamp(14px,1.8vw,20px);
-      background:linear-gradient(165deg,#26232a,#151318 45%,#0e0d10);
-      border-radius:14px;
-      border:1px solid rgba(244,188,37,.26);
-      box-shadow:
-        0 0 0 3px #08080a,
-        0 0 0 4px rgba(244,188,37,.22),
-        0 26px 60px rgba(0,0,0,.6),
-        0 0 46px 6px rgba(244,188,37,.05);
-      transition:box-shadow 1.2s ease;
+    .nh-beam-l{ left:2%;  transform:rotate(17deg);  animation:beamSwayL 17s ease-in-out infinite alternate; }
+    .nh-beam-r{ right:2%; transform:rotate(-17deg); animation:beamSwayR 21s ease-in-out infinite alternate; }
+    @keyframes beamSwayL{ from{transform:rotate(12deg)} to{transform:rotate(22deg)} }
+    @keyframes beamSwayR{ from{transform:rotate(-22deg)} to{transform:rotate(-12deg)} }
+    @media (max-width:767px){ .nh-beam{ width:44vw; filter:blur(10px); bottom:-34%; } }
+
+    /* Ghost signage: the wordmark painted across the theater wall,
+       oversized, cropped by the frame, dissolving at the edges. */
+    .nh-watermark{
+      position:absolute; top:50%; left:50%; z-index:0;
+      transform:translate(-50%,-50%);
+      font-family:'Anton', Impact, sans-serif;
+      font-size:clamp(10rem, 26vw, 30rem); line-height:1; white-space:nowrap;
+      text-transform:uppercase; letter-spacing:.02em;
+      color:transparent; -webkit-text-stroke:1.5px rgba(252,249,239,.085);
+      -webkit-mask-image:linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+              mask-image:linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+      user-select:none; pointer-events:none;
     }
-    @media (min-width:768px){ .mh-sign{ margin-left:0; } }
-    .marquee-hero.lit .mh-sign{
-      box-shadow:
-        0 0 0 3px #08080a,
-        0 0 0 4px rgba(244,188,37,.3),
-        0 26px 60px rgba(0,0,0,.6),
-        0 0 60px 10px rgba(244,188,37,.12),
-        0 0 150px 50px rgba(227,69,45,.06);
+    @media (max-width:767px){
+      .nh-watermark{ top:54%; -webkit-text-stroke:1.2px rgba(252,249,239,.065); }
     }
-    /* Room glow: the lit sign throws warm light onto the wall behind it */
-    .mh-halo{
-      position:absolute; inset:-34% -16%; z-index:-1; pointer-events:none;
-      background:radial-gradient(ellipse at center, rgba(244,188,37,.14) 0%, rgba(227,69,45,.07) 45%, transparent 72%);
-      filter:blur(28px); opacity:0; transition:opacity 1.6s ease .5s;
+    /* Deep poster vignette: above the scene, below the content */
+    .nh-vignette{position:absolute; inset:0; z-index:2; pointer-events:none;
+      background:radial-gradient(120% 100% at 50% 45%, transparent 52%, rgba(0,0,0,.5) 100%);}
+
+    /* ---- The bill ---- */
+    .noir-hero > .max-w-7xl{ min-height:min(calc(100svh - 5rem), 860px); display:flex; align-items:center; }
+    .nh-inner{
+      position:relative; z-index:3; width:100%; max-width:52rem; margin:0 auto;
+      text-align:center; display:flex; flex-direction:column; align-items:center;
+      gap:1.55rem; padding:clamp(3.5rem, 9vh, 6rem) 0 clamp(2.5rem, 6vh, 4rem);
     }
-    .marquee-hero.lit .mh-halo{ opacity:1; }
-    /* Bulb rows: warm chase along the sign's top and bottom rails */
-    .mh-bulbs{
-      position:absolute; left:16px; right:16px; height:12px; pointer-events:none;
-      background-image:radial-gradient(circle at 13px 6px, #ffedbe 0 2.4px, rgba(244,188,37,.55) 3.4px, transparent 6px);
-      background-size:26px 12px; background-repeat:repeat-x;
-      opacity:0; transition:opacity .4s ease;
+    /* The one piece of color: a small cherry neon tube, dead until .lit */
+    .nh-neon{
+      display:inline-block; font-family:'Anton', Impact, sans-serif;
+      font-size:clamp(.72rem, 1.4vw, .88rem); letter-spacing:.48em; text-indent:.48em;
+      text-transform:uppercase; line-height:1;
+      padding:.72em 1.15em .66em; border-radius:999px;
+      color:#43101b; border:2px solid rgba(255,54,84,.13);
     }
-    .mh-bulbs-top{ top:8px; }
-    .mh-bulbs-bottom{ bottom:8px; }
-    .marquee-hero.lit .mh-bulbs{
-      opacity:1;
-      animation:mhChase .85s steps(2, jump-none) infinite;
+    .noir-hero.lit .nh-neon{
+      animation:nhNeonOn 1.4s steps(1) .25s both, nhNeonBuzz 7s 4.5s ease-in-out infinite;
     }
-    @keyframes mhChase{ from{background-position-x:0} to{background-position-x:26px} }
-    /* The letter board */
-    .mh-board{
-      position:relative; z-index:1; display:block; text-align:center;
-      background:linear-gradient(180deg,#1c1a20,#121115 55%,#0d0c0f);
-      border-radius:8px; border:1px solid rgba(252,249,239,.07);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.05), inset 0 -16px 34px rgba(0,0,0,.45);
-      padding:clamp(1.3rem,3vw,2.1rem) clamp(.9rem,2.4vw,1.8rem);
-      color:#FCF9EF; text-transform:uppercase;
-      font-size:clamp(2.1rem,4.4vw,3.7rem); line-height:1.02; letter-spacing:.015em;
-      text-shadow:0 2px 0 rgba(0,0,0,.45);
-      text-wrap:balance;
-    }
-    /* Neon accent word: dead tube until the sign is lit, then flickers on
-       cherry-red — same tube red as the taste-profile marquee below */
-    .mh-neon{ font-style:normal; color:#571522; text-shadow:none; }
-    .marquee-hero.lit .mh-neon{
-      animation:mhNeonOn 1.5s steps(1) .25s both, mhNeonBuzz 6.5s 4s ease-in-out infinite;
-    }
-    @keyframes mhNeonOn{
-      0%, 22%, 30%, 36% { color:#571522; text-shadow:none; }
-      26%, 33%, 100% {
-        color:#ff3654;
-        text-shadow:
-          0 0 6px rgba(255,7,58,.8),
-          0 0 20px rgba(255,7,58,.5),
-          0 0 46px rgba(255,7,58,.3);
+    @keyframes nhNeonOn{
+      0%, 21%, 27%, 34% {
+        color:#43101b; border-color:rgba(255,54,84,.13);
+        text-shadow:none; box-shadow:none;
+      }
+      24%, 30%, 100% {
+        color:#ff3654; border-color:rgba(255,54,84,.6);
+        text-shadow:0 0 7px rgba(255,7,58,.6), 0 0 18px rgba(255,7,58,.3);
+        box-shadow:0 0 14px rgba(255,7,58,.16), inset 0 0 12px rgba(255,7,58,.1);
       }
     }
-    @keyframes mhNeonBuzz{
-      0%, 100% { text-shadow:0 0 6px rgba(255,7,58,.8), 0 0 20px rgba(255,7,58,.5), 0 0 46px rgba(255,7,58,.3); }
-      7%  { text-shadow:0 0 5px rgba(255,7,58,.65), 0 0 14px rgba(255,7,58,.38), 0 0 34px rgba(255,7,58,.22); }
-      9%  { text-shadow:0 0 7px rgba(255,7,58,.85), 0 0 24px rgba(255,7,58,.55), 0 0 52px rgba(255,7,58,.34); }
-      54% { text-shadow:0 0 6px rgba(255,7,58,.75), 0 0 18px rgba(255,7,58,.45), 0 0 42px rgba(255,7,58,.27); }
+    @keyframes nhNeonBuzz{
+      0%, 100% { text-shadow:0 0 7px rgba(255,7,58,.6), 0 0 18px rgba(255,7,58,.3); }
+      8%  { text-shadow:0 0 6px rgba(255,7,58,.45), 0 0 13px rgba(255,7,58,.2); }
+      11% { text-shadow:0 0 8px rgba(255,7,58,.65), 0 0 20px rgba(255,7,58,.34); }
+      57% { text-shadow:0 0 7px rgba(255,7,58,.52), 0 0 16px rgba(255,7,58,.26); }
     }
-    /* Phone: warm ambient spill from the sign, plus a soft glow pad behind */
-    .mh-phone-glow{
-      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      width:120%; max-width:560px; aspect-ratio:1/1; pointer-events:none; z-index:0;
-      background:radial-gradient(ellipse at center, rgba(244,188,37,.1) 0%, rgba(227,69,45,.05) 45%, transparent 70%);
-      filter:blur(30px); opacity:0; transition:opacity 1.6s ease .7s;
+    /* Headline: big, dry, black-and-white — ink on the one-sheet, no glow */
+    .nh-title{
+      font-size:clamp(2.7rem, 6.5vw, 5.4rem); line-height:.98; letter-spacing:.015em;
+      text-transform:uppercase; color:#FCF9EF;
+      text-shadow:0 2px 0 rgba(0,0,0,.4);
+      text-wrap:balance;
     }
-    .marquee-hero.lit .mh-phone-glow{ opacity:1; }
-    .marquee-hero .iphone-frame{ position:relative; z-index:1; }
+    .nh-title em{ font-style:normal; color:#E3452D; }
+    .nh-lede{ margin-top:-.2rem; }
+    .nh-ctas{ justify-content:center; }
+    .noir-hero .hero-proof{ justify-content:center; }
+    .noir-hero .hero-proof .hero-stars{ color:#E3452D; }
+    /* Billing block: the poster credits */
+    .nh-billing{ position:relative; margin-top:.9rem; padding-top:1.5rem; max-width:46rem; }
+    .nh-billing::before{
+      content:""; position:absolute; top:0; left:50%; transform:translateX(-50%);
+      width:min(340px, 72%); height:1px;
+      background:linear-gradient(90deg, transparent, rgba(252,249,239,.32), transparent);
+    }
+    .nh-bill-line{
+      display:block; font-family:'Montserrat', ui-sans-serif, system-ui;
+      font-size:.58rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase;
+      color:rgba(252,249,239,.4); line-height:2.4;
+    }
+    .nh-bill-line b{
+      font-family:'Anton', Impact, sans-serif; font-weight:400;
+      font-size:.8rem; letter-spacing:.13em; color:rgba(252,249,239,.72);
+    }
+    .nh-bill-line i{ font-style:normal; color:rgba(252,249,239,.25); padding:0 .35em; }
+    .nh-bill-seg{ white-space:nowrap; }
+    .nh-bill-foot{ color:rgba(252,249,239,.32); }
     /* Mobile slider overrides */
     @media (max-width: 768px) {
       #chef {
@@ -574,28 +585,6 @@
     /* ---- Polish pass: hero ---- */
 
     /* ---- iPhone device frame around the hero screenshot ---- */
-    .iphone-frame {
-      position: relative; width: 100%; max-width: 210px; padding: 10px;
-      border-radius: 44px;
-      background: linear-gradient(160deg, #3c3c42, #17171a 30%, #0c0c0f 72%, #2a2a30);
-      box-shadow:
-        0 34px 70px rgba(0,0,0,.55), 0 8px 20px rgba(0,0,0,.4),
-        0 0 60px 8px rgba(244,188,37,.08), 0 0 120px 26px rgba(227,69,45,.05),
-        inset 0 0 2px 2px #0a0a0c, inset 0 0 0 4px rgba(255,255,255,.12);
-    }
-    .iphone-island {
-      position: absolute; top: 3.6%; left: 50%; transform: translateX(-50%);
-      width: 29%; aspect-ratio: 125 / 37; background: #050507; border-radius: 999px; z-index: 2;
-    }
-    .iphone-screen { display: block; width: 100%; height: auto; border-radius: 34px; }
-    @media (min-width: 768px) {
-      .iphone-frame { max-width: 250px; padding: 12px; border-radius: 52px; }
-      .iphone-screen { border-radius: 40px; }
-    }
-    @media (min-width: 1024px) {
-      .iphone-frame { max-width: 290px; border-radius: 58px; }
-      .iphone-screen { border-radius: 46px; }
-    }
 
     /* Star-rated social proof under the CTAs */
     .hero-proof {
@@ -678,15 +667,14 @@
       background: linear-gradient(105deg, rgba(255,236,200,0) 30%, rgba(255,236,200,.07) 46%, rgba(255,236,200,0) 62%);
     }
 
-    /* Hero content: rises as the sign warms up */
-    .marquee-hero article > * { opacity: 0; transform: translateY(12px); animation: heroRise .7s cubic-bezier(.22,1,.36,1) forwards; }
-    .marquee-hero article > *:nth-child(1) { animation-delay: .15s; }
-    .marquee-hero article > *:nth-child(2) { animation-delay: .25s; }
-    .marquee-hero article > *:nth-child(3) { animation-delay: .4s; }
-    .marquee-hero article > *:nth-child(4) { animation-delay: .5s; }
-    .marquee-hero article > *:nth-child(5) { animation-delay: .6s; }
-    .marquee-hero article > *:nth-child(6) { animation-delay: .7s; }
-    .marquee-hero figure { opacity: 0; transform: translateY(16px); animation: heroRise .9s cubic-bezier(.22,1,.36,1) .35s forwards; }
+    /* Hero content: rises as the house lights come down */
+    .noir-hero article > * { opacity: 0; transform: translateY(12px); animation: heroRise .7s cubic-bezier(.22,1,.36,1) forwards; }
+    .noir-hero article > *:nth-child(1) { animation-delay: .15s; }
+    .noir-hero article > *:nth-child(2) { animation-delay: .25s; }
+    .noir-hero article > *:nth-child(3) { animation-delay: .4s; }
+    .noir-hero article > *:nth-child(4) { animation-delay: .5s; }
+    .noir-hero article > *:nth-child(5) { animation-delay: .6s; }
+    .noir-hero article > *:nth-child(6) { animation-delay: .7s; }
     @keyframes heroRise { to { opacity: 1; transform: none; } }
 
     /* ---- 5. Film-strip scroll progress (bottom of viewport) ---- */
@@ -828,13 +816,14 @@
 
     /* ---- Reduced motion: the show still goes on, just without the moves ---- */
     @media (prefers-reduced-motion: reduce) {
-      .marquee-hero article > *, .marquee-hero figure { animation: none; opacity: 1; transform: none; }
-      /* Sign lights instantly, fully lit, no chase or flicker */
-      .marquee-hero.lit .mh-bulbs { animation: none; opacity: 1; }
-      .marquee-hero .mh-neon, .marquee-hero.lit .mh-neon {
+      .noir-hero article > * { animation: none; opacity: 1; transform: none; }
+      /* Searchlights hold still; neon lights instantly, no flicker */
+      .nh-beam { animation: none; }
+      .noir-hero .nh-neon, .noir-hero.lit .nh-neon {
         animation: none;
-        color: #ff3654;
-        text-shadow: 0 0 6px rgba(255,7,58,.8), 0 0 20px rgba(255,7,58,.5), 0 0 46px rgba(255,7,58,.3);
+        color: #ff3654; border-color: rgba(255,54,84,.6);
+        text-shadow: 0 0 7px rgba(255,7,58,.6), 0 0 18px rgba(255,7,58,.3);
+        box-shadow: 0 0 14px rgba(255,7,58,.16), inset 0 0 12px rgba(255,7,58,.1);
       }
       .js .feature-card, .js .glance-card { opacity: 1; transform: none; transition: none; }
       .section-title em:after { transition: none; }

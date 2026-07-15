@@ -49,13 +49,6 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="assets/site.webmanifest" />
 
-  <!-- Preload the hero screenshot (LCP candidate) — responsive WebP -->
-  <link rel="preload" as="image"
-        imagesrcset="assets/tastebud-feed-440w.webp 440w, assets/tastebud-feed-660w.webp 660w"
-        imagesizes="(max-width: 767px) 210px, (max-width: 1023px) 250px, 290px"
-        type="image/webp"
-        fetchpriority="high" />
-
   <!-- Fonts: non-render-blocking -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -379,25 +372,28 @@
   </header>
 
   <main class="pt-20">
-    <!-- Hero: dark neon marquee — the headline is a lit theater sign on a
-         night-dark wall, extending the "name in lights" language of the
-         story panels below. -->
-    <section id="hero" class="marquee-hero hero-rel">
+    <!-- Hero: noir one-sheet — an old-Hollywood premiere staged as a movie
+         poster. Oversized AFTERTASTE watermark ghosted across the wall,
+         crossed searchlight beams, dust and grain; black-and-white type
+         with a single cherry neon "Now Showing" sign, and a classic
+         billing block where the credits would run. -->
+    <section id="hero" class="noir-hero hero-rel">
       <!-- Scene layers -->
-      <div class="mh-backdrop" aria-hidden="true"></div>
+      <div class="nh-backdrop" aria-hidden="true"></div>
+      <div class="nh-beams" aria-hidden="true">
+        <span class="nh-beam nh-beam-l"></span>
+        <span class="nh-beam nh-beam-r"></span>
+      </div>
+      <div class="nh-watermark" aria-hidden="true">Aftertaste</div>
       <div class="screen-grain" aria-hidden="true"></div>
       <div class="dust-layer" id="dustLayer" aria-hidden="true"></div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-center relative text-almond">
-        <article class="space-y-6 text-center md:text-left">
-          <p class="mh-eyebrow"><span aria-hidden="true">&#9733;</span> Now Showing <span aria-hidden="true">&#9733;</span></p>
-          <div class="mh-sign">
-            <span class="mh-halo" aria-hidden="true"></span>
-            <span class="mh-bulbs mh-bulbs-top" aria-hidden="true"></span>
-            <span class="mh-bulbs mh-bulbs-bottom" aria-hidden="true"></span>
-            <h1 class="mh-board font-display">Your Ultimate<br/>Movie &amp; TV <em class="mh-neon">Hub</em></h1>
-          </div>
-          <p class="text-base md:text-lg text-almond/85 max-w-lg mx-auto md:mx-0">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
-          <div class="hero-ctas">
+      <div class="nh-vignette" aria-hidden="true"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-almond">
+        <article class="nh-inner">
+          <p class="nh-sign"><span class="nh-neon">Now Showing</span></p>
+          <h1 class="nh-title font-display">Your Ultimate<br/>Movie &amp; TV <em>Hub</em></h1>
+          <p class="nh-lede text-base md:text-lg text-almond/85 max-w-xl mx-auto">Track what you watch, compare tastes with friends, and discover what's worth watching — <strong>through people you trust</strong>.</p>
+          <div class="hero-ctas nh-ctas">
             <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="inline-block transition hover:-translate-y-0.5">
               <img src="assets/App_Store_Download.svg" alt="Download on the App Store" class="h-11 md:h-12" />
             </a>
@@ -410,29 +406,12 @@
             <span class="hero-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
             <span>Loved by film fans &mdash; read the reviews</span>
           </a>
-          <p class="text-xs tracking-[0.2em] uppercase text-almond/60 pt-2">Android &#183; Coming soon</p>
-        </article>
-        <figure class="relative">
-          <span class="mh-phone-glow" aria-hidden="true"></span>
-          <div class="iphone-frame mx-auto">
-            <span class="iphone-island" aria-hidden="true"></span>
-            <picture>
-              <source
-                type="image/webp"
-                srcset="assets/tastebud-feed-440w.webp 440w, assets/tastebud-feed-660w.webp 660w"
-                sizes="(max-width: 767px) 210px, (max-width: 1023px) 250px, 290px" />
-              <img
-                class="iphone-screen"
-                src="assets/tastebud-feed.png"
-                alt="Aftertaste mobile app showing the Tastebuds feed with friends' ratings and reviews"
-                loading="eager"
-                decoding="async"
-                fetchpriority="high"
-                width="660"
-                height="1434" />
-            </picture>
+          <div class="nh-billing">
+            <span class="nh-bill-line"><span class="nh-bill-seg">Starring <b>Your Tastebuds</b></span> <i>&middot;</i> <span class="nh-bill-seg">Co&#8209;starring <b>Every Show You&rsquo;ve Ever Loved</b></span></span>
+            <span class="nh-bill-line"><span class="nh-bill-seg">Scores by <b>People You Trust</b></span> <i>&middot;</i> <span class="nh-bill-seg">Absolutely <b>No Algorithms</b> Were Consulted</span></span>
+            <span class="nh-bill-line nh-bill-foot"><span class="nh-bill-seg">Now Playing on iPhone &amp; Web</span> <i>&middot;</i> <span class="nh-bill-seg">Coming Soon to Android</span></span>
           </div>
-        </figure>
+        </article>
       </div>
     </section>
 
@@ -1059,8 +1038,8 @@
   </script>
 
   <script>
-    // Light the marquee sign shortly after load (CSS drives the bulb chase,
-    // neon flicker-on, and room glow off the .lit class)
+    // Light the "Now Showing" neon shortly after load (CSS drives the
+    // tube flicker-on off the .lit class)
     const heroEl = document.getElementById('hero');
     if (heroEl) {
       window.setTimeout(() => heroEl.classList.add('lit'), 600);
