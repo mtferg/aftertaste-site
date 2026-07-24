@@ -11,8 +11,6 @@
       pointer-events: none;
       box-shadow: inset 0 0 120px 40px rgba(0,0,0,.6);
     }
-    /* Premium motion + lighting */
-    .hero-rel {position: relative; overflow: hidden;}
     /* ================= Noir one-sheet hero =================
        An old-Hollywood premiere staged as a movie poster: night-dark
        theater wall, oversized AFTERTASTE watermark ghosted across it,
@@ -138,186 +136,21 @@
       font-size:.58rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase;
       color:rgba(252,249,239,.4); line-height:2.4;
     }
-    .nh-bill-line b{
-      font-family:'Anton', Impact, sans-serif; font-weight:400;
-      font-size:.8rem; letter-spacing:.13em; color:rgba(252,249,239,.72);
-    }
     .nh-bill-line i{ font-style:normal; color:rgba(252,249,239,.25); padding:0 .35em; }
     .nh-bill-seg{ white-space:nowrap; }
     .nh-bill-foot{ color:rgba(252,249,239,.32); }
-    /* Mobile slider overrides */
-    @media (max-width: 768px) {
-      #chef {
-        overflow-x: hidden;
-        max-width: 100vw;
-      }
-
-      #chefSlider {
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        max-width: 100vw;
-        width: 100%;
-        position: relative;
-      }
-      #chefSlides {
-        transform: none !important;
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-        scroll-snap-align: start;
-        width: max-content;
-        min-width: 100%;
-      }
-      #chefSlides li {
-        transform: none !important;
-        opacity: 1 !important;
-        scale: 1 !important;
-        width: 85vw !important;
-        min-width: 85vw !important;
-        max-width: 85vw !important;
-        flex-shrink: 0;
-        scroll-snap-align: center;
-        padding: 1rem !important;
-      }
-
-      /* Reviews section mobile fixes */
-      #reviewsBelt {
-        width: max-content !important;
-      }
-      #reviewsSetA, #reviewsSetB {
-        width: max-content !important;
-        gap: 1rem !important;
-        padding: 0 1rem !important;
-      }
-      #reviewsSetA figure, #reviewsSetB figure {
-        width: 200px !important;
-        min-width: 200px !important;
-        max-width: 200px !important;
-        flex-shrink: 0 !important;
-        margin: 0 !important;
-      }
-    }
     /* Footer social icons on dark background */
     .footer-social img{filter: brightness(0) invert(1)}
 
 
-    /* ---- Phase 3: Features poster-card grid ---- */
-    /* Background: same Coffee-dot halftone on Licorice used for #glance, for a consistent editorial block */
+    /* Coffee-dot halftone on Licorice behind The Feature Presentation */
     #features { background: #111 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><circle cx='1' cy='1' r='.6' fill='%23F3E7BF' opacity='.04'/></svg>") repeat; }
-    #features .features-eyebrow { color: #F3E7BF; opacity: .8; }
-    #features .section-title { color: #FCF9EF; }
-
-    /* Divider bar under the section title */
-    .features-divider { width: 56px; height: 3px; background: #F3E7BF; opacity: .85; border-radius: 2px; margin-top: 1rem; }
-    .features-lede { color: rgba(252,249,239,.72); max-width: 34rem; font-size: 1.02rem; line-height: 1.55; }
-
-    /* Poster-style feature card — uniform frame, consistent proportions */
-    .feature-card {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem 1.5rem 1.75rem;
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(252,249,239,.035), rgba(252,249,239,.01));
-      border: 1px solid rgba(243,231,191,.18);
-      height: 100%;
-      transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease;
-      overflow: hidden;
-    }
-    .feature-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(243,231,191,.42);
-      background: linear-gradient(180deg, rgba(252,249,239,.06), rgba(252,249,239,.015));
-    }
-    /* Coffee tab, matches .glance-card language */
-    .feature-card:before {
-      content: "";
-      position: absolute;
-      top: 0; left: 1.5rem;
-      width: 36px; height: 3px;
-      background: #F3E7BF;
-      border-radius: 0 0 2px 2px;
-      opacity: .75;
-    }
-
-    /* Screenshot chip: phone-shaped poster image, uniform aspect so every card aligns */
-    .feature-card .shot {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      margin-bottom: 1.25rem;
-      background: radial-gradient(ellipse at 50% 60%, rgba(243,231,191,.12), rgba(243,231,191,0) 65%);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .feature-card .shot:after {
-      /* subtle coffee-dot halftone wash to tie screenshots into the vintage look */
-      content: "";
-      position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(243,231,191,.06) 1px, transparent 1.2px);
-      background-size: 6px 6px;
-      pointer-events: none;
-    }
-    .feature-card .shot img {
-      position: relative;
-      display: block;
-      width: auto;
-      height: 92%;
-      max-width: 78%;
-      object-fit: contain;
-      filter: drop-shadow(0 12px 24px rgba(0,0,0,.45));
-    }
-
-    /* Ticket-stub numeral in the top-right of every card */
-    .feature-card .stub {
-      position: absolute;
-      top: 1.1rem; right: 1.25rem;
-      font-family: 'Anton', Impact, sans-serif;
-      font-size: .82rem;
-      letter-spacing: .22em;
-      color: rgba(243,231,191,.55);
-    }
-
-    .feature-card h3 {
-      font-family: 'Anton', Impact, sans-serif;
-      font-size: 1.4rem;
-      line-height: 1.02;
-      letter-spacing: .02em;
-      color: #FCF9EF;
-      margin-bottom: .55rem;
-    }
-    .feature-card p {
-      font-family: 'Montserrat', ui-sans-serif, system-ui;
-      color: rgba(252,249,239,.74);
-      font-size: .92rem;
-      line-height: 1.5;
-      margin: 0;
-    }
-    /* Thin divider under the title, matches the poster language */
-    .feature-card h3:after {
-      content: "";
-      display: block;
-      width: 28px;
-      height: 2px;
-      background: #E3452D;
-      opacity: .8;
-      border-radius: 1px;
-      margin-top: .55rem;
-      margin-bottom: .75rem;
-    }
 
     /* ---- Phase 1: Header + Hero polish ---- */
 
     /* Header scroll state: transparent over hero, solid Licorice once scrolled */
     #top { backdrop-filter: saturate(140%) blur(0px); transition: background-color 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease; }
     #top.is-scrolled { background-color: rgba(28,28,28,.92); backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid rgba(252,249,239,.08); }
-    #top.is-scrolled .nav-divider { opacity: 0; }
-    #top:not(.is-scrolled) .nav-divider { opacity: 0; }
 
     /* Nav link underline (Cherry), replaces popcorn color swap */
     .nav-link { position: relative; color: #FCF9EF; opacity: .85; transition: opacity 200ms ease, color 200ms ease; }
@@ -341,8 +174,6 @@
     .hero-cta-secondary svg { width: 14px; height: 14px; transition: transform 200ms ease; }
     .hero-cta-secondary:hover svg { transform: translateY(2px); }
 
-    /* ---- Phase 2: "At a Glance" + "Who we are" refresh ---- */
-
     /* Shared editorial kicker eyebrow (Montserrat small-caps) for section headers */
     .section-kicker { display: inline-flex; align-items: center; gap: .6rem; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
     .section-kicker:before, .section-kicker:after { content: ""; display: inline-block; width: 28px; height: 1px; background: currentColor; opacity: .45; }
@@ -351,76 +182,6 @@
     /* Editorial section heading helpers */
     .section-title { font-family: 'Anton', Impact, sans-serif; font-size: clamp(2.25rem, 4vw + 1rem, 3.75rem); line-height: .98; letter-spacing: .005em; text-transform: none; }
     .section-title em { font-style: normal; color: #E3452D; }
-
-    /* Halftone duotone image chip (for "Who we are" microphone etc.) */
-    .halftone-chip { position: relative; display: inline-block; isolation: isolate; }
-    .halftone-chip img { display: block; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; width: 100%; height: auto; }
-    .halftone-chip:after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(28,28,28,.55) 1px, transparent 1.2px); background-size: 5px 5px; mix-blend-mode: multiply; pointer-events: none; opacity: .9; }
-    .halftone-chip.on-mint:after { background-image: radial-gradient(circle, rgba(28,28,28,.42) 1px, transparent 1.2px); }
-
-    /* "At a Glance" — Almond/Coffee neutral treatment */
-    #glance { background: #111 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'><circle cx='1' cy='1' r='.6' fill='%23F3E7BF' opacity='.04'/></svg>") repeat; }
-    #glance .glance-eyebrow { color: #F3E7BF; opacity: .8; }
-    #glance .section-title { color: #FCF9EF; }
-    #glance .glance-lede { color: rgba(252,249,239,.78); max-width: 42rem; margin-left: auto; margin-right: auto; margin-top: .9rem; font-size: 1.05rem; line-height: 1.55; }
-    .glance-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; margin: 1.25rem auto 0; border-radius: 2px; }
-
-    /* Poster-style feature cards with coffee/almond neutral accents */
-    .glance-card { position: relative; padding: 1.6rem; border-radius: 14px; background: linear-gradient(180deg, rgba(252,249,239,.035), rgba(252,249,239,.01)); border: 1px solid rgba(243,231,191,.18); transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease; height: 100%; }
-    .glance-card:hover { transform: translateY(-2px); border-color: rgba(243,231,191,.42); background: linear-gradient(180deg, rgba(252,249,239,.06), rgba(252,249,239,.015)); }
-    .glance-card:before { content: ""; position: absolute; top: 0; left: 1.5rem; width: 36px; height: 3px; background: #F3E7BF; border-radius: 0 0 2px 2px; opacity: .75; }
-    .glance-card .card-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 10px; background: rgba(243,231,191,.09); border: 1px solid rgba(243,231,191,.22); color: #F3E7BF; margin-bottom: 1rem; }
-    .glance-card .card-icon img { width: 20px; height: 20px; filter: brightness(0) saturate(100%) invert(91%) sepia(16%) saturate(397%) hue-rotate(9deg) brightness(98%) contrast(92%); }
-    .glance-card .card-icon svg { width: 20px; height: 20px; }
-    .glance-card h3 { font-family: 'Anton', Impact, sans-serif; font-size: 1.35rem; line-height: 1; letter-spacing: .02em; color: #FCF9EF; margin-bottom: .55rem; }
-    .glance-card p { color: rgba(252,249,239,.78); font-size: .95rem; line-height: 1.5; margin-bottom: .85rem; }
-    .glance-card ul { list-style: none; padding: 0; margin: 0; border-top: 1px dashed rgba(243,231,191,.18); padding-top: .7rem; }
-    .glance-card ul li { position: relative; font-size: .82rem; color: rgba(252,249,239,.62); padding-left: 1rem; line-height: 1.55; }
-    .glance-card ul li:before { content: "\2022"; position: absolute; left: 0; top: 0; color: #F3E7BF; opacity: .8; font-size: 1.05rem; line-height: 1.4; }
-
-    /* "Who we are" — Mint anchor */
-    #who { background: #419B85; color: #1C1C1C; position: relative; overflow: hidden; }
-    #who:before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(28,28,28,.08) 1px, transparent 1.2px); background-size: 7px 7px; mix-blend-mode: multiply; pointer-events: none; opacity: .6; }
-    #who:after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: repeating-linear-gradient(to right, rgba(28,28,28,.25) 0 12px, transparent 12px 20px); opacity: .5; pointer-events: none; }
-    .who-kicker { color: #1C1C1C; opacity: .75; }
-    .who-kicker:before { background: #1C1C1C; }
-    #who .section-title { color: #1C1C1C; }
-    #who .section-title em { color: #FCF9EF; background: #1C1C1C; padding: 0 .4rem; border-radius: 2px; }
-    .who-lede { font-size: 1.15rem; line-height: 1.55; color: #1C1C1C; max-width: 30rem; }
-    .who-meta { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .72rem; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: #1C1C1C; opacity: .75; }
-    .who-meta .who-dot { width: 6px; height: 6px; border-radius: 50%; background: #E3452D; display: inline-block; }
-    .who-mic-wrap { position: relative; padding: 1.25rem; }
-    .who-mic-wrap .halftone-chip { max-width: 200px; margin: 0 auto; }
-    .who-mic-wrap:before { content: ""; position: absolute; inset: 8% 14%; background: #FCF9EF; border-radius: 50%; opacity: .45; z-index: 0; }
-    .who-mic-wrap .halftone-chip { position: relative; z-index: 1; }
-    @media (min-width: 768px) { .who-mic-wrap .halftone-chip { max-width: 220px; } }
-
-    /* ---- Phase 4: Chef + Reviews polish ---- */
-
-    /* Chef: editorial treatment matching the phase-2/3 language */
-    #chef { position: relative; background: #1C1C1C; }
-    #chef:before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(243,231,191,.04) 1px, transparent 1.2px); background-size: 7px 7px; pointer-events: none; }
-    #chef > * { position: relative; }
-    #chef .chef-eyebrow { color: #F3E7BF; opacity: .8; }
-    #chef .section-title { color: #FCF9EF; }
-    .chef-divider { display: block; width: 56px; height: 3px; background: #F3E7BF; margin-top: 1rem; border-radius: 2px; opacity: .85; }
-    .chef-lede { color: rgba(252,249,239,.78); max-width: 34rem; font-size: 1.02rem; line-height: 1.55; margin-top: 1rem; }
-
-    /* Two-column "what it does / why it matters" split */
-    .chef-split { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1.75rem; }
-    @media (min-width: 640px) { .chef-split { grid-template-columns: 1fr 1fr; gap: 1.25rem; } }
-    .chef-block { position: relative; padding: 1.1rem 1.25rem 1.25rem; border-radius: 12px; background: linear-gradient(180deg, rgba(252,249,239,.035), rgba(252,249,239,.01)); border: 1px solid rgba(243,231,191,.18); }
-    .chef-block:before { content: ""; position: absolute; top: 0; left: 1.1rem; width: 28px; height: 3px; background: #F3E7BF; border-radius: 0 0 2px 2px; opacity: .75; }
-    .chef-block h3 { font-family: 'Anton', Impact, sans-serif; font-size: 1.1rem; line-height: 1; letter-spacing: .02em; color: #FCF9EF; margin-bottom: .4rem; text-transform: uppercase; }
-    .chef-block .chef-block-kicker { display: block; font-family: 'Montserrat', ui-sans-serif, system-ui; font-size: .65rem; letter-spacing: .28em; text-transform: uppercase; color: #F3E7BF; opacity: .7; margin-bottom: .35rem; }
-    .chef-block p { color: rgba(252,249,239,.78); font-size: .9rem; line-height: 1.55; margin: 0; }
-
-    /* Chef screenshot frame: single uniform poster-style chip */
-    .chef-frame { position: relative; border-radius: 16px; padding: 1rem 1rem 1.25rem; background: linear-gradient(180deg, rgba(243,231,191,.08), rgba(243,231,191,.02)); border: 1px solid rgba(243,231,191,.22); overflow: hidden; }
-    .chef-frame:before { content: ""; position: absolute; top: 0; left: 1.25rem; width: 48px; height: 3px; background: #E3452D; border-radius: 0 0 2px 2px; opacity: .85; }
-    .chef-frame:after { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(243,231,191,.05) 1px, transparent 1.2px); background-size: 6px 6px; pointer-events: none; }
-    .chef-frame .chef-frame-meta { position: absolute; top: .9rem; right: 1.1rem; font-family: 'Anton', Impact, sans-serif; font-size: .78rem; letter-spacing: .22em; color: rgba(243,231,191,.6); z-index: 2; }
-    .chef-frame #chefSlider { position: relative; z-index: 1; }
 
     /* ---- Reviews: festival pull-quote strip ---- */
     #reviews { background: #1C1C1C; position: relative; padding-top: 1.25rem; padding-bottom: 2.5rem; overflow: hidden; }
@@ -484,6 +245,17 @@
     .reviews-belt { display: flex; gap: 1.25rem; width: max-content; animation: pullquoteLoop 80s linear infinite; will-change: transform; padding: 0 1rem; }
     .reviews-belt:hover { animation-play-state: paused; }
     @keyframes pullquoteLoop { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .reviews-set { display: flex; gap: 1.25rem; align-items: stretch; }
+
+    /* Small screens: narrower cards, tighter gaps. Applied to both sets — the
+       -50% loop translate only lands cleanly if the duplicate set is exactly
+       as wide as the original. Must sit after the .pullquote base rules and
+       before the reduced-motion block, which overrides both. */
+    @media (max-width: 768px) {
+      .reviews-set { gap: 1rem; }
+      .pullquote { width: 200px; min-width: 200px; max-width: 200px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .reviews-belt-wrap { mask-image: none; -webkit-mask-image: none; overflow: visible; }
       .reviews-belt { animation: none; width: 100%; flex-wrap: wrap; justify-content: center; }
@@ -491,7 +263,6 @@
       .reviews-belt .reviews-set.is-duplicate { display: none; }
       .pullquote { width: 100%; max-width: 340px; min-width: 0; }
     }
-    .reviews-set { display: flex; gap: 1.25rem; align-items: stretch; }
 
     /* ---- Phase 5: CTA, Contact, Footer + a11y/perf pass ---- */
 
@@ -570,8 +341,6 @@
     .site-footer .footer-bottom { max-width: 80rem; margin: 1.5rem auto 0; padding: 1.25rem 1.5rem 0; border-top: 1px solid rgba(252,249,239,.06); display: flex; flex-direction: column; gap: .75rem; align-items: center; justify-content: space-between; text-align: center; font-size: .8rem; color: rgba(252,249,239,.55); }
     @media (min-width: 768px) { .site-footer .footer-bottom { flex-direction: row; text-align: left; } }
 
-
-
     /* "Get the App" nav badge */
     .get-app-badge { display: inline-block; transition: transform 180ms ease; }
     .get-app-badge:hover { transform: translateY(-1px); }
@@ -594,11 +363,7 @@
     /* Balanced multi-line headlines (progressive enhancement) */
     .section-title, h1 { text-wrap: balance; }
 
-    /* ---- Polish pass: hero ---- */
-
-    /* ---- iPhone device frame around the hero screenshot ---- */
-
-    /* Star-rated social proof under the CTAs */
+    /* Star-rated social proof under the hero CTAs */
     .hero-proof {
       display: inline-flex; align-items: center; gap: .6rem;
       font-family: 'Montserrat', ui-sans-serif, system-ui;
@@ -613,23 +378,9 @@
 
     /* ---- Polish pass: micro-interactions ---- */
 
-    /* Feature cards: screenshot lifts with the card */
-    .feature-card .shot img { transition: transform 260ms ease; }
-    .feature-card:hover .shot img { transform: translateY(-5px) scale(1.015); }
-    .feature-card:hover .stub { color: rgba(243,231,191,.85); }
-    .feature-card .stub { transition: color 220ms ease; }
-
-    /* Glance cards: icon chip warms up on hover */
-    .glance-card .card-icon { transition: background-color 220ms ease, border-color 220ms ease, transform 220ms ease; }
-    .glance-card:hover .card-icon { background: rgba(243,231,191,.16); border-color: rgba(243,231,191,.4); transform: translateY(-2px); }
-
     /* Pull-quote posters: gentle lift + tilt, like picking a card off the wall */
     .pullquote { transition: transform 260ms ease, box-shadow 260ms ease; }
     .pullquote:hover { transform: translateY(-4px) rotate(-.4deg); box-shadow: 0 16px 32px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.45) inset; }
-
-    /* Chef frame: subtle sheen on hover */
-    .chef-frame { transition: border-color 240ms ease; }
-    .chef-frame:hover { border-color: rgba(243,231,191,.4); }
 
     /* Ticket stub straightens when the CTA is hovered */
     @media (min-width: 768px) {
@@ -639,8 +390,7 @@
 
     /* Respect reduced motion for the new micro-interactions */
     @media (prefers-reduced-motion: reduce) {
-      .feature-card .shot img, .pullquote, #cta .cta-ticket { transition: none; }
-      .feature-card:hover .shot img { transform: none; }
+      .pullquote, #cta .cta-ticket { transition: none; }
       .pullquote:hover { transform: none; }
     }
 
@@ -702,17 +452,7 @@
       background: repeating-linear-gradient(90deg, transparent 0 11px, rgba(252,249,239,.85) 11px 16px, transparent 16px 27px);
     }
 
-    /* ---- 6. Poster paste-up reveals (JS-gated so no-JS visitors see everything) ---- */
-    .js .feature-card, .js .glance-card {
-      opacity: 0; transform: translateY(20px) rotate(-1.1deg);
-      transition: opacity .65s ease, transform .65s cubic-bezier(.22,1,.36,1),
-                  border-color 220ms ease, background-color 220ms ease;
-    }
-    .js .feature-card.pasted, .js .glance-card.pasted { opacity: 1; transform: none; }
-    .js .feature-card.pasted:hover { transform: translateY(-3px); }
-    .js .glance-card.pasted:hover { transform: translateY(-2px); }
-
-    /* Section-title accent: underline sweeps in when the section enters */
+    /* ---- 6. Section-title accent: underline sweeps in when the section enters ---- */
     .section-title em { position: relative; }
     .section-title em:after {
       content: ""; position: absolute; left: 2%; right: 2%; bottom: -.06em; height: 3px;
@@ -721,7 +461,7 @@
       transition: transform .7s .35s cubic-bezier(.22,1,.36,1);
     }
     section.sec-in .section-title em:after { transform: scaleX(1); }
-    #who .section-title em:after, #cta .section-title em:after { display: none; }
+    #cta .section-title em:after { display: none; }
 
     /* ---- 7. NOIR mode (type “noir”) ---- */
     .noir-overlay {
@@ -837,7 +577,6 @@
         text-shadow: 0 0 7px rgba(255,7,58,.6), 0 0 18px rgba(255,7,58,.3);
         box-shadow: 0 0 14px rgba(255,7,58,.16), inset 0 0 12px rgba(255,7,58,.1);
       }
-      .js .feature-card, .js .glance-card { opacity: 1; transform: none; transition: none; }
       .section-title em:after { transition: none; }
       .noir-overlay:before, .noir-overlay:after { animation: none; }
       #intermission .ix-curtain { transition: none; }
@@ -922,11 +661,6 @@
     img.at-avatar { object-fit:cover; background:#26262b; }
     .at-card-quote { display:flex; align-items:center; gap:.7rem; padding:.35rem .9rem .95rem; }
     .at-card-quote p { font-size:.82rem; font-style:italic; color:rgba(252,249,239,.85); margin:0; }
-    .at-score-chip {
-      flex:none; width:38px; height:38px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
-      font-weight:700; font-size:.8rem;
-    }
-    .at-score-chip.yum { color:var(--at-accent); border:2.5px solid var(--at-accent); background:rgba(0,230,180,.08); }
     /* Score as a proportional progress ring (9.0 => 90% swept), app-style. */
     .at-score-ring { flex:none; position:relative; width:42px; height:42px; display:inline-flex; align-items:center; justify-content:center; }
     .at-score-ring svg { width:42px; height:42px; transform:rotate(-90deg); display:block; }

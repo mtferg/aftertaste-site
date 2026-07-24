@@ -205,7 +205,8 @@
   }
   </script>
 
-  <!-- Breadcrumbs (single-page today; scaffolded for future /privacy, /press, etc.) -->
+  <!-- Breadcrumbs (the marketing funnel is single-page; privacy.html and
+       terms.html are standalone leaves, not part of this trail) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -221,7 +222,8 @@
   }
   </script>
 
-  <!-- Features list (mirrors the "A menu of features" grid on the page) -->
+  <!-- Features list (the app's feature set, as told by The Feature
+       Presentation scroll story in #features) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -338,8 +340,8 @@
 
         <!-- Desktop links -->
         <div class="hidden md:flex items-center gap-7 text-[13px] font-medium">
-                              <a href="#features" class="nav-link">Features</a>
-                    <a href="#reviews" class="nav-link">Reviews</a>
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#reviews" class="nav-link">Reviews</a>
           <a href="#contact" class="nav-link">Contact</a>
           <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="get-app-badge">
             <img src="assets/App_Store_Download.svg" alt="Download on the App Store" width="135" height="45" loading="eager" decoding="async" />
@@ -359,8 +361,8 @@
       <!-- Mobile nav panel -->
       <div id="mobile-nav" class="md:hidden absolute left-0 right-0 top-full mx-3 mt-2 rounded-2xl bg-licorice/95 ring-1 ring-almond/10 backdrop-blur-md p-5 shadow-2xl" role="menu">
         <div class="flex flex-col gap-1 text-[15px] font-medium">
-                              <a href="#features" class="nav-link py-2">Features</a>
-                    <a href="#reviews" class="nav-link py-2">Reviews</a>
+          <a href="#features" class="nav-link py-2">Features</a>
+          <a href="#reviews" class="nav-link py-2">Reviews</a>
           <a href="#contact" class="nav-link py-2">Contact</a>
         </div>
         <a href="https://apps.apple.com/ca/app/aftertaste-movies-tv/id6449655530" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store" class="get-app-badge mt-4 flex justify-center">
@@ -368,7 +370,6 @@
         </a>
       </div>
     </nav>
-    <div class="nav-divider h-px w-full bg-almond/5"></div>
   </header>
 
   <main class="pt-20">
@@ -377,7 +378,7 @@
          crossed searchlight beams, dust and grain; black-and-white type
          with a single cherry neon "Now Showing" sign, and a classic
          billing block where the credits would run. -->
-    <section id="hero" class="noir-hero hero-rel">
+    <section id="hero" class="noir-hero">
       <!-- Scene layers -->
       <div class="nh-backdrop" aria-hidden="true"></div>
       <div class="nh-beams" aria-hidden="true">
@@ -418,7 +419,7 @@
          built from live replicas of real in-app elements.
          ============================================================ -->
     <section id="features" class="story-section">
-      <div id="story">
+      <div>
 
         <!-- ================= 01 · FIND YOUR TASTEBUDS ================= -->
         <article class="story-panel" id="tastebuds" aria-label="Find your Tastebuds">
@@ -631,7 +632,7 @@
               <div class="tp-marquee" data-el="marquee">
                 <div class="tp-board">
                   <div class="tp-neon-bar top"></div>
-                  <div class="tp-message"><span id="tpTitle">Sci&#8209;Fi Savant</span></div>
+                  <div class="tp-message"><span>Sci&#8209;Fi Savant</span></div>
                   <div class="tp-neon-bar bottom"></div>
                 </div>
               </div>
@@ -713,8 +714,8 @@
         <p class="reviews-lede">Real quotes from real Aftertaste users.</p>
       </div>
       <div class="reviews-belt-wrap mt-4">
-        <div class="reviews-belt" id="reviewsBelt">
-          <div class="reviews-set" id="reviewsSetA">
+        <div class="reviews-belt">
+          <div class="reviews-set">
             <figure class="pullquote">
               <div>
                 <div class="pq-kicker">Aftertaste Reviews</div>
@@ -1189,8 +1190,6 @@
       observer.observe(s);
     });
 
-
-
     // ---- Header scroll state + mobile nav ----
     (function(){
       var header = document.getElementById('top');
@@ -1262,26 +1261,6 @@
             if (!pxTick) { pxTick = true; requestAnimationFrame(parallax); }
           }, { passive: true });
         }
-      }
-
-      // ---- Poster paste-up: cards settle in with a stagger ----
-      var cards = document.querySelectorAll('.feature-card, .glance-card');
-      if ('IntersectionObserver' in window && cards.length) {
-        var cardObs = new IntersectionObserver(function(es){
-          es.forEach(function(e){
-            if (!e.isIntersecting) return;
-            var el = e.target;
-            el.classList.add('pasted');
-            el.addEventListener('transitionend', function(){ el.style.transitionDelay = ''; }, { once: true });
-            cardObs.unobserve(el);
-          });
-        }, { threshold: .12 });
-        cards.forEach(function(c, i){
-          c.style.transitionDelay = ((i % 3) * 90) + 'ms';
-          cardObs.observe(c);
-        });
-      } else {
-        cards.forEach(function(c){ c.classList.add('pasted'); });
       }
 
       // ---- NOIR mode: type “noir” anywhere. Esc turns the lights back on. ----

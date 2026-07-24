@@ -2,9 +2,8 @@
 User-agent: *
 Allow: /
 
-# Disallow assets that don't need indexing
+# Assets that don't need indexing
 Disallow: /assets/grain.svg
+Disallow: /assets/og-card-source.html
 
-# Sitemap location (update this when you create your sitemap)
 Sitemap: https://aftertaste.com/sitemap.xml
-
